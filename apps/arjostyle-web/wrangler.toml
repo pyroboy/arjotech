@@ -1,0 +1,14 @@
+name = "arjostyle-web"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".svelte-kit/cloudflare"
+
+[vars]
+NODE_ENV = "production"
+
+[[r2_buckets]]
+binding = "ARJOSTYLE_BUCKET"
+bucket_name = "arjostyle-assets"
+
+[observability]
+enabled = true

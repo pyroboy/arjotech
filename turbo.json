@@ -1,0 +1,51 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalEnv": [
+    "NODE_ENV",
+    "DATABASE_URL"
+  ],
+  "globalDependencies": [
+    "**/.env",
+    "**/.env.*local",
+    "**/svelte.config.*",
+    "**/vite.config.*",
+    "**/tsconfig*.json",
+    "**/postcss.config.*",
+    "**/tailwind.config.*",
+    "**/package.json"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [
+        "build/**",
+        "dist/**",
+        ".svelte-kit/**",
+        ".output/**"
+      ],
+      "inputs": [
+        "src/**",
+        "static/**",
+        "svelte.config.*",
+        "vite.config.*",
+        "tsconfig*.json",
+        "tailwind.config.*",
+        "postcss.config.*",
+        "package.json"
+      ]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "lint": {
+      "outputs": []
+    },
+    "typecheck": {
+      "outputs": []
+    },
+    "clean": {
+      "cache": false
+    }
+  }
+}
