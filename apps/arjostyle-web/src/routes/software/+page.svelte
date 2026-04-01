@@ -2,6 +2,8 @@
   import { softwareProjects } from '$lib/data/portfolioData';
   import { Code2, Database, Globe } from 'lucide-svelte';
 
+  const projectIcons = [Code2, Globe, Database];
+
   const techStack = [
     { name: 'SvelteKit', icon: Code2 },
     { name: 'React', icon: Code2 },
@@ -41,6 +43,10 @@
 <svelte:head>
   <title>Software Projects — Arjo Magno</title>
   <meta name="description" content="Full-stack web applications built for real businesses. SvelteKit, React, Cloudflare." />
+  <meta property="og:title" content="Software Projects — Arjo Magno" />
+  <meta property="og:description" content="Full-stack web applications built for real businesses. SvelteKit, React, Cloudflare." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://arjostyle-web.pages.dev/software" />
 </svelte:head>
 
 <!-- Hero section -->
@@ -61,47 +67,65 @@
 <section class="bg-surface-900 px-6 py-12">
   <div class="max-w-6xl mx-auto">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-      {#each softwareProjects as project}
+      {#each softwareProjects as project, i}
+        {@const Icon = projectIcons[i % projectIcons.length]}
         <a
           href="/software/{project.slug}"
-          class="group block bg-surface-800 border border-zinc-800/50 rounded-xl p-6 hover:border-tech-500/30 transition-all duration-300 hover:-translate-y-1"
+          class="group block bg-surface-800 border border-zinc-800/50 rounded-xl overflow-hidden hover:border-tech-500/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-tech-500/5"
         >
-          <!-- Header with status badge -->
-          <div class="flex items-start justify-between mb-5">
-            <span
-              class="text-xs font-mono px-3 py-1 rounded-full border {getStatusBadgeColor(
-                project.status
-              )}"
-            >
-              {getStatusLabel(project.status)}
-            </span>
-            {#if project.featured}
-              <span class="text-xs font-semibold text-ink-500 bg-ink-500/10 px-2 py-1 rounded">
-                Featured
+          <!-- Image placeholder -->
+          <div class="aspect-video relative overflow-hidden bg-gradient-to-br from-zinc-900 to-zinc-800">
+            <div
+              class="absolute inset-0 opacity-20"
+              style="background-image: linear-gradient(rgba(56,189,248,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.4) 1px, transparent 1px); background-size: 28px 28px;"
+            ></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-tech-500/10 via-transparent to-cyan-500/5"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="text-center">
+                <div class="w-14 h-14 rounded-xl bg-tech-500/20 border border-tech-500/30 flex items-center justify-center mx-auto mb-2 group-hover:bg-tech-500/30 transition-colors">
+                  <Icon class="w-7 h-7 text-tech-400" />
+                </div>
+                <p class="text-xs font-mono text-tech-500/50 tracking-widest">{project.techStack[0]}</p>
+              </div>
+            </div>
+            <!-- Status badge -->
+            <div class="absolute top-3 left-3">
+              <span class="text-xs font-mono px-2.5 py-1 rounded-full border {getStatusBadgeColor(project.status)}">
+                {getStatusLabel(project.status)}
               </span>
+            </div>
+            {#if project.featured}
+              <div class="absolute top-3 right-3">
+                <span class="text-xs font-semibold text-ink-500 bg-ink-500/10 border border-ink-500/20 px-2 py-1 rounded-full">
+                  Featured
+                </span>
+              </div>
             {/if}
           </div>
 
-          <!-- Project title -->
-          <h2 class="text-xl font-semibold text-white mb-3 group-hover:text-tech-400 transition-colors">
-            {project.title}
-          </h2>
+          <!-- Card content -->
+          <div class="p-6">
+            <!-- Project title -->
+            <h2 class="text-xl font-semibold text-white mb-3 group-hover:text-tech-400 transition-colors">
+              {project.title}
+            </h2>
 
-          <!-- Description -->
-          <p class="text-zinc-400 text-sm leading-relaxed mb-6">{project.description}</p>
+            <!-- Description -->
+            <p class="text-zinc-400 text-sm leading-relaxed mb-6">{project.description}</p>
 
-          <!-- Tech stack badges -->
-          <div class="flex flex-wrap gap-2">
-            {#each project.techStack.slice(0, 4) as tech}
-              <span class="text-xs px-2.5 py-1 bg-zinc-800/50 text-zinc-300 rounded-md border border-zinc-700/50 group-hover:border-tech-500/30 transition-colors">
-                {tech}
-              </span>
-            {/each}
-            {#if project.techStack.length > 4}
-              <span class="text-xs px-2.5 py-1 bg-zinc-800/50 text-zinc-400 rounded-md border border-zinc-700/50">
-                +{project.techStack.length - 4}
-              </span>
-            {/if}
+            <!-- Tech stack badges -->
+            <div class="flex flex-wrap gap-2">
+              {#each project.techStack.slice(0, 4) as tech}
+                <span class="text-xs px-2.5 py-1 bg-zinc-800/50 text-zinc-300 rounded-md border border-zinc-700/50 group-hover:border-tech-500/30 transition-colors">
+                  {tech}
+                </span>
+              {/each}
+              {#if project.techStack.length > 4}
+                <span class="text-xs px-2.5 py-1 bg-zinc-800/50 text-zinc-400 rounded-md border border-zinc-700/50">
+                  +{project.techStack.length - 4}
+                </span>
+              {/if}
+            </div>
           </div>
         </a>
       {/each}
@@ -124,7 +148,7 @@
       {#each techStack as tech}
         <div class="bg-surface-900 border border-zinc-800/50 rounded-lg p-6 flex flex-col items-center gap-3 hover:border-tech-500/30 transition-colors">
           <div class="w-10 h-10 rounded-lg bg-tech-500/10 border border-tech-500/20 flex items-center justify-center">
-            <svelte:component this={tech.icon} class="w-5 h-5 text-tech-500" />
+            <tech.icon class="w-5 h-5 text-tech-500" />
           </div>
           <p class="text-sm font-medium text-white text-center">{tech.name}</p>
         </div>

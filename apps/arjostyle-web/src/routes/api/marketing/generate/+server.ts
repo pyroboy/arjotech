@@ -2,15 +2,42 @@ import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { getDb } from '$lib/db';
 import { marketingContent } from '$lib/db/schema';
+import { z } from 'zod';
+
+const generateSchema = z.object({
+  business: z.enum(['silog', 'sweetytreats', 'foodhub', 'dorm', 'arjostyle'], { required_error: 'Business is required' }),
+  contentType: z.enum(['menu_image', 'promo_graphic', 'social_caption', 'story_post', 'reel_script', 'review_reply'], { required_error: 'Content type is required' }),
+  platform: z.enum(['facebook', 'tiktok', 'instagram', 'google_business'], { required_error: 'Platform is required' }),
+  pipelineStage: z.enum(['awareness', 'interest', 'conversion', 'retention', 'advocacy']).optional(),
+  menuItem: z.object({ name: z.string().optional(), price: z.number().optional(), style: z.string().optional() }).optional(),
+  promoDetails: z.object({ title: z.string().optional(), discount: z.string().optional(), validUntil: z.string().optional() }).optional(),
+  templateOverride: z.string().optional(),
+});
 
 // AI content generation endpoint
 // This generates captions and image prompts using templates
 // Actual image generation would be handled by an external service (n8n webhook, Replicate, etc.)
 export const POST: RequestHandler = async ({ request, platform }) => {
-  const db = getDb(platform?.env ?? {});
-  const body = await request.json();
+  try {
+    let rawBody: unknown;
+    try {
+      rawBody = await request.json();
+    } catch {
+      return json({ error: 'Invalid JSON in request body' }, { status: 400 });
+    }
 
-  const { business, contentType, platform: targetPlatform, pipelineStage, menuItem, promoDetails, templateOverride } = body;
+    const parsed = generateSchema.safeParse(rawBody);
+    if (!parsed.success) {
+      return json(
+        { error: 'Validation failed', details: parsed.error.issues.map(i => i.message).join(', ') },
+        { status: 400 }
+      );
+    }
+
+    const db = getDb(platform?.env ?? {});
+    const body = parsed.data;
+
+    const { business, contentType, platform: targetPlatform, pipelineStage, menuItem, promoDetails, templateOverride } = body;
 
   // Build content based on type
   let title = '';
@@ -40,7 +67,7 @@ export const POST: RequestHandler = async ({ request, platform }) => {
     hashtags = generateHashtags(business, 'promo');
   } else if (contentType === 'social_caption') {
     title = `Daily Post — ${biz}`;
-    caption = templateOverride || generateDailyCaption(business, targetPlatform, pipelineStage);
+    caption = templateOverride || generateDailyCaption(business, targetPlatform, pipelineStage ?? 'awareness');
     hashtags = generateHashtags(business, 'daily');
   } else if (contentType === 'story_post') {
     title = `Story — ${biz}`;
@@ -64,6 +91,10 @@ export const POST: RequestHandler = async ({ request, platform }) => {
   }).returning();
 
   return json(created, { status: 201 });
+  } catch (err) {
+    console.error('POST /api/marketing/generate error:', err);
+    return json({ error: 'Failed to generate content' }, { status: 500 });
+  }
 };
 
 // ── Template generators ──────────────────────────────────────────────────────

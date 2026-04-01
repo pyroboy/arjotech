@@ -239,6 +239,7 @@
           ondragleave={() => (dragActive = false)}
           role="button"
           tabindex="0"
+          onkeydown={(e) => { if (e.key === 'Enter' || e.key === ' ') document.getElementById('file-input')?.click(); }}
         >
           <p class="text-white font-semibold mb-2">Drop image here</p>
           <p class="text-zinc-500 text-sm mb-4">or click to select</p>
@@ -263,7 +264,7 @@
         {#if uploadedImage}
           <!-- Preset Sizes -->
           <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-xl p-6">
-            <h3 class="text-white font-bold mb-3 text-sm">Preset Sizes</h3>
+            <h2 class="text-white font-bold mb-3 text-sm">Preset Sizes</h2>
             <div class="space-y-2 max-h-96 overflow-y-auto">
               {#each PRESET_SIZES as preset (preset.name)}
                 <button
@@ -291,14 +292,14 @@
               onclick={() => (usePreset = false)}
               class="w-full text-left mb-3"
             >
-              <h3 class="text-white font-bold text-sm {!usePreset ? 'text-orange-400' : ''}">
+              <h2 class="text-white font-bold text-sm {!usePreset ? 'text-orange-400' : ''}">
                 Custom Size
-              </h3>
+              </h2>
             </button>
 
             <div class="space-y-3">
               <div>
-                <label class="block text-xs text-zinc-400 mb-1">Width (px)</label>
+                <label class="block text-xs text-zinc-400 mb-1">Width (px)
                 <input
                   type="number"
                   bind:value={customWidth}
@@ -306,9 +307,10 @@
                   disabled={usePreset}
                   class="w-full px-3 py-2 bg-surface-900 border border-zinc-600 rounded-lg text-white text-sm focus:outline-none focus:border-orange-500 disabled:opacity-50"
                 />
+</label>
               </div>
               <div>
-                <label class="block text-xs text-zinc-400 mb-1">Height (px)</label>
+                <label class="block text-xs text-zinc-400 mb-1">Height (px)
                 <input
                   type="number"
                   bind:value={customHeight}
@@ -316,6 +318,7 @@
                   disabled={usePreset}
                   class="w-full px-3 py-2 bg-surface-900 border border-zinc-600 rounded-lg text-white text-sm focus:outline-none focus:border-orange-500 disabled:opacity-50"
                 />
+</label>
               </div>
               <label
                 class="flex items-center gap-2 cursor-pointer {usePreset
@@ -335,7 +338,7 @@
 
           <!-- Output Format -->
           <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-xl p-6">
-            <h3 class="text-white font-bold mb-3 text-sm">Output Format</h3>
+            <h2 class="text-white font-bold mb-3 text-sm">Output Format</h2>
             <div class="space-y-2">
               {#each ['png', 'jpeg', 'webp'] as format}
                 <label class="flex items-center gap-3 cursor-pointer">
@@ -355,7 +358,7 @@
           {#if selectedFormat !== 'png'}
             <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-xl p-6">
               <div class="flex justify-between items-center mb-3">
-                <h3 class="text-white font-bold text-sm">Quality</h3>
+                <h2 class="text-white font-bold text-sm">Quality</h2>
                 <span class="text-orange-500 font-semibold text-sm">
                   {Math.round(quality * 100)}%
                 </span>
@@ -395,7 +398,7 @@
           <div class="space-y-4">
             <!-- Original Image -->
             <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-xl p-6">
-              <h3 class="text-white font-semibold mb-3 text-sm">Original Image</h3>
+              <h2 class="text-white font-semibold mb-3 text-sm">Original Image</h2>
               <img
                 src={uploadedImage.preview}
                 alt="Original"
@@ -420,9 +423,9 @@
             <!-- Resized Image -->
             {#if resizedImage}
               <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-xl p-6">
-                <h3 class="text-white font-semibold mb-3 text-sm">
+                <h2 class="text-white font-semibold mb-3 text-sm">
                   Resized Image ({selectedFormat.toUpperCase()})
-                </h3>
+                </h2>
                 <img
                   src={resizedImage.url}
                   alt="Resized"

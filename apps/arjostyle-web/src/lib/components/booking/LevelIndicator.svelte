@@ -23,10 +23,11 @@
   const percentage = $derived(validLevel * 10);
 
   const defaultPainColors: { level: number; colorClass: string }[] = [
-    { level: 3, colorClass: 'bg-green-500' },
-    { level: 5, colorClass: 'bg-yellow-400' },
-    { level: 7, colorClass: 'bg-orange-500' },
-    { level: 10, colorClass: 'bg-red-600' },
+    { level: 2, colorClass: 'bg-teal-400' },
+    { level: 4, colorClass: 'bg-emerald-400' },
+    { level: 6, colorClass: 'bg-amber-400' },
+    { level: 8, colorClass: 'bg-amber-500' },
+    { level: 10, colorClass: 'bg-orange-500' },
   ];
 
   function getActiveColor(lvl: number, stops: { level: number; colorClass: string }[]): string {
@@ -43,17 +44,17 @@
 
 <div
   class={cn(
-    'w-full bg-zinc-800 rounded-full overflow-hidden relative',
-    minimized ? 'h-1.5 my-1' : 'h-2.5 my-1.5',
+    'w-full bg-zinc-800/60 rounded-full overflow-hidden relative',
+    minimized ? 'h-1.5 my-1' : 'h-3 my-1.5',
     className
   )}
   title="{ariaLabel}: {validLevel}/10"
 >
   <div
     class={cn(
-      'h-full rounded-l-full',
+      'h-full rounded-l-full shadow-inner',
       percentage >= 100 ? 'rounded-r-full' : '',
-      'transition-all duration-400 ease-out',
+      'transition-all duration-500 ease-out',
       activeColor
     )}
     style="width: {percentage}%"

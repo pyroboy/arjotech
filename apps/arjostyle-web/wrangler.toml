@@ -10,5 +10,9 @@ NODE_ENV = "production"
 binding = "ARJOSTYLE_BUCKET"
 bucket_name = "arjostyle-assets"
 
+[[kv_namespaces]]
+binding = "ARJOSTYLE_KV"
+id = "0240826786b5457b86501077cab20526"
+
 [observability]
 enabled = true

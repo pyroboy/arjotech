@@ -1,28 +1,83 @@
+import { browser } from '$app/environment';
 import { initialFormData } from '$data/bookingInitialData';
 import type { BookingFormData } from '$types/bookings';
-import type { BodyPartMappings } from '$types/mapping';
+import type { BodyPartMappings, BodyPartMappingData } from '$types/mapping';
 import { defaultBodyPartMappings as defaultMappings } from '$data/defaultMappings';
+
+const STORAGE_KEY_FORM = 'arjo_booking_form';
+const STORAGE_KEY_STEP = 'arjo_booking_step';
 
 // Svelte 5 rune-based store using a class pattern
 class BookingStore {
-  formData = $state<BookingFormData>(structuredClone(initialFormData));
-  currentStepIndex = $state(0);
+  formData = $state<BookingFormData>(this.loadForm());
+  currentStepIndex = $state(this.loadStep());
   isTransitioning = $state(false);
   liveBodyPartMappings = $state<BodyPartMappings>(structuredClone(defaultMappings));
   editMode = $state(false);
   referenceGuideSeen = $state(false);
 
   readonly steps = [
-    { id: 'age-verification', title: 'Age Verification' },
-    { id: 'tattoo-calculator', title: 'Tattoo Estimate' },
-    { id: 'references', title: 'References & Details' },
-    { id: 'personal-info', title: 'Personal Info' },
-    { id: 'scheduling', title: 'Scheduling' },
-    { id: 'review', title: 'Review & Submit' },
+    { id: 'tattoo-design', title: 'Your Tattoo' },
+    { id: 'contact-schedule', title: 'Book Session' },
+    { id: 'review', title: 'Review' },
   ] as const;
+
+  private loadForm(): BookingFormData {
+    if (!browser) return structuredClone(initialFormData);
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY_FORM);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        // Restore Date objects that were serialized as strings
+        if (parsed.appointmentDate) parsed.appointmentDate = new Date(parsed.appointmentDate);
+        if (parsed.dateOfBirth) parsed.dateOfBirth = new Date(parsed.dateOfBirth);
+        return { ...structuredClone(initialFormData), ...parsed };
+      }
+    } catch {
+      // Ignore corrupt/unavailable storage
+    }
+    return structuredClone(initialFormData);
+  }
+
+  private loadStep(): number {
+    if (!browser) return 0;
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY_STEP);
+      if (raw) {
+        const step = Number(raw) || 0;
+        if (step >= this.steps.length) {
+          localStorage.setItem(STORAGE_KEY_STEP, '0');
+          return 0;
+        }
+        return step;
+      }
+    } catch {
+      // Ignore
+    }
+    return 0;
+  }
+
+  private saveForm() {
+    if (!browser) return;
+    try {
+      localStorage.setItem(STORAGE_KEY_FORM, JSON.stringify(this.formData));
+    } catch {
+      // Ignore quota errors
+    }
+  }
+
+  private saveStep() {
+    if (!browser) return;
+    try {
+      localStorage.setItem(STORAGE_KEY_STEP, String(this.currentStepIndex));
+    } catch {
+      // Ignore
+    }
+  }
 
   updateFormData(data: Partial<BookingFormData>) {
     this.formData = { ...this.formData, ...data };
+    this.saveForm();
   }
 
   reset() {
@@ -32,51 +87,35 @@ class BookingStore {
     this.editMode = false;
     this.referenceGuideSeen = false;
     this.liveBodyPartMappings = structuredClone(defaultMappings);
+    if (browser) {
+      try {
+        localStorage.removeItem(STORAGE_KEY_FORM);
+        localStorage.removeItem(STORAGE_KEY_STEP);
+      } catch {
+        // Ignore
+      }
+    }
   }
 
   isStepComplete(index: number, data: BookingFormData): boolean {
     const isNonEmpty = (v: string | null | undefined) => !!v?.trim();
     const isValidEmail = (e: string | null | undefined) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e ?? '');
 
-    function isEighteenOrOlder(dob: string | Date | null | undefined): boolean {
-      if (!dob) return false;
-      const d = typeof dob === 'string' ? new Date(dob) : dob;
-      if (isNaN(d.getTime())) return false;
-      const today = new Date();
-      let age = today.getFullYear() - d.getFullYear();
-      const m = today.getMonth() - d.getMonth();
-      if (m < 0 || (m === 0 && today.getDate() < d.getDate())) age--;
-      return age >= 18;
-    }
-
     switch (index) {
-      case 0: return true;
+      case 0:
+        return (
+          data.primaryTattooStyle !== null &&
+          data.bodyRegion !== null &&
+          data.bodyArea !== null &&
+          data.sizeCategory !== null
+        );
       case 1:
-        return (
-          data.size !== null &&
-          data.size > 0 &&
-          !!data.currentPlacement &&
-          data.placementSliderTouched &&
-          data.sizeSliderTouched
-        );
-      case 2:
-        return (
-          (data.primaryTattooStyle !== null && !!data.primaryTattooStyle) ||
-          data.referenceImages.length > 0
-        );
-      case 3:
         return (
           isNonEmpty(data.name) &&
           isValidEmail(data.email) &&
-          isNonEmpty(data.phone) &&
-          isEighteenOrOlder(data.dateOfBirth)
+          (data.ageConfirmed === true)
         );
-      case 4:
-        return (
-          data.appointmentDate instanceof Date &&
-          isNonEmpty(data.appointmentTime)
-        );
-      case 5: return true;
+      case 2: return true;
       default: return false;
     }
   }
@@ -96,7 +135,8 @@ class BookingStore {
     setTimeout(() => {
       this.currentStepIndex = newIndex;
       this.isTransitioning = false;
-    }, 150);
+      this.saveStep();
+    }, 300);
   }
 
   next() {
@@ -113,7 +153,7 @@ class BookingStore {
     }
   }
 
-  updateMapping(category: string, placement: string, update: Partial<BodyPartMappings>) {
+  updateMapping(category: string, placement: string, update: Partial<BodyPartMappingData>) {
     if (!this.editMode) return;
     const newMappings = structuredClone(this.liveBodyPartMappings);
     if (!newMappings[category]) newMappings[category] = {};
@@ -122,6 +162,21 @@ class BookingStore {
       ...update,
     };
     this.liveBodyPartMappings = newMappings;
+  }
+
+  /** Load mappings from KV API — falls back to defaults on error */
+  async loadMappingsFromKV() {
+    try {
+      const res = await fetch('/api/mappings');
+      if (res.ok) {
+        const data = await res.json();
+        if (data && typeof data === 'object' && Object.keys(data).length > 0) {
+          this.liveBodyPartMappings = data;
+        }
+      }
+    } catch {
+      // Silently fall back to defaults
+    }
   }
 }
 

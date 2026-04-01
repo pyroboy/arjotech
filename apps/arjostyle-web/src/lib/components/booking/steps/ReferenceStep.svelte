@@ -110,7 +110,7 @@
 					const val = (e.target as HTMLTextAreaElement).value;
 					updateFormData({ styleDescription: val });
 				}}
-			/>
+			></textarea>
 			<p class="text-xs text-slate-500 mt-2">
 				{(formData.styleDescription ?? '').length} / 500 characters
 			</p>
@@ -123,8 +123,19 @@
 		<p class="text-xs text-slate-400 mb-4">Up to 5 images, 5MB each</p>
 
 		<!-- Upload zone -->
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<div
 			class="border-2 border-dashed border-slate-600 hover:border-ink-500 rounded-xl p-6 text-center transition-colors cursor-pointer"
+			role="button"
+			tabindex="0"
+			onkeydown={(e) => {
+				if (e.key === 'Enter' || e.key === ' ') {
+					e.preventDefault();
+					document.getElementById('fileInput')?.click();
+				}
+			}}
+			onfocus={(e) => e.currentTarget.classList.add('border-ink-500')}
+			onblur={(e) => e.currentTarget.classList.remove('border-ink-500')}
 			onmouseover={(e) => {
 				if (!(e.target as HTMLElement).closest('input')) {
 					e.currentTarget.classList.add('border-ink-500');
@@ -188,10 +199,11 @@
 
 	<!-- Section D: Creative Freedom Slider -->
 	<div class="border-b border-slate-800 pb-6">
-		<label class="block text-slate-200 font-semibold text-sm uppercase tracking-wide mb-4">Creative Freedom</label>
+		<label class="block text-slate-200 font-semibold text-sm uppercase tracking-wide mb-4" for="creativeFreedom">Creative Freedom</label>
 		<div class="flex items-center gap-4">
 			<span class="text-xs text-slate-400 whitespace-nowrap">Specific</span>
 			<input
+				id="creativeFreedom"
 				type="range"
 				min="0"
 				max="100"
@@ -224,7 +236,7 @@
 				const val = (e.target as HTMLTextAreaElement).value;
 				updateFormData({ mustHaveElements: val });
 			}}
-		/>
+		></textarea>
 		<p class="text-xs text-slate-500 mt-2">
 			{(formData.mustHaveElements ?? '').length} / 300 characters
 		</p>
@@ -247,7 +259,7 @@
 					const val = (e.target as HTMLTextAreaElement).value;
 					updateFormData({ colorPreferences: val });
 				}}
-			/>
+			></textarea>
 			<p class="text-xs text-slate-500 mt-2">
 				{(formData.colorPreferences ?? '').length} / 300 characters
 			</p>

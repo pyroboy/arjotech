@@ -18,7 +18,7 @@
         <!-- Social links -->
         <div class="flex gap-4 mt-6">
           <a
-            href="https://instagram.com"
+            href="https://instagram.com/arjostyle.ink"
             target="_blank"
             rel="noopener noreferrer"
             class="text-zinc-500 hover:text-white transition-colors"
@@ -27,7 +27,7 @@
             <Instagram class="w-5 h-5" />
           </a>
           <a
-            href="https://github.com"
+            href="https://github.com/arjomagno"
             target="_blank"
             rel="noopener noreferrer"
             class="text-zinc-500 hover:text-white transition-colors"
@@ -36,7 +36,7 @@
             <Github class="w-5 h-5" />
           </a>
           <a
-            href="https://facebook.com"
+            href="https://facebook.com/arjostyle.ink"
             target="_blank"
             rel="noopener noreferrer"
             class="text-zinc-500 hover:text-white transition-colors"

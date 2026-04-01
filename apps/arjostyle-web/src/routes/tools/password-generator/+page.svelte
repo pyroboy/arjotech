@@ -6,18 +6,18 @@
 		timestamp: Date;
 	}
 
-	let length = 16;
-	let useUppercase = true;
-	let useLowercase = true;
-	let useNumbers = true;
-	let useSymbols = true;
-	let excludeAmbiguous = true;
+	let length = $state(16);
+	let useUppercase = $state(true);
+	let useLowercase = $state(true);
+	let useNumbers = $state(true);
+	let useSymbols = $state(true);
+	let excludeAmbiguous = $state(true);
 
-	let password = '';
-	let passwordHistory: PasswordEntry[] = [];
-	let copied = false;
-	let bulkCount = 5;
-	let bulkPasswords: string[] = [];
+	let password = $state('');
+	let passwordHistory: PasswordEntry[] = $state([]);
+	let copied = $state(false);
+	let bulkCount = $state(5);
+	let bulkPasswords: string[] = $state([]);
 
 	type StrengthLevel = 'Weak' | 'Fair' | 'Good' | 'Strong' | 'Very Strong';
 
@@ -27,7 +27,7 @@
 		crackTime: string;
 	}
 
-	let stats: PasswordStats | null = null;
+	let stats: PasswordStats | null = $state(null);
 
 	const UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	const LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
@@ -213,13 +213,13 @@
 
 				<div class="flex gap-2 justify-center">
 					<button
-						on:click={generateNew}
+						onclick={generateNew}
 						class="flex-1 rounded-lg bg-orange-500 px-6 py-2 font-medium text-white hover:bg-orange-600 transition-colors"
 					>
 						Generate
 					</button>
 					<button
-						on:click={copyPassword}
+						onclick={copyPassword}
 						disabled={!password}
 						class="flex-1 rounded-lg bg-orange-500 px-6 py-2 font-medium text-white hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
 					>
@@ -240,7 +240,7 @@
 							<div
 								class={`h-full ${getStrengthColor(stats.strength)} transition-all`}
 								style={`width: ${Math.min(100, (stats.entropy / 100) * 100)}%`}
-							/>
+							></div>
 						</div>
 					</div>
 
@@ -278,13 +278,13 @@
 
 			<!-- Character Options -->
 			<div class="rounded-lg bg-zinc-800/50 border border-zinc-700/50 p-6">
-				<h3 class="text-sm font-semibold text-white mb-4">Character Types</h3>
+				<h2 class="text-sm font-semibold text-white mb-4">Character Types</h2>
 				<div class="space-y-3">
 					<label class="flex items-center gap-3 cursor-pointer">
 						<input
 							type="checkbox"
 							bind:checked={useUppercase}
-							on:change={() => generateNew()}
+							onchange={() => generateNew()}
 							class="w-4 h-4 rounded accent-orange-500 cursor-pointer"
 						/>
 						<span class="text-sm text-zinc-400">Uppercase (A-Z)</span>
@@ -293,7 +293,7 @@
 						<input
 							type="checkbox"
 							bind:checked={useLowercase}
-							on:change={() => generateNew()}
+							onchange={() => generateNew()}
 							class="w-4 h-4 rounded accent-orange-500 cursor-pointer"
 						/>
 						<span class="text-sm text-zinc-400">Lowercase (a-z)</span>
@@ -302,7 +302,7 @@
 						<input
 							type="checkbox"
 							bind:checked={useNumbers}
-							on:change={() => generateNew()}
+							onchange={() => generateNew()}
 							class="w-4 h-4 rounded accent-orange-500 cursor-pointer"
 						/>
 						<span class="text-sm text-zinc-400">Numbers (0-9)</span>
@@ -311,7 +311,7 @@
 						<input
 							type="checkbox"
 							bind:checked={useSymbols}
-							on:change={() => generateNew()}
+							onchange={() => generateNew()}
 							class="w-4 h-4 rounded accent-orange-500 cursor-pointer"
 						/>
 						<span class="text-sm text-zinc-400">Symbols (!@#$%^&*)</span>
@@ -320,7 +320,7 @@
 						<input
 							type="checkbox"
 							bind:checked={excludeAmbiguous}
-							on:change={() => generateNew()}
+							onchange={() => generateNew()}
 							class="w-4 h-4 rounded accent-orange-500 cursor-pointer"
 						/>
 						<span class="text-sm text-zinc-400">Exclude Ambiguous (i, l, 1, L, o, 0, O)</span>
@@ -330,7 +330,7 @@
 
 			<!-- Bulk Generation -->
 			<div class="rounded-lg bg-zinc-800/50 border border-zinc-700/50 p-6">
-				<h3 class="text-sm font-semibold text-white mb-4">Bulk Generate</h3>
+				<h2 class="text-sm font-semibold text-white mb-4">Bulk Generate</h2>
 				<div class="flex gap-2 mb-4">
 					<select
 						bind:value={bulkCount}
@@ -341,7 +341,7 @@
 						<option value={20}>20 passwords</option>
 					</select>
 					<button
-						on:click={generateBulk}
+						onclick={generateBulk}
 						class="flex-1 rounded-lg bg-orange-500 px-4 py-2 font-medium text-white hover:bg-orange-600 transition-colors"
 					>
 						Generate Bulk
@@ -355,7 +355,7 @@
 						{/each}
 					</div>
 					<button
-						on:click={copyBulk}
+						onclick={copyBulk}
 						class="w-full rounded-lg bg-green-600 px-4 py-2 font-medium text-white hover:bg-green-700 transition-colors"
 					>
 						Copy All
@@ -366,13 +366,13 @@
 			<!-- Password History -->
 			{#if passwordHistory.length > 0}
 				<div class="rounded-lg bg-zinc-800/50 border border-zinc-700/50 p-6">
-					<h3 class="text-sm font-semibold text-white mb-4">Recent Passwords</h3>
+					<h2 class="text-sm font-semibold text-white mb-4">Recent Passwords</h2>
 					<div class="space-y-2">
 						{#each passwordHistory as entry}
 							<div class="flex items-center justify-between bg-zinc-900 rounded-lg p-3">
 								<span class="font-mono text-sm text-green-400 break-all">{entry.password}</span>
 								<button
-									on:click={() => navigator.clipboard.writeText(entry.password)}
+									onclick={() => navigator.clipboard.writeText(entry.password)}
 									class="ml-2 px-2 py-1 text-xs bg-zinc-700 hover:bg-zinc-600 text-zinc-300 rounded transition-colors flex-shrink-0"
 								>
 									Copy

@@ -41,10 +41,12 @@
       </div>
       <div class="py-6 px-2 space-y-4">
         <div class="flex justify-center items-center mb-4 h-8">
-          <svelte:component
-            this={iconInfo.icon}
-            class={cn('transition-all', iconInfo.className)}
-          />
+          {#if iconInfo}
+            {@const Icon = iconInfo.icon}
+            <Icon
+              class={cn('transition-all', iconInfo.className)}
+            />
+          {/if}
         </div>
         <div class="w-full bg-zinc-800 rounded-full h-2.5 overflow-hidden">
           <div

@@ -77,33 +77,34 @@
   }
 </script>
 
-<div class="p-8 max-w-4xl mx-auto">
+<div class="p-4 sm:p-8 max-w-4xl mx-auto">
   <!-- Header -->
-  <div class="mb-8">
+  <div class="mb-6 sm:mb-8">
     <a href="/admin/marketing" class="text-zinc-500 text-xs font-mono hover:text-zinc-300 mb-2 inline-block">← Back to Pipeline</a>
-    <h1 class="text-2xl font-bold text-white">Content Generator</h1>
-    <p class="text-zinc-500 text-sm mt-1">Generate AI-powered captions, image prompts, and social content</p>
+    <h1 class="text-xl sm:text-2xl font-bold text-white">Content Generator</h1>
+    <p class="text-zinc-500 text-xs sm:text-sm mt-1">Generate AI-powered captions, image prompts, and social content</p>
   </div>
 
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
     <!-- Input Form -->
     <div class="space-y-6">
-      <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg p-6 space-y-5">
+      <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg p-4 sm:p-6 space-y-5">
         <h2 class="text-white font-semibold text-sm uppercase tracking-wider">Configuration</h2>
 
         <!-- Business -->
         <div>
-          <label class="block text-zinc-400 text-xs uppercase tracking-wider mb-2">Business</label>
+          <label class="block text-zinc-400 text-xs uppercase tracking-wider mb-2">Business
           <select bind:value={selectedBusiness} class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2.5 text-white text-sm focus:ring-2 focus:ring-orange-500 focus:border-transparent">
             {#each businesses as biz}
               <option value={biz.id}>{biz.name}</option>
             {/each}
           </select>
+</label>
         </div>
 
         <!-- Content Type -->
         <div>
-          <label class="block text-zinc-400 text-xs uppercase tracking-wider mb-2">Content Type</label>
+          <span class="block text-zinc-400 text-xs uppercase tracking-wider mb-2">Content Type</span>
           <div class="grid grid-cols-2 gap-2">
             {#each contentTypes as ct}
               <button
@@ -116,7 +117,7 @@
 
         <!-- Platform -->
         <div>
-          <label class="block text-zinc-400 text-xs uppercase tracking-wider mb-2">Platform</label>
+          <span class="block text-zinc-400 text-xs uppercase tracking-wider mb-2">Platform</span>
           <div class="flex gap-2 flex-wrap">
             {#each platforms as p}
               <button
@@ -129,29 +130,32 @@
 
         <!-- Pipeline Stage -->
         <div>
-          <label class="block text-zinc-400 text-xs uppercase tracking-wider mb-2">Pipeline Stage</label>
+          <label class="block text-zinc-400 text-xs uppercase tracking-wider mb-2">Pipeline Stage
           <select bind:value={pipelineStage} class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2.5 text-white text-sm focus:ring-2 focus:ring-orange-500 focus:border-transparent">
             {#each pipelineStages as ps}
               <option value={ps.id}>{ps.label}</option>
             {/each}
           </select>
+</label>
         </div>
       </div>
 
       <!-- Conditional Fields -->
       {#if contentType === 'menu_image'}
-        <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg p-6 space-y-4">
+        <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg p-4 sm:p-6 space-y-4">
           <h2 class="text-white font-semibold text-sm uppercase tracking-wider">Menu Item Details</h2>
           <div>
-            <label class="block text-zinc-400 text-xs mb-1.5">Item Name</label>
+            <label class="block text-zinc-400 text-xs mb-1.5">Item Name
             <input bind:value={menuName} placeholder="e.g. Tapsilog, Longsilog, Cornsilog" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2.5 text-white text-sm placeholder-zinc-600 focus:ring-2 focus:ring-orange-500 focus:border-transparent" />
+</label>
           </div>
           <div>
-            <label class="block text-zinc-400 text-xs mb-1.5">Price (₱)</label>
+            <label class="block text-zinc-400 text-xs mb-1.5">Price (₱)
             <input bind:value={menuPrice} placeholder="e.g. 99" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2.5 text-white text-sm placeholder-zinc-600 focus:ring-2 focus:ring-orange-500 focus:border-transparent" />
+</label>
           </div>
           <div>
-            <label class="block text-zinc-400 text-xs mb-1.5">Photo Style</label>
+            <label class="block text-zinc-400 text-xs mb-1.5">Photo Style
             <select bind:value={menuStyle} class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2.5 text-white text-sm focus:ring-2 focus:ring-orange-500 focus:border-transparent">
               <option value="overhead food photography">Overhead / Flat Lay</option>
               <option value="45-degree angle food photography">45° Angle</option>
@@ -159,24 +163,28 @@
               <option value="lifestyle food photography with hands">Lifestyle with Hands</option>
               <option value="dark moody food photography">Dark & Moody</option>
             </select>
+</label>
           </div>
         </div>
       {/if}
 
       {#if contentType === 'promo_graphic'}
-        <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg p-6 space-y-4">
+        <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg p-4 sm:p-6 space-y-4">
           <h2 class="text-white font-semibold text-sm uppercase tracking-wider">Promo Details</h2>
           <div>
-            <label class="block text-zinc-400 text-xs mb-1.5">Promo Title</label>
+            <label class="block text-zinc-400 text-xs mb-1.5">Promo Title
             <input bind:value={promoTitle} placeholder="e.g. Payday Weekend Special" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2.5 text-white text-sm placeholder-zinc-600 focus:ring-2 focus:ring-orange-500 focus:border-transparent" />
+</label>
           </div>
           <div>
-            <label class="block text-zinc-400 text-xs mb-1.5">Discount</label>
+            <label class="block text-zinc-400 text-xs mb-1.5">Discount
             <input bind:value={promoDiscount} placeholder="e.g. 20%, Buy 1 Take 1" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2.5 text-white text-sm placeholder-zinc-600 focus:ring-2 focus:ring-orange-500 focus:border-transparent" />
+</label>
           </div>
           <div>
-            <label class="block text-zinc-400 text-xs mb-1.5">Valid Until</label>
+            <label class="block text-zinc-400 text-xs mb-1.5">Valid Until
             <input type="date" bind:value={promoValidUntil} class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2.5 text-white text-sm focus:ring-2 focus:ring-orange-500 focus:border-transparent" />
+</label>
           </div>
         </div>
       {/if}
@@ -200,7 +208,7 @@
             <span class="text-xs px-2 py-1 rounded-full bg-green-900/30 text-green-400">{result.status}</span>
           </div>
 
-          <div class="p-6 space-y-4">
+          <div class="p-4 sm:p-6 space-y-4">
             <div>
               <p class="text-zinc-500 text-xs uppercase tracking-wider mb-1">Title</p>
               <p class="text-white font-medium">{result.title}</p>
@@ -243,7 +251,7 @@
           </div>
         </div>
       {:else}
-        <div class="bg-zinc-800/30 border border-dashed border-zinc-700 rounded-lg p-12 text-center sticky top-8">
+        <div class="bg-zinc-800/30 border border-dashed border-zinc-700 rounded-lg p-8 sm:p-12 text-center sticky top-8">
           <p class="text-zinc-600 text-4xl mb-4">✨</p>
           <p class="text-zinc-500 text-sm">Configure options and hit generate</p>
           <p class="text-zinc-600 text-xs mt-2">AI will create captions, hashtags, and image prompts</p>

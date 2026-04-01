@@ -219,20 +219,21 @@
           <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg p-6">
             <label class="block text-zinc-400 text-sm uppercase font-semibold tracking-wider mb-2">
               Batch Yield
-            </label>
+            
             <input
               type="number"
               bind:value={batchYield}
               min="1"
               class="w-full px-4 py-2 bg-zinc-700/50 border border-zinc-600 rounded-lg text-white focus:outline-none focus:border-orange-500"
             />
+</label>
             <p class="text-zinc-500 text-xs mt-2">pieces per batch</p>
           </div>
 
           <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg p-6">
             <label class="block text-zinc-400 text-sm uppercase font-semibold tracking-wider mb-2">
               Packaging Cost/Unit
-            </label>
+            
             <input
               type="number"
               bind:value={packagingCostPerUnit}
@@ -240,13 +241,14 @@
               step="0.5"
               class="w-full px-4 py-2 bg-zinc-700/50 border border-zinc-600 rounded-lg text-white focus:outline-none focus:border-orange-500"
             />
+</label>
             <p class="text-zinc-500 text-xs mt-2">{formatPrice(packagingCostPerUnit)}</p>
           </div>
 
           <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg p-6">
             <label class="block text-zinc-400 text-sm uppercase font-semibold tracking-wider mb-2">
               Overhead %
-            </label>
+            
             <input
               type="number"
               bind:value={overheadPercent}
@@ -254,6 +256,7 @@
               max="100"
               class="w-full px-4 py-2 bg-zinc-700/50 border border-zinc-600 rounded-lg text-white focus:outline-none focus:border-orange-500"
             />
+</label>
             <p class="text-zinc-500 text-xs mt-2">{overheadPercent}%</p>
           </div>
         </div>
@@ -324,7 +327,7 @@
     <!-- Daily Sales Input -->
     <div class="mb-12">
       <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg p-6 max-w-md">
-        <label class="block text-white font-semibold text-lg mb-4">Monthly Projection</label>
+        <label class="block text-white font-semibold text-lg mb-4">Monthly Projection
         <input
           type="number"
           placeholder="pieces per day"
@@ -332,6 +335,7 @@
           min="1"
           class="w-full px-4 py-2 bg-zinc-700/50 border border-zinc-600 rounded-lg text-white focus:outline-none focus:border-orange-500 mb-2"
         />
+</label>
         <p class="text-zinc-400 text-sm">Calculating for {piecesPerDay} pieces/day</p>
       </div>
     </div>

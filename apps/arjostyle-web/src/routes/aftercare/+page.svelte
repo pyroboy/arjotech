@@ -1,5 +1,10 @@
 <svelte:head>
   <title>Aftercare — Arjo Magno</title>
+  <meta name="description" content="Essential tattoo aftercare guide by Arjo Magno. Learn how to care for your new tattoo during the first 24 hours, healing phase, and long-term maintenance." />
+  <meta property="og:title" content="Aftercare — Arjo Magno" />
+  <meta property="og:description" content="Essential tattoo aftercare guide by Arjo Magno. Learn how to care for your new tattoo during the first 24 hours, healing phase, and long-term maintenance." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://arjostyle-web.pages.dev/aftercare" />
 </svelte:head>
 
 <div class="min-h-screen bg-surface-900 px-6 py-20">

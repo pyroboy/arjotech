@@ -67,7 +67,7 @@ export interface PortfolioVideoItem {
 
 export type PortfolioItem = PortfolioImageItem | PortfolioVideoItem;
 
-const imageUrls = [
+export const imageUrls = [
   'https://res.cloudinary.com/dexcw6vg0/image/upload/v1745826300/chy7geqmgfevi7pautgu.jpg',
   'https://res.cloudinary.com/dexcw6vg0/image/upload/v1745826257/r8h4fpmjdecybf1txnmh.jpg',
   'https://res.cloudinary.com/dexcw6vg0/image/upload/v1745826257/uumhrjprdgr6riqljgnj.jpg',

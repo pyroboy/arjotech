@@ -114,21 +114,21 @@
   }
 </script>
 
-<div class="min-h-screen bg-gradient-to-br from-surface-900 to-surface-800 p-8">
+<div class="min-h-screen bg-gradient-to-br from-surface-900 to-surface-800 p-4 sm:p-8">
   <!-- Header -->
-  <div class="mb-8">
-    <div class="flex items-center justify-between mb-6">
+  <div class="mb-6 sm:mb-8">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
       <div>
-        <h1 class="text-4xl font-bold text-white mb-2">Bookings</h1>
-        <p class="text-zinc-400">Manage tattoo booking requests</p>
+        <h1 class="text-2xl sm:text-4xl font-bold text-white mb-1 sm:mb-2">Bookings</h1>
+        <p class="text-sm sm:text-base text-zinc-400">Manage tattoo booking requests</p>
       </div>
-      <div class="bg-ink-500/20 border border-ink-500/30 rounded-lg px-4 py-2">
-        <span class="text-ink-500 font-semibold text-lg">{filteredBookings.length} bookings</span>
+      <div class="bg-ink-500/20 border border-ink-500/30 rounded-lg px-4 py-2 self-start sm:self-auto">
+        <span class="text-ink-500 font-semibold text-base sm:text-lg">{filteredBookings.length} bookings</span>
       </div>
     </div>
 
     <!-- Controls -->
-    <div class="flex gap-4">
+    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
       <!-- Search -->
       <div class="flex-1 relative">
         <Search class="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 w-5 h-5" />
@@ -259,8 +259,9 @@
 
   <!-- Detail Slide-Over Panel -->
   {#if showDetail && selectedBooking}
-    <div class="fixed inset-0 bg-black/40 z-40" onclick={() => (showDetail = false)}></div>
-    <div class="fixed inset-y-0 right-0 w-[500px] bg-surface-800 border-l border-zinc-800 shadow-2xl z-50 flex flex-col">
+    <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
+    <div class="fixed inset-0 bg-black/40 z-40" onclick={() => (showDetail = false)} role="presentation"></div>
+    <div class="fixed inset-y-0 right-0 w-full sm:w-[500px] bg-surface-800 border-l border-zinc-800 shadow-2xl z-50 flex flex-col">
       <!-- Header -->
       <div class="flex items-center justify-between p-6 border-b border-zinc-700 bg-surface-900/50">
         <h2 class="text-xl font-bold text-white">Booking Details</h2>

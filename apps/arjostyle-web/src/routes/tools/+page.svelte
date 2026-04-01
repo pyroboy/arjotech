@@ -23,6 +23,13 @@
       category: 'business'
     },
     {
+      path: '/tools/tattoo-calculator',
+      title: 'Tattoo Calculator',
+      description: 'Interactive 3D body placement with real-time pricing, pain level info, and session estimates.',
+      icon: '🖋️',
+      category: 'business'
+    },
+    {
       path: '/tools/cookie-costing-calculator',
       title: 'Cookie Costing Calculator',
       description: 'Calculate ingredient costs, pricing, and profit margins for baked goods with monthly projections.',

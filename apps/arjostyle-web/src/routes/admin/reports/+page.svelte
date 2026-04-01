@@ -299,11 +299,11 @@
 <div class="min-h-screen bg-surface-900 text-white">
   <!-- Header -->
   <div class="border-b border-zinc-800">
-    <div class="max-w-7xl mx-auto px-6 py-8">
-      <div class="flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 class="text-3xl font-bold">KPI Reports</h1>
-          <p class="text-zinc-400 mt-1">Comprehensive view of builder, product, and business metrics</p>
+          <h1 class="text-2xl sm:text-3xl font-bold">KPI Reports</h1>
+          <p class="text-zinc-400 mt-1 text-sm sm:text-base">Comprehensive view of builder, product, and business metrics</p>
         </div>
 
         <!-- Period Toggle -->
@@ -787,7 +787,7 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <!-- Category -->
             <div>
-              <label class="block text-sm font-medium text-zinc-300 mb-2">Category</label>
+              <label class="block text-sm font-medium text-zinc-300 mb-2">Category
               <select
                 bind:value={logForm.category}
                 class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-orange-500"
@@ -802,22 +802,24 @@
                 <option value="marketing">Marketing</option>
                 <option value="leads">Leads</option>
               </select>
+</label>
             </div>
 
             <!-- Action -->
             <div>
-              <label class="block text-sm font-medium text-zinc-300 mb-2">Action</label>
+              <label class="block text-sm font-medium text-zinc-300 mb-2">Action
               <input
                 type="text"
                 bind:value={logForm.action}
                 placeholder="e.g., feature_shipped, doc_created"
                 class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-2 text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500"
               />
+</label>
             </div>
 
             <!-- Business -->
             <div>
-              <label class="block text-sm font-medium text-zinc-300 mb-2">Business</label>
+              <label class="block text-sm font-medium text-zinc-300 mb-2">Business
               <select
                 bind:value={logForm.business}
                 class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-orange-500"
@@ -828,28 +830,31 @@
                 <option value="foodhub">FoodHub</option>
                 <option value="dorm">Dorm</option>
               </select>
+</label>
             </div>
 
             <!-- Value -->
             <div>
-              <label class="block text-sm font-medium text-zinc-300 mb-2">Value</label>
+              <label class="block text-sm font-medium text-zinc-300 mb-2">Value
               <input
                 type="number"
                 bind:value={logForm.value}
                 class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-orange-500"
               />
+</label>
             </div>
           </div>
 
           <!-- Notes -->
           <div>
-            <label class="block text-sm font-medium text-zinc-300 mb-2">Notes (optional)</label>
+            <label class="block text-sm font-medium text-zinc-300 mb-2">Notes (optional)
             <textarea
               bind:value={logForm.notes}
               placeholder="Add any additional context..."
               class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-2 text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500"
               rows="2"
             ></textarea>
+</label>
           </div>
 
           <!-- Submit Button -->

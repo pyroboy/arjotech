@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @layer base {
   :root {
@@ -31,4 +31,147 @@
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* ==========================================================================
+   Utility Classes — Dark-theme design tokens for arjostyle booking flow
+   ========================================================================== */
+
+/* --- Glassmorphism panels for overlays on dark backgrounds --- */
+.glass-panel {
+  background: rgba(24, 24, 27, 0.80);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-panel-light {
+  background: rgba(24, 24, 27, 0.60);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* --- Ink accent glow for buttons and active elements --- */
+.glow-ink {
+  box-shadow: 0 0 12px rgba(234, 88, 12, 0.25), 0 0 4px rgba(234, 88, 12, 0.1);
+}
+
+.glow-ink-lg {
+  box-shadow: 0 0 20px rgba(234, 88, 12, 0.3), 0 0 8px rgba(234, 88, 12, 0.15);
+}
+
+.glow-ink-hover:hover {
+  box-shadow: 0 0 24px rgba(234, 88, 12, 0.35), 0 0 8px rgba(234, 88, 12, 0.2);
+}
+
+/* --- Enhanced input focus state with subtle glow --- */
+.input-focus-glow:focus {
+  border-color: rgb(234, 88, 12);
+  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15);
+  outline: none;
+}
+
+.input-focus-glow:focus-within {
+  border-color: rgb(234, 88, 12);
+  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15);
+}
+
+/* --- Subtle depth gradient for 3D model backgrounds --- */
+.bg-depth-gradient {
+  background: radial-gradient(ellipse at 50% 40%, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+}
+
+/* --- Animation keyframes --- */
+
+/* Scale-in animation for checkmarks and badges */
+@keyframes scaleIn {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Subtle pulse for active/pending elements */
+@keyframes subtlePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Count-up fade for price changes */
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(4px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s ease-out forwards;
+}
+
+.animate-subtle-pulse {
+  animation: subtlePulse 2s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.3s ease-out forwards;
+}
+
+/* --- Booking flow typography hierarchy --- */
+.booking-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  color: #f4f4f5;
+}
+
+.booking-section-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #a1a1aa;
+}
+
+.booking-label {
+  font-size: 0.875rem;
+  color: #a1a1aa;
+}
+
+.booking-value {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #f4f4f5;
+}
+
+/* --- Interactive card hover with subtle lift --- */
+.card-interactive {
+  transition: all 0.2s ease-out;
+}
+
+.card-interactive:hover {
+  border-color: rgba(234, 88, 12, 0.3);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+.card-interactive:active {
+  transform: translateY(0);
+}
+
+/* --- Refined scrollbar for booking flow content area --- */
+.booking-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.booking-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.booking-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(161, 161, 170, 0.2);
+  border-radius: 2px;
+}
+
+.booking-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(161, 161, 170, 0.4);
 }

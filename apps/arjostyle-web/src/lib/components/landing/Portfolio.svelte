@@ -32,6 +32,20 @@
     activeCategory === 'all' ? imageItems : imageItems.filter((item) => item.category === activeCategory)
   );
 
+  function cloudinarySrcset(url: string): string {
+    const widths = [400, 600, 800];
+    return widths
+      .map((w) => {
+        const transformed = url.replace('/image/upload/', `/image/upload/w_${w},q_auto,f_auto/`);
+        return `${transformed} ${w}w`;
+      })
+      .join(', ');
+  }
+
+  function cloudinarySrc(url: string, width: number = 800): string {
+    return url.replace('/image/upload/', `/image/upload/w_${width},q_auto,f_auto/`);
+  }
+
   function handleImageError(event: Event) {
     const target = event.currentTarget as HTMLImageElement;
     if (target.src === FALLBACK_IMAGE_SRC) {
@@ -49,9 +63,9 @@
 <section id="portfolio" class="py-16 bg-gradient-to-b from-surface-950 to-surface-900 text-zinc-200">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div>
-      <h3 class="text-2xl md:text-3xl font-semibold text-center mb-6 text-zinc-100">
+      <h2 class="text-2xl md:text-3xl font-semibold text-center mb-6 text-zinc-100">
         Tattoo <span class="text-white">Gallery</span>
-      </h3>
+      </h2>
 
       <div class="flex flex-wrap justify-center gap-2 md:gap-3 mb-12">
         {#each portfolioCategories as category}
@@ -76,10 +90,13 @@
             <div class="group relative overflow-hidden rounded-lg shadow-lg bg-surface-900 border border-zinc-800 hover:border-zinc-800/50 transition-all duration-300 hover:shadow-xl">
               <div class="aspect-[4/5] w-full overflow-hidden bg-zinc-800 flex items-center justify-center text-zinc-600">
                 <img
-                  src={item.image}
+                  src={cloudinarySrc(item.image)}
+                  srcset={cloudinarySrcset(item.image)}
+                  sizes="(max-width: 640px) 50vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   alt={item.title || `Portfolio image ${item.id}`}
                   class="w-full h-full object-cover object-center transition-transform duration-700 ease-in-out group-hover:scale-105"
                   loading="lazy"
+                  decoding="async"
                   onerror={handleImageError}
                 />
               </div>
@@ -87,7 +104,7 @@
                 <span class="inline-block px-2 py-0.5 text-xs font-semibold bg-zinc-600/90 rounded-full text-white mb-2 self-start">
                   {portfolioCategories.find((cat) => cat.id === item.category)?.name || item.category}
                 </span>
-                <h4 class="text-white text-sm md:text-base font-bold mb-1 truncate">{item.title}</h4>
+                <h3 class="text-white text-sm md:text-base font-bold mb-1 truncate">{item.title}</h3>
                 <p class="text-zinc-200 text-xs md:text-sm">Artist: {item.artist}</p>
               </div>
             </div>
@@ -109,7 +126,7 @@
         <button
           type="button"
           onclick={onOpenBookingModal}
-          class="inline-block px-8 py-3 bg-zinc-600 hover:bg-zinc-700 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105"
+          class="inline-block px-8 py-3 bg-ink-500 hover:bg-ink-400 text-white font-semibold rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
         >
           Book Your Consultation
         </button>

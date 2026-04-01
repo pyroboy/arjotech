@@ -4,7 +4,8 @@
 
   let { data } = $props();
 
-  // State
+  // State – initialised once from server data; mutations update local copy
+  // svelte-ignore state_referenced_locally
   let allLeads = $state<Lead[]>(data.leads);
   let searchQuery = $state('');
   let selectedBusiness = $state<string | null>(null);
@@ -289,17 +290,17 @@
   }
 </script>
 
-<div class="min-h-screen bg-gradient-to-br from-surface-900 to-surface-800 p-8">
+<div class="min-h-screen bg-gradient-to-br from-surface-900 to-surface-800 p-4 sm:p-8">
   <!-- Header -->
-  <div class="mb-8">
-    <div class="flex items-center justify-between mb-6">
+  <div class="mb-6 sm:mb-8">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
       <div>
-        <h1 class="text-4xl font-bold text-white mb-2">Leads</h1>
-        <p class="text-zinc-400">Manage sales pipeline across all businesses</p>
+        <h1 class="text-2xl sm:text-4xl font-bold text-white mb-1 sm:mb-2">Leads</h1>
+        <p class="text-sm sm:text-base text-zinc-400">Manage sales pipeline across all businesses</p>
       </div>
       <button
         onclick={() => (showAddForm = !showAddForm)}
-        class="flex items-center gap-2 bg-orange-500/20 border border-orange-500/30 rounded-lg px-4 py-3 text-orange-400 font-semibold hover:bg-orange-500/30 transition-colors"
+        class="flex items-center gap-2 bg-orange-500/20 border border-orange-500/30 rounded-lg px-4 py-3 text-orange-400 font-semibold hover:bg-orange-500/30 transition-colors self-start sm:self-auto"
       >
         <Plus class="w-5 h-5" />
         Add Lead
@@ -307,26 +308,26 @@
     </div>
 
     <!-- Stats Bar -->
-    <div class="grid grid-cols-5 gap-4 mb-6">
-      <div class="bg-surface-800 border border-zinc-700 rounded-lg p-4">
-        <p class="text-zinc-400 text-sm font-medium mb-1">Total Leads</p>
-        <p class="text-3xl font-bold text-white">{stats.total}</p>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 mb-6">
+      <div class="bg-surface-800 border border-zinc-700 rounded-lg p-3 sm:p-4">
+        <p class="text-zinc-400 text-xs sm:text-sm font-medium mb-1">Total Leads</p>
+        <p class="text-2xl sm:text-3xl font-bold text-white">{stats.total}</p>
       </div>
-      <div class="bg-surface-800 border border-zinc-700 rounded-lg p-4">
-        <p class="text-zinc-400 text-sm font-medium mb-1">New This Week</p>
-        <p class="text-3xl font-bold text-blue-400">{stats.newThisWeek}</p>
+      <div class="bg-surface-800 border border-zinc-700 rounded-lg p-3 sm:p-4">
+        <p class="text-zinc-400 text-xs sm:text-sm font-medium mb-1">New This Week</p>
+        <p class="text-2xl sm:text-3xl font-bold text-blue-400">{stats.newThisWeek}</p>
       </div>
-      <div class="bg-surface-800 border border-zinc-700 rounded-lg p-4">
-        <p class="text-zinc-400 text-sm font-medium mb-1">Contacted</p>
-        <p class="text-3xl font-bold text-cyan-400">{stats.contacted}</p>
+      <div class="bg-surface-800 border border-zinc-700 rounded-lg p-3 sm:p-4">
+        <p class="text-zinc-400 text-xs sm:text-sm font-medium mb-1">Contacted</p>
+        <p class="text-2xl sm:text-3xl font-bold text-cyan-400">{stats.contacted}</p>
       </div>
-      <div class="bg-surface-800 border border-zinc-700 rounded-lg p-4">
-        <p class="text-zinc-400 text-sm font-medium mb-1">Won</p>
-        <p class="text-3xl font-bold text-green-400">{stats.won}</p>
+      <div class="bg-surface-800 border border-zinc-700 rounded-lg p-3 sm:p-4">
+        <p class="text-zinc-400 text-xs sm:text-sm font-medium mb-1">Won</p>
+        <p class="text-2xl sm:text-3xl font-bold text-green-400">{stats.won}</p>
       </div>
-      <div class="bg-surface-800 border border-zinc-700 rounded-lg p-4">
-        <p class="text-zinc-400 text-sm font-medium mb-1">Pipeline Value</p>
-        <p class="text-2xl font-bold text-orange-400">{formatCurrency(stats.totalValue)}</p>
+      <div class="bg-surface-800 border border-zinc-700 rounded-lg p-3 sm:p-4">
+        <p class="text-zinc-400 text-xs sm:text-sm font-medium mb-1">Pipeline Value</p>
+        <p class="text-xl sm:text-2xl font-bold text-orange-400">{formatCurrency(stats.totalValue)}</p>
       </div>
     </div>
 
@@ -344,18 +345,19 @@
     {#if showAddForm}
       <div class="bg-surface-800 border border-zinc-700 rounded-lg p-6 mb-6">
         <h2 class="text-xl font-bold text-white mb-4">New Lead</h2>
-        <div class="grid grid-cols-2 gap-4 mb-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
           <div>
-            <label class="block text-zinc-400 text-sm font-medium mb-2">Name *</label>
+            <label class="block text-zinc-400 text-sm font-medium mb-2">Name *
             <input
               type="text"
               placeholder="Lead name"
               bind:value={formData.name}
               class="w-full bg-surface-900 border border-zinc-700 rounded-lg px-4 py-2 text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500/50 transition-colors"
             />
+</label>
           </div>
           <div>
-            <label class="block text-zinc-400 text-sm font-medium mb-2">Business *</label>
+            <label class="block text-zinc-400 text-sm font-medium mb-2">Business *
             <select
               bind:value={formData.business}
               class="w-full bg-surface-900 border border-zinc-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-orange-500/50 transition-colors cursor-pointer"
@@ -364,9 +366,10 @@
                 <option value={b.id}>{b.label}</option>
               {/each}
             </select>
+</label>
           </div>
           <div>
-            <label class="block text-zinc-400 text-sm font-medium mb-2">Source</label>
+            <label class="block text-zinc-400 text-sm font-medium mb-2">Source
             <select
               bind:value={formData.source}
               class="w-full bg-surface-900 border border-zinc-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-orange-500/50 transition-colors cursor-pointer"
@@ -375,69 +378,77 @@
                 <option value={s.id}>{s.label}</option>
               {/each}
             </select>
+</label>
           </div>
           <div>
-            <label class="block text-zinc-400 text-sm font-medium mb-2">Estimated Value (₱)</label>
+            <label class="block text-zinc-400 text-sm font-medium mb-2">Estimated Value (₱)
             <input
               type="number"
               placeholder="5000"
               bind:value={formData.estimatedValue}
               class="w-full bg-surface-900 border border-zinc-700 rounded-lg px-4 py-2 text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500/50 transition-colors"
             />
+</label>
           </div>
           <div>
-            <label class="block text-zinc-400 text-sm font-medium mb-2">Phone</label>
+            <label class="block text-zinc-400 text-sm font-medium mb-2">Phone
             <input
               type="tel"
               placeholder="+63 9XX XXX XXXX"
               bind:value={formData.phone}
               class="w-full bg-surface-900 border border-zinc-700 rounded-lg px-4 py-2 text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500/50 transition-colors"
             />
+</label>
           </div>
           <div>
-            <label class="block text-zinc-400 text-sm font-medium mb-2">Email</label>
+            <label class="block text-zinc-400 text-sm font-medium mb-2">Email
             <input
               type="email"
               placeholder="email@example.com"
               bind:value={formData.email}
               class="w-full bg-surface-900 border border-zinc-700 rounded-lg px-4 py-2 text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500/50 transition-colors"
             />
+</label>
           </div>
           <div>
-            <label class="block text-zinc-400 text-sm font-medium mb-2">Facebook</label>
+            <label class="block text-zinc-400 text-sm font-medium mb-2">Facebook
             <input
               type="text"
               placeholder="facebook.com/username"
               bind:value={formData.facebook}
               class="w-full bg-surface-900 border border-zinc-700 rounded-lg px-4 py-2 text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500/50 transition-colors"
             />
+</label>
           </div>
           <div>
-            <label class="block text-zinc-400 text-sm font-medium mb-2">Instagram</label>
+            <label class="block text-zinc-400 text-sm font-medium mb-2">Instagram
             <input
               type="text"
               placeholder="@username"
               bind:value={formData.instagram}
               class="w-full bg-surface-900 border border-zinc-700 rounded-lg px-4 py-2 text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500/50 transition-colors"
             />
+</label>
           </div>
-          <div class="col-span-2">
-            <label class="block text-zinc-400 text-sm font-medium mb-2">Interest / What they want</label>
+          <div class="sm:col-span-2">
+            <label class="block text-zinc-400 text-sm font-medium mb-2">Interest / What they want
             <textarea
               placeholder="e.g., 'Tapsilog catering for 50 people', 'Tattoo sleeve design', etc."
               bind:value={formData.interest}
               rows="2"
               class="w-full bg-surface-900 border border-zinc-700 rounded-lg px-4 py-2 text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500/50 transition-colors resize-none"
             ></textarea>
+</label>
           </div>
-          <div class="col-span-2">
-            <label class="block text-zinc-400 text-sm font-medium mb-2">Notes</label>
+          <div class="sm:col-span-2">
+            <label class="block text-zinc-400 text-sm font-medium mb-2">Notes
             <textarea
               placeholder="Additional notes..."
               bind:value={formData.notes}
               rows="2"
               class="w-full bg-surface-900 border border-zinc-700 rounded-lg px-4 py-2 text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500/50 transition-colors resize-none"
             ></textarea>
+</label>
           </div>
         </div>
         <div class="flex gap-3">
@@ -459,7 +470,7 @@
     {/if}
 
     <!-- Search and Filters -->
-    <div class="flex gap-4 mb-6">
+    <div class="flex gap-3 sm:gap-4 mb-6">
       <div class="flex-1 relative">
         <Search class="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 w-5 h-5" />
         <input
@@ -518,7 +529,7 @@
   </div>
 
   <!-- Kanban Board -->
-  <div class="grid grid-cols-3 gap-6 pb-8">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 pb-8">
     {#each statuses.slice(0, 3) as status}
       <div class="flex flex-col bg-surface-800/30 border border-zinc-700 rounded-lg p-4">
         <h2 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
@@ -565,7 +576,7 @@
               {/if}
 
               <!-- Actions -->
-              <div class="flex gap-2 mb-3 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div class="flex gap-2 mb-3 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
                 <button
                   onclick={() => markAsContacted(lead.id)}
                   title="Mark as contacted"

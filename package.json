@@ -14,10 +14,13 @@
     "build": "turbo run build",
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
+    "test:unit": "turbo run test:unit",
     "clean": "turbo run clean && rimraf node_modules"
   },
   "devDependencies": {
+    "@typescript/native-preview": "7.0.0-dev.20260324.1",
     "rimraf": "^6.0.1",
+    "svelte-check-rs": "^0.9.6",
     "turbo": "latest",
     "typescript": "^5.5.0"
   }

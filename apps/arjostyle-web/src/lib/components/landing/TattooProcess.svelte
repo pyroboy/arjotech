@@ -1,10 +1,9 @@
 <script lang="ts">
   import { CalendarCheck, SprayCan, PenTool, ShieldCheck, Clock } from 'lucide-svelte';
-  import type { Component } from 'svelte';
 
   interface ProcessStep {
     id: string;
-    icon: Component;
+    icon: typeof CalendarCheck;
     title: string;
     duration: string;
     items: { heading: string; text: string }[];
@@ -15,10 +14,10 @@
     {
       id: '1', icon: CalendarCheck, title: 'Online Booking & Consultation', duration: 'Online + 30-60 min',
       items: [
-        { heading: 'Book Online', text: 'Select your preferred artist, service, date, and time through our secure online portal.' },
+        { heading: 'Book Online', text: 'Select your preferred service, date, and time through the secure online portal.' },
         { heading: 'Deposit', text: 'A deposit may be required to secure your appointment slot.' },
-        { heading: 'Consultation', text: 'Discuss your ideas, references, placement, and sizing with your chosen artist.' },
-        { heading: 'Design Refinement', text: 'We provide expert advice to ensure your design is perfect for tattooing.' },
+        { heading: 'Consultation', text: 'Discuss your ideas, references, placement, and sizing with me directly.' },
+        { heading: 'Design Refinement', text: 'I\'ll provide expert advice to ensure your design is perfect for tattooing.' },
       ],
       tip: { title: "What you'll need:", text: 'Have your ideas, reference images, and preferred placement ready.' },
     },
@@ -49,7 +48,7 @@
         { heading: 'Moisturizing', text: 'Apply recommended aftercare lotion sparingly to keep skin hydrated.' },
         { heading: 'Protection', text: 'Avoid sun exposure, soaking, and tight clothing over the healing tattoo.' },
       ],
-      tip: { title: 'Follow Up:', text: 'Contact us with any healing concerns. A complimentary touch-up may be offered.' },
+      tip: { title: 'Follow Up:', text: 'Contact me with any healing concerns. A complimentary touch-up may be offered.' },
     },
   ];
 
@@ -110,7 +109,7 @@
     </h2>
 
     <div
-      class="h-px w-full bg-zinc-600 mx-auto mb-6 transition-transform duration-1000 origin-left
+      class="h-px w-full max-w-3xl bg-zinc-600 mx-auto mb-6 transition-transform duration-1000 origin-left
         {isVisible ? 'scale-x-100' : 'scale-x-0'}"
     ></div>
 
@@ -128,7 +127,7 @@
               <button
                 onclick={(e) => { e.stopPropagation(); handleStepClick(step.id); }}
                 class="relative z-10 text-xl md:text-2xl font-bold transition-colors duration-300
-                  {activeStepId === step.id ? 'text-zinc-400' : 'text-zinc-500 hover:text-zinc-300'}"
+                  {activeStepId === step.id ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}"
                 aria-label="Go to step {step.id}: {step.title}"
               >
                 {step.id}
@@ -147,7 +146,7 @@
         <!-- Content Area -->
         <div class="p-6 md:p-8 min-h-[400px] md:min-h-[450px] flex flex-col md:flex-row md:items-start gap-6 pointer-events-none">
           <div class="flex-shrink-0 mx-auto md:mx-0 mb-4 md:mb-0 md:mr-6 text-zinc-400">
-            <svelte:component this={activeStep.icon} class="w-12 h-12 md:w-14 md:h-14" strokeWidth={1.5} />
+            <activeStep.icon class="w-12 h-12 md:w-14 md:h-14" strokeWidth={1.5} />
           </div>
           <div class="flex-grow space-y-4">
             <h3 class="text-2xl font-bold text-white">{activeStep.title}</h3>
@@ -159,14 +158,14 @@
               <ul class="list-none space-y-3 pl-0">
                 {#each activeStep.items as item}
                   <li>
-                    <span class="block text-zinc-300 font-medium mb-1">{item.heading}</span>
-                    <span class="text-zinc-300">{item.text}</span>
+                    <span class="block text-white font-medium mb-1">{item.heading}</span>
+                    <span class="text-zinc-400">{item.text}</span>
                   </li>
                 {/each}
               </ul>
               <div class="mt-4 p-3 bg-zinc-700/40 rounded-lg border border-zinc-700">
-                <p class="text-sm text-zinc-300 font-medium mb-2">{activeStep.tip.title}</p>
-                <p class="text-xs text-zinc-300">{activeStep.tip.text}</p>
+                <p class="text-sm text-zinc-200 font-medium mb-2">{activeStep.tip.title}</p>
+                <p class="text-xs text-zinc-400">{activeStep.tip.text}</p>
               </div>
             </div>
           </div>

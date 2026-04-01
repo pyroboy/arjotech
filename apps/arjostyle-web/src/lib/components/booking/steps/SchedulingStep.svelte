@@ -43,8 +43,8 @@
   <!-- Time Slots -->
   {#if formData.appointmentDate}
     <div>
-      <label class="block text-sm text-zinc-400 mb-3">Preferred Time *</label>
-      <div class="grid grid-cols-3 gap-2">
+      <span id="time-label" class="block text-sm text-zinc-400 mb-3">Preferred Time *</span>
+      <div class="grid grid-cols-3 gap-2" role="group" aria-labelledby="time-label">
         {#each ALL_DAY_TIME_SLOTS as slot}
           <button
             type="button"
@@ -63,8 +63,8 @@
 
   <!-- Urgency -->
   <div>
-    <label class="block text-sm text-zinc-400 mb-2">Urgency</label>
-    <div class="flex gap-3">
+    <span id="urgency-label" class="block text-sm text-zinc-400 mb-2">Urgency</span>
+    <div class="flex gap-3" role="group" aria-labelledby="urgency-label">
       {#each ['normal', 'soon', 'urgent'] as level}
         <button
           type="button"

@@ -65,22 +65,22 @@
   });
 </script>
 
-<div class="p-8 max-w-6xl mx-auto">
+<div class="p-4 sm:p-8 max-w-6xl mx-auto">
   <!-- Header -->
-  <div class="flex items-center justify-between mb-8">
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8">
     <div>
       <a href="/admin/marketing" class="text-zinc-500 text-xs font-mono hover:text-zinc-300 mb-2 inline-block">← Back to Pipeline</a>
-      <h1 class="text-2xl font-bold text-white">Content Calendar</h1>
-      <p class="text-zinc-500 text-sm mt-1">Schedule and visualize your content across the month</p>
+      <h1 class="text-xl sm:text-2xl font-bold text-white">Content Calendar</h1>
+      <p class="text-zinc-500 text-xs sm:text-sm mt-1">Schedule and visualize your content across the month</p>
     </div>
-    <a href="/admin/marketing/generate" class="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg text-sm font-medium transition-colors">
+    <a href="/admin/marketing/generate" class="px-3 sm:px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg text-xs sm:text-sm font-medium transition-colors self-start sm:self-auto">
       ✨ Generate Content
     </a>
   </div>
 
   <!-- Business + Month controls -->
-  <div class="flex items-center justify-between mb-6">
-    <div class="flex gap-2">
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+    <div class="flex gap-2 flex-wrap">
       {#each businesses as biz}
         <button
           onclick={() => selectedBusiness = biz.id}
@@ -89,25 +89,26 @@
       {/each}
     </div>
     <div class="flex items-center gap-4">
-      <button onclick={prevMonth} class="text-zinc-400 hover:text-white transition-colors">←</button>
+      <button onclick={prevMonth} class="p-2 text-zinc-400 hover:text-white transition-colors">←</button>
       <span class="text-white font-semibold text-sm min-w-[140px] text-center">{monthName}</span>
-      <button onclick={nextMonth} class="text-zinc-400 hover:text-white transition-colors">→</button>
+      <button onclick={nextMonth} class="p-2 text-zinc-400 hover:text-white transition-colors">→</button>
     </div>
   </div>
 
   <!-- Calendar Grid -->
-  <div class="bg-zinc-800/30 border border-zinc-700/50 rounded-lg overflow-hidden">
+  <div class="bg-zinc-800/30 border border-zinc-700/50 rounded-lg overflow-x-auto">
+    <div class="min-w-[500px]">
     <!-- Day headers -->
     <div class="grid grid-cols-7 border-b border-zinc-700/50">
       {#each ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] as day}
-        <div class="px-3 py-2 text-center text-zinc-500 text-xs uppercase tracking-wider font-medium">{day}</div>
+        <div class="px-2 sm:px-3 py-2 text-center text-zinc-500 text-xs uppercase tracking-wider font-medium">{day}</div>
       {/each}
     </div>
 
     <!-- Calendar days -->
     <div class="grid grid-cols-7">
       {#each calendarDays() as day}
-        <div class="min-h-[100px] border-b border-r border-zinc-800/50 p-2 {day ? 'bg-zinc-900/20' : 'bg-zinc-900/50'}">
+        <div class="min-h-[80px] sm:min-h-[100px] border-b border-r border-zinc-800/50 p-1.5 sm:p-2 {day ? 'bg-zinc-900/20' : 'bg-zinc-900/50'}">
           {#if day}
             <span class="text-zinc-500 text-xs font-mono">{day}</span>
             {#each getContentForDay(day) as item}
@@ -123,11 +124,12 @@
         </div>
       {/each}
     </div>
+    </div>
   </div>
 
   <!-- Quick Content Suggestions -->
   <div class="mt-8">
-    <h2 class="text-lg font-semibold text-white mb-4">Content Ideas This Month</h2>
+    <h2 class="text-base sm:text-lg font-semibold text-white mb-4">Content Ideas This Month</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
       <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg p-4">
         <p class="text-orange-400 text-xs uppercase tracking-wider font-semibold mb-2">Week 1</p>

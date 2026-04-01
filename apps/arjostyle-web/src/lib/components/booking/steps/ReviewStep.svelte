@@ -1,19 +1,30 @@
 <script lang="ts">
   import type { BookingFormData } from '$types/bookings';
-  import { User, CalendarDays, CreditCard, Clock, Layers, Image as ImageIcon, CheckCircle, AlertTriangle, Send, Info, Loader2, FileImage } from 'lucide-svelte';
+  import { SIZE_CATEGORIES, getPriceRange, sizeCategoryToSqInches } from '$lib/data/sizeCategoryMap';
+  import { User, CalendarDays, CheckCircle, AlertTriangle, Send, Info, Loader2, FileImage, Image as ImageIcon, Pencil } from 'lucide-svelte';
 
   interface Props {
     formData: BookingFormData;
     updateFormData: (data: Partial<BookingFormData>) => void;
     onSubmitSuccess: () => void;
+    onBookAnother: () => void;
+    onEditStep?: (stepIndex: number) => void;
   }
 
-  let { formData, updateFormData, onSubmitSuccess }: Props = $props();
+  let { formData, updateFormData, onSubmitSuccess, onBookAnother, onEditStep }: Props = $props();
 
   let isSubmitting = $state(false);
   let submitError = $state<string | null>(null);
   let submissionProgress = $state(0);
   let submissionStatusText = $state('');
+  let showConfirmation = $state(false);
+
+  // Snapshot booking details before they get cleared
+  let confirmedName = $state('');
+  let confirmedEmail = $state('');
+  let confirmedStyle = $state('');
+  let confirmedPlacement = $state('');
+  let confirmedSize = $state('');
 
   // Helper functions
   function formatDateForDisplay(date: Date | string | null): string {
@@ -32,43 +43,27 @@
     }
   }
 
-  function formatCurrency(amount: number | undefined): string {
-    if (amount === undefined || isNaN(amount)) return 'N/A';
-    return `₱${Math.round(amount).toLocaleString()}`;
-  }
-
-  function formatDuration(totalMinutes: number | undefined): string {
-    if (!totalMinutes) return 'N/A';
-    const rounded = Math.round(totalMinutes / 30) * 30;
-    const hours = Math.floor(rounded / 60);
-    const minutes = rounded % 60;
-    if (hours === 0) return `Approx. ${minutes} min`;
-    if (minutes === 0) return `Approx. ${hours} hr${hours > 1 ? 's' : ''}`;
-    return `Approx. ${hours} hr${hours > 1 ? 's' : ''} ${minutes} min`;
-  }
-
   function getFreedomDescription(value: number): string {
-    if (value <= 20) return 'Follow References Closely';
-    if (value <= 40) return 'Mostly Based on References';
-    if (value <= 60) return 'Balanced Interpretation';
-    if (value <= 80) return 'Mostly Artist\'s Interpretation';
-    return 'Full Creative Freedom';
+    if (value <= 20) return 'Exactly as described';
+    if (value <= 60) return 'Add artistic touch';
+    return 'Surprise me!';
   }
 
-  const complexityLabel = $derived(
-    ['Simple', 'Detailed', 'Intricate'][formData.complexity ? formData.complexity - 1 : -1] ?? 'N/A'
-  );
+  const priceRange = $derived(getPriceRange(formData.sizeCategory ?? null, formData.isColor, formData.isCoverUp));
 
-  const deposit = $derived(Math.round((formData.pricing?.total || 0) / 2 / 100) * 100);
+  const sizeCategoryLabel = $derived(
+    SIZE_CATEGORIES.find(c => c.id === formData.sizeCategory)?.label ?? 'Not specified'
+  );
 
   // State derivations
-  const allTermsChecked = $derived(
-    (formData.termsAgreed ?? false) && (formData.medicalConfirmed ?? false) && (formData.ageConfirmed ?? false)
-  );
+  const allTermsChecked = $derived(formData.termsAgreed ?? false);
 
   const isMissingInfo = $derived(
-    !formData.name || !formData.email || !formData.phone || !formData.dateOfBirth
+    !formData.name || !formData.email || !formData.ageConfirmed
   );
+
+  // Determine which card has missing info
+  const contactCardMissing = $derived(!formData.name || !formData.email || !formData.ageConfirmed);
 
   const isSubmissionDisabled = $derived(!allTermsChecked || isMissingInfo || isSubmitting);
 
@@ -87,36 +82,31 @@
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
-        dob: formData.dateOfBirth instanceof Date ? formData.dateOfBirth.toISOString() : formData.dateOfBirth,
-        size: formData.size,
+        dob: null,
+        ageConfirmed: formData.ageConfirmed ?? false,
+        size: sizeCategoryToSqInches(formData.sizeCategory ?? null),
         isColor: formData.isColor,
-        complexity: formData.complexity,
-        selectedCategory: formData.selectedCategory,
-        currentPlacement: formData.currentPlacement,
-        placementIndex: formData.placementIndex,
+        complexity: 1,
+        selectedCategory: formData.bodyRegion ?? formData.selectedCategory,
+        currentPlacement: formData.bodyArea ?? formData.currentPlacement,
         isCoverUp: formData.isCoverUp,
         primaryTattooStyle: formData.primaryTattooStyle,
-        styleDescription: formData.styleDescription,
-        pricing: formData.pricing,
-        estimatedDurationMinutes: formData.estimatedDurationMinutes,
-        estimatedSessions: formData.estimatedSessions,
+        styleDescription: formData.tattooDescription,
+        pricing: { basePriceRaw: 0, complexityPrice: 0, placementPrice: 0, colorPrice: 0, coverUpPrice: 0, total: 0 },
         creativeFreedom: formData.creativeFreedom,
-        specificRequirements: formData.specificRequirements,
-        mustHaveElements: formData.mustHaveElements,
-        colorPreferences: formData.colorPreferences,
-        placementNotes: formData.placementNotes,
+        specificRequirements: formData.tattooDescription,
+        mustHaveElements: null,
+        colorPreferences: null,
         appointmentDate: formData.appointmentDate instanceof Date ? formData.appointmentDate.toISOString() : formData.appointmentDate,
         appointmentTime: formData.appointmentTime,
-        urgencyLevel: formData.urgencyLevel,
         termsAgreed: formData.termsAgreed,
-        medicalConfirmed: formData.medicalConfirmed,
-        ageConfirmed: formData.ageConfirmed,
-        instagramHandle: formData.instagramHandle,
-        preferredContactMethod: formData.preferredContactMethod,
+        medicalConfirmed: true,
         referralSource: formData.referralSource,
         painLevel: formData.painLevel,
         painReason: formData.painReason,
-        visualComplexityScore: formData.visualComplexityScore,
+        numbingCream: formData.numbingCream ?? false,
+        firstTattoo: formData.firstTattoo,
+        additionalAreas: formData.additionalAreas,
       };
 
       const res = await fetch('/api/bookings', {
@@ -130,9 +120,16 @@
       submissionProgress = 100;
       submissionStatusText = 'Booking request sent!';
 
+      // Snapshot details for confirmation screen
+      confirmedName = formData.name || '';
+      confirmedEmail = formData.email || '';
+      confirmedStyle = formData.primaryTattooStyle || 'Not specified';
+      confirmedPlacement = formData.bodyArea || formData.currentPlacement || 'TBD';
+      confirmedSize = SIZE_CATEGORIES.find(c => c.id === formData.sizeCategory)?.label ?? 'Not specified';
+
       setTimeout(() => {
         isSubmitting = false;
-        onSubmitSuccess();
+        showConfirmation = true;
       }, 2000);
     } catch (err) {
       submitError = err instanceof Error ? err.message : 'Something went wrong.';
@@ -142,23 +139,100 @@
   }
 </script>
 
+{#if showConfirmation}
+<div class="py-12 max-w-lg mx-auto px-4 text-center space-y-8">
+  <!-- Green checkmark -->
+  <div class="flex justify-center">
+    <div class="w-20 h-20 rounded-full bg-emerald-500/20 border-2 border-emerald-500 flex items-center justify-center">
+      <CheckCircle size={40} class="text-emerald-400" />
+    </div>
+  </div>
+
+  <div>
+    <h2 class="text-3xl font-bold text-white mb-2">Booking Request Sent!</h2>
+    <p class="text-zinc-400">I'll contact you within 24 hours to confirm your appointment.</p>
+  </div>
+
+  <!-- Booking summary -->
+  <div class="bg-surface-800 border border-zinc-800 rounded-xl p-5 text-left space-y-3 text-sm">
+    <h3 class="text-lg font-semibold text-white mb-3">Booking Summary</h3>
+    <div class="flex justify-between">
+      <span class="text-zinc-500">Name:</span>
+      <span class="text-white font-medium">{confirmedName}</span>
+    </div>
+    <div class="flex justify-between">
+      <span class="text-zinc-500">Email:</span>
+      <span class="text-white font-medium">{confirmedEmail}</span>
+    </div>
+    <div class="flex justify-between">
+      <span class="text-zinc-500">Style:</span>
+      <span class="text-white font-medium capitalize">{confirmedStyle}</span>
+    </div>
+    <div class="flex justify-between">
+      <span class="text-zinc-500">Placement:</span>
+      <span class="text-white font-medium capitalize">{confirmedPlacement}</span>
+    </div>
+    <div class="flex justify-between">
+      <span class="text-zinc-500">Size:</span>
+      <span class="text-white font-medium">{confirmedSize}</span>
+    </div>
+  </div>
+
+  <!-- What happens next -->
+  <div class="bg-ink-500/5 border border-ink-500/30 rounded-xl p-5 text-left">
+    <h3 class="font-semibold text-white mb-3">What happens next</h3>
+    <ol class="text-sm text-zinc-400 space-y-2 list-decimal list-inside">
+      <li>I'll review your request and reach out within 24 hours</li>
+      <li>We'll finalize the design details and confirm pricing</li>
+      <li>A 50% deposit secures your appointment slot</li>
+      <li>You'll receive a confirmation with your appointment date</li>
+    </ol>
+  </div>
+
+  <!-- Action buttons -->
+  <div class="flex flex-col sm:flex-row gap-3">
+    <button
+      type="button"
+      onclick={() => { showConfirmation = false; onBookAnother(); }}
+      class="flex-1 py-3 border border-zinc-700 text-zinc-300 rounded-xl font-medium hover:bg-zinc-800 transition-colors"
+    >
+      Book Another
+    </button>
+    <button
+      type="button"
+      onclick={() => { onSubmitSuccess(); }}
+      class="flex-1 py-3 bg-ink-500 text-white rounded-xl font-semibold hover:bg-ink-400 transition-colors"
+    >
+      Done
+    </button>
+  </div>
+</div>
+{:else}
 <div class="py-8 space-y-8 max-w-6xl mx-auto px-4">
   <!-- Header -->
   <div>
     <h2 class="text-2xl font-bold text-white mb-2">Review Your Booking Request</h2>
-    <p class="text-zinc-400">Almost there! Please check the details you've provided.</p>
+    <p class="text-zinc-400">
+      <span class="text-ink-400 font-medium">Step 3 of 3</span> — Almost there! Review your details below.
+    </p>
   </div>
 
-  <!-- Two-column grid -->
-  <div class="grid md:grid-cols-2 gap-6">
-    <!-- Card A: Contact & Personal Info -->
-    <div class="bg-surface-800 border border-zinc-800 rounded-xl p-5 space-y-4">
-      <div class="flex items-center gap-3 mb-4">
+  <!-- Single compact review card -->
+  <div class="space-y-6">
+    <!-- Contact + Appointment Card -->
+    <div class="bg-surface-800 border rounded-xl p-5 space-y-4 {contactCardMissing ? 'border-red-500/50 shadow-lg shadow-red-500/10' : 'border-zinc-800'}">
+      <div class="flex items-center gap-3 mb-2">
         <User size={20} class="text-ink-500" />
-        <h3 class="text-lg font-semibold text-white">Contact & Personal Info</h3>
+        <h3 class="text-lg font-semibold text-white flex-1">Your Details & Schedule</h3>
+        {#if onEditStep}
+          <button type="button" onclick={() => onEditStep?.(1)} class="text-xs text-ink-400 hover:text-ink-300 cursor-pointer flex items-center gap-1 transition-colors">
+            <Pencil size={12} />
+            Edit
+          </button>
+        {/if}
       </div>
 
-      <div class="space-y-3 text-sm">
+      <div class="grid sm:grid-cols-2 gap-x-6 gap-y-3 text-sm">
         <div class="flex justify-between">
           <span class="text-zinc-500">Name:</span>
           <span class={`font-medium text-right ${!formData.name ? 'text-red-400' : 'text-white'}`}>
@@ -173,96 +247,63 @@
         </div>
         <div class="flex justify-between">
           <span class="text-zinc-500">Phone:</span>
-          <span class={`font-medium text-right ${!formData.phone ? 'text-red-400' : 'text-white'}`}>
-            {formData.phone || 'Missing'}
+          <span class={`font-medium text-right ${!formData.phone ? 'text-zinc-500' : 'text-white'}`}>
+            {formData.phone || 'Not provided'}
           </span>
         </div>
         <div class="flex justify-between">
-          <span class="text-zinc-500">Date of Birth:</span>
-          <span class={`font-medium text-right ${!formData.dateOfBirth ? 'text-red-400' : 'text-white'}`}>
-            {formatDateForDisplay(formData.dateOfBirth)}
+          <span class="text-zinc-500">18+ Confirmed:</span>
+          <span class={`font-medium text-right ${!formData.ageConfirmed ? 'text-red-400' : 'text-emerald-400'}`}>
+            {formData.ageConfirmed ? 'Yes' : 'Not confirmed'}
           </span>
         </div>
-        {#if formData.preferredContactMethod}
-          <div class="flex justify-between">
-            <span class="text-zinc-500">Preferred Contact:</span>
-            <span class="font-medium text-white text-right capitalize">{formData.preferredContactMethod}</span>
-          </div>
-        {/if}
-        {#if formData.instagramHandle}
-          <div class="flex justify-between">
-            <span class="text-zinc-500">Instagram:</span>
-            <span class="font-medium text-white text-right">@{formData.instagramHandle}</span>
-          </div>
-        {/if}
-        {#if formData.facebookProfile}
-          <div class="flex justify-between">
-            <span class="text-zinc-500">Facebook:</span>
-            <span class="font-medium text-white text-right">{formData.facebookProfile}</span>
-          </div>
-        {/if}
-      </div>
-    </div>
-
-    <!-- Card B: Requested Appointment -->
-    <div class="bg-surface-800 border border-zinc-800 rounded-xl p-5 space-y-4">
-      <div class="flex items-center gap-3 mb-4">
-        <CalendarDays size={20} class="text-ink-500" />
-        <h3 class="text-lg font-semibold text-white">Requested Appointment</h3>
-      </div>
-
-      <div class="space-y-3 text-sm">
         <div class="flex justify-between">
           <span class="text-zinc-500">Date:</span>
           <span class="font-medium text-white text-right">
             {#if formData.appointmentDate}
               {formatDateForDisplay(formData.appointmentDate)}
             {:else}
-              <span class="text-zinc-500">Not specified</span>
+              <span class="text-zinc-500">I'll contact you</span>
             {/if}
           </span>
         </div>
         <div class="flex justify-between">
           <span class="text-zinc-500">Time:</span>
           <span class="font-medium text-white text-right">
-            {formData.appointmentTime || 'Not specified'}
+            {formData.appointmentTime === 'flexible' ? 'Flexible' : formData.appointmentTime || 'We\'ll contact you'}
           </span>
         </div>
-        {#if formData.artistPreference}
-          <div class="flex justify-between">
-            <span class="text-zinc-500">Artist Preference:</span>
-            <span class="font-medium text-white text-right capitalize">{formData.artistPreference}</span>
-          </div>
-        {/if}
       </div>
     </div>
 
-    <!-- Card C: Tattoo Request Summary -->
-    <div class="md:col-span-2 bg-surface-800 border border-zinc-800 rounded-xl p-5 space-y-6">
-      <div>
-        <h3 class="text-lg font-semibold text-white mb-1">Tattoo Request Summary</h3>
-        <p class="text-xs text-zinc-500">Review design details and estimates. Estimates subject to artist confirmation.</p>
+    <!-- Tattoo Request Summary -->
+    <div class="bg-surface-800 border border-zinc-800 rounded-xl p-5 space-y-6">
+      <div class="flex items-start justify-between">
+        <div>
+          <h3 class="text-lg font-semibold text-white mb-1">Tattoo Request Summary</h3>
+          <p class="text-xs text-zinc-500">Review design details. Final pricing confirmed by the artist at consultation.</p>
+        </div>
+        {#if onEditStep}
+          <button type="button" onclick={() => onEditStep?.(0)} class="text-xs text-ink-400 hover:text-ink-300 cursor-pointer flex items-center gap-1 transition-colors flex-shrink-0 mt-1">
+            <Pencil size={12} />
+            Edit
+          </button>
+        {/if}
       </div>
 
       <!-- Detail Grid -->
       <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-4 text-sm">
         <div class="flex justify-between">
-          <span class="text-zinc-500">Placement:</span>
-          <span class="font-medium text-white text-right">{formData.currentPlacement || 'TBD'}</span>
+          <span class="text-zinc-500">Body Region:</span>
+          <span class="font-medium text-white text-right capitalize">{formData.bodyRegion || formData.selectedCategory || 'TBD'}</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-zinc-500">Area:</span>
+          <span class="font-medium text-white text-right capitalize">{formData.bodyArea || formData.currentPlacement || 'TBD'}</span>
         </div>
         <div class="flex justify-between">
           <span class="text-zinc-500">Size:</span>
-          <span class="font-medium text-white text-right">
-            {#if formData.size}
-              Approx. {formData.size} sq in
-            {:else}
-              TBD
-            {/if}
-          </span>
-        </div>
-        <div class="flex justify-between">
-          <span class="text-zinc-500">Complexity:</span>
-          <span class="font-medium text-white text-right">{complexityLabel}</span>
+          <span class="font-medium text-white text-right">{sizeCategoryLabel}</span>
         </div>
         <div class="flex justify-between">
           <span class="text-zinc-500">Color:</span>
@@ -273,27 +314,15 @@
           <span class="font-medium text-white text-right">{formData.isCoverUp ? 'Yes' : 'No'}</span>
         </div>
         <div class="flex justify-between">
-          <span class="text-zinc-500">References:</span>
-          <span class="font-medium text-white text-right flex items-center gap-2">
-            {formData.referenceImages.length}
-            <FileImage size={16} class="text-ink-500" />
+          <span class="text-zinc-500">First Tattoo:</span>
+          <span class="font-medium text-white text-right">{formData.firstTattoo === true ? 'Yes' : formData.firstTattoo === false ? 'No' : 'Not specified'}</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-zinc-500">Numbing Cream:</span>
+          <span class="font-medium text-right {formData.numbingCream ? 'text-emerald-400' : 'text-white'}">
+            {formData.numbingCream ? 'Yes (+₱500–1,000)' : 'No'}
           </span>
         </div>
-      </div>
-
-      <!-- Creative Freedom -->
-      <div class="pt-2">
-        <div class="flex justify-between items-start mb-2">
-          <span class="text-sm text-zinc-500">Creative Freedom:</span>
-          <span class="text-sm font-medium text-ink-400">{formData.creativeFreedom}%</span>
-        </div>
-        <div class="bg-zinc-900 rounded h-1.5 overflow-hidden">
-          <div
-            class="bg-gradient-to-r from-ink-500 to-ink-400 h-full transition-all"
-            style="width: {formData.creativeFreedom}%"
-          />
-        </div>
-        <p class="text-xs text-zinc-500 mt-1">{getFreedomDescription(formData.creativeFreedom)}</p>
       </div>
 
       <!-- Tattoo Style -->
@@ -304,89 +333,51 @@
         </div>
       </div>
 
-      <!-- Style Description -->
-      {#if formData.styleDescription}
+      <!-- Creative Freedom -->
+      <div>
+        <div class="flex justify-between mb-1">
+          <span class="text-sm text-zinc-500">Creative Freedom:</span>
+          <span class="text-sm font-medium text-ink-400">{getFreedomDescription(formData.creativeFreedom)}</span>
+        </div>
+      </div>
+
+      <!-- Tattoo Description -->
+      {#if formData.tattooDescription}
         <div class="text-sm">
-          <p class="text-zinc-500 mb-1">Style Description:</p>
-          <p class="text-white bg-zinc-900/50 rounded p-2">{formData.styleDescription}</p>
+          <p class="text-zinc-500 mb-1">Your Tattoo Idea:</p>
+          <p class="text-white bg-zinc-900/50 rounded p-2">{formData.tattooDescription}</p>
+        </div>
+      {/if}
+
+      {#if formData.additionalAreas}
+        <div class="text-sm">
+          <p class="text-zinc-500 mb-1">Additional Areas:</p>
+          <p class="text-white bg-zinc-900/50 rounded p-2">{formData.additionalAreas}</p>
         </div>
       {/if}
 
       <!-- Separator -->
-      <div class="border-t border-zinc-700" />
+      <div class="border-t border-zinc-700"></div>
 
-      <!-- Estimates Section -->
+      <!-- Estimated Price Range -->
       <div class="space-y-3">
-        <div class="flex items-center gap-2 mb-2">
-          <Clock size={16} class="text-ink-500" />
-          <h4 class="font-semibold text-white">Time & Cost Estimates</h4>
-        </div>
-
-        <div class="grid sm:grid-cols-2 gap-4">
-          <div class="bg-zinc-900/30 rounded p-3">
-            <p class="text-xs text-zinc-500 mb-1">Est. Duration</p>
-            <p class="text-white font-semibold">{formatDuration(formData.estimatedDurationMinutes)}</p>
-          </div>
-
-          {#if formData.estimatedSessions && formData.estimatedSessions > 1}
-            <div class="bg-amber-500/10 border border-amber-500/30 rounded p-3">
-              <p class="text-xs text-zinc-500 mb-1">Sessions</p>
-              <p class="text-amber-400 font-semibold">Likely requires {formData.estimatedSessions} sessions</p>
-            </div>
-          {/if}
-        </div>
-
         <div class="bg-zinc-900/30 rounded p-3">
-          <p class="text-xs text-zinc-500 mb-1">Est. Price</p>
-          <p class="text-ink-400 text-2xl font-bold">{formatCurrency(formData.pricing?.total)}</p>
-          <p class="text-xs text-zinc-500 mt-1">50% deposit: {formatCurrency(deposit)}</p>
+          <p class="text-xs text-zinc-500 mb-1">Estimated Price Range</p>
+          {#if priceRange.min > 0}
+            <p class="text-ink-400 text-2xl font-bold">
+              ₱{priceRange.min.toLocaleString()} — ₱{priceRange.max.toLocaleString()}
+            </p>
+          {:else}
+            <p class="text-zinc-400 text-lg">Select a size to see estimate</p>
+          {/if}
         </div>
 
         <div class="bg-blue-500/10 border border-blue-500/30 rounded p-3 flex gap-3">
           <Info size={16} class="text-blue-400 flex-shrink-0 mt-0.5" />
           <p class="text-xs text-blue-300">
-            Duration and price are initial estimates based on your specifications. Final details will be confirmed by the artist.
+            This is an estimated range. Final pricing will be confirmed by the artist at consultation.
           </p>
         </div>
-      </div>
-
-      <!-- Separator -->
-      <div class="border-t border-zinc-700" />
-
-      <!-- Notes Section -->
-      <div class="space-y-3">
-        <h4 class="font-semibold text-white">Your Notes & Requirements</h4>
-
-        {#if formData.specificRequirements || formData.mustHaveElements || formData.colorPreferences || formData.placementNotes}
-          <div class="space-y-2">
-            {#if formData.specificRequirements}
-              <div class="bg-zinc-800/50 rounded p-3 text-sm">
-                <p class="text-zinc-500 mb-1 text-xs">Specific Requirements:</p>
-                <p class="text-white">{formData.specificRequirements}</p>
-              </div>
-            {/if}
-            {#if formData.mustHaveElements}
-              <div class="bg-zinc-800/50 rounded p-3 text-sm">
-                <p class="text-zinc-500 mb-1 text-xs">Must-Have Elements:</p>
-                <p class="text-white">{formData.mustHaveElements}</p>
-              </div>
-            {/if}
-            {#if formData.colorPreferences}
-              <div class="bg-zinc-800/50 rounded p-3 text-sm">
-                <p class="text-zinc-500 mb-1 text-xs">Color Preferences:</p>
-                <p class="text-white">{formData.colorPreferences}</p>
-              </div>
-            {/if}
-            {#if formData.placementNotes}
-              <div class="bg-zinc-800/50 rounded p-3 text-sm">
-                <p class="text-zinc-500 mb-1 text-xs">Placement Notes:</p>
-                <p class="text-white">{formData.placementNotes}</p>
-              </div>
-            {/if}
-          </div>
-        {:else}
-          <p class="text-sm text-zinc-500 italic">No specific details provided.</p>
-        {/if}
       </div>
 
       <!-- Reference Images -->
@@ -408,17 +399,17 @@
       {/if}
     </div>
 
-    <!-- Card D: Next Steps -->
-    <div class="md:col-span-2 bg-ink-500/5 border border-ink-500/30 rounded-xl p-5 space-y-3">
+    <!-- Next Steps -->
+    <div class="bg-ink-500/5 border border-ink-500/30 rounded-xl p-5 space-y-3">
       <div class="flex items-start gap-3">
-        <CheckCircle size={20} class="text-ink-500 flex-shrink-0 mt-0.5" />
+        <CheckCircle size={20} class="text-ink-500 flex-shrink-0 mt-0.5 animate-pulse" />
         <div>
           <h3 class="font-semibold text-white mb-1">What Happens Next</h3>
           <ul class="text-sm text-zinc-400 space-y-1">
-            <li>✓ We'll review your request and contact you within 24-48 hours</li>
-            <li>✓ The artist will confirm all details and finalize pricing</li>
-            <li>✓ A 50% non-refundable deposit ({formatCurrency(deposit)}) will be required to secure your appointment</li>
-            <li>✓ We'll send you a contract and appointment confirmation</li>
+            <li>I'll review your request and contact you within 24-48 hours</li>
+            <li>I'll confirm all details and finalize pricing</li>
+            <li>A deposit will be required to secure your appointment</li>
+            <li>I'll send you a contract and appointment confirmation</li>
           </ul>
         </div>
       </div>
@@ -446,30 +437,36 @@
         </span>
       </label>
 
-      <label class="flex items-start gap-3 cursor-pointer hover:bg-zinc-700/20 p-2 rounded transition">
-        <input
-          type="checkbox"
-          class="mt-1 accent-ink-500"
-          checked={formData.medicalConfirmed ?? false}
-          onchange={(e) => updateFormData({ medicalConfirmed: (e.target as HTMLInputElement).checked })}
-        />
-        <span class="text-sm text-zinc-400">
-          I confirm I have no medical conditions that contraindicate tattooing and I will disclose any relevant conditions to the artist before the appointment.
-        </span>
-      </label>
-
-      <label class="flex items-start gap-3 cursor-pointer hover:bg-zinc-700/20 p-2 rounded transition">
-        <input
-          type="checkbox"
-          class="mt-1 accent-ink-500"
-          checked={formData.ageConfirmed ?? false}
-          onchange={(e) => updateFormData({ ageConfirmed: (e.target as HTMLInputElement).checked })}
-        />
-        <span class="text-sm text-zinc-400">
-          I confirm I am 18 years of age or older and have a valid government-issued ID available for the appointment.
-        </span>
-      </label>
     </div>
+  </div>
+
+  <!-- Numbing Cream Option -->
+  <div class="bg-gradient-to-r from-surface-800 to-surface-800/50 border border-zinc-800 rounded-xl p-5 space-y-3">
+    <label class="flex items-start gap-3 cursor-pointer hover:bg-zinc-700/20 p-2 rounded transition">
+      <input
+        type="checkbox"
+        class="mt-1 accent-ink-500"
+        checked={formData.numbingCream ?? false}
+        onchange={(e) => updateFormData({ numbingCream: (e.target as HTMLInputElement).checked })}
+      />
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="text-sm text-white font-medium">Add numbing cream for my session</span>
+          {#if formData.firstTattoo}
+            <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full font-medium">Recommended for first-timers</span>
+          {/if}
+        </div>
+        <p class="text-xs text-zinc-400 mt-1">
+          Topical anesthesia applied before your session for a more comfortable experience.
+          Additional ₱500–1,000 depending on area size.
+        </p>
+        {#if formData.firstTattoo}
+          <p class="text-xs text-emerald-400/80 mt-1">
+            70% of clients report a more comfortable experience with numbing cream — popular choice for first-timers.
+          </p>
+        {/if}
+      </div>
+    </label>
   </div>
 
   <!-- Error Messages -->
@@ -486,10 +483,7 @@
   {#if isMissingInfo}
     <div class="bg-yellow-500/10 border border-yellow-500/30 rounded-xl p-4 flex gap-3">
       <AlertTriangle size={20} class="text-yellow-400 flex-shrink-0 mt-0.5" />
-      <div>
-        <p class="text-sm text-yellow-400 font-medium">Complete Your Information</p>
-        <p class="text-sm text-yellow-300">Please fill in your name, email, phone, and date of birth to submit.</p>
-      </div>
+      <p class="text-sm text-yellow-300">Name, email, and age confirmation are required to submit.</p>
     </div>
   {/if}
 
@@ -498,7 +492,7 @@
       <Info size={20} class="text-blue-400 flex-shrink-0 mt-0.5" />
       <div>
         <p class="text-sm text-blue-400 font-medium">Review & Agree</p>
-        <p class="text-sm text-blue-300">Please review and agree to all terms and conditions before submitting.</p>
+        <p class="text-sm text-blue-300">Please agree to the terms and conditions before submitting.</p>
       </div>
     </div>
   {/if}
@@ -508,8 +502,8 @@
     type="button"
     disabled={isSubmissionDisabled}
     onclick={handleFinalSubmit}
-    class="w-full py-4 bg-ink-500 text-white rounded-xl font-semibold text-lg transition-all duration-200
-      {isSubmissionDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-ink-400 active:scale-95'}
+    class="w-full py-5 bg-ink-500 text-white rounded-xl font-semibold text-lg transition-all duration-200
+      {isSubmissionDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-ink-400 active:scale-[0.98] shadow-lg shadow-ink-500/25 hover:shadow-xl hover:shadow-ink-500/30'}
       flex items-center justify-center gap-2"
   >
     {#if isSubmitting}
@@ -517,10 +511,11 @@
       Submitting...
     {:else}
       <Send size={20} />
-      Submit Booking Request
+      Book My Tattoo
     {/if}
   </button>
 </div>
+{/if}
 
 <!-- Submission Progress Overlay -->
 {#if isSubmitting && submissionProgress < 100}
@@ -540,7 +535,7 @@
           <div
             class="bg-ink-500 h-full transition-all duration-300"
             style="width: {submissionProgress}%"
-          />
+          ></div>
         </div>
       </div>
 

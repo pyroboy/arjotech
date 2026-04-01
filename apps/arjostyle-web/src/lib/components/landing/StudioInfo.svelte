@@ -59,9 +59,9 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
       <RevealOnScroll delay={300}>
         <div class="bg-surface-800 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300 h-full flex flex-col border border-zinc-700">
-          <div class="mb-3"><MapPin class="w-8 h-8 text-blue-600" /></div>
+          <div class="mb-3"><MapPin class="w-8 h-8 text-ink-500" /></div>
           <h3 class="text-zinc-100 text-xl font-semibold mb-2">Location</h3>
-          <p class="text-zinc-300 mb-4">Located in the heart of Tagbilaran City, our space is designed for comfort and privacy.</p>
+          <p class="text-zinc-300 mb-4">Located in the heart of Tagbilaran City, my space is designed for comfort and privacy.</p>
           <div class="mt-4 text-sm space-y-3">
             <div>
               <p class="font-medium text-zinc-200">Address:</p>
@@ -73,7 +73,7 @@
               <p class="font-medium text-zinc-200">Landmarks:</p>
               <p class="text-zinc-400 leading-relaxed">Above Paeng's Fried Chicken<br />Across from University of Bohol</p>
             </div>
-            <a href={googleMapsLinkUrl} target="_blank" rel="noopener noreferrer" class="pt-3 inline-flex items-center font-medium text-blue-400 hover:text-blue-300 hover:underline transition-colors">
+            <a href={googleMapsLinkUrl} target="_blank" rel="noopener noreferrer" class="pt-3 inline-flex items-center font-medium text-ink-400 hover:text-ink-300 hover:underline transition-colors">
               View on Google Maps <ExternalLink class="w-4 h-4 ml-1.5" />
             </a>
           </div>
@@ -82,9 +82,9 @@
 
       <RevealOnScroll delay={400}>
         <div class="bg-surface-800 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300 h-full flex flex-col border border-zinc-700">
-          <div class="mb-3"><Clock class="w-8 h-8 text-purple-600" /></div>
+          <div class="mb-3"><Clock class="w-8 h-8 text-ink-500" /></div>
           <h3 class="text-zinc-100 text-xl font-semibold mb-2">Hours</h3>
-          <p class="text-zinc-300 mb-4">We operate by appointment only to ensure every client receives our full attention.</p>
+          <p class="text-zinc-300 mb-4">I operate by appointment only to ensure every client receives my full attention.</p>
           <p class="text-sm font-medium text-zinc-300 italic mb-4">By Appointment Only</p>
           <div class="text-sm space-y-2">
             <div class="flex justify-between text-zinc-300"><span>Tuesday - Friday:</span><span class="font-medium">11AM - 7PM</span></div>
@@ -96,14 +96,14 @@
 
       <RevealOnScroll delay={500}>
         <div class="bg-surface-800 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300 h-full flex flex-col border border-zinc-700">
-          <div class="mb-3"><Award class="w-8 h-8 text-green-600" /></div>
-          <h3 class="text-zinc-100 text-xl font-semibold mb-2">Our Standards</h3>
-          <p class="text-zinc-300 mb-4">We prioritize safety, hygiene, and artistic excellence in every tattoo.</p>
+          <div class="mb-3"><Award class="w-8 h-8 text-ink-500" /></div>
+          <h3 class="text-zinc-100 text-xl font-semibold mb-2">My Standards</h3>
+          <p class="text-zinc-300 mb-4">I prioritize safety, hygiene, and artistic excellence in every tattoo.</p>
           <ul class="space-y-2 text-sm text-zinc-300">
-            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-green-600 rounded-full mr-2.5 flex-shrink-0"></span>Single-use needles</li>
-            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-green-600 rounded-full mr-2.5 flex-shrink-0"></span>Hospital-grade sterilization</li>
-            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-green-600 rounded-full mr-2.5 flex-shrink-0"></span>Premium inks and equipment</li>
-            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-green-600 rounded-full mr-2.5 flex-shrink-0"></span>Certified professional artists</li>
+            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-ink-500 rounded-full mr-2.5 flex-shrink-0"></span>Single-use needles</li>
+            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-ink-500 rounded-full mr-2.5 flex-shrink-0"></span>Hospital-grade sterilization</li>
+            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-ink-500 rounded-full mr-2.5 flex-shrink-0"></span>Premium inks and equipment</li>
+            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-ink-500 rounded-full mr-2.5 flex-shrink-0"></span>Certified professional artist</li>
           </ul>
         </div>
       </RevealOnScroll>

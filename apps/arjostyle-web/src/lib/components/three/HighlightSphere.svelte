@@ -1,6 +1,7 @@
 <script lang="ts">
   import { T, useTask } from '@threlte/core';
   import { Text } from '@threlte/extras';
+  import { onDestroy } from 'svelte';
   import * as THREE from 'three';
 
   interface Props {
@@ -52,10 +53,11 @@
   let currentOpacity = 0;
   let currentScale = 0;
   let elapsedTime = 0;
+  let isActive = true;
 
   // Frame loop using useTask (equivalent to useFrame in R3F)
-  useTask((delta) => {
-    if (!meshRef || !materialRef) return;
+  const { stop } = useTask((delta) => {
+    if (!isActive || !meshRef || !materialRef) return;
 
     elapsedTime += delta;
 
@@ -117,6 +119,18 @@
     }
   });
 
+  // Cleanup on unmount: stop task loop and dispose geometry/material
+  onDestroy(() => {
+    isActive = false;
+    stop();
+    if (meshRef) {
+      if (meshRef.geometry) meshRef.geometry.dispose();
+    }
+    if (materialRef) {
+      materialRef.dispose();
+    }
+  });
+
   // Text position: slightly above the sphere
   let textPos = $derived<[number, number, number]>(
     debugTextPosition
@@ -140,7 +154,7 @@
     onpointermove={editMode ? onPointerMove : undefined}
     onpointerup={editMode ? onPointerUp : undefined}
   >
-    <T.SphereGeometry args={[0.5, 32, 16]} />
+    <T.SphereGeometry args={[0.5, 16, 8]} />
     <T.MeshBasicMaterial
       bind:ref={materialRef}
       color={highlightColor}
