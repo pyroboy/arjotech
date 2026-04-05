@@ -174,5 +174,17 @@
         Get in Touch →
       </a>
     </div>
+    
+    <!-- Dev Resources (temporary access) -->
+    <div class="mt-8 pt-6 border-t border-zinc-800/50">
+      <p class="text-xs text-zinc-600 mb-2">Internal Resources</p>
+      <div class="flex flex-wrap gap-3 justify-center">
+        <a href="/dev/hire-me.html" class="text-xs text-zinc-500 hover:text-tech-400 transition-colors">💼 Hire Me Page</a>
+        <a href="/dev/tattoo-tide-pricing.html" class="text-xs text-zinc-500 hover:text-tech-400 transition-colors">🎨 Tattoo Tide Pricing</a>
+        <a href="/dev/flash-sheets.html" class="text-xs text-zinc-500 hover:text-tech-400 transition-colors">🖼️ Flash Sheets</a>
+        <a href="/dev/bmc-integration.html" class="text-xs text-zinc-500 hover:text-tech-400 transition-colors">☕ BMC Setup</a>
+        <a href="/dev/wtfpos-outreach-email.txt" class="text-xs text-zinc-500 hover:text-tech-400 transition-colors">📧 WTFPOS Email</a>
+      </div>
+    </div>
   </div>
 </section>

@@ -17,8 +17,20 @@ export const softwareProjects: SoftwareProject[] = [
   {
     slug: 'tattoo-tide',
     title: 'Tattoo Tide',
-    description: 'Full-stack tattoo booking platform with 3D body placement selector and AI-powered admin tools.',
-    techStack: ['SvelteKit', 'Neon', 'Drizzle', 'Threlte', 'Cloudflare'],
+    description: 'Full-stack tattoo studio platform — 3D body placement selector, AI-powered admin tools, online booking flow, and a portfolio gallery. This site is built on it.',
+    longDescription: `Tattoo studio platform built for a real studio. Handles the full client journey — from browsing the portfolio and placing a tattoo on a 3D body model to booking a session and managing appointments.
+
+**Features:**
+- **3D body placement** — Interactive Three.js body model where clients position their tattoo idea before booking. Built with Threlte for reactive Svelte integration.
+- **Booking flow** — Multi-step booking wizard: style selection, body placement, size, date/time, and artist preference. Validates availability in real time.
+- **Portfolio gallery** — Filterable media gallery with image and video support, organized by tattoo style and artist.
+- **AI admin tools** — AI-assisted tools for the studio admin: content generation, client communication drafts, and booking insights.
+- **Cloudflare R2 storage** — All portfolio images and videos served from R2 with Cloudinary transformation pipelines.
+- **Neon PostgreSQL** — Drizzle ORM with type-safe schema for bookings, artists, sessions, and availability.
+
+**This site** — arjostyle.com is built on Tattoo Tide. The software portfolio you're reading is part of the same SvelteKit app.`,
+    techStack: ['Svelte 5', 'SvelteKit', 'TypeScript', 'Neon', 'Drizzle', 'Three.js', 'Threlte', 'Cloudflare R2', 'TailwindCSS'],
+    liveUrl: 'https://arjostyle.com',
     tags: ['Booking', 'AI', '3D', 'Full-stack'],
     status: 'production',
     featured: true
@@ -49,9 +61,71 @@ Offline-first using RxDB (reactive local database backed by IndexedDB). The POS 
   {
     slug: 'dorm-management',
     title: 'Dorm Management System',
-    description: 'Comprehensive dorm operations platform for billing, occupancy, and utility tracking.',
-    techStack: ['SvelteKit', 'Supabase'],
-    tags: ['Property', 'Management', 'Billing'],
+    description: 'Full-stack property management platform for landlords — tenant leases, utility billing with meter readings, payment tracking, 3D floor plans, and a real-time financial dashboard. Built with Svelte 5, RxDB, and Neon.',
+    longDescription: `Rental property management system built for a real dormitory. Handles the full landlord workflow — from onboarding tenants and creating leases to tracking utility consumption and chasing overdue payments.
+
+**Features:**
+- **Dashboard** — Financial KPIs at a glance: collected payments, outstanding balance, overdue count, collection rate, and occupancy metrics. Flags expiring leases and overdue billings automatically.
+- **Tenant & lease management** — Tenant profiles, lease agreements with start/end dates, multi-tenant leases, and automated renewal tracking.
+- **Utility billing** — Meter readings per unit, automatic bill generation based on consumption, and billing history per tenant.
+- **Payment tracking** — Record payments, allocate across multiple billings, and track outstanding balances per tenant and per property.
+- **Expenses & budgets** — Log property expenses by category, set budgets, and compare actuals vs plan.
+- **Penalties** — Configurable late payment penalty rules per property.
+- **3D floor plans** — Three.js-powered interactive floor plan viewer per property, built with Threlte.
+- **Reports & insights** — Monthly overview, lease reports, and visual analytics across all properties.
+- **Multi-property** — Manage multiple properties, floors, units, and meters from a single account.
+
+**Architecture:**
+Offline-first with RxDB (15 reactive collections backed by IndexedDB). Real-time sync via Supabase edge functions. Neon PostgreSQL for persistent storage. Cloudinary for image hosting, AWS S3 for file storage. Auth via Better Auth with role-based access.`,
+    techStack: ['Svelte 5', 'SvelteKit', 'TypeScript', 'RxDB', 'Neon', 'Supabase', 'Three.js', 'Drizzle', 'TailwindCSS', 'Zod'],
+    tags: ['Property', 'Management', 'Full-stack', 'Offline-first'],
+    status: 'production',
+    featured: true
+  },
+  {
+    slug: 'remote-desk',
+    title: 'FlowWork',
+    description: 'Offline-first workforce management platform for field teams — GPS clock-in, task tracking with photo evidence, expense reporting, inventory, shift scheduling, and team chat with voice messages.',
+    longDescription: `Workforce management platform built for organizations managing distributed field teams. Handles the full day-to-day ops loop — from clocking in at a job site to submitting expense reports and messaging the team.
+
+**Features:**
+- **GPS clock-in/out** — Record employee location with timestamp and geofence verification on every shift start and end.
+- **Task management** — Assign tasks to field workers, track status, and require photo evidence on completion.
+- **Expense reporting** — Workers submit expenses (transport, meals, equipment) from the field; managers approve from the dashboard.
+- **Inventory tracking** — Real-time stock level monitoring across locations.
+- **Shift scheduling** — View and manage employee schedules with conflict detection.
+- **Team messaging** — Real-time group chat with voice message recording, reactions, mentions, and typing indicators.
+- **Reports & analytics** — Performance metrics and insights across the workforce.
+- **Admin dashboard** — System configuration, user management, and org settings.
+- **PWA** — Full offline functionality; works without internet and syncs when back online.
+
+**Architecture:**
+Offline-first with RxDB (8 collections: employees, shifts, tasks, inventory, expenses, messages, schedules, locations). Neon PostgreSQL for server persistence. Drizzle ORM for type-safe queries. Cloudflare Workers for edge deployment.`,
+    techStack: ['Svelte 5', 'SvelteKit', 'TypeScript', 'RxDB', 'Neon', 'Drizzle', 'TailwindCSS', 'Bits UI', 'Zod'],
+    tags: ['Workforce', 'Field Ops', 'Offline-first', 'PWA'],
+    status: 'prototype',
+    featured: true
+  },
+  {
+    slug: 'kanaya',
+    title: 'Kanaya',
+    description: 'Multi-tenant ID card generation platform — drag-and-drop template designer, AI-powered image decomposition, 3D card preview, QR-encoded physical IDs, and real-time attendance verification. Built for schools, government, and events.',
+    longDescription: `ID card generation and management platform serving schools, government agencies, and event organizers. Combines a visual card designer with AI-assisted template processing and a physical card production pipeline.
+
+**Features:**
+- **Template designer** — Drag-and-drop canvas for building ID card layouts. Position elements, set fonts, upload images, and preview in real-time.
+- **AI image decomposition** — Uses fal.ai (Qwen-Image-Layered) to automatically separate template images into RGBA layers for clean element extraction.
+- **3D card preview** — Real-time Three.js card visualization with scroll-triggered animations on the marketing page.
+- **QR-encoded IDs** — Each generated ID embeds a scannable QR code encoding identity data for instant verification and attendance tracking.
+- **Multi-tenant RBAC** — Organization-scoped data with a full role hierarchy: super_admin → org_admin → id_gen_admin → id_gen_user.
+- **Credits billing** — Usage-based billing system with invoice generation and payment tracking.
+- **Batch generation** — Generate ID cards at scale from a single template and a data import.
+- **Physical ecosystem** — Supports shop integrations for physical card printing and production.
+
+**Architecture:**
+SvelteKit full-stack with Neon PostgreSQL and Drizzle ORM. Better Auth for multi-tenant authentication. Cloudflare R2 for file storage. pdf-lib for PDF generation. fal.ai for AI image processing. Threlte for 3D visualization.`,
+    techStack: ['Svelte 5', 'SvelteKit', 'TypeScript', 'Neon', 'Drizzle', 'Three.js', 'fal.ai', 'Better Auth', 'TailwindCSS', 'Zod'],
+    tags: ['SaaS', 'AI', 'Multi-tenant', '3D'],
     status: 'production',
     featured: true
   }
