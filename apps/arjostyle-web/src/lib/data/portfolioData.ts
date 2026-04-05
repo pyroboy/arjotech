@@ -7,6 +7,7 @@ export interface SoftwareProject {
   liveUrl?: string;
   githubUrl?: string;
   imageUrl?: string;
+  videoUrl?: string;
   tags: string[];
   status: 'production' | 'built' | 'prototype';
   featured: boolean;
@@ -25,10 +26,24 @@ export const softwareProjects: SoftwareProject[] = [
   {
     slug: 'wtfpos',
     title: 'WTFPOS',
-    description: 'Modern point-of-sale system for Philippine SMEs with offline-first architecture.',
-    techStack: ['SvelteKit', 'Supabase', 'RxDB'],
-    tags: ['POS', 'Offline-first', 'SME'],
-    status: 'built',
+    description:
+      'Offline-first restaurant POS with QR self-ordering, a live kitchen display, floor plan editor, and multi-location inventory. Built for a real BBQ restaurant chain with Svelte 5 and RxDB.',
+    longDescription: `Full-stack point-of-sale system built for a BBQ restaurant chain. Handles the full service lifecycle — from guests scanning a QR code at the table to kitchen tickets to billing.
+
+**Features:**
+- **Floor plan editor** — WYSIWYG drag-and-drop canvas to design the restaurant layout. Tables, chairs, walls, labels, and entrances — all configurable with rotation and capacity settings.
+- **QR self-ordering** — Guests scan a QR code at their table, browse the menu on their phone, and submit orders directly. Orders sync live to the POS. Dynamic pricing tiers by group size.
+- **Kitchen Display System** — Real-time ticket view per station with live cooking timers, urgency levels, and one-tap item completion. Separate dine-in vs. takeout workflows.
+- **Table operations** — Merge tables, transfer orders, split bills, void items with PIN authorization, and track elapsed time per table.
+- **Inventory** — Real-time stock deduction per order. Delivery logging, waste tracking, periodic stock counts, and variance reports. Multi-protein tracking (beef, pork, chicken, seafood).
+- **Multi-location** — All features support multiple branches with a consolidated KPI dashboard.
+- **PWA** — Installable on Android/iOS for tablet use at the counter.
+
+**Architecture:**
+Offline-first using RxDB (reactive local database backed by IndexedDB). The POS works without internet and syncs via Server-Sent Events when back online. 117 Svelte components built with Svelte 5's new \`$state\` reactivity.`,
+    techStack: ['Svelte 5', 'SvelteKit', 'TypeScript', 'RxDB', 'Dexie', 'TailwindCSS', 'Bits UI'],
+    tags: ['POS', 'Restaurant', 'Offline-first', 'PWA'],
+    status: 'production',
     featured: true
   },
   {
