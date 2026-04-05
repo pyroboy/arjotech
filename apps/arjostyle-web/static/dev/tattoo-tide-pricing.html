@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tattoo Tide - Tattoo Studio Management Software</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid #222;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: #00d4ff;
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: #888;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+        
+        /* Features */
+        .features {
+            padding: 80px 0;
+        }
+        
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: #111;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #222;
+            transition: border-color 0.3s;
+        }
+        
+        .feature-card:hover {
+            border-color: #00d4ff;
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+        
+        .feature-card p {
+            color: #888;
+        }
+        
+        /* Pricing */
+        .pricing {
+            padding: 80px 0;
+            background: #0d0d0d;
+        }
+        
+        .pricing h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .pricing-subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 60px;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .pricing-card {
+            background: #111;
+            border-radius: 16px;
+            padding: 40px;
+            border: 1px solid #222;
+            position: relative;
+            transition: transform 0.3s;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .pricing-card.featured {
+            border-color: #00d4ff;
+            background: linear-gradient(135deg, #111 0%, #1a1a2e 100%);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .price {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .price span {
+            font-size: 1rem;
+            color: #888;
+            font-weight: normal;
+        }
+        
+        .pricing-card ul {
+            list-style: none;
+            margin: 30px 0;
+        }
+        
+        .pricing-card li {
+            padding: 10px 0;
+            border-bottom: 1px solid #222;
+            color: #ccc;
+        }
+        
+        .pricing-card li:before {
+            content: "✓";
+            color: #00d4ff;
+            margin-right: 10px;
+        }
+        
+        .pricing-button {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: transparent;
+            border: 2px solid #00d4ff;
+            color: #00d4ff;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        .pricing-button:hover {
+            background: #00d4ff;
+            color: #000;
+        }
+        
+        .pricing-card.featured .pricing-button {
+            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
+            border: none;
+            color: #fff;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+        }
+        
+        .testimonials h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial {
+            background: #111;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #222;
+        }
+        
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: #00d4ff;
+        }
+        
+        /* FAQ */
+        .faq {
+            padding: 80px 0;
+            background: #0d0d0d;
+        }
+        
+        .faq h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+        }
+        
+        .faq-item {
+            max-width: 800px;
+            margin: 0 auto 20px;
+            background: #111;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #222;
+        }
+        
+        .faq-item h3 {
+            margin-bottom: 10px;
+            color: #00d4ff;
+        }
+        
+        .faq-item p {
+            color: #888;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0a0a0a 100%);
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            color: #888;
+            margin-bottom: 40px;
+            font-size: 1.125rem;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid #222;
+            color: #666;
+        }
+        
+        footer a {
+            color: #00d4ff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="/" class="logo">Tattoo <span>Tide</span></a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Run Your Tattoo Studio Like a Pro</h1>
+            <p>The all-in-one platform for tattoo artists. 3D body placement, AI-powered admin tools, online booking, and client management.</p>
+            <a href="#pricing" class="cta-button">Start Free Trial</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2>Everything You Need</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>3D Body Placement</h3>
+                    <p>Let clients visualize tattoos on their body before committing. Reduces cancellations and increases confidence.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h3>Online Booking</h3>
+                    <p>24/7 appointment scheduling with automatic reminders. No more back-and-forth DMs.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI Admin Tools</h3>
+                    <p>Automated pricing estimates, design suggestions, and client communication.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💳</div>
+                    <h3>Deposit Management</h3>
+                    <p>Collect deposits online, track payments, and manage cancellations automatically.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Studio Analytics</h3>
+                    <p>Track revenue, popular designs, client retention, and growth metrics.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Mobile-First</h3>
+                    <p>Manage your studio from anywhere. Works perfectly on phones and tablets.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2>Simple Pricing</h2>
+            <p class="pricing-subtitle">Start free, upgrade when you're ready</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <div class="price">₱500<span>/month</span></div>
+                    <p>Perfect for solo artists starting out</p>
+                    <ul>
+                        <li>Up to 50 appointments/month</li>
+                        <li>3D body placement tool</li>
+                        <li>Online booking</li>
+                        <li>Basic analytics</li>
+                        <li>Email support</li>
+                    </ul>
+                    <a href="/book" class="pricing-button">Get Started</a>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <div class="popular-badge">Most Popular</div>
+                    <h3>Professional</h3>
+                    <div class="price">₱1,500<span>/month</span></div>
+                    <p>For established artists ready to scale</p>
+                    <ul>
+                        <li>Unlimited appointments</li>
+                        <li>Advanced 3D placement</li>
+                        <li>AI-powered admin tools</li>
+                        <li>Deposit collection</li>
+                        <li>Full analytics suite</li>
+                        <li>Priority support</li>
+                        <li>Custom branding</li>
+                    </ul>
+                    <a href="/book" class="pricing-button">Start Free Trial</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>Studio</h3>
+                    <div class="price">₱3,000<span>/month</span></div>
+                    <p>For multi-artist studios</p>
+                    <ul>
+                        <li>Everything in Professional</li>
+                        <li>Up to 5 artists</li>
+                        <li>Team management</li>
+                        <li>Commission tracking</li>
+                        <li>White-label option</li>
+                        <li>Dedicated account manager</li>
+                        <li>API access</li>
+                    </ul>
+                    <a href="/contact" class="pricing-button">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2>Loved by Tattoo Artists</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <p>"Tattoo Tide transformed my business. The 3D placement tool alone has reduced my consultation time by 70%. Clients book with confidence."</p>
+                    <div class="testimonial-author">— Maria Santos, Manila Ink Studio</div>
+                </div>
+                <div class="testimonial">
+                    <p>"I went from managing bookings in Instagram DMs to a professional system. My no-show rate dropped from 30% to 5%. Worth every peso."</p>
+                    <div class="testimonial-author">— Jake Reyes, Black Rose Tattoo</div>
+                </div>
+                <div class="testimonial">
+                    <p>"The AI pricing estimator is scary accurate. My clients love getting instant quotes. I've doubled my booking rate since switching."</p>
+                    <div class="testimonial-author">— Liza Chen, Fine Line Tattoo</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <h3>Can I import my existing client list?</h3>
+                <p>Yes! We support CSV import from Excel, Google Sheets, or any other booking system. Our team can also help with migration.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>Do I need technical skills to use Tattoo Tide?</h3>
+                <p>Not at all. If you can use Instagram, you can use Tattoo Tide. We handle all the technical stuff. Setup takes less than 10 minutes.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>Is there a contract or commitment?</h3>
+                <p>No contracts. Cancel anytime. We also offer a 14-day free trial on all plans so you can try before you buy.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>Can I use my own domain?</h3>
+                <p>Absolutely! Professional and Studio plans support custom domains (yourstudio.com). We'll help you set it up.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>What payment methods can I accept?</h3>
+                <p>We integrate with GCash, Maya, bank transfers, credit cards, and PayPal. You can accept deposits and full payments.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Transform Your Studio?</h2>
+            <p>Join 50+ tattoo artists already using Tattoo Tide. Start your free trial today.</p>
+            <a href="/book" class="cta-button">Start Free 14-Day Trial</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Built with ❤️ by <a href="https://arjostyle.com">ArjoStyle</a></p>
+        </div>
+    </footer>
+</body>
+</html>

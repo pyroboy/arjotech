@@ -1,0 +1,73 @@
+Subject: Free Your Restaurant from Expensive POS Systems — WTFPOS
+
+Hi [Restaurant Owner Name],
+
+I'm Arjo, a software developer and restaurant tech specialist. I noticed [Restaurant Name] and wanted to reach out because I've built something that could save you thousands of pesos every month.
+
+**The Problem with Current POS Systems:**
+❌ Monthly subscriptions costing ₱5,000-₱15,000+
+❌ Internet downtime = lost sales
+❌ Complicated interfaces that slow down service
+❌ Expensive hardware requirements
+
+**I Built WTFPOS for a Local BBQ Chain:**
+WTFPOS is an offline-first restaurant POS that runs even without internet. It was built specifically for a busy BBQ restaurant here in [City], handling 200+ orders daily with zero downtime.
+
+**What WTFPOS Does:**
+✅ **QR Self-Ordering** — Customers order from their phones, reducing staff workload
+✅ **Offline-First** — Works without internet, syncs when connection returns
+✅ **Live Kitchen Display** — Orders appear instantly on kitchen screens
+✅ **Floor Plan Editor** — Drag-and-drop table management
+✅ **Multi-Location Inventory** — Track stock across all branches
+✅ **One-Time Payment** — No monthly fees, ever
+
+**Real Results from the BBQ Chain:**
+📊 30% faster order processing
+📊 50% reduction in order errors
+📊 ₱180,000 saved annually (no monthly POS fees)
+📊 Zero downtime during internet outages
+
+**Special Offer for [Restaurant Name]:**
+I'm looking for 3 more restaurants to pilot WTFPOS at a special rate:
+
+🎁 **Setup Fee:** ₱15,000 (one-time, normally ₱35,000)
+🎁 **Includes:** Installation, training, 6 months support
+🎁 **No Monthly Fees:** Ever
+🎁 **Money-Back Guarantee:** 30 days, no questions asked
+
+**What You Get:**
+- Complete POS system (works on any tablet/computer)
+- QR ordering system for customers
+- Kitchen display screens
+- Inventory management
+- Sales reporting & analytics
+- Staff management
+- Receipt printing
+- And more...
+
+**Next Steps:**
+I'd love to show you WTFPOS in action. Can we schedule a 20-minute demo this week? I'll bring a tablet and show you exactly how it works with your menu.
+
+**Available Demo Times:**
+- Tuesday [Date] — 10:00 AM or 2:00 PM
+- Wednesday [Date] — 11:00 AM or 3:00 PM
+- Thursday [Date] — 10:00 AM or 4:00 PM
+
+Just reply with your preferred time, or call/text me at [Your Number].
+
+**P.S.** — I'm only offering this pilot pricing to 3 restaurants this month. After that, it goes back to regular pricing. If you're tired of paying monthly POS fees, let's talk.
+
+Best regards,
+
+Arjo Magno
+Software Developer & Restaurant Tech Specialist
+📧 arjo@arjostyle.com
+📱 [Your Phone Number]
+🌐 https://arjostyle.com/software/wtfpos
+
+---
+
+**About Me:**
+I'm a full-stack developer with 5+ years experience building apps for real businesses. WTFPOS was built after watching my friend struggle with expensive, unreliable POS systems at his BBQ restaurant. Now he saves ₱15,000/month and never worries about internet outages.
+
+See my other work: https://arjostyle.com/software
