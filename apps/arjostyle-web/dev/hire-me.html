@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hire Arjo Magno — Full-Stack Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            padding: 30px 0;
+            border-bottom: 1px solid #222;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .back-link:hover {
+            color: #00d4ff;
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+        
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 30px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: #00d4ff;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            color: #888;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+        }
+        
+        .availability {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid #00d4ff;
+            border-radius: 20px;
+            color: #00d4ff;
+            font-size: 0.875rem;
+        }
+        
+        /* Stats */
+        .stats {
+            padding: 40px 0;
+            border-top: 1px solid #222;
+            border-bottom: 1px solid #222;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #00d4ff;
+        }
+        
+        .stat-label {
+            color: #888;
+            font-size: 0.875rem;
+        }
+        
+        /* Services */
+        .services {
+            padding: 80px 0;
+        }
+        
+        .services h2 {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .service-card {
+            background: #111;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #222;
+            transition: border-color 0.3s;
+        }
+        
+        .service-card:hover {
+            border-color: #00d4ff;
+        }
+        
+        .service-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .service-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+        
+        .service-card p {
+            color: #888;
+            margin-bottom: 15px;
+        }
+        
+        .service-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tech-tag {
+            padding: 4px 10px;
+            background: #222;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            color: #ccc;
+        }
+        
+        /* Tech Stack */
+        .tech-stack {
+            padding: 60px 0;
+            background: #0d0d0d;
+        }
+        
+        .tech-stack h2 {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .tech-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .tech-category h3 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+        
+        .tech-category ul {
+            list-style: none;
+        }
+        
+        .tech-category li {
+            padding: 5px 0;
+            color: #888;
+        }
+        
+        /* Projects */
+        .projects {
+            padding: 80px 0;
+        }
+        
+        .projects h2 {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .project {
+            background: #111;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #222;
+            margin-bottom: 20px;
+        }
+        
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+        
+        .project h3 {
+            font-size: 1.25rem;
+        }
+        
+        .live-badge {
+            padding: 4px 12px;
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+        
+        .project p {
+            color: #888;
+            margin-bottom: 15px;
+        }
+        
+        .project-stats {
+            display: flex;
+            gap: 20px;
+            font-size: 0.875rem;
+            color: #666;
+        }
+        
+        /* Pricing */
+        .pricing {
+            padding: 80px 0;
+            background: #0d0d0d;
+        }
+        
+        .pricing h2 {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .pricing-card {
+            background: #111;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #222;
+        }
+        
+        .pricing-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .price span {
+            font-size: 1rem;
+            color: #888;
+        }
+        
+        .pricing-card ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .pricing-card li {
+            padding: 8px 0;
+            border-bottom: 1px solid #222;
+            color: #ccc;
+        }
+        
+        .pricing-card li:before {
+            content: "✓";
+            color: #00d4ff;
+            margin-right: 10px;
+        }
+        
+        /* Process */
+        .process {
+            padding: 80px 0;
+        }
+        
+        .process h2 {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        
+        .step {
+            text-align: center;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto 15px;
+        }
+        
+        .step h3 {
+            margin-bottom: 10px;
+        }
+        
+        .step p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        /* CTA */
+        .cta {
+            padding: 100px 0;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0a0a0a 100%);
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            color: #888;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin: 10px;
+            transition: transform 0.2s;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid #00d4ff;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid #222;
+            color: #666;
+        }
+        
+        footer a {
+            color: #00d4ff;
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="/" class="logo">ArjoStyle</a>
+                <a href="/software" class="back-link">← Back to Software</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="profile-img">👨‍💻</div>
+            <h1>Arjo Magno</h1>
+            <p class="subtitle">Full-Stack Developer & UI Designer</p>
+            <p>I build fast, modern web applications for businesses that need to ship. From restaurant POS systems to booking platforms, I turn ideas into production-ready software.</p>
+            <span class="availability">● Available for projects</span>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div>
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div>
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Apps in Production</div>
+                </div>
+                <div>
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">Tattoos Delivered</div>
+                </div>
+                <div>
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Remote Work</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            <h2>What I Can Build For You</h2>
+            <div class="service-grid">
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h3>Web Applications</h3>
+                    <p>Full-stack apps with modern frameworks. Booking systems, dashboards, e-commerce, and custom tools.</p>
+                    <div class="service-tech">
+                        <span class="tech-tag">SvelteKit</span>
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Cloudflare</span>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🏪</div>
+                    <h3>Business Systems</h3>
+                    <p>POS systems, inventory management, CRM tools. Built for real businesses with real problems.</p>
+                    <div class="service-tech">
+                        <span class="tech-tag">Offline-First</span>
+                        <span class="tech-tag">RxDB</span>
+                        <span class="tech-tag">Real-time</span>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>Progressive Web Apps</h3>
+                    <p>Mobile-first apps that work offline, send push notifications, and feel native.</p>
+                    <div class="service-tech">
+                        <span class="tech-tag">PWA</span>
+                        <span class="tech-tag">Service Workers</span>
+                        <span class="tech-tag">IndexedDB</span>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🎭</div>
+                    <h3>UI/UX Design</h3>
+                    <p>Beautiful, usable interfaces. From wireframes to high-fidelity designs ready for development.</p>
+                    <div class="service-tech">
+                        <span class="tech-tag">Figma</span>
+                        <span class="tech-tag">Design Systems</span>
+                        <span class="tech-tag">Prototyping</span>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🔧</div>
+                    <h3>API Development</h3>
+                    <p>RESTful and GraphQL APIs. Database design, authentication, and third-party integrations.</p>
+                    <div class="service-tech">
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">Drizzle</span>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🚀</div>
+                    <h3>DevOps & Deployment</h3>
+                    <p>CI/CD pipelines, serverless deployment, and performance optimization.</p>
+                    <div class="service-tech">
+                        <span class="tech-tag">Cloudflare</span>
+                        <span class="tech-tag">Vercel</span>
+                        <span class="tech-tag">Docker</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="tech-stack">
+        <div class="container">
+            <h2>Tech Stack</h2>
+            <div class="tech-categories">
+                <div class="tech-category">
+                    <h3>Frontend</h3>
+                    <ul>
+                        <li>Svelte / SvelteKit</li>
+                        <li>React / Next.js</li>
+                        <li>TypeScript</li>
+                        <li>Tailwind CSS</li>
+                        <li>Three.js / 3D</li>
+                    </ul>
+                </div>
+                <div class="tech-category">
+                    <h3>Backend</h3>
+                    <ul>
+                        <li>Node.js</li>
+                        <li>PostgreSQL</li>
+                        <li>Supabase</li>
+                        <li>Neon</li>
+                        <li>Redis</li>
+                    </ul>
+                </div>
+                <div class="tech-category">
+                    <h3>Cloud & DevOps</h3>
+                    <ul>
+                        <li>Cloudflare Workers</li>
+                        <li>Vercel</li>
+                        <li>Docker</li>
+                        <li>GitHub Actions</li>
+                        <li>Serverless</li>
+                    </ul>
+                </div>
+                <div class="tech-category">
+                    <h3>Tools & Design</h3>
+                    <ul>
+                        <li>Figma</li>
+                        <li>Git / GitHub</li>
+                        <li>Drizzle ORM</li>
+                        <li>RxDB</li>
+                        <li>Playwright</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects">
+        <div class="container">
+            <h2>Recent Projects</h2>
+            
+            <div class="project">
+                <div class="project-header">
+                    <h3>Tattoo Tide</h3>
+                    <span class="live-badge">● LIVE</span>
+                </div>
+                <p>Full-stack tattoo booking platform with 3D body placement selector and AI-powered admin tools. Used by 50+ tattoo artists.</p>
+                <div class="project-stats">
+                    <span>SvelteKit</span>
+                    <span>Neon</span>
+                    <span>Drizzle</span>
+                    <span>Three.js</span>
+                </div>
+            </div>
+            
+            <div class="project">
+                <div class="project-header">
+                    <h3>WTFPOS</h3>
+                    <span class="live-badge">● LIVE</span>
+                </div>
+                <p>Offline-first restaurant POS with QR self-ordering, live kitchen display, and multi-location inventory. Built for a BBQ restaurant chain.</p>
+                <div class="project-stats">
+                    <span>Svelte 5</span>
+                    <span>RxDB</span>
+                    <span>TypeScript</span>
+                    <span>200+ orders/day</span>
+                </div>
+            </div>
+            
+            <div class="project">
+                <div class="project-header">
+                    <h3>Dorm Management System</h3>
+                    <span class="live-badge">● LIVE</span>
+                </div>
+                <p>Comprehensive dorm operations platform for billing, occupancy, and utility tracking. Manages 100+ rooms.</p>
+                <div class="project-stats">
+                    <span>SvelteKit</span>
+                    <span>Supabase</span>
+                    <span>Real-time sync</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing">
+        <div class="container">
+            <h2>Engagement Models</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Hourly Consulting</h3>
+                    <div class="price">₱2,500<span>/hour</span></div>
+                    <p>Best for quick fixes, code reviews, or advisory</p>
+                    <ul>
+                        <li>Video calls & screen sharing</li>
+                        <li>Code review & debugging</li>
+                        <li>Architecture advice</li>
+                        <li>Minimum 2 hours</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>Project-Based</h3>
+                    <div class="price">Custom<span> quote</span></div>
+                    <p>Fixed price for defined scope</p>
+                    <ul>
+                        <li>Detailed requirements</li>
+                        <li>Fixed timeline</li>
+                        <li>Milestone payments</li>
+                        <li>Post-launch support</li>
+                        <li>Typical range: ₱50K-500K</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>Retainer</h3>
+                    <div class="price">₱50,000<span>/month</span></div>
+                    <p>Ongoing development & support</p>
+                    <ul>
+                        <li>20 hours/month</li>
+                        <li>Priority support</li>
+                        <li>Monthly planning</li>
+                        <li>Regular updates</li>
+                        <li>3-month minimum</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="process">
+        <div class="container">
+            <h2>How We Work Together</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Discovery</h3>
+                    <p>Free 30-min call to understand your needs, timeline, and budget</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Proposal</h3>
+                    <p>Detailed scope, timeline, and pricing within 48 hours</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Development</h3>
+                    <p>Weekly updates, demos, and collaborative feedback</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Launch</h3>
+                    <p>Deployment, training, and 30-day post-launch support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h2>Let's Build Something Great</h2>
+            <p>Have a project in mind? I'd love to hear about it.</p>
+            <a href="mailto:arjo@arjostyle.com?subject=Project Inquiry" class="cta-button">Email Me</a>
+            <a href="https://calendly.com/arjomagno" class="cta-button secondary">Book a Call</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Arjo Magno. Built with ❤️ and caffeine.</p>
+            <p><a href="https://arjostyle.com">arjostyle.com</a> · <a href="https://github.com/arjomagno">GitHub</a></p>
+        </div>
+    </footer>
+</body>
+</html>
