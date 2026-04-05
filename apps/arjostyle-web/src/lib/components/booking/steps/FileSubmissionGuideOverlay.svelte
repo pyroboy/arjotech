@@ -10,7 +10,7 @@
   let { open, onClose, placement }: Props = $props();
 
   let activeSlide = $state(0);
-  let overlayRef: HTMLDivElement;
+  let overlayRef: HTMLDivElement = $state(undefined as unknown as HTMLDivElement);
   let autoplayTimer: ReturnType<typeof setInterval> | null = null;
 
   const slides = $derived([
@@ -74,10 +74,12 @@
 </script>
 
 {#if open}
-  <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div
     class="fixed inset-0 bg-black/70 z-50 backdrop-blur-sm transition-all duration-300 overflow-y-auto p-4"
+    role="button"
+    tabindex="0"
     onclick={handleClickOutside}
+    onkeydown={(e) => { if (e.key === 'Escape') onClose(); }}
   >
     <div bind:this={overlayRef} class="relative max-w-lg w-full bg-zinc-900 text-white rounded-xl p-6 shadow-xl border border-zinc-700 mx-auto mb-8">
       <button

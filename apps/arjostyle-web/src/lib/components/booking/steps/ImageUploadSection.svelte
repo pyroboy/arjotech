@@ -11,6 +11,7 @@
     allowedImageTypes: string[];
     maxFileSizeMb: number;
     onShowGuide: () => void;
+    uploading?: boolean;
   }
 
   let {
@@ -25,6 +26,7 @@
     allowedImageTypes,
     maxFileSizeMb,
     onShowGuide,
+    uploading = false,
   }: Props = $props();
 
   function getObjectUrl(file: File): string {
@@ -56,7 +58,8 @@
 
   <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div
-    class="bg-surface-800 transition-all duration-300 border-2 rounded-lg shadow-sm hover:shadow-md
+    class="bg-surface-800 transition-all duration-300 border-2 rounded-lg shadow-sm hover:shadow-md relative
+      {uploading ? 'opacity-50 pointer-events-none' : ''}
       {isDraggingOver ? 'border-ink-500 border-solid ring-2 ring-ink-500/20' : 'border-dashed border-zinc-700/50'}"
     ondragover={handleDragOver}
     ondragleave={handleDragLeave}
@@ -75,7 +78,7 @@
             <polyline points="21 15 16 10 5 21"></polyline>
           </svg>
         </div>
-        <p class="text-xl font-medium mb-1 text-white">{isDraggingOver ? 'Drop images here' : 'Drag / Drop Images here'}</p>
+        <p class="text-xl font-medium mb-1 text-white">{uploading ? 'Uploading...' : isDraggingOver ? 'Drop images here' : 'Drag / Drop Images here'}</p>
         <p class="text-sm text-center text-zinc-400 max-w-md">
           or click to upload up to {maxImages} images (max {maxFileSizeMb}MB each, JPG/PNG/GIF/WEBP)
         </p>
@@ -87,7 +90,7 @@
           class="sr-only"
           onchange={handleFileChange}
           multiple
-          disabled={images.length >= maxImages}
+          disabled={uploading || images.length >= maxImages}
           aria-label="Upload reference images"
         />
       </label>
@@ -131,7 +134,7 @@
                 <line x1="12" y1="5" x2="12" y2="19"></line>
                 <line x1="5" y1="12" x2="19" y2="12"></line>
               </svg>
-              <span class="text-xs font-medium text-center px-2">{isDraggingOver ? 'Drop here' : 'Add image'}</span>
+              <span class="text-xs font-medium text-center px-2">{uploading ? 'Uploading...' : isDraggingOver ? 'Drop here' : 'Add image'}</span>
               <input
                 id="file-upload"
                 name="file-upload"
@@ -140,7 +143,7 @@
                 class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                 onchange={handleFileChange}
                 multiple
-                disabled={images.length >= maxImages}
+                disabled={uploading || images.length >= maxImages}
                 aria-label="Upload more reference images"
               />
             </label>

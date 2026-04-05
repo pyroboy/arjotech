@@ -144,9 +144,10 @@
 
     <!-- Input -->
     <div class="rounded-lg bg-zinc-800/50 border border-zinc-700/50 p-6 mb-6">
-      <label class="block text-sm font-medium text-zinc-300 mb-2">YouTube URL or Video ID</label>
+      <label for="yt-url-input" class="block text-sm font-medium text-zinc-300 mb-2">YouTube URL or Video ID</label>
       <div class="flex gap-2 mb-4">
         <input
+          id="yt-url-input"
           type="text"
           bind:value={urlInput}
           onkeydown={handleKeydown}

@@ -10,36 +10,36 @@
 	}
 
 	// From section
-	let fromBusiness = '';
-	let fromAddress = '';
-	let fromEmail = '';
-	let fromPhone = '';
+	let fromBusiness = $state('');
+	let fromAddress = $state('');
+	let fromEmail = $state('');
+	let fromPhone = $state('');
 
 	// To section
-	let toClient = '';
-	let toAddress = '';
-	let toEmail = '';
+	let toClient = $state('');
+	let toAddress = $state('');
+	let toEmail = $state('');
 
 	// Invoice details
-	let invoiceNumber = 'INV-001';
-	let invoiceDate = new Date().toISOString().split('T')[0];
-	let dueDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+	let invoiceNumber = $state('INV-001');
+	let invoiceDate = $state(new Date().toISOString().split('T')[0]);
+	let dueDate = $state(new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]);
 
 	// Line items
-	let lineItems: LineItem[] = [
+	let lineItems: LineItem[] = $state([
 		{ id: '1', description: 'Service', quantity: 1, unitPrice: 0, amount: 0 }
-	];
+	]);
 
 	// Tax and discount
-	let taxPercent = 12;
-	let discountAmount = 0;
-	let discountType: 'fixed' | 'percent' = 'fixed';
+	let taxPercent = $state(12);
+	let discountAmount = $state(0);
+	let discountType: 'fixed' | 'percent' = $state('fixed');
 
 	// Notes
-	let notes = '';
+	let notes = $state('');
 
 	// Currency
-	let currency: Currency = 'PHP';
+	let currency: Currency = $state('PHP');
 
 	const currencySymbols: Record<Currency, string> = {
 		PHP: '₱',
@@ -131,41 +131,45 @@
 					<h2 class="text-lg font-semibold text-white mb-4">From</h2>
 					<div class="space-y-3">
 						<div>
-							<label class="block text-sm font-medium text-zinc-400 mb-1">Business Name</label>
+							<label class="block text-sm font-medium text-zinc-400 mb-1">Business Name
 							<input
 								type="text"
 								bind:value={fromBusiness}
 								placeholder="Your business name..."
 								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
 							/>
+</label>
 						</div>
 						<div>
-							<label class="block text-sm font-medium text-zinc-400 mb-1">Address</label>
+							<label class="block text-sm font-medium text-zinc-400 mb-1">Address
 							<input
 								type="text"
 								bind:value={fromAddress}
 								placeholder="Business address..."
 								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
 							/>
+</label>
 						</div>
 						<div class="grid grid-cols-2 gap-3">
 							<div>
-								<label class="block text-sm font-medium text-zinc-400 mb-1">Email</label>
+								<label class="block text-sm font-medium text-zinc-400 mb-1">Email
 								<input
 									type="email"
 									bind:value={fromEmail}
 									placeholder="email@example.com..."
 									class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
 								/>
+</label>
 							</div>
 							<div>
-								<label class="block text-sm font-medium text-zinc-400 mb-1">Phone</label>
+								<label class="block text-sm font-medium text-zinc-400 mb-1">Phone
 								<input
 									type="tel"
 									bind:value={fromPhone}
 									placeholder="+63 123 4567..."
 									class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
 								/>
+</label>
 							</div>
 						</div>
 					</div>
@@ -176,31 +180,34 @@
 					<h2 class="text-lg font-semibold text-white mb-4">Bill To</h2>
 					<div class="space-y-3">
 						<div>
-							<label class="block text-sm font-medium text-zinc-400 mb-1">Client Name</label>
+							<label class="block text-sm font-medium text-zinc-400 mb-1">Client Name
 							<input
 								type="text"
 								bind:value={toClient}
 								placeholder="Client name..."
 								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
 							/>
+</label>
 						</div>
 						<div>
-							<label class="block text-sm font-medium text-zinc-400 mb-1">Address</label>
+							<label class="block text-sm font-medium text-zinc-400 mb-1">Address
 							<input
 								type="text"
 								bind:value={toAddress}
 								placeholder="Client address..."
 								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
 							/>
+</label>
 						</div>
 						<div>
-							<label class="block text-sm font-medium text-zinc-400 mb-1">Email</label>
+							<label class="block text-sm font-medium text-zinc-400 mb-1">Email
 							<input
 								type="email"
 								bind:value={toEmail}
 								placeholder="client@example.com..."
 								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
 							/>
+</label>
 						</div>
 					</div>
 				</div>
@@ -210,28 +217,31 @@
 					<h2 class="text-lg font-semibold text-white mb-4">Invoice Details</h2>
 					<div class="grid grid-cols-3 gap-3">
 						<div>
-							<label class="block text-sm font-medium text-zinc-400 mb-1">Invoice #</label>
+							<label class="block text-sm font-medium text-zinc-400 mb-1">Invoice #
 							<input
 								type="text"
 								bind:value={invoiceNumber}
 								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white focus:border-orange-500 focus:outline-none"
 							/>
+</label>
 						</div>
 						<div>
-							<label class="block text-sm font-medium text-zinc-400 mb-1">Invoice Date</label>
+							<label class="block text-sm font-medium text-zinc-400 mb-1">Invoice Date
 							<input
 								type="date"
 								bind:value={invoiceDate}
 								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white focus:border-orange-500 focus:outline-none"
 							/>
+</label>
 						</div>
 						<div>
-							<label class="block text-sm font-medium text-zinc-400 mb-1">Due Date</label>
+							<label class="block text-sm font-medium text-zinc-400 mb-1">Due Date
 							<input
 								type="date"
 								bind:value={dueDate}
 								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white focus:border-orange-500 focus:outline-none"
 							/>
+</label>
 						</div>
 					</div>
 				</div>
@@ -246,25 +256,25 @@
 									type="text"
 									placeholder="Description..."
 									value={item.description}
-									on:input={(e) => updateLineItem(item.id, 'description', e.currentTarget.value)}
+									oninput={(e) => updateLineItem(item.id, 'description', e.currentTarget.value)}
 									class="col-span-6 rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-2 py-2 text-sm text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
 								/>
 								<input
 									type="number"
 									placeholder="Qty"
 									value={item.quantity}
-									on:input={(e) => updateLineItem(item.id, 'quantity', parseFloat(e.currentTarget.value) || 0)}
+									oninput={(e) => updateLineItem(item.id, 'quantity', parseFloat(e.currentTarget.value) || 0)}
 									class="col-span-2 rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-2 py-2 text-sm text-white focus:border-orange-500 focus:outline-none"
 								/>
 								<input
 									type="number"
 									placeholder="Price"
 									value={item.unitPrice}
-									on:input={(e) => updateLineItem(item.id, 'unitPrice', parseFloat(e.currentTarget.value) || 0)}
+									oninput={(e) => updateLineItem(item.id, 'unitPrice', parseFloat(e.currentTarget.value) || 0)}
 									class="col-span-2 rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-2 py-2 text-sm text-white focus:border-orange-500 focus:outline-none"
 								/>
 								<button
-									on:click={() => removeLineItem(item.id)}
+									onclick={() => removeLineItem(item.id)}
 									class="col-span-2 rounded-lg bg-red-500/20 border border-red-500/50 px-2 py-2 text-sm text-red-400 hover:bg-red-500/30 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
 									disabled={lineItems.length === 1}
 								>
@@ -274,7 +284,7 @@
 						{/each}
 					</div>
 					<button
-						on:click={addLineItem}
+						onclick={addLineItem}
 						class="mt-4 w-full rounded-lg bg-orange-500 px-4 py-2 font-medium text-white hover:bg-orange-600 transition-colors"
 					>
 						+ Add Item
@@ -286,7 +296,7 @@
 					<h2 class="text-lg font-semibold text-white mb-4">Tax & Discount</h2>
 					<div class="grid grid-cols-2 gap-3 mb-3">
 						<div>
-							<label class="block text-sm font-medium text-zinc-400 mb-1">Tax %</label>
+							<label class="block text-sm font-medium text-zinc-400 mb-1">Tax %
 							<input
 								type="number"
 								bind:value={taxPercent}
@@ -294,9 +304,10 @@
 								max="100"
 								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white focus:border-orange-500 focus:outline-none"
 							/>
+</label>
 						</div>
 						<div>
-							<label class="block text-sm font-medium text-zinc-400 mb-1">Discount Type</label>
+							<label class="block text-sm font-medium text-zinc-400 mb-1">Discount Type
 							<select
 								bind:value={discountType}
 								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white focus:border-orange-500 focus:outline-none"
@@ -304,24 +315,26 @@
 								<option value="fixed">Fixed Amount</option>
 								<option value="percent">Percentage</option>
 							</select>
+</label>
 						</div>
 					</div>
 					<div>
 						<label class="block text-sm font-medium text-zinc-400 mb-1">
 							Discount {discountType === 'percent' ? '(%)' : `(${currencySymbols[currency]})`}
-						</label>
+						
 						<input
 							type="number"
 							bind:value={discountAmount}
 							min="0"
 							class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white focus:border-orange-500 focus:outline-none"
 						/>
+</label>
 					</div>
 				</div>
 
 				<!-- Currency Selection -->
 				<div class="rounded-lg bg-zinc-800/50 border border-zinc-700/50 p-6">
-					<label class="block text-sm font-medium text-zinc-400 mb-2">Currency</label>
+					<label class="block text-sm font-medium text-zinc-400 mb-2">Currency
 					<select
 						bind:value={currency}
 						class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white focus:border-orange-500 focus:outline-none"
@@ -331,22 +344,23 @@
 						<option value="EUR">Euro (€)</option>
 						<option value="GBP">British Pound (£)</option>
 					</select>
+</label>
 				</div>
 
 				<!-- Notes -->
 				<div class="rounded-lg bg-zinc-800/50 border border-zinc-700/50 p-6">
-					<label class="block text-sm font-medium text-white mb-2">Notes</label>
+					<label for="invoice-notes" class="block text-sm font-medium text-white mb-2">Notes</label>
 					<textarea
 						bind:value={notes}
 						placeholder="Payment terms, thank you message, etc..."
 						rows="3"
 						class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
-					/>
+					></textarea>
 				</div>
 
 				<!-- Print Button -->
 				<button
-					on:click={handlePrint}
+					onclick={handlePrint}
 					class="w-full rounded-lg bg-orange-500 px-4 py-3 font-semibold text-white hover:bg-orange-600 transition-colors"
 				>
 					Print / Save as PDF

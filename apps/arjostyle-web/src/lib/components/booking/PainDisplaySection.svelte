@@ -10,6 +10,11 @@
 
   let { painLevel, painReason }: Props = $props();
 
+  const iconColor = $derived(
+    painLevel <= 4 ? 'text-teal-400' : painLevel <= 6 ? 'text-amber-400' : 'text-orange-500'
+  );
+
+  // svelte-ignore state_referenced_locally
   let showPainLevelLabel = $state(!painReason);
   const intervalDuration = 7000;
 
@@ -38,12 +43,12 @@
         class={cn(
           'absolute inset-0 flex items-center',
           'text-sm font-medium text-zinc-400',
-          'transition-opacity duration-500 ease-in-out',
+          'transition-opacity duration-300 ease-in-out',
           showPainLevelLabel ? 'opacity-100' : 'opacity-0 pointer-events-none'
         )}
       >
-        <Zap size={14} class="mr-1 inline-block text-amber-500 flex-shrink-0" />
-        Est. Pain Level:
+        <Zap size={14} class={cn('mr-1 inline-block flex-shrink-0', iconColor)} />
+        Comfort Level:
       </span>
 
       {#if painReason}
@@ -52,7 +57,7 @@
             'absolute inset-0 flex items-center',
             'text-amber-400 text-left',
             'leading-tight',
-            'transition-opacity duration-500 ease-in-out',
+            'transition-opacity duration-300 ease-in-out',
             !showPainLevelLabel ? 'opacity-100' : 'opacity-0 pointer-events-none'
           )}
           title={painReason}

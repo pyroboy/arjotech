@@ -46,4 +46,14 @@ export interface BookingFormData {
   painReason?: string;
   visualComplexityScore?: number;
   carouselTouched?: boolean;
+  firstTattoo: boolean | null;
+  budgetRange: string | null;
+  coverUpPhoto: string[];
+  tattooDescription: string | null;
+  sizeCategory: string | null;
+  bodyRegion: string | null;
+  bodyArea: string | null;
+  additionalAreas: string | null;
+  /** Whether client wants topical numbing cream for their session */
+  numbingCream: boolean;
 }

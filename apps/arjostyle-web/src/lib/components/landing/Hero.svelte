@@ -37,7 +37,7 @@
     </h1>
 
     <p class="text-base md:text-lg text-zinc-400 mx-auto mb-10 drop-shadow-md">
-      Unleash your vision where I transform your vision with ink.
+      Custom designs crafted with precision — from fine line to full color, your story permanently inked.
     </p>
 
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4">

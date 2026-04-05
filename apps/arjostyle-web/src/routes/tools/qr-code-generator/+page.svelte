@@ -4,36 +4,36 @@
 
 	type TabType = 'text' | 'wifi' | 'vcard' | 'email';
 
-	let activeTab: TabType = 'text';
+	let activeTab: TabType = $state('text');
 
 	// Text/URL inputs
-	let textInput = 'https://arjostyle.com';
+	let textInput = $state('https://arjostyle.com');
 
 	// WiFi inputs
-	let wifiSSID = '';
-	let wifiPassword = '';
-	let wifiEncryption: 'WPA' | 'WEP' | 'None' = 'WPA';
+	let wifiSSID = $state('');
+	let wifiPassword = $state('');
+	let wifiEncryption: 'WPA' | 'WEP' | 'None' = $state('WPA');
 
 	// vCard inputs
-	let vcardName = '';
-	let vcardPhone = '';
-	let vcardEmail = '';
-	let vcardCompany = '';
-	let vcardTitle = '';
+	let vcardName = $state('');
+	let vcardPhone = $state('');
+	let vcardEmail = $state('');
+	let vcardCompany = $state('');
+	let vcardTitle = $state('');
 
 	// Email inputs
-	let emailTo = '';
-	let emailSubject = '';
-	let emailBody = '';
+	let emailTo = $state('');
+	let emailSubject = $state('');
+	let emailBody = $state('');
 
 	// QR Customization
-	let qrForeground = '#000000';
-	let qrBackground = '#FFFFFF';
-	let qrSize = 300;
+	let qrForeground = $state('#000000');
+	let qrBackground = $state('#FFFFFF');
+	let qrSize = $state(300);
 
 	// QR Output
-	let qrDataUrl = '';
-	let qrSvgUrl = '';
+	let qrDataUrl = $state('');
+	let qrSvgUrl = $state('');
 
 	// Generate QR code
 	async function generateQR() {
@@ -142,7 +142,7 @@
 				<div class="flex gap-2 border-b border-zinc-700/50">
 					{#each ['text', 'wifi', 'vcard', 'email'] as tab}
 						<button
-							on:click={() => {
+							onclick={() => {
 								activeTab = tab as TabType;
 							}}
 							class={`px-4 py-2 text-sm font-medium transition-colors border-b-2 -mb-[2px] ${
@@ -160,35 +160,38 @@
 				<div class="space-y-4">
 					{#if activeTab === 'text'}
 						<div>
-							<label class="block text-sm font-medium text-white mb-2">Text or URL</label>
+							<label class="block text-sm font-medium text-white mb-2">Text or URL
 							<textarea
 								bind:value={textInput}
 								placeholder="Enter text or URL..."
 								rows="4"
 								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
-							/>
+							></textarea>
+</label>
 						</div>
 					{:else if activeTab === 'wifi'}
 						<div>
-							<label class="block text-sm font-medium text-white mb-2">Network Name (SSID)</label>
+							<label class="block text-sm font-medium text-white mb-2">Network Name (SSID)
 							<input
 								type="text"
 								bind:value={wifiSSID}
 								placeholder="WiFi network name..."
 								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
 							/>
+</label>
 						</div>
 						<div>
-							<label class="block text-sm font-medium text-white mb-2">Password</label>
+							<label class="block text-sm font-medium text-white mb-2">Password
 							<input
 								type="password"
 								bind:value={wifiPassword}
 								placeholder="WiFi password..."
 								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
 							/>
+</label>
 						</div>
 						<div>
-							<label class="block text-sm font-medium text-white mb-2">Encryption</label>
+							<label class="block text-sm font-medium text-white mb-2">Encryption
 							<select
 								bind:value={wifiEncryption}
 								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white focus:border-orange-500 focus:outline-none"
@@ -197,91 +200,100 @@
 								<option value="WEP">WEP</option>
 								<option value="None">None</option>
 							</select>
+</label>
 						</div>
 					{:else if activeTab === 'vcard'}
 						<div>
-							<label class="block text-sm font-medium text-white mb-2">Full Name</label>
+							<label class="block text-sm font-medium text-white mb-2">Full Name
 							<input
 								type="text"
 								bind:value={vcardName}
 								placeholder="John Doe..."
 								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
 							/>
+</label>
 						</div>
 						<div>
-							<label class="block text-sm font-medium text-white mb-2">Phone</label>
+							<label class="block text-sm font-medium text-white mb-2">Phone
 							<input
 								type="tel"
 								bind:value={vcardPhone}
 								placeholder="+63 123 4567..."
 								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
 							/>
+</label>
 						</div>
 						<div>
-							<label class="block text-sm font-medium text-white mb-2">Email</label>
+							<label class="block text-sm font-medium text-white mb-2">Email
 							<input
 								type="email"
 								bind:value={vcardEmail}
 								placeholder="john@example.com..."
 								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
 							/>
+</label>
 						</div>
 						<div>
-							<label class="block text-sm font-medium text-white mb-2">Company</label>
+							<label class="block text-sm font-medium text-white mb-2">Company
 							<input
 								type="text"
 								bind:value={vcardCompany}
 								placeholder="Company name..."
 								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
 							/>
+</label>
 						</div>
 						<div>
-							<label class="block text-sm font-medium text-white mb-2">Title</label>
+							<label class="block text-sm font-medium text-white mb-2">Title
 							<input
 								type="text"
 								bind:value={vcardTitle}
 								placeholder="Job title..."
 								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
 							/>
+</label>
 						</div>
 					{:else if activeTab === 'email'}
 						<div>
-							<label class="block text-sm font-medium text-white mb-2">To</label>
+							<label class="block text-sm font-medium text-white mb-2">To
 							<input
 								type="email"
 								bind:value={emailTo}
 								placeholder="recipient@example.com..."
 								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
 							/>
+</label>
 						</div>
 						<div>
-							<label class="block text-sm font-medium text-white mb-2">Subject</label>
+							<label class="block text-sm font-medium text-white mb-2">Subject
 							<input
 								type="text"
 								bind:value={emailSubject}
 								placeholder="Email subject..."
 								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
 							/>
+</label>
 						</div>
 						<div>
-							<label class="block text-sm font-medium text-white mb-2">Message</label>
+							<label class="block text-sm font-medium text-white mb-2">Message
 							<textarea
 								bind:value={emailBody}
 								placeholder="Email body..."
 								rows="3"
 								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
-							/>
+							></textarea>
+</label>
 						</div>
 					{/if}
 				</div>
 
 				<!-- Customization -->
 				<div class="space-y-4 border-t border-zinc-700/50 pt-6">
-					<h3 class="text-sm font-semibold text-white">Customization</h3>
+					<h2 class="text-sm font-semibold text-white">Customization</h2>
 
 					<div class="grid grid-cols-2 gap-4">
 						<div>
-							<label class="block text-sm font-medium text-zinc-400 mb-2">Foreground Color</label>
+							<label for="qr-fg-color" class="block text-sm font-medium text-zinc-400 mb-2">Foreground Color</label>
 							<div class="flex items-center gap-2">
 								<input
 									type="color"
@@ -293,7 +305,7 @@
 						</div>
 
 						<div>
-							<label class="block text-sm font-medium text-zinc-400 mb-2">Background Color</label>
+							<label for="qr-bg-color" class="block text-sm font-medium text-zinc-400 mb-2">Background Color</label>
 							<div class="flex items-center gap-2">
 								<input
 									type="color"
@@ -306,7 +318,7 @@
 					</div>
 
 					<div>
-						<label class="block text-sm font-medium text-zinc-400 mb-2">Size: {qrSize}px</label>
+						<label class="block text-sm font-medium text-zinc-400 mb-2">Size: {qrSize}px
 						<input
 							type="range"
 							min="200"
@@ -315,6 +327,7 @@
 							bind:value={qrSize}
 							class="w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-orange-500"
 						/>
+</label>
 					</div>
 				</div>
 			</div>
@@ -334,14 +347,14 @@
 				<!-- Download Buttons -->
 				<div class="grid grid-cols-2 gap-3">
 					<button
-						on:click={downloadPNG}
+						onclick={downloadPNG}
 						disabled={!qrDataUrl}
 						class="flex items-center justify-center gap-2 rounded-lg bg-orange-500 px-4 py-2 font-medium text-white hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
 					>
 						Download PNG
 					</button>
 					<button
-						on:click={downloadSVG}
+						onclick={downloadSVG}
 						disabled={!qrSvgUrl}
 						class="flex items-center justify-center gap-2 rounded-lg bg-orange-500 px-4 py-2 font-medium text-white hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
 					>

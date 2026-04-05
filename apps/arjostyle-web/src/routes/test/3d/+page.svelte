@@ -58,7 +58,7 @@
     </p>
   </div>
 
-  <div class="flex flex-col lg:flex-row gap-0 h-[calc(100vh-80px)]">
+  <div class="flex flex-col lg:flex-row gap-0 h-[calc(100dvh-80px)]">
     <!-- Left Panel: Controls -->
     <div class="w-full lg:w-96 border-r border-zinc-800 bg-zinc-900/30 p-6 overflow-y-auto flex-shrink-0">
       <!-- Category Dropdown -->
@@ -134,7 +134,7 @@
       <!-- Current Mapping Data -->
       {#if currentMapping}
         <div class="space-y-4">
-          <h3 class="text-sm font-semibold text-zinc-300 uppercase tracking-wider">Mapping Data</h3>
+          <h2 class="text-sm font-semibold text-zinc-300 uppercase tracking-wider">Mapping Data</h2>
 
           <!-- Position -->
           <div class="bg-zinc-800/50 rounded-lg p-3">

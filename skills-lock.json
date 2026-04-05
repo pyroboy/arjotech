@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "sveltekit": {
+      "source": "bobmatnyc/claude-mpm-skills",
+      "sourceType": "github",
+      "computedHash": "9bec22d5ae7aa2d9a5cb673febb03a0a4ccd6719734e0bbe111e63f85533046b"
+    }
+  }
+}

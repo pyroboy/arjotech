@@ -71,8 +71,8 @@
 
     <!-- Preferred Contact -->
     <div>
-      <label class="block text-sm text-zinc-400 mb-2">Preferred Contact Method</label>
-      <div class="flex flex-wrap gap-2">
+      <span id="contact-method-label" class="block text-sm text-zinc-400 mb-2">Preferred Contact Method</span>
+      <div class="flex flex-wrap gap-2" role="group" aria-labelledby="contact-method-label">
         {#each contactMethods as method}
           <button
             type="button"

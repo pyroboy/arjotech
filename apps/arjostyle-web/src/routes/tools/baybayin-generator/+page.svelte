@@ -6,8 +6,8 @@
 		baybayin: string;
 	}
 
-	let input = '';
-	let canvasElement: HTMLCanvasElement;
+	let input = $state('');
+	let canvasElement: HTMLCanvasElement = $state(undefined as unknown as HTMLCanvasElement);
 
 	const baybayinMap: Record<string, string> = {
 		// Vowels
@@ -278,22 +278,22 @@
 			<div class="space-y-6">
 				<!-- Text Input -->
 				<div>
-					<label class="block text-sm font-medium text-white mb-2">Enter Text (Filipino/Tagalog)</label>
+					<label for="baybayin-input" class="block text-sm font-medium text-white mb-2">Enter Text (Filipino/Tagalog)</label>
 					<textarea
 						bind:value={input}
 						placeholder="Type or paste Filipino text..."
 						rows="6"
 						class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
-					/>
+					></textarea>
 				</div>
 
 				<!-- Popular Words -->
 				<div>
-					<h3 class="text-sm font-medium text-white mb-3">Popular Words</h3>
+					<h2 class="text-sm font-medium text-white mb-3">Popular Words</h2>
 					<div class="grid grid-cols-2 gap-2">
 						{#each popularWords as word}
 							<button
-								on:click={() => fillFromPopular(word.latin)}
+								onclick={() => fillFromPopular(word.latin)}
 								class="rounded-lg bg-zinc-800/50 border border-zinc-700/50 hover:border-orange-500/50 hover:bg-zinc-800 px-3 py-2 text-xs sm:text-sm text-zinc-300 hover:text-orange-400 transition-colors text-left truncate"
 								title={word.latin}
 							>
@@ -306,7 +306,7 @@
 				<!-- Action Buttons -->
 				<div class="flex gap-2">
 					<button
-						on:click={copyBaybayin}
+						onclick={copyBaybayin}
 						data-copy-btn
 						disabled={!baybayinOutput}
 						class="flex-1 rounded-lg bg-orange-500 hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2 font-medium text-white transition-colors text-sm"
@@ -314,7 +314,7 @@
 						Copy Baybayin
 					</button>
 					<button
-						on:click={downloadAsImage}
+						onclick={downloadAsImage}
 						disabled={!baybayinOutput}
 						class="flex-1 rounded-lg bg-orange-500 hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2 font-medium text-white transition-colors text-sm"
 					>
@@ -343,7 +343,7 @@
 				{#if characterMappings.length > 0}
 					<div class="rounded-lg bg-zinc-800/50 border border-zinc-700/50 overflow-hidden">
 						<div class="px-4 py-3 border-b border-zinc-700/50 bg-zinc-800">
-							<h3 class="text-sm font-medium text-white">Character Mapping</h3>
+							<h2 class="text-sm font-medium text-white">Character Mapping</h2>
 						</div>
 						<div class="max-h-64 overflow-y-auto">
 							<div class="divide-y divide-zinc-700/50">
@@ -362,7 +362,7 @@
 
 				<!-- Education -->
 				<div class="rounded-lg bg-zinc-800/50 border border-zinc-700/50 p-4">
-					<h3 class="text-sm font-medium text-white mb-2">What is Baybayin?</h3>
+					<h2 class="text-sm font-medium text-white mb-2">What is Baybayin?</h2>
 					<p class="text-xs sm:text-sm text-zinc-400 leading-relaxed">
 						Baybayin (also known as Alibata) is an ancient script used by pre-colonial Filipinos to write
 						their indigenous languages. It was one of the first writing systems in Southeast Asia. Today,
@@ -384,4 +384,4 @@
 	</div>
 </div>
 
-<canvas bind:this={canvasElement} class="hidden" />
+<canvas bind:this={canvasElement} class="hidden"></canvas>

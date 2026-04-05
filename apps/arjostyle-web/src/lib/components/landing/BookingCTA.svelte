@@ -18,7 +18,7 @@
       </p>
       <button
         onclick={onOpenBookingModal}
-        class="px-8 py-3 bg-ink-500 text-white rounded-lg font-semibold hover:bg-ink-400 transition-colors text-lg"
+        class="px-8 py-3 bg-ink-500 text-white rounded-full font-semibold hover:bg-ink-400 transition-colors text-lg"
       >
         Book Your Appointment
       </button>

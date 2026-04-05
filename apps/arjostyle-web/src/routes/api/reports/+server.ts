@@ -5,6 +5,7 @@ import { leads, marketingContent, bookings, kpiActivityLog } from '$lib/db/schem
 import { desc, gte } from 'drizzle-orm';
 
 export const GET: RequestHandler = async ({ platform, url }) => {
+  try {
   const db = getDb(platform?.env ?? {});
   const period = url.searchParams.get('period') || 'week';
 
@@ -182,6 +183,10 @@ export const GET: RequestHandler = async ({ platform, url }) => {
   };
 
   return json(report);
+  } catch (err) {
+    console.error('GET /api/reports error:', err);
+    return json({ error: 'Failed to generate report' }, { status: 500 });
+  }
 };
 
 // Helper functions

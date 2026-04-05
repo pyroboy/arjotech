@@ -1,6 +1,7 @@
 <script lang="ts">
   import { T } from '@threlte/core';
   import { useGltf } from '@threlte/extras';
+  import { onDestroy } from 'svelte';
   import * as THREE from 'three';
 
   interface Props {
@@ -12,6 +13,7 @@
 
   let { modelUrl, isColor = true, onLoad, onError }: Props = $props();
 
+  // svelte-ignore state_referenced_locally
   const gltf = useGltf(modelUrl);
 
   $effect(() => {
@@ -43,6 +45,30 @@
         }
       });
       onLoad?.(model);
+    }
+  });
+
+  // Dispose GLTF resources on unmount to prevent memory leaks
+  onDestroy(() => {
+    if ($gltf) {
+      $gltf.scene.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          if (child.geometry) child.geometry.dispose();
+          const materials = Array.isArray(child.material) ? child.material : [child.material];
+          materials.forEach((mat) => {
+            if (mat) {
+              // Dispose any textures on the material
+              for (const key of Object.keys(mat)) {
+                const value = (mat as Record<string, unknown>)[key];
+                if (value instanceof THREE.Texture) {
+                  value.dispose();
+                }
+              }
+              mat.dispose();
+            }
+          });
+        }
+      });
     }
   });
 </script>

@@ -297,6 +297,7 @@
           ondragleave={() => (dragActive = false)}
           role="button"
           tabindex="0"
+          onkeydown={(e) => { if (e.key === 'Enter' || e.key === ' ') document.getElementById('file-input')?.click(); }}
         >
           <p class="text-white font-semibold mb-2">Drop image here</p>
           <p class="text-zinc-500 text-sm mb-4">or click to select</p>
@@ -333,7 +334,7 @@
 
           <!-- Export -->
           <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-xl p-6 space-y-3">
-            <h3 class="text-white font-bold text-sm">Export Palette</h3>
+            <h2 class="text-white font-bold text-sm">Export Palette</h2>
             <button
               onclick={() => {
                 downloadExport(exportAsCSS(extractedColors), 'palette.css');
@@ -358,7 +359,7 @@
 
         <!-- Random Generator -->
         <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-xl p-6">
-          <h3 class="text-white font-bold mb-3 text-sm">Random Palette</h3>
+          <h2 class="text-white font-bold mb-3 text-sm">Random Palette</h2>
           <p class="text-zinc-500 text-xs mb-4">
             Generate harmonious colors without uploading
           </p>
@@ -387,7 +388,7 @@
             <!-- Image Preview -->
             {#if uploadedImage}
               <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-xl p-6">
-                <h3 class="text-white font-semibold mb-3 text-sm">Source Image</h3>
+                <h2 class="text-white font-semibold mb-3 text-sm">Source Image</h2>
                 <img
                   src={uploadedImage.preview}
                   alt="Source"
@@ -398,9 +399,9 @@
 
             <!-- Color Swatches -->
             <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-xl p-6">
-              <h3 class="text-white font-semibold mb-4 text-sm">
+              <h2 class="text-white font-semibold mb-4 text-sm">
                 {showComplements ? 'Colors with Complements' : 'Extracted Colors'}
-              </h3>
+              </h2>
               <div class="space-y-3">
                 {#each activePalette as color (color.hex)}
                   <div class="bg-surface-900 rounded-lg p-4 border border-zinc-700">

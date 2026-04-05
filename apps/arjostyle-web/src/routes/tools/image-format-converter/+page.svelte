@@ -180,6 +180,7 @@
           ondragleave={() => (dragActive = false)}
           role="button"
           tabindex="0"
+          onkeydown={(e) => { if (e.key === 'Enter' || e.key === ' ') document.getElementById('file-input')?.click(); }}
         >
           <p class="text-white font-semibold mb-2">Drop images here</p>
           <p class="text-zinc-500 text-sm mb-4">or select files</p>
@@ -204,7 +205,7 @@
 
         <!-- Format Settings -->
         <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-xl p-6">
-          <h3 class="text-white font-bold mb-4">Output Format</h3>
+          <h2 class="text-white font-bold mb-4">Output Format</h2>
           <div class="space-y-3">
             <label class="flex items-center gap-3 cursor-pointer">
               <input
@@ -246,7 +247,7 @@
         {#if selectedFormat !== 'png'}
           <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-xl p-6">
             <div class="flex justify-between items-center mb-3">
-              <h3 class="text-white font-bold">Quality</h3>
+              <h2 class="text-white font-bold">Quality</h2>
               <span class="text-orange-500 font-semibold">{Math.round(quality * 100)}%</span>
             </div>
             <input
@@ -290,7 +291,7 @@
                 <div class="flex flex-col md:flex-row gap-6 items-start">
                   <!-- Original Image -->
                   <div class="flex-1">
-                    <h4 class="text-white font-semibold mb-3 text-sm">Original</h4>
+                    <h3 class="text-white font-semibold mb-3 text-sm">Original</h3>
                     <img
                       src={uploadedImg.preview}
                       alt="Original"
@@ -319,9 +320,9 @@
                   <!-- Converted Image -->
                   <div class="flex-1">
                     {#if converted}
-                      <h4 class="text-white font-semibold mb-3 text-sm">
+                      <h3 class="text-white font-semibold mb-3 text-sm">
                         {selectedFormat.toUpperCase()}
-                      </h4>
+                      </h3>
                       <img
                         src={converted.url}
                         alt="Converted"

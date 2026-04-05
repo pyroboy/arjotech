@@ -87,13 +87,20 @@
 		modelUrl = undefined
 	}: Props = $props();
 
-	// State
+	// State — intentionally captured once from initialValues (not reactive to prop changes)
+	// svelte-ignore state_referenced_locally
 	let size = $state(initialValues?.size ?? 0);
+	// svelte-ignore state_referenced_locally
 	let isColor = $state(initialValues?.isColor ?? false);
+	// svelte-ignore state_referenced_locally
 	let selectedCategory = $state(initialValues?.selectedCategory ?? '');
+	// svelte-ignore state_referenced_locally
 	let placementIndex = $state(initialValues?.placementIndex ?? 0);
+	// svelte-ignore state_referenced_locally
 	let isCoverUp = $state(initialValues?.isCoverUp ?? false);
+	// svelte-ignore state_referenced_locally
 	let sizeSliderTouched = $state(initialValues?.sizeSliderTouched ?? false);
+	// svelte-ignore state_referenced_locally
 	let placementSliderTouched = $state(initialValues?.placementSliderTouched ?? false);
 
 	// Derived
@@ -306,39 +313,40 @@
 		}
 	});
 
-	// Debounced onchange to prevent infinite effect loops
-	let changeTimeout: ReturnType<typeof setTimeout> | null = null;
+	// Live onchange: pushes state to parent so 3D model updates immediately.
+	// Captures reactive values first, then calls onchange outside tracking
+	// to prevent infinite loop (onchange → store update → props change → re-trigger).
 	$effect(() => {
-		if (onchange && calculationsEnabled) {
-			// Read all values to track them
-			const _size = size;
-			const _isColor = isColor;
-			const _cat = selectedCategory;
-			const _pi = placementIndex;
-			const _cp = currentPlacement;
-			const _pain = currentPainLevel;
-			const _painR = currentPainInfo?.reason;
-			const _cover = isCoverUp;
-			const _p = pricing;
-			const _dur = estimatedDurationMinutes;
-			const _sess = estimatedSessions;
-			const _comp = effectiveComplexityLevel;
-			const _vcs = visualComplexityScore;
-			const _st = sizeSliderTouched;
-			const _pt = placementSliderTouched;
+		// Read all reactive values to subscribe to slider changes
+		const _size = size;
+		const _isColor = isColor;
+		const _cat = selectedCategory;
+		const _pi = placementIndex;
+		const _cp = currentPlacement;
+		const _pain = currentPainLevel;
+		const _painR = currentPainInfo?.reason;
+		const _cover = isCoverUp;
+		const _pricing = pricing;
+		const _dur = estimatedDurationMinutes;
+		const _sess = estimatedSessions;
+		const _comp = effectiveComplexityLevel;
+		const _vis = visualComplexityScore;
+		const _st = sizeSliderTouched;
+		const _pt = placementSliderTouched;
 
-			if (changeTimeout) clearTimeout(changeTimeout);
-			changeTimeout = setTimeout(() => {
-				onchange({
-					size: _size, isColor: _isColor, selectedCategory: _cat,
-					placementIndex: _pi, currentPlacement: _cp,
-					painLevel: _pain, painReason: _painR, isCoverUp: _cover,
-					pricing: _p, estimatedDurationMinutes: _dur, estimatedSessions: _sess,
-					complexity: _comp, visualComplexityScore: _vcs,
-					sizeSliderTouched: _st, placementSliderTouched: _pt
-				});
-			}, 50);
-		}
+		if (!onchange) return;
+		// Fire outside Svelte's tracking via microtask to break the cycle
+		queueMicrotask(() => {
+			onchange({
+				size: _size, isColor: _isColor, selectedCategory: _cat,
+				placementIndex: _pi, currentPlacement: _cp,
+				painLevel: _pain, painReason: _painR, isCoverUp: _cover,
+				pricing: _pricing, estimatedDurationMinutes: _dur,
+				estimatedSessions: _sess, complexity: _comp,
+				visualComplexityScore: _vis,
+				sizeSliderTouched: _st, placementSliderTouched: _pt,
+			});
+		});
 	});
 
 	// Event handlers
@@ -572,7 +580,8 @@
 							</div>
 							<span class="font-medium text-base text-slate-200 truncate">Cover-up / Enhancement</span>
 						</div>
-						<label class="relative inline-flex items-center cursor-pointer flex-shrink-0" onclick={(e) => e.stopPropagation()}>
+						<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+						<label class="relative inline-flex items-center cursor-pointer flex-shrink-0" onclick={(e) => e.stopPropagation()} onkeydown={(e) => e.stopPropagation()}>
 							<input
 								type="checkbox"
 								checked={isCoverUp}
@@ -599,7 +608,8 @@
 							</div>
 							<span class="font-medium text-base text-slate-200 truncate">Color Tattoo</span>
 						</div>
-						<label class="relative inline-flex items-center cursor-pointer flex-shrink-0" onclick={(e) => e.stopPropagation()}>
+						<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+						<label class="relative inline-flex items-center cursor-pointer flex-shrink-0" onclick={(e) => e.stopPropagation()} onkeydown={(e) => e.stopPropagation()}>
 							<input
 								type="checkbox"
 								checked={isColor}

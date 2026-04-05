@@ -1,4 +1,5 @@
-import { json, type RequestHandler } from '@sveltejs/kit';
+import { json } from '@sveltejs/kit';
+import type { RequestHandler } from './$types';
 import { getDb } from '$db/index';
 import { schedulingSlots } from '$db/schema';
 import { eq } from 'drizzle-orm';

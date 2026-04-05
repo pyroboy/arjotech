@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onDestroy } from 'svelte';
   import * as THREE from 'three';
   import SceneSetup from './SceneSetup.svelte';
   import HumanModel from './HumanModel.svelte';
@@ -15,7 +16,9 @@
     selectedCategory?: string | null;
     currentPlacement?: string | null;
     size?: number;
+    cameraFov?: number;
     isContainerResizing?: boolean;
+    onCameraChange?: (azimuth: number, polar: number, distance: number) => void;
   }
 
   let {
@@ -27,7 +30,9 @@
     selectedCategory = null,
     currentPlacement = null,
     size,
+    cameraFov = 45,
     isContainerResizing = false,
+    onCameraChange,
   }: Props = $props();
 
   // --- Constants (ported from tattoo-tide) ---
@@ -52,13 +57,40 @@
   const NO_PAIN_COLOR = new THREE.Color('#9ca3af');
   const EDIT_MODE_COLOR = new THREE.Color('#60a5fa');
 
+  const LOAD_TIMEOUT_MS = 8000;
+
   let isModelLoaded = $state(false);
+  let loadError = $state(false);
   let initialVisibilityFactor = $state(0);
   let fadeInTimer: ReturnType<typeof setTimeout> | null = null;
+  let loadTimeoutTimer: ReturnType<typeof setTimeout> | null = null;
+
+  // Start load timeout whenever modelUrl changes
+  $effect(() => {
+    if (loadTimeoutTimer) {
+      clearTimeout(loadTimeoutTimer);
+      loadTimeoutTimer = null;
+    }
+    if (modelUrl && !isModelLoaded && !loadError) {
+      loadTimeoutTimer = setTimeout(() => {
+        if (!isModelLoaded) {
+          loadError = true;
+        }
+      }, LOAD_TIMEOUT_MS);
+    }
+    return () => {
+      if (loadTimeoutTimer) clearTimeout(loadTimeoutTimer);
+    };
+  });
+
+  // Default startup camera — centers on upper abdomen / lower torso area
+  // Derived from the "Upper Abdomen" mapping: position [0, -0.56, 0.13], azimuth 0, polar π/2, distance 1.1
+  const STARTUP_CAMERA_POSITION: [number, number, number] = [0, -0.56, 1.23];
+  const STARTUP_CAMERA_TARGET: [number, number, number] = [0, -0.56, 0.13];
 
   // Camera animation state for coordinating with OrbitControls
   let isCameraAnimating = $state(false);
-  let controlsTarget = $state<[number, number, number]>([0, 0.5, 0]);
+  let controlsTarget = $state<[number, number, number]>(STARTUP_CAMERA_TARGET);
 
   function handleAnimatingChange(animating: boolean, target?: [number, number, number]) {
     isCameraAnimating = animating;
@@ -66,6 +98,17 @@
       controlsTarget = target;
     }
   }
+
+  // In editMode, sync OrbitControls target ONLY when placement changes
+  // (not on every slider drag — that makes the camera follow the sphere, hiding movement)
+  let lastPlacementKey = '';
+  $effect(() => {
+    const key = `${selectedCategory}_${currentPlacement}`;
+    if (editMode && spherePosition && key !== lastPlacementKey) {
+      lastPlacementKey = key;
+      controlsTarget = [...spherePosition];
+    }
+  });
 
   // --- Initial visibility fade-in (ported from tattoo-tide) ---
   $effect(() => {
@@ -135,13 +178,35 @@
   );
 
   function handleModelLoad(model: THREE.Group) {
+    if (loadTimeoutTimer) {
+      clearTimeout(loadTimeoutTimer);
+      loadTimeoutTimer = null;
+    }
+    loadError = false;
     isModelLoaded = true;
   }
+
+  function handleModelError(error: unknown) {
+    if (loadTimeoutTimer) {
+      clearTimeout(loadTimeoutTimer);
+      loadTimeoutTimer = null;
+    }
+    loadError = true;
+  }
+
+  // Cleanup on unmount
+  onDestroy(() => {
+    if (fadeInTimer) clearTimeout(fadeInTimer);
+    if (loadTimeoutTimer) clearTimeout(loadTimeoutTimer);
+    // Dispose pain color THREE.Color instances
+    // (THREE.Color has no dispose, but clearing references helps GC)
+    isModelLoaded = false;
+  });
 </script>
 
-{#if modelUrl}
-  <SceneSetup {editMode} isAnimating={isCameraAnimating} {controlsTarget} {isContainerResizing}>
-    <HumanModel {modelUrl} {isColor} onLoad={handleModelLoad} />
+{#if modelUrl && !loadError}
+  <SceneSetup {editMode} isAnimating={isCameraAnimating} {controlsTarget} cameraPosition={STARTUP_CAMERA_POSITION} {cameraFov} {isContainerResizing} {onCameraChange}>
+    <HumanModel {modelUrl} {isColor} onLoad={handleModelLoad} onError={handleModelError} />
 
     <!-- Camera animation (ported from tattoo-tide useCameraAnimation) -->
     <CameraAnimator
@@ -164,4 +229,10 @@
       />
     {/if}
   </SceneSetup>
+{:else if modelUrl && loadError}
+  <div
+    style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: #1f2937; border-radius: 8px; color: #9ca3af; font-size: 14px;"
+  >
+    3D Preview unavailable
+  </div>
 {/if}

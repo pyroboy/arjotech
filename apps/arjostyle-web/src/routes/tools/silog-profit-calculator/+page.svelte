@@ -285,10 +285,11 @@
 
         <!-- Selling Price -->
         <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg p-6">
-          <label class="block text-white font-semibold text-lg mb-4">Selling Price</label>
+          <label for="selling-price" class="block text-white font-semibold text-lg mb-4">Selling Price</label>
           <div class="flex gap-4 items-end">
             <div class="flex-1">
               <input
+                id="selling-price"
                 type="number"
                 bind:value={sellingPrice}
                 step="5"
@@ -355,13 +356,14 @@
         <div>
           <label class="block text-zinc-400 text-sm uppercase font-semibold tracking-wider mb-2">
             Servings/Day
-          </label>
+          
           <input
             type="number"
             bind:value={servingsPerDay}
             min="1"
             class="w-full px-4 py-2 bg-zinc-700/50 border border-zinc-600 rounded-lg text-white focus:outline-none focus:border-orange-500"
           />
+</label>
         </div>
       </div>
     </div>
@@ -373,7 +375,7 @@
         <div>
           <label class="block text-zinc-400 text-sm uppercase font-semibold tracking-wider mb-2">
             Rent
-          </label>
+          
           <input
             type="number"
             bind:value={monthlyRent}
@@ -381,11 +383,12 @@
             step="500"
             class="w-full px-4 py-2 bg-zinc-700/50 border border-zinc-600 rounded-lg text-white focus:outline-none focus:border-orange-500"
           />
+</label>
         </div>
         <div>
           <label class="block text-zinc-400 text-sm uppercase font-semibold tracking-wider mb-2">
             Utilities
-          </label>
+          
           <input
             type="number"
             bind:value={monthlyUtilities}
@@ -393,11 +396,12 @@
             step="500"
             class="w-full px-4 py-2 bg-zinc-700/50 border border-zinc-600 rounded-lg text-white focus:outline-none focus:border-orange-500"
           />
+</label>
         </div>
         <div>
           <label class="block text-zinc-400 text-sm uppercase font-semibold tracking-wider mb-2">
             Labor
-          </label>
+          
           <input
             type="number"
             bind:value={monthlyLabor}
@@ -405,11 +409,12 @@
             step="500"
             class="w-full px-4 py-2 bg-zinc-700/50 border border-zinc-600 rounded-lg text-white focus:outline-none focus:border-orange-500"
           />
+</label>
         </div>
         <div>
           <label class="block text-zinc-400 text-sm uppercase font-semibold tracking-wider mb-2">
             Misc
-          </label>
+          
           <input
             type="number"
             bind:value={monthlyMisc}
@@ -417,11 +422,12 @@
             step="500"
             class="w-full px-4 py-2 bg-zinc-700/50 border border-zinc-600 rounded-lg text-white focus:outline-none focus:border-orange-500"
           />
+</label>
         </div>
         <div>
-          <label class="block text-zinc-400 text-sm uppercase font-semibold tracking-wider mb-2">
+          <span class="block text-zinc-400 text-sm uppercase font-semibold tracking-wider mb-2">
             Total
-          </label>
+          </span>
           <div class="px-4 py-2 bg-zinc-700/20 border border-zinc-600 rounded-lg text-white font-semibold">
             {formatPrice(monthlyExpenses)}
           </div>

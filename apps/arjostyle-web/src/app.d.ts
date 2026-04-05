@@ -5,6 +5,7 @@ declare global {
     interface Platform {
       env: {
         ARJOSTYLE_BUCKET: R2Bucket;
+        ARJOSTYLE_KV: KVNamespace;
         DATABASE_URL?: string;
       };
       context: {

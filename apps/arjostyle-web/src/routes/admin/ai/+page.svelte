@@ -185,13 +185,13 @@ Current context:
   <title>AI Prompt Editor — Admin</title>
 </svelte:head>
 
-<div class="min-h-screen bg-gradient-to-br from-surface-900 to-surface-800 p-8">
+<div class="min-h-screen bg-gradient-to-br from-surface-900 to-surface-800 p-4 sm:p-8">
   <!-- Header -->
   <div class="mb-8">
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-3 mb-2">
-        <Sparkles class="w-8 h-8 text-ink-500" />
-        <h1 class="text-4xl font-bold text-white">AI Prompt Editor</h1>
+        <Sparkles class="w-6 h-6 sm:w-8 sm:h-8 text-ink-500" />
+        <h1 class="text-2xl sm:text-4xl font-bold text-white">AI Prompt Editor</h1>
       </div>
     </div>
     <p class="text-zinc-400 mb-6">Manage prompts for the tattoo placement AI and quotation generator</p>
@@ -203,19 +203,19 @@ Current context:
   </div>
 
   <!-- Tab Navigation -->
-  <div class="mb-8 border-b border-zinc-800 bg-surface-800 rounded-t-xl">
-    <div class="flex gap-0">
+  <div class="mb-6 sm:mb-8 border-b border-zinc-800 bg-surface-800 rounded-t-xl overflow-x-auto">
+    <div class="flex gap-0 min-w-max">
       {#each tabs as tab}
         <button
           onclick={() => {
             activeTab = tab.id;
             hasUnsavedChanges = false;
           }}
-          class="flex items-center gap-2 px-6 py-4 text-sm font-medium border-b-2 transition-all {activeTab === tab.id
+          class="flex items-center gap-2 px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-medium border-b-2 transition-all whitespace-nowrap {activeTab === tab.id
             ? 'border-ink-500 text-white'
             : 'border-transparent text-zinc-500 hover:text-zinc-300'}"
         >
-          <svelte:component this={tab.icon} class="w-4 h-4" />
+          <tab.icon class="w-4 h-4" />
           {tab.label}
         </button>
       {/each}
@@ -223,12 +223,12 @@ Current context:
   </div>
 
   <!-- Content Area -->
-  <div class="grid grid-cols-[1fr_280px] gap-6">
+  <div class="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-6">
     <!-- Left: Editor -->
     <div class="space-y-4">
       <!-- Prompt Name Input -->
       <div>
-        <label class="block text-xs font-semibold text-zinc-400 uppercase mb-2">Prompt Name</label>
+        <label class="block text-xs font-semibold text-zinc-400 uppercase mb-2">Prompt Name
         <input
           type="text"
           value={currentPrompt.name}
@@ -236,11 +236,12 @@ Current context:
           class="w-full bg-surface-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-ink-500 transition-colors"
           placeholder="Enter prompt name..."
         />
+</label>
       </div>
 
       <!-- Prompt Description Input -->
       <div>
-        <label class="block text-xs font-semibold text-zinc-400 uppercase mb-2">Description</label>
+        <label class="block text-xs font-semibold text-zinc-400 uppercase mb-2">Description
         <input
           type="text"
           value={currentPrompt.description}
@@ -248,11 +249,12 @@ Current context:
           class="w-full bg-surface-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-ink-500 transition-colors"
           placeholder="Brief description of this prompt's purpose..."
         />
+</label>
       </div>
 
       <!-- Large Textarea for Prompt Content -->
       <div>
-        <label class="block text-xs font-semibold text-zinc-400 uppercase mb-2">Prompt Content</label>
+        <label class="block text-xs font-semibold text-zinc-400 uppercase mb-2">Prompt Content
         <textarea
           value={currentPrompt.content}
           oninput={(e) => updatePromptContent(e.currentTarget.value)}
@@ -260,6 +262,7 @@ Current context:
           placeholder="Enter your prompt here..."
           spellcheck="false"
         ></textarea>
+</label>
 
         <!-- Character and Line Count -->
         <div class="flex justify-between text-xs text-zinc-600 mt-2 px-1">
@@ -269,11 +272,11 @@ Current context:
       </div>
 
       <!-- Action Buttons -->
-      <div class="flex gap-3 pt-4">
+      <div class="flex flex-wrap gap-3 pt-4">
         <button
           onclick={savePrompt}
           disabled={!hasUnsavedChanges || saveStatus === 'saving'}
-          class="flex-1 px-6 py-3 rounded-lg font-medium transition-all flex items-center justify-center gap-2 {saveStatus === 'saved'
+          class="w-full sm:w-auto sm:flex-1 px-6 py-3 rounded-lg font-medium transition-all flex items-center justify-center gap-2 {saveStatus === 'saved'
             ? 'bg-green-500/10 hover:bg-green-500/20 border border-green-500/30 hover:border-green-500/50 text-green-400'
             : 'bg-ink-500/10 hover:bg-ink-500/20 border border-ink-500/30 hover:border-ink-500/50 text-ink-400 disabled:opacity-50 disabled:cursor-not-allowed'}"
         >
@@ -321,9 +324,9 @@ Current context:
     </div>
 
     <!-- Right: Variables Panel -->
-    <div class="bg-surface-800 border border-zinc-800 rounded-xl p-4 h-fit sticky top-8 space-y-4">
+    <div class="bg-surface-800 border border-zinc-800 rounded-xl p-4 h-fit lg:sticky lg:top-8 space-y-4">
       <div>
-        <h3 class="font-semibold text-white text-sm mb-1">Template Variables</h3>
+        <h2 class="font-semibold text-white text-sm mb-1">Template Variables</h2>
         <p class="text-xs text-zinc-500">Click to insert at cursor position</p>
       </div>
 

@@ -46,6 +46,15 @@
     },
     "clean": {
       "cache": false
+    },
+    "test:unit": {
+      "outputs": [],
+      "inputs": [
+        "src/**",
+        "vite.config.*",
+        "tsconfig*.json",
+        "package.json"
+      ]
     }
   }
 }

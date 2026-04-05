@@ -103,15 +103,6 @@ export const defaultBodyPartMappings: BodyPartMappings = {
       placementSizeLimits: { min: 1, max: 6, multiplier: 1.2 },
       placementPainInfo: { level: 6, reason: "Spine area can be sensitive." }
     },
-    Throat: {
-      position: [0, 0.07, 0.06],
-      scale: 0.055,
-      cameraAzimuth: 0,
-      cameraPolar: 1.5707963267948966,
-      cameraDistance: 0.5,
-      placementSizeLimits: { min: 1, max: 4, multiplier: 1.5 },
-      placementPainInfo: { level: 8, reason: "Very sensitive area." }
-    }
   },
   "Upper Torso": {
     Chest: {
@@ -159,6 +150,24 @@ export const defaultBodyPartMappings: BodyPartMappings = {
       placementSizeLimits: { min: 3, max: 25, multiplier: 1.1 },
       placementPainInfo: { level: 5, reason: "Generally less sensitive, more muscle/fat cushion." }
     },
+    "Shoulder Top": {
+      position: [-0.18, -0.1, -0.02],
+      scale: 0.1,
+      cameraAzimuth: -0.9,
+      cameraPolar: 0.8,
+      cameraDistance: 0.9,
+      placementSizeLimits: { min: 2, max: 10, multiplier: 1.2 },
+      placementPainInfo: { level: 6, reason: "Mix of muscle and bone, moderate sensitivity." }
+    },
+    Spine: {
+      position: [0, -0.3, -0.14],
+      scale: 0.15,
+      cameraAzimuth: 3.141592653589793,
+      cameraPolar: 1.5707963267948966,
+      cameraDistance: 1.1,
+      placementSizeLimits: { min: 2, max: 20, multiplier: 1.3 },
+      placementPainInfo: { level: 8, reason: "Directly over vertebrae, thin skin, nerve-rich area." }
+    },
     "Shoulder Blade": {
       position: [-0.16, -0.23, -0.11],
       scale: 0.1,
@@ -176,24 +185,6 @@ export const defaultBodyPartMappings: BodyPartMappings = {
       cameraDistance: 0.7,
       placementSizeLimits: { min: 1, max: 5, multiplier: 1.7 },
       placementPainInfo: { level: 9, reason: "Extremely sensitive lymph node area, thin skin, high friction." }
-    },
-    Bicep: {
-      position: [-0.29, -0.47, 0.05],
-      scale: 0.1,
-      cameraAzimuth: -0.5235987755982988,
-      cameraPolar: 1.5707963267948966,
-      cameraDistance: 0.9,
-      placementSizeLimits: { min: 3, max: 12, multiplier: 1.0 },
-      placementPainInfo: { level: 4 }
-    },
-    Tricep: {
-      position: [-0.29, -0.47, -0.08],
-      scale: 0.1,
-      cameraAzimuth: -2.356194490192345,
-      cameraPolar: 1.5707963267948966,
-      cameraDistance: 0.9,
-      placementSizeLimits: { min: 3, max: 12, multiplier: 1.0 },
-      placementPainInfo: { level: 4 }
     }
   },
   "Lower Torso": {
@@ -262,6 +253,24 @@ export const defaultBodyPartMappings: BodyPartMappings = {
     }
   },
   Arms: {
+    Bicep: {
+      position: [-0.29, -0.47, 0.05],
+      scale: 0.1,
+      cameraAzimuth: -0.5235987755982988,
+      cameraPolar: 1.5707963267948966,
+      cameraDistance: 0.9,
+      placementSizeLimits: { min: 3, max: 12, multiplier: 1.0 },
+      placementPainInfo: { level: 4 }
+    },
+    Tricep: {
+      position: [-0.29, -0.47, -0.08],
+      scale: 0.1,
+      cameraAzimuth: -2.356194490192345,
+      cameraPolar: 1.5707963267948966,
+      cameraDistance: 0.9,
+      placementSizeLimits: { min: 3, max: 12, multiplier: 1.0 },
+      placementPainInfo: { level: 4 }
+    },
     Deltoid: {
       position: [-0.2434161602174525, -0.3911198297304921, -0.07930097186963092],
       scale: 0.15000000000000002,
@@ -398,6 +407,15 @@ export const defaultBodyPartMappings: BodyPartMappings = {
       cameraDistance: 0.5999999999999994,
       placementSizeLimits: { min: 0.5, max: 1.5, multiplier: 1.9 },
       placementPainInfo: { level: 9, reason: "Thin skin, constant friction." }
+    },
+    Palm: {
+      position: [-0.55, -0.88, -0.02],
+      scale: 0.06,
+      cameraAzimuth: 0.8,
+      cameraPolar: 1.4,
+      cameraDistance: 0.55,
+      placementSizeLimits: { min: 1, max: 5, multiplier: 1.8 },
+      placementPainInfo: { level: 9, reason: "Extremely sensitive, many nerve endings, ink fades faster due to skin renewal." }
     },
     Thumb: {
       position: [-0.5177433582931585, -0.9044537901323213, 0.09102677197661262],
@@ -584,51 +602,4 @@ export const defaultBodyPartMappings: BodyPartMappings = {
       placementPainInfo: { level: 9, reason: "Very thin skin, bones, many nerve endings." }
     }
   },
-  "Intimate Areas": {
-    "Groin Crease": {
-      position: [-0.09000000000000001, -0.9865134885629296, 0.06],
-      scale: 0.06,
-      cameraAzimuth: -0.10207375071633176,
-      cameraPolar: 1.5,
-      cameraDistance: 0.8080332409972304,
-      placementSizeLimits: { min: 1, max: 4, multiplier: 1.9 },
-      placementPainInfo: { level: 10, reason: "Extremely sensitive, thin skin, high friction, nerve endings." }
-    },
-    Underbutt: {
-      position: [0.14, -1.0393373679351727, -0.16],
-      scale: 0.1,
-      cameraAzimuth: 2.3170808268966496,
-      cameraPolar: 1.4245783144059394,
-      cameraDistance: 1.2000000000000028,
-      placementSizeLimits: { min: 2, max: 8, multiplier: 1.5 },
-      placementPainInfo: { level: 8, reason: "Sensitive crease area." }
-    },
-    "Upper Inner Thigh": {
-      position: [-0.10900717102324765, -0.996127943788147, 0.052559975475656225],
-      scale: 0.09202687455123602,
-      cameraAzimuth: -0.084692039054511,
-      cameraPolar: 1.3381441325843992,
-      cameraDistance: 0.8000000000000083,
-      placementSizeLimits: { min: 2, max: 8, multiplier: 1.6 },
-      placementPainInfo: { level: 8, reason: "Very sensitive skin, high friction." }
-    },
-    Tailbone: {
-      position: [0, -0.8203343932711049, -0.1],
-      scale: 0.07,
-      cameraAzimuth: 2.7732206516140376,
-      cameraPolar: 1.150019926301074,
-      cameraDistance: 0.799999999999992,
-      placementSizeLimits: { min: 1, max: 5, multiplier: 1.6 },
-      placementPainInfo: { level: 9, reason: "Directly over bone, very sensitive." }
-    },
-    Buttock: {
-      position: [0.10591034977946424, -0.9408657298184429, -0.15999999999999998],
-      scale: 0.14999999999999997,
-      cameraAzimuth: 2.7206187580163386,
-      cameraPolar: 1.3752776151519825,
-      cameraDistance: 0.9999999999999994,
-      placementSizeLimits: { min: 4, max: 15, multiplier: 1.1 },
-      placementPainInfo: { level: 6, reason: "Mostly fatty tissue, pain varies." }
-    }
-  }
 };

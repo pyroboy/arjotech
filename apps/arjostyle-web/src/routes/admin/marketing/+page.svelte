@@ -74,25 +74,25 @@
   }
 </script>
 
-<div class="p-8 max-w-7xl mx-auto">
+<div class="p-4 sm:p-8 max-w-7xl mx-auto">
   <!-- Header -->
-  <div class="flex items-center justify-between mb-8">
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8">
     <div>
-      <h1 class="text-2xl font-bold text-white">Marketing Pipeline</h1>
-      <p class="text-zinc-500 text-sm mt-1">AI-powered content generation & scheduling across all businesses</p>
+      <h1 class="text-xl sm:text-2xl font-bold text-white">Marketing Pipeline</h1>
+      <p class="text-zinc-500 text-xs sm:text-sm mt-1">AI-powered content generation & scheduling across all businesses</p>
     </div>
-    <div class="flex gap-3">
-      <a href="/admin/marketing/generate" class="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg text-sm font-medium transition-colors">
+    <div class="flex gap-2 sm:gap-3">
+      <a href="/admin/marketing/generate" class="px-3 sm:px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg text-xs sm:text-sm font-medium transition-colors">
         ✨ Generate Content
       </a>
-      <a href="/admin/marketing/calendar" class="px-4 py-2 bg-zinc-700 hover:bg-zinc-600 text-white rounded-lg text-sm font-medium transition-colors">
+      <a href="/admin/marketing/calendar" class="px-3 sm:px-4 py-2 bg-zinc-700 hover:bg-zinc-600 text-white rounded-lg text-xs sm:text-sm font-medium transition-colors">
         📅 Calendar
       </a>
     </div>
   </div>
 
   <!-- Business Selector -->
-  <div class="flex gap-2 mb-8 flex-wrap">
+  <div class="flex gap-2 mb-6 sm:mb-8 flex-wrap">
     {#each businesses as biz}
       <button
         onclick={() => selectedBusiness = biz.id}
@@ -105,7 +105,7 @@
   </div>
 
   <!-- Stats Bar -->
-  <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8">
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 mb-6 sm:mb-8">
     <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg p-4">
       <p class="text-zinc-500 text-xs uppercase tracking-wider">Total</p>
       <p class="text-2xl font-bold text-white mt-1">{stats.total}</p>
@@ -129,8 +129,8 @@
   </div>
 
   <!-- Pipeline Funnel -->
-  <h2 class="text-lg font-semibold text-white mb-4">Pipeline Stages</h2>
-  <div class="grid grid-cols-1 md:grid-cols-5 gap-3 mb-8">
+  <h2 class="text-base sm:text-lg font-semibold text-white mb-4">Pipeline Stages</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 mb-6 sm:mb-8">
     {#each stageContent as stage}
       <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg overflow-hidden">
         <div class="p-4 border-b border-zinc-700/50">
@@ -178,7 +178,7 @@
   </div>
 
   <!-- Recent Content Table -->
-  <h2 class="text-lg font-semibold text-white mb-4">All Content</h2>
+  <h2 class="text-base sm:text-lg font-semibold text-white mb-4">All Content</h2>
   {#if loading}
     <div class="flex items-center justify-center py-12">
       <div class="text-zinc-500 text-sm">Loading...</div>

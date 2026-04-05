@@ -161,19 +161,20 @@
             <div>
               <label class="block text-sm font-medium text-white mb-2">
                 Property Purchase Price (₱)
-              </label>
+              
               <input
                 type="number"
                 bind:value={propertyPrice}
                 class="w-full px-4 py-2 bg-surface-800 border border-zinc-600 rounded-lg text-white focus:outline-none focus:border-orange-500 transition"
               />
+</label>
               <p class="text-xs text-zinc-500 mt-1">{formatPeso(propertyPrice)}</p>
             </div>
 
             <div>
               <label class="block text-sm font-medium text-white mb-2">
                 Number of Rooms/Units
-              </label>
+              
               <input
                 type="number"
                 min="1"
@@ -181,6 +182,7 @@
                 onchange={() => updateNumRooms(numRooms)}
                 class="w-full px-4 py-2 bg-surface-800 border border-zinc-600 rounded-lg text-white focus:outline-none focus:border-orange-500 transition"
               />
+</label>
             </div>
           </div>
         </div>
@@ -203,12 +205,13 @@
             <div>
               <label class="block text-sm font-medium text-white mb-2">
                 Monthly Rent per Room (₱)
-              </label>
+              
               <input
                 type="number"
                 bind:value={monthlyRentUniform}
                 class="w-full px-4 py-2 bg-surface-800 border border-zinc-600 rounded-lg text-white focus:outline-none focus:border-orange-500 transition"
               />
+</label>
               <p class="text-xs text-zinc-500 mt-1">
                 {numRooms} rooms × {formatPeso(monthlyRentUniform)} = {formatPeso(grossMonthlyIncome)}/month
               </p>
@@ -219,12 +222,13 @@
                 <div>
                   <label class="block text-sm font-medium text-white mb-1">
                     Room {index + 1} Monthly Rent (₱)
-                  </label>
+                  
                   <input
                     type="number"
                     bind:value={room.monthlyRent}
                     class="w-full px-4 py-2 bg-surface-800 border border-zinc-600 rounded-lg text-white focus:outline-none focus:border-orange-500 transition"
                   />
+</label>
                 </div>
               {/each}
             </div>
@@ -238,56 +242,61 @@
             <div>
               <label class="block text-sm font-medium text-white mb-2">
                 Utilities (₱)
-              </label>
+              
               <input
                 type="number"
                 bind:value={expenses.utilities}
                 class="w-full px-4 py-2 bg-surface-800 border border-zinc-600 rounded-lg text-white focus:outline-none focus:border-orange-500 transition"
               />
+</label>
             </div>
 
             <div>
               <label class="block text-sm font-medium text-white mb-2">
                 Maintenance (₱)
-              </label>
+              
               <input
                 type="number"
                 bind:value={expenses.maintenance}
                 class="w-full px-4 py-2 bg-surface-800 border border-zinc-600 rounded-lg text-white focus:outline-none focus:border-orange-500 transition"
               />
+</label>
             </div>
 
             <div>
               <label class="block text-sm font-medium text-white mb-2">
                 Property Tax/Month (₱)
-              </label>
+              
               <input
                 type="number"
                 bind:value={expenses.propertyTax}
                 class="w-full px-4 py-2 bg-surface-800 border border-zinc-600 rounded-lg text-white focus:outline-none focus:border-orange-500 transition"
               />
+</label>
             </div>
 
             <div>
               <label class="block text-sm font-medium text-white mb-2">
                 Insurance (₱)
-              </label>
+              
               <input
                 type="number"
                 bind:value={expenses.insurance}
                 class="w-full px-4 py-2 bg-surface-800 border border-zinc-600 rounded-lg text-white focus:outline-none focus:border-orange-500 transition"
               />
+</label>
             </div>
 
             <div>
               <label class="block text-sm font-medium text-white mb-2">
                 Miscellaneous (₱)
-              </label>
+              
               <input
                 type="number"
                 bind:value={expenses.misc}
                 class="w-full px-4 py-2 bg-surface-800 border border-zinc-600 rounded-lg text-white focus:outline-none focus:border-orange-500 transition"
               />
+</label>
             </div>
 
             <div class="pt-2 border-t border-zinc-700">
@@ -306,7 +315,7 @@
             <div>
               <label class="block text-sm font-medium text-white mb-2">
                 Occupancy Rate: {occupancyRate}%
-              </label>
+              
               <input
                 type="range"
                 min="0"
@@ -314,6 +323,7 @@
                 bind:value={occupancyRate}
                 class="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer"
               />
+</label>
               <p class="text-xs text-zinc-500 mt-1">
                 Expected occupancy percentage per month
               </p>
@@ -322,7 +332,7 @@
             <div>
               <label class="block text-sm font-medium text-white mb-2">
                 Vacancy Months per Year
-              </label>
+              
               <input
                 type="number"
                 min="0"
@@ -330,6 +340,7 @@
                 bind:value={vacancyMonths}
                 class="w-full px-4 py-2 bg-surface-800 border border-zinc-600 rounded-lg text-white focus:outline-none focus:border-orange-500 transition"
               />
+</label>
               <p class="text-xs text-zinc-500 mt-1">
                 Months with no rental income ({occupiedMonths} months operating)
               </p>

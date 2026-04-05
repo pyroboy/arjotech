@@ -3,6 +3,24 @@ import type { RequestHandler } from './$types';
 import { getDb } from '$db/index';
 import { leads } from '$db/schema';
 import { desc } from 'drizzle-orm';
+import { z } from 'zod';
+
+const createLeadSchema = z.object({
+  business: z.enum(['silog', 'sweetytreats', 'foodhub', 'dorm', 'arjostyle'], {
+    required_error: 'Business is required',
+  }),
+  status: z.enum(['new', 'contacted', 'responded', 'qualified', 'proposal_sent', 'negotiating', 'won', 'lost', 'dormant']).optional().default('new'),
+  source: z.enum(['facebook', 'instagram', 'tiktok', 'google', 'walk_in', 'referral', 'dm', 'email', 'phone', 'website', 'other']).optional().default('other'),
+  name: z.string().min(1, 'Name is required'),
+  phone: z.string().optional(),
+  email: z.string().email().optional().or(z.literal('')).or(z.literal(undefined)),
+  facebook: z.string().optional(),
+  instagram: z.string().optional(),
+  interest: z.string().optional(),
+  estimatedValue: z.number().optional(),
+  notes: z.string().optional(),
+  nextFollowUpAt: z.string().optional(),
+});
 
 export const GET: RequestHandler = async ({ platform, url }) => {
   try {
@@ -25,22 +43,37 @@ export const GET: RequestHandler = async ({ platform, url }) => {
 
 export const POST: RequestHandler = async ({ request, platform }) => {
   try {
+    let body: unknown;
+    try {
+      body = await request.json();
+    } catch {
+      return json({ error: 'Invalid JSON in request body' }, { status: 400 });
+    }
+
+    const parsed = createLeadSchema.safeParse(body);
+    if (!parsed.success) {
+      return json(
+        { error: 'Validation failed', details: parsed.error.issues.map(i => i.message).join(', ') },
+        { status: 400 }
+      );
+    }
+
+    const data = parsed.data;
     const db = getDb(platform?.env ?? {});
-    const body = await request.json();
 
     const [created] = await db.insert(leads).values({
-      business: body.business,
-      status: body.status || 'new',
-      source: body.source || 'other',
-      name: body.name,
-      phone: body.phone,
-      email: body.email,
-      facebook: body.facebook,
-      instagram: body.instagram,
-      interest: body.interest,
-      estimatedValue: body.estimatedValue,
-      notes: body.notes,
-      nextFollowUpAt: body.nextFollowUpAt ? new Date(body.nextFollowUpAt) : null,
+      business: data.business,
+      status: data.status,
+      source: data.source,
+      name: data.name,
+      phone: data.phone,
+      email: data.email || undefined,
+      facebook: data.facebook,
+      instagram: data.instagram,
+      interest: data.interest,
+      estimatedValue: data.estimatedValue,
+      notes: data.notes,
+      nextFollowUpAt: data.nextFollowUpAt ? new Date(data.nextFollowUpAt) : null,
     }).returning();
 
     return json(created, { status: 201 });

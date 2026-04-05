@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	let input = '{}';
-	let output = '';
-	let error = '';
-	let indentSize: 2 | 4 = 2;
-	let useSpaces = true;
-	let showStats = false;
+	let input = $state('{}');
+	let output = $state('');
+	let error = $state('');
+	let indentSize: 2 | 4 = $state(2);
+	let useSpaces = $state(true);
+	let showStats = $state(false);
 
 	interface JsonStats {
 		characters: number;
@@ -15,7 +15,7 @@
 		depth: number;
 	}
 
-	let stats: JsonStats | null = null;
+	let stats: JsonStats | null = $state(null);
 
 	function tryParseJSON(str: string): any {
 		try {
@@ -195,7 +195,7 @@
 				<div class="flex items-center justify-between">
 					<h2 class="text-lg font-semibold text-white">Input</h2>
 					<button
-						on:click={pasteFromClipboard}
+						onclick={pasteFromClipboard}
 						class="text-xs px-2 py-1 rounded bg-zinc-800 border border-zinc-700/50 text-zinc-400 hover:text-zinc-300 hover:bg-zinc-700 transition-colors"
 					>
 						Paste from Clipboard
@@ -206,7 +206,7 @@
 					placeholder={'{"key": "value"}'}
 					rows="20"
 					class="w-full rounded-lg bg-zinc-900 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-600 focus:border-orange-500 focus:outline-none font-mono text-sm"
-				/>
+				></textarea>
 			</div>
 
 			<!-- Output Section -->
@@ -286,25 +286,25 @@
 			<!-- Action Buttons -->
 			<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
 				<button
-					on:click={format}
+					onclick={format}
 					class="rounded-lg bg-orange-500 px-4 py-2 font-medium text-white hover:bg-orange-600 transition-colors"
 				>
 					Format
 				</button>
 				<button
-					on:click={minify}
+					onclick={minify}
 					class="rounded-lg bg-orange-500 px-4 py-2 font-medium text-white hover:bg-orange-600 transition-colors"
 				>
 					Minify
 				</button>
 				<button
-					on:click={validate}
+					onclick={validate}
 					class="rounded-lg bg-blue-600 px-4 py-2 font-medium text-white hover:bg-blue-700 transition-colors"
 				>
 					Validate
 				</button>
 				<button
-					on:click={clear}
+					onclick={clear}
 					class="rounded-lg bg-red-600 px-4 py-2 font-medium text-white hover:bg-red-700 transition-colors"
 				>
 					Clear
@@ -314,7 +314,7 @@
 			<!-- Copy Button -->
 			{#if output && output !== 'Valid JSON!'}
 				<button
-					on:click={copy}
+					onclick={copy}
 					class="w-full rounded-lg bg-green-600 px-4 py-2 font-medium text-white hover:bg-green-700 transition-colors"
 				>
 					Copy Output

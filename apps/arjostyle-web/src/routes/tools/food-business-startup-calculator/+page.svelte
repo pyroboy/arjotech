@@ -270,7 +270,7 @@
             <div>
               <label class="block text-zinc-400 text-sm uppercase font-semibold tracking-wider mb-2">
                 Rent/Space
-              </label>
+              
               <input
                 type="number"
                 bind:value={monthlyRent}
@@ -278,11 +278,12 @@
                 step="500"
                 class="w-full px-4 py-2 bg-zinc-700/50 border border-zinc-600 rounded-lg text-white focus:outline-none focus:border-orange-500"
               />
+</label>
             </div>
             <div>
               <label class="block text-zinc-400 text-sm uppercase font-semibold tracking-wider mb-2">
                 Utilities
-              </label>
+              
               <input
                 type="number"
                 bind:value={monthlyUtilities}
@@ -290,11 +291,12 @@
                 step="500"
                 class="w-full px-4 py-2 bg-zinc-700/50 border border-zinc-600 rounded-lg text-white focus:outline-none focus:border-orange-500"
               />
+</label>
             </div>
             <div>
               <label class="block text-zinc-400 text-sm uppercase font-semibold tracking-wider mb-2">
                 Labor
-              </label>
+              
               <input
                 type="number"
                 bind:value={monthlyLabor}
@@ -302,11 +304,12 @@
                 step="500"
                 class="w-full px-4 py-2 bg-zinc-700/50 border border-zinc-600 rounded-lg text-white focus:outline-none focus:border-orange-500"
               />
+</label>
             </div>
             <div>
               <label class="block text-zinc-400 text-sm uppercase font-semibold tracking-wider mb-2">
                 Ingredients
-              </label>
+              
               <input
                 type="number"
                 bind:value={monthlyIngredients}
@@ -314,11 +317,12 @@
                 step="500"
                 class="w-full px-4 py-2 bg-zinc-700/50 border border-zinc-600 rounded-lg text-white focus:outline-none focus:border-orange-500"
               />
+</label>
             </div>
             <div>
               <label class="block text-zinc-400 text-sm uppercase font-semibold tracking-wider mb-2">
                 Packaging
-              </label>
+              
               <input
                 type="number"
                 bind:value={monthlyPackaging}
@@ -326,11 +330,12 @@
                 step="500"
                 class="w-full px-4 py-2 bg-zinc-700/50 border border-zinc-600 rounded-lg text-white focus:outline-none focus:border-orange-500"
               />
+</label>
             </div>
             <div>
               <label class="block text-zinc-400 text-sm uppercase font-semibold tracking-wider mb-2">
                 Misc
-              </label>
+              
               <input
                 type="number"
                 bind:value={monthlyMisc}
@@ -338,6 +343,7 @@
                 step="500"
                 class="w-full px-4 py-2 bg-zinc-700/50 border border-zinc-600 rounded-lg text-white focus:outline-none focus:border-orange-500"
               />
+</label>
             </div>
           </div>
 
@@ -352,7 +358,7 @@
       <div class="space-y-6">
         <!-- Revenue Input -->
         <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg p-6">
-          <label class="block text-white font-semibold text-lg mb-4">Projected Monthly Revenue</label>
+          <label class="block text-white font-semibold text-lg mb-4">Projected Monthly Revenue
           <input
             type="number"
             bind:value={monthlyRevenue}
@@ -360,6 +366,7 @@
             step="5000"
             class="w-full px-4 py-3 bg-zinc-700/50 border border-zinc-600 rounded-lg text-white text-lg focus:outline-none focus:border-orange-500 font-semibold"
           />
+</label>
           <p class="text-zinc-400 text-sm mt-2">{formatPrice(monthlyRevenue)}</p>
         </div>
 

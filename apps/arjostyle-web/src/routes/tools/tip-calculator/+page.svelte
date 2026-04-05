@@ -1,13 +1,13 @@
 <script lang="ts">
 	type RatingType = 'poor' | 'okay' | 'good' | 'great' | 'amazing';
 
-	let billAmount = 0;
-	let tipPercentage = 15;
-	let customTip = '';
-	let numPeople = 1;
-	let serviceRating: RatingType | null = null;
-	let roundingOption: '0' | '5' | '10' | '50' = '0';
-	let kuripotMode = false;
+	let billAmount = $state(0);
+	let tipPercentage = $state(15);
+	let customTip = $state('');
+	let numPeople = $state(1);
+	let serviceRating: RatingType | null = $state(null);
+	let roundingOption: '0' | '5' | '10' | '50' = $state('0');
+	let kuripotMode = $state(false);
 
 	const ratingToTip: Record<RatingType, number> = {
 		poor: 5,
@@ -84,7 +84,7 @@
 			<div class="space-y-6">
 				<!-- Bill Amount -->
 				<div>
-					<label class="block text-sm font-medium text-white mb-2">Bill Amount (₱)</label>
+					<label for="bill-amount" class="block text-sm font-medium text-white mb-2">Bill Amount (₱)</label>
 					<div class="relative">
 						<span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-zinc-400">₱</span>
 						<input
@@ -100,11 +100,11 @@
 
 				<!-- Service Rating -->
 				<div>
-					<label class="block text-sm font-medium text-white mb-3">Service Rating (Optional)</label>
+					<span id="service-rating-label" class="block text-sm font-medium text-white mb-3">Service Rating (Optional)</span>
 					<div class="grid grid-cols-5 gap-2">
 						{#each ['poor', 'okay', 'good', 'great', 'amazing'] as rating}
 							<button
-								on:click={() => handleRatingChange(rating as RatingType)}
+								onclick={() => handleRatingChange(rating as RatingType)}
 								class={`rounded-lg px-3 py-2 text-xs font-medium transition-colors ${
 									serviceRating === rating
 										? 'bg-orange-500 text-white'
@@ -119,11 +119,11 @@
 
 				<!-- Tip Percentage -->
 				<div>
-					<label class="block text-sm font-medium text-white mb-3">Tip Percentage</label>
+					<span id="tip-pct-label" class="block text-sm font-medium text-white mb-3">Tip Percentage</span>
 					<div class="grid grid-cols-4 gap-2 mb-4">
 						{#each [5, 10, 15, 20] as percent}
 							<button
-								on:click={() => {
+								onclick={() => {
 									tipPercentage = percent;
 									customTip = '';
 									serviceRating = null;
@@ -153,11 +153,11 @@
 
 				<!-- Rounding -->
 				<div>
-					<label class="block text-sm font-medium text-white mb-3">Rounding</label>
+					<span id="rounding-label" class="block text-sm font-medium text-white mb-3">Rounding</span>
 					<div class="grid grid-cols-4 gap-2">
 						{#each ['0', '5', '10', '50'] as rounding}
 							<button
-								on:click={() => (roundingOption = rounding as '0' | '5' | '10' | '50')}
+								onclick={() => (roundingOption = rounding as '0' | '5' | '10' | '50')}
 								class={`rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
 									roundingOption === rounding
 										? 'bg-orange-500 text-white'
@@ -172,7 +172,7 @@
 
 				<!-- Number of People -->
 				<div>
-					<label class="block text-sm font-medium text-white mb-2">Split Between (People)</label>
+					<label class="block text-sm font-medium text-white mb-2">Split Between (People)
 					<input
 						type="number"
 						bind:value={numPeople}
@@ -180,6 +180,7 @@
 						max="20"
 						class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
 					/>
+</label>
 				</div>
 
 				<!-- Kuripot Mode -->
@@ -188,7 +189,7 @@
 						type="checkbox"
 						id="kuripot"
 						checked={kuripotMode}
-						on:change={handleKuripotToggle}
+						onchange={handleKuripotToggle}
 						class="cursor-pointer"
 					/>
 					<label for="kuripot" class="text-white text-sm cursor-pointer">
@@ -234,7 +235,7 @@
 
 				<!-- Tipping Guide -->
 				<div class="rounded-lg bg-zinc-800/50 border border-zinc-700/50 p-4">
-					<h3 class="text-sm font-medium text-white mb-3">Philippine Tipping Guide</h3>
+					<h2 class="text-sm font-medium text-white mb-3">Philippine Tipping Guide</h2>
 					<div class="space-y-2 text-xs sm:text-sm text-zinc-400">
 						<p>
 							<strong class="text-white">Restaurants:</strong> 10-15% for good service is standard. Round up for casual dining.
