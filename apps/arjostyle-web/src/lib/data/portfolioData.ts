@@ -109,20 +109,21 @@ Offline-first with RxDB (8 collections: employees, shifts, tasks, inventory, exp
   {
     slug: 'arjostyle-ai',
     title: 'ArjoStyle AI',
-    description: 'AI-powered studio assistant for a tattoo studio — handles client FAQs, qualifies inquiries via chat, auto-responds to Instagram and Facebook DMs, and guides clients through tattoo consultation before they book.',
-    longDescription: `Conversational AI system built specifically for ArjoStyle Tattoo Studio. Handles the full pre-booking client communication pipeline — from first contact to a qualified booking lead.
+    description: 'AI-powered tattoo booking agent — converses with clients on Facebook Messenger, collects tattoo requirements, qualifies leads, and schedules appointments via Google Calendar. Built with SvelteKit, Groq (Llama 3.3 70B), and Inngest.',
+    longDescription: `Conversational AI booking system built for ArjoStyle Tattoo Studio. Automates the full pre-booking client pipeline — from first Messenger message to a qualified, scheduled appointment.
 
 **Features:**
-- **Studio chat assistant** — Embedded chat widget on arjostyle.com. Answers client questions about pricing, styles, aftercare, studio location, and availability. Powered by Claude (Anthropic).
-- **Instagram & Facebook DM auto-responder** — Monitors social media DMs and responds instantly to common inquiries (pricing, availability, style questions). Falls back to the artist for complex or custom requests.
-- **AI tattoo consultation** — Guides clients through describing their idea: style preference, body placement, size, color vs. black & grey, references. Produces a structured brief the artist can act on directly.
-- **Booking pre-qualification** — Identifies whether an inquiry is ready to book or needs more back-and-forth. Routes hot leads directly to the booking form.
-- **Context-aware responses** — Knows the studio's current availability windows, flash designs, pricing tiers, and style specialties. Stays on-brand in tone.
-- **Handoff protocol** — Detects when a client needs a human and hands off gracefully with a full conversation summary for the artist.
+- **Facebook Messenger bot** — Clients message the studio's Facebook page and the AI responds instantly. Collects design concept, placement, size, color vs. black & grey, and reference images — all conversationally.
+- **AI consultation agent** — Powered by Groq (Llama 3.3 70B). Asks the right questions to build a complete tattoo brief the artist can price and act on without any back-and-forth.
+- **Reference image handling** — Clients send photos directly in Messenger; the bot downloads and stores them via Cloudflare R2, linked to the inquiry record.
+- **Admin Kanban dashboard** — All incoming inquiries appear as cards across four columns: Pending → Approved → Completed → Cancelled. One-click approve or reject with price quoting.
+- **Google Calendar integration** — Admins schedule approved sessions directly from the inquiry detail view. Creates Google Calendar events with client info attached.
+- **Async message processing** — Messenger webhooks are handled via Inngest durable functions — no timeouts, automatic retries on failure, full replay history.
+- **CRM** — Full inquiry history per client, chat transcript, reference images, quoted price, and scheduled date all in one view.
 
 **Architecture:**
-Claude API (Anthropic) for language model inference. SvelteKit for the embedded chat widget. Meta Graph API for Instagram and Facebook DM integration. Conversation state persisted in Neon PostgreSQL. Rate limiting and abuse detection built in.`,
-    techStack: ['Claude API', 'SvelteKit', 'TypeScript', 'Neon', 'Meta Graph API', 'Anthropic SDK', 'TailwindCSS'],
+SvelteKit full-stack deployed on Vercel. Groq API for low-latency LLM inference. Inngest for durable async job processing. Neon PostgreSQL + Drizzle ORM for inquiries, users, and chat history. Cloudflare R2 for reference image storage. Better Auth (magic link) for admin access. Meta Graph API v18 for Messenger integration. Google Calendar API via service account for appointment creation.`,
+    techStack: ['SvelteKit', 'TypeScript', 'Groq (Llama 3.3 70B)', 'Inngest', 'Neon', 'Drizzle', 'Meta Graph API', 'Google Calendar API', 'Cloudflare R2', 'Better Auth', 'TailwindCSS'],
     liveUrl: 'https://arjostyle.com',
     tags: ['AI', 'Chatbot', 'Automation', 'Full-stack'],
     status: 'production',
