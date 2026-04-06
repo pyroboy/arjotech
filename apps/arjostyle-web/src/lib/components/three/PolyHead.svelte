@@ -88,7 +88,7 @@
     // Scroll-driven head tilt
     const scrollTilt = scrollProgress * 0.5;
     headGroup.rotation.x = scrollTilt + smoothMouseY * 0.12;
-    headGroup.rotation.y = Math.PI + smoothMouseX * 0.2;
+    headGroup.rotation.y = smoothMouseX * 0.2;
 
     const time = performance.now() * 0.001;
     headGroup.rotation.z = Math.sin(time * 0.3) * 0.015;
@@ -116,7 +116,7 @@
   });
 </script>
 
-<T.Group bind:ref={headGroup} position={[0, -0.05, 0]} scale={[8, 8, 8]}>
+<T.Group bind:ref={headGroup} position={[0, -0.3, 0]} scale={[4, 4, 4]}>
   <!-- Head wireframe from GLTF model -->
   {#each headMeshes as mesh}
     <!-- Primary wireframe -->
