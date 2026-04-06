@@ -41,10 +41,10 @@
 </script>
 
 <svelte:head>
-  <title>Software Projects — Arjo Magno</title>
-  <meta name="description" content="Full-stack web applications built for real businesses. SvelteKit, React, Cloudflare." />
-  <meta property="og:title" content="Software Projects — Arjo Magno" />
-  <meta property="og:description" content="Full-stack web applications built for real businesses. SvelteKit, React, Cloudflare." />
+  <title>Software — Arjo Magno, Full-Stack Developer</title>
+  <meta name="description" content="Full-stack applications shipped for real businesses — POS systems, AI studio assistants, booking platforms, workforce tools, and SaaS. Built with SvelteKit, TypeScript, and Cloudflare." />
+  <meta property="og:title" content="Software — Arjo Magno, Full-Stack Developer" />
+  <meta property="og:description" content="Full-stack applications shipped for real businesses — POS systems, AI studio assistants, booking platforms, workforce tools, and SaaS. Built with SvelteKit, TypeScript, and Cloudflare." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://arjostyle-web.pages.dev/software" />
 </svelte:head>
@@ -53,11 +53,11 @@
 <section class="bg-surface-900 px-6 py-20">
   <div class="max-w-6xl mx-auto">
     <div class="mb-20">
-      <p class="text-tech-500/80 font-mono text-sm tracking-widest uppercase mb-3">Code & Build</p>
-      <h1 class="font-display text-5xl md:text-6xl font-bold text-white mb-6">Software Projects</h1>
+      <p class="text-tech-500/80 font-mono text-sm tracking-widest uppercase mb-3">Full-Stack Developer</p>
+      <h1 class="font-display text-5xl md:text-6xl font-bold text-white mb-6">Software I've Built</h1>
       <p class="text-zinc-400 text-lg max-w-2xl leading-relaxed">
-        Full-stack applications built for real businesses. From POS systems to booking platforms —
-        modern, scalable, and built to last.
+        Production applications shipped for real clients and real users — a restaurant POS handling live orders, an AI studio assistant answering client DMs, a multi-tenant SaaS for ID generation, and the platform powering this very site.
+        Everything is full-stack: database schema, API routes, UI, deployment.
       </p>
     </div>
   </div>

@@ -23,8 +23,8 @@
             Arjo Magno
           </h1>
           <p class="text-zinc-300 text-lg leading-relaxed mb-6">
-            Tattoo artist, painter, and software developer based in Tagbilaran City, Bohol.
-            I create permanent art that means something — rooted in Filipino culture, personal stories, and clean design.
+            Full-stack developer and tattoo artist based in Tagbilaran City, Bohol.
+            I ship production software for real businesses and create permanent art rooted in Filipino culture, personal stories, and clean design.
           </p>
           <div class="flex gap-4">
             <a href="https://instagram.com/arjostyle.ink" target="_blank" rel="noopener noreferrer"
@@ -69,8 +69,7 @@
         </RevealOnScroll>
         <RevealOnScroll delay={160}>
           <p>
-            Beyond tattooing, I build software — from booking systems to business tools. The same eye for detail
-            that goes into a clean tattoo line goes into clean, functional code. Both are crafts.
+            On the software side, I build full-stack production systems — a restaurant POS running live in a BBQ chain, an AI chatbot handling client DMs for this studio, a multi-tenant SaaS for ID generation, and more. Same principles as tattooing: clean lines, nothing wasted, built to last.
           </p>
         </RevealOnScroll>
       </div>

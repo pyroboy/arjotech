@@ -107,6 +107,28 @@ Offline-first with RxDB (8 collections: employees, shifts, tasks, inventory, exp
     featured: true
   },
   {
+    slug: 'arjostyle-ai',
+    title: 'ArjoStyle AI',
+    description: 'AI-powered studio assistant for a tattoo studio — handles client FAQs, qualifies inquiries via chat, auto-responds to Instagram and Facebook DMs, and guides clients through tattoo consultation before they book.',
+    longDescription: `Conversational AI system built specifically for ArjoStyle Tattoo Studio. Handles the full pre-booking client communication pipeline — from first contact to a qualified booking lead.
+
+**Features:**
+- **Studio chat assistant** — Embedded chat widget on arjostyle.com. Answers client questions about pricing, styles, aftercare, studio location, and availability. Powered by Claude (Anthropic).
+- **Instagram & Facebook DM auto-responder** — Monitors social media DMs and responds instantly to common inquiries (pricing, availability, style questions). Falls back to the artist for complex or custom requests.
+- **AI tattoo consultation** — Guides clients through describing their idea: style preference, body placement, size, color vs. black & grey, references. Produces a structured brief the artist can act on directly.
+- **Booking pre-qualification** — Identifies whether an inquiry is ready to book or needs more back-and-forth. Routes hot leads directly to the booking form.
+- **Context-aware responses** — Knows the studio's current availability windows, flash designs, pricing tiers, and style specialties. Stays on-brand in tone.
+- **Handoff protocol** — Detects when a client needs a human and hands off gracefully with a full conversation summary for the artist.
+
+**Architecture:**
+Claude API (Anthropic) for language model inference. SvelteKit for the embedded chat widget. Meta Graph API for Instagram and Facebook DM integration. Conversation state persisted in Neon PostgreSQL. Rate limiting and abuse detection built in.`,
+    techStack: ['Claude API', 'SvelteKit', 'TypeScript', 'Neon', 'Meta Graph API', 'Anthropic SDK', 'TailwindCSS'],
+    liveUrl: 'https://arjostyle.com',
+    tags: ['AI', 'Chatbot', 'Automation', 'Full-stack'],
+    status: 'production',
+    featured: true
+  },
+  {
     slug: 'kanaya',
     title: 'Kanaya',
     description: 'Multi-tenant ID card generation platform — drag-and-drop template designer, AI-powered image decomposition, 3D card preview, QR-encoded physical IDs, and real-time attendance verification. Built for schools, government, and events.',
