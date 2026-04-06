@@ -4,11 +4,13 @@
   import FloatingGeometry from './FloatingGeometry.svelte';
   import ParticleField from './ParticleField.svelte';
   import MouseFollowLight from './MouseFollowLight.svelte';
+  import PolyHead from './PolyHead.svelte';
   import { onMount } from 'svelte';
   import { browser } from '$app/environment';
 
   let mouseX = $state(0);
   let mouseY = $state(0);
+  let scrollProgress = $state(0);
   let visible = $state(true);
   let containerEl: HTMLDivElement;
 
@@ -18,7 +20,13 @@
       mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
     }
 
+    function handleScroll() {
+      const vh = window.innerHeight;
+      scrollProgress = Math.min(window.scrollY / vh, 1);
+    }
+
     window.addEventListener('mousemove', handleMouse);
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     // Pause when scrolled out of view
     const observer = new IntersectionObserver(
@@ -29,12 +37,14 @@
 
     return () => {
       window.removeEventListener('mousemove', handleMouse);
+      window.removeEventListener('scroll', handleScroll);
       observer.disconnect();
     };
   });
 
   const isMobile = browser ? window.innerWidth < 768 : false;
 
+  // Fewer floating shapes now — the head is the focal point
   const shapes: Array<{
     geometry: 'icosahedron' | 'octahedron' | 'torus' | 'dodecahedron' | 'ring';
     position: [number, number, number];
@@ -46,18 +56,14 @@
     floatAmplitude: number;
   }> = isMobile
     ? [
-        { geometry: 'icosahedron', position: [-2.5, 1.5, -2], color: '#ea580c', opacity: 0.25, size: 1.0, rotationSpeed: 0.002, floatSpeed: 0.4, floatAmplitude: 0.3 },
-        { geometry: 'octahedron', position: [2.5, -1, -1], color: '#06b6d4', opacity: 0.2, size: 0.7, rotationSpeed: 0.003, floatSpeed: 0.6, floatAmplitude: 0.2 },
-        { geometry: 'torus', position: [0, 0, -3], color: '#ea580c', opacity: 0.12, size: 1.8, rotationSpeed: 0.001, floatSpeed: 0.3, floatAmplitude: 0.15 },
+        { geometry: 'octahedron', position: [-2.5, 1.5, -3], color: '#06b6d4', opacity: 0.12, size: 0.5, rotationSpeed: 0.003, floatSpeed: 0.5, floatAmplitude: 0.2 },
+        { geometry: 'octahedron', position: [2.5, -1.5, -3], color: '#ea580c', opacity: 0.1, size: 0.4, rotationSpeed: 0.004, floatSpeed: 0.6, floatAmplitude: 0.15 },
       ]
     : [
-        { geometry: 'icosahedron', position: [-3.5, 2, -2], color: '#ea580c', opacity: 0.25, size: 1.2, rotationSpeed: 0.002, floatSpeed: 0.4, floatAmplitude: 0.3 },
-        { geometry: 'icosahedron', position: [4, -1.5, -3], color: '#ea580c', opacity: 0.15, size: 0.8, rotationSpeed: 0.003, floatSpeed: 0.5, floatAmplitude: 0.2 },
-        { geometry: 'octahedron', position: [2.5, 2.5, -1.5], color: '#06b6d4', opacity: 0.2, size: 0.8, rotationSpeed: 0.004, floatSpeed: 0.6, floatAmplitude: 0.25 },
-        { geometry: 'octahedron', position: [-2, -2, -2.5], color: '#06b6d4', opacity: 0.18, size: 0.6, rotationSpeed: 0.003, floatSpeed: 0.35, floatAmplitude: 0.3 },
-        { geometry: 'torus', position: [0, 0, -4], color: '#ea580c', opacity: 0.1, size: 2.0, rotationSpeed: 0.001, floatSpeed: 0.3, floatAmplitude: 0.15 },
-        { geometry: 'dodecahedron', position: [-4, 0.5, -1], color: '#22d3ee', opacity: 0.15, size: 0.6, rotationSpeed: 0.005, floatSpeed: 0.7, floatAmplitude: 0.2 },
-        { geometry: 'ring', position: [3.5, 1, -3.5], color: '#ffffff', opacity: 0.06, size: 1.3, rotationSpeed: 0.002, floatSpeed: 0.25, floatAmplitude: 0.1 },
+        { geometry: 'octahedron', position: [-4.5, 2, -3], color: '#06b6d4', opacity: 0.12, size: 0.6, rotationSpeed: 0.003, floatSpeed: 0.5, floatAmplitude: 0.25 },
+        { geometry: 'octahedron', position: [4.5, -1.5, -2.5], color: '#ea580c', opacity: 0.1, size: 0.5, rotationSpeed: 0.004, floatSpeed: 0.6, floatAmplitude: 0.2 },
+        { geometry: 'dodecahedron', position: [-3.5, -2, -4], color: '#8b5cf6', opacity: 0.08, size: 0.4, rotationSpeed: 0.005, floatSpeed: 0.7, floatAmplitude: 0.15 },
+        { geometry: 'dodecahedron', position: [3.5, 2.5, -3.5], color: '#22d3ee', opacity: 0.08, size: 0.35, rotationSpeed: 0.004, floatSpeed: 0.4, floatAmplitude: 0.2 },
       ];
 </script>
 
@@ -76,13 +82,33 @@
         });
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
         renderer.outputColorSpace = THREE.SRGBColorSpace;
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.2;
         return renderer;
       }}
     >
-      <T.PerspectiveCamera makeDefault position={[0, 0, 5]} fov={60} near={0.1} far={100} />
+      <T.PerspectiveCamera makeDefault position={[0, 0.5, 5.5]} fov={50} near={0.1} far={100} />
 
-      <T.AmbientLight intensity={0.15} />
+      <T.AmbientLight intensity={0.08} />
 
+      <!-- Key light from top-right -->
+      <T.DirectionalLight
+        position={[3, 4, 2]}
+        intensity={0.3}
+        color={new THREE.Color('#e0f2fe')}
+      />
+
+      <!-- Rim light from behind-left for edge definition -->
+      <T.DirectionalLight
+        position={[-3, 2, -2]}
+        intensity={0.15}
+        color={new THREE.Color('#06b6d4')}
+      />
+
+      <!-- The polygonal head -->
+      <PolyHead {scrollProgress} {mouseX} {mouseY} />
+
+      <!-- Ambient floating shapes (reduced, pushed to edges) -->
       {#each shapes as shape}
         <FloatingGeometry
           geometry={shape.geometry}
@@ -100,8 +126,8 @@
 
       <ParticleField />
 
-      <MouseFollowLight color="#ea580c" intensity={0.6} {mouseX} {mouseY} />
-      <MouseFollowLight color="#06b6d4" intensity={0.4} {mouseX} {mouseY} invert={true} />
+      <MouseFollowLight color="#ea580c" intensity={0.4} {mouseX} {mouseY} />
+      <MouseFollowLight color="#06b6d4" intensity={0.3} {mouseX} {mouseY} invert={true} />
     </Canvas>
   {/if}
 </div>
