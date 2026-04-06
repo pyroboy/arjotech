@@ -5,6 +5,7 @@ pages_build_output_dir = ".svelte-kit/cloudflare"
 
 [vars]
 NODE_ENV = "production"
+R2_PUBLIC_URL = "https://pub-96532b44a4674c75b7eca3f5ff1cc082.r2.dev"
 
 [[r2_buckets]]
 binding = "ARJOSTYLE_BUCKET"
