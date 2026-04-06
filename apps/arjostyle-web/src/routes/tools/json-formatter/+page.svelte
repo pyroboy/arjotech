@@ -15,7 +15,7 @@
 		depth: number;
 	}
 
-	let stats: JsonStats | null = $state(null);
+	let stats = $state<JsonStats | null>(null);
 
 	function tryParseJSON(str: string): any {
 		try {

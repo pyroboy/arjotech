@@ -340,8 +340,8 @@ describe('GET /api/mappings — KV miss, Neon DB hit', () => {
     const result = await simulateGET(kv, db);
 
     expect(result.status).toBe(200);
-    expect(result.data['Arms']['Bicep'].placementPainInfo.level).toBe(9);
-    expect(result.data['Arms']['Bicep'].placementPainInfo.reason).toBe('Sensitive');
+    expect(result.data['Arms']!['Bicep']!.placementPainInfo!.level).toBe(9);
+    expect(result.data['Arms']!['Bicep']!.placementPainInfo!.reason).toBe('Sensitive');
   });
 });
 
@@ -547,8 +547,8 @@ describe('Full round-trip: PUT then GET returns same data', () => {
     // Read back — KV should have it now
     const getResult = await simulateGET(kv, db);
     expect(getResult.status).toBe(200);
-    expect(getResult.data['Neck']['Front Neck'].placementPainInfo.level).toBe(7);
-    expect(getResult.data['Neck']['Front Neck'].placementSizeLimits.multiplier).toBe(1.4);
+    expect(getResult.data['Neck']!['Front Neck']!.placementPainInfo!.level).toBe(7);
+    expect(getResult.data['Neck']!['Front Neck']!.placementSizeLimits!.multiplier).toBe(1.4);
   });
 
   it('second PUT replaces first (soft-delete + reinsert)', async () => {
@@ -583,9 +583,9 @@ describe('Full round-trip: PUT then GET returns same data', () => {
     await simulatePUT(secondData, kv2, db);
 
     const getResult = await simulateGET(kv2, db);
-    expect(getResult.data['Arms']['Bicep'].scale).toBe(0.2);
-    expect(getResult.data['Arms']['Bicep'].placementPainInfo.level).toBe(6);
-    expect(getResult.data['Arms']['Bicep'].placementPainInfo.reason).toBe('Updated.');
+    expect(getResult.data['Arms']!['Bicep']!.scale).toBe(0.2);
+    expect(getResult.data['Arms']!['Bicep']!.placementPainInfo!.level).toBe(6);
+    expect(getResult.data['Arms']!['Bicep']!.placementPainInfo!.reason).toBe('Updated.');
   });
 
   it('GET after soft-delete returns defaults when no active rows remain', async () => {

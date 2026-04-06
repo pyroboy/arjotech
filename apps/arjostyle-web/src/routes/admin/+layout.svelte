@@ -23,6 +23,12 @@
       ]
     },
     {
+      label: 'Content',
+      items: [
+        { href: '/admin/assets', label: 'Media Assets', icon: '🖼' },
+      ]
+    },
+    {
       label: 'Tools',
       items: [
         { href: '/admin/model', label: '3D Mapping', icon: '🫀' },

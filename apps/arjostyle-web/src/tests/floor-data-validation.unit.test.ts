@@ -138,8 +138,8 @@ describe('rowsToMappings()', () => {
 
     expect(result).toHaveProperty('Arms');
     expect(result['Arms']).toHaveProperty('Bicep');
-    expect(result['Arms']['Bicep'].position).toEqual([-0.29, -0.47, 0.05]);
-    expect(result['Arms']['Bicep'].scale).toBe(0.1);
+    expect(result['Arms']!['Bicep']!.position).toEqual([-0.29, -0.47, 0.05]);
+    expect(result['Arms']!['Bicep']!.scale).toBe(0.1);
   });
 
   it('skips rows where isActive is false', () => {
@@ -187,55 +187,55 @@ describe('rowsToMappings()', () => {
   it('defaults painLevel to 1 when null', () => {
     const rows = [makeRow({ painLevel: null })];
     const result = rowsToMappings(rows);
-    expect(result['Arms']['Bicep'].placementPainInfo.level).toBe(1);
+    expect(result['Arms']!['Bicep']!.placementPainInfo!.level).toBe(1);
   });
 
   it('maps painReason null to undefined (not string "null")', () => {
     const rows = [makeRow({ painReason: null })];
     const result = rowsToMappings(rows);
-    expect(result['Arms']['Bicep'].placementPainInfo.reason).toBeUndefined();
+    expect(result['Arms']!['Bicep']!.placementPainInfo!.reason).toBeUndefined();
   });
 
   it('defaults sizeLimitMin to 0.5 when null', () => {
     const rows = [makeRow({ sizeLimitMin: null })];
     const result = rowsToMappings(rows);
-    expect(result['Arms']['Bicep'].placementSizeLimits.min).toBe(0.5);
+    expect(result['Arms']!['Bicep']!.placementSizeLimits!.min).toBe(0.5);
   });
 
   it('defaults sizeLimitMax to 12 when null', () => {
     const rows = [makeRow({ sizeLimitMax: null })];
     const result = rowsToMappings(rows);
-    expect(result['Arms']['Bicep'].placementSizeLimits.max).toBe(12);
+    expect(result['Arms']!['Bicep']!.placementSizeLimits!.max).toBe(12);
   });
 
   it('defaults sizeLimitMultiplier to 1 when null', () => {
     const rows = [makeRow({ sizeLimitMultiplier: null })];
     const result = rowsToMappings(rows);
-    expect(result['Arms']['Bicep'].placementSizeLimits.multiplier).toBe(1);
+    expect(result['Arms']!['Bicep']!.placementSizeLimits!.multiplier).toBe(1);
   });
 
   it('maps cameraAzimuth null to undefined', () => {
     const rows = [makeRow({ cameraAzimuth: null })];
     const result = rowsToMappings(rows);
-    expect(result['Arms']['Bicep'].cameraAzimuth).toBeUndefined();
+    expect(result['Arms']!['Bicep']!.cameraAzimuth).toBeUndefined();
   });
 
   it('maps cameraPolar null to undefined', () => {
     const rows = [makeRow({ cameraPolar: null })];
     const result = rowsToMappings(rows);
-    expect(result['Arms']['Bicep'].cameraPolar).toBeUndefined();
+    expect(result['Arms']!['Bicep']!.cameraPolar).toBeUndefined();
   });
 
   it('maps cameraDistance null to undefined', () => {
     const rows = [makeRow({ cameraDistance: null })];
     const result = rowsToMappings(rows);
-    expect(result['Arms']['Bicep'].cameraDistance).toBeUndefined();
+    expect(result['Arms']!['Bicep']!.cameraDistance).toBeUndefined();
   });
 
   it('preserves all null camera fields simultaneously', () => {
     const rows = [makeRow({ cameraAzimuth: null, cameraPolar: null, cameraDistance: null })];
     const result = rowsToMappings(rows);
-    const placement = result['Arms']['Bicep'];
+    const placement = result['Arms']!['Bicep']!;
     expect(placement.cameraAzimuth).toBeUndefined();
     expect(placement.cameraPolar).toBeUndefined();
     expect(placement.cameraDistance).toBeUndefined();
@@ -248,27 +248,27 @@ describe('rowsToMappings()', () => {
   it('passes through painLevel 0 without clamping', () => {
     const rows = [makeRow({ painLevel: 0 })];
     const result = rowsToMappings(rows);
-    expect(result['Arms']['Bicep'].placementPainInfo.level).toBe(0);
+    expect(result['Arms']!['Bicep']!.placementPainInfo!.level).toBe(0);
   });
 
   it('passes through negative scale without clamping', () => {
     const rows = [makeRow({ scale: -1 })];
     const result = rowsToMappings(rows);
-    expect(result['Arms']['Bicep'].scale).toBe(-1);
+    expect(result['Arms']!['Bicep']!.scale).toBe(-1);
   });
 
   it('passes through inverted size limits without clamping', () => {
     const rows = [makeRow({ sizeLimitMin: 10, sizeLimitMax: 2 })];
     const result = rowsToMappings(rows);
-    const limits = result['Arms']['Bicep'].placementSizeLimits;
-    expect(limits.min).toBe(10);
-    expect(limits.max).toBe(2);
+    const limits = result['Arms']!['Bicep']!.placementSizeLimits;
+    expect(limits!.min).toBe(10);
+    expect(limits!.max).toBe(2);
   });
 
   it('passes through NaN position values', () => {
     const rows = [makeRow({ positionX: NaN })];
     const result = rowsToMappings(rows);
-    expect(Number.isNaN(result['Arms']['Bicep'].position[0])).toBe(true);
+    expect(Number.isNaN(result['Arms']!['Bicep']!.position[0])).toBe(true);
   });
 
   it('handles category with special characters', () => {
@@ -454,12 +454,12 @@ describe('mappingsToRows()', () => {
     }));
 
     const restored = rowsToMappings(dbRows);
-    expect(restored['Arms']['Bicep'].position).toEqual([-0.29, -0.47, 0.05]);
-    expect(restored['Arms']['Bicep'].scale).toBe(0.1);
-    expect(restored['Arms']['Bicep'].placementPainInfo.level).toBe(4);
-    expect(restored['Arms']['Bicep'].placementPainInfo.reason).toBe('Tolerable.');
-    expect(restored['Arms']['Bicep'].placementSizeLimits.min).toBe(3);
-    expect(restored['Arms']['Bicep'].placementSizeLimits.max).toBe(12);
+    expect(restored['Arms']!['Bicep']!.position).toEqual([-0.29, -0.47, 0.05]);
+    expect(restored['Arms']!['Bicep']!.scale).toBe(0.1);
+    expect(restored['Arms']!['Bicep']!.placementPainInfo!.level).toBe(4);
+    expect(restored['Arms']!['Bicep']!.placementPainInfo!.reason).toBe('Tolerable.');
+    expect(restored['Arms']!['Bicep']!.placementSizeLimits!.min).toBe(3);
+    expect(restored['Arms']!['Bicep']!.placementSizeLimits!.max).toBe(12);
   });
 
   it('roundtrip drops inactive rows', () => {
@@ -564,7 +564,7 @@ describe('API input validation rules', () => {
   });
 
   it('array body is falsy as BodyPartMappings (not a plain object check)', () => {
-    const body = [];
+    const body: unknown[] = [];
     // The API checks: body && typeof body === 'object'
     // An array passes typeof but we document that the schema expects a plain object.
     // This test documents the current behavior (arrays would pass the type check).
@@ -603,20 +603,20 @@ describe('PlacementSizeLimits edge cases', () => {
   it('sizeLimitMin equal to sizeLimitMax is preserved in roundtrip', () => {
     const rows = [makeRow({ sizeLimitMin: 5, sizeLimitMax: 5 })];
     const result = rowsToMappings(rows);
-    expect(result['Arms']['Bicep'].placementSizeLimits.min).toBe(5);
-    expect(result['Arms']['Bicep'].placementSizeLimits.max).toBe(5);
+    expect(result['Arms']!['Bicep']!.placementSizeLimits!.min).toBe(5);
+    expect(result['Arms']!['Bicep']!.placementSizeLimits!.max).toBe(5);
   });
 
   it('sizeLimitMin > sizeLimitMax passes through (inverted range, no clamping)', () => {
     const rows = [makeRow({ sizeLimitMin: 20, sizeLimitMax: 5 })];
     const result = rowsToMappings(rows);
-    expect(result['Arms']['Bicep'].placementSizeLimits.min).toBe(20);
-    expect(result['Arms']['Bicep'].placementSizeLimits.max).toBe(5);
+    expect(result['Arms']!['Bicep']!.placementSizeLimits!.min).toBe(20);
+    expect(result['Arms']!['Bicep']!.placementSizeLimits!.max).toBe(5);
   });
 
   it('sizeLimitMultiplier 0 passes through (pricing calculation responsibility)', () => {
     const rows = [makeRow({ sizeLimitMultiplier: 0 })];
     const result = rowsToMappings(rows);
-    expect(result['Arms']['Bicep'].placementSizeLimits.multiplier).toBe(0);
+    expect(result['Arms']!['Bicep']!.placementSizeLimits!.multiplier).toBe(0);
   });
 });

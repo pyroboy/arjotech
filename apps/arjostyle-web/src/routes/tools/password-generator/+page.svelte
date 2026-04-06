@@ -27,7 +27,7 @@
 		crackTime: string;
 	}
 
-	let stats: PasswordStats | null = $state(null);
+	let stats = $state<PasswordStats | null>(null);
 
 	const UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	const LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';

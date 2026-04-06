@@ -6,8 +6,18 @@
 
   const navLinks = [
     { label: 'Tattoo', href: '/tattoo' },
+    { label: 'Paintings', href: '/paintings' },
     { label: 'Software', href: '/software' },
     { label: 'Free Tools', href: '/tools' },
+  ];
+
+  const secondaryLinks = [
+    { label: 'About', href: '/about' },
+    { label: 'Studio', href: '/studio' },
+    { label: 'Pricing', href: '/pricing' },
+    { label: 'Flash', href: '/flash' },
+    { label: 'FAQ', href: '/faq' },
+    { label: 'Testimonials', href: '/testimonials' },
   ];
 
   function isActive(href: string): boolean {
@@ -82,6 +92,19 @@
           {link.label}
         </a>
       {/each}
+
+      <!-- Secondary links -->
+      <div class="flex flex-wrap gap-x-6 gap-y-2 pt-2 border-t border-zinc-800">
+        {#each secondaryLinks as link}
+          <a
+            href={link.href}
+            class="text-sm {isActive(link.href) ? 'text-ink-400' : 'text-zinc-400 hover:text-white'} transition-colors"
+            onclick={() => (mobileMenuOpen = false)}
+          >
+            {link.label}
+          </a>
+        {/each}
+      </div>
 
       <!-- Mobile Book button -->
       <a

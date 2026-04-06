@@ -80,7 +80,7 @@
 
 			// SVG data URL
 			const svgString = await QRCode.toString(content, {
-				type: 'image/svg+xml',
+				type: 'svg',
 				width: qrSize,
 				margin: 2,
 				color: {

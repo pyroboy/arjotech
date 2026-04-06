@@ -46,21 +46,21 @@
     { name: 'Passport Photo', width: 413, height: 531, category: 'Documents' }
   ];
 
-  let uploadedImage: {
+  let uploadedImage = $state<{
     file: File;
     preview: string;
     originalWidth: number;
     originalHeight: number;
     originalSize: number;
-  } | null = $state(null);
+  } | null>(null);
 
-  let resizedImage: {
+  let resizedImage = $state<{
     blob: Blob;
     url: string;
     width: number;
     height: number;
     size: number;
-  } | null = $state(null);
+  } | null>(null);
 
   let customWidth = $state(1080);
   let customHeight = $state(1080);

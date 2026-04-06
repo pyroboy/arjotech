@@ -363,8 +363,45 @@ export const kpiActivityLog = pgTable('kpi_activity_log', {
   notes: text('notes'),
 });
 
+// ── Media Assets ─────────────────────────────────────────────────────────────
+
+export const assetCategoryEnum = pgEnum('asset_category', [
+  'tattoo',
+  'painting',
+  'flash',
+  'design',
+  'testimonial',
+  'studio',
+  'misc'
+]);
+
+export const mediaAssets = pgTable('media_assets', {
+  id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+
+  key: text('key').notNull().unique(),
+  url: text('url').notNull(),
+  originalFilename: text('original_filename').notNull(),
+  mimeType: text('mime_type').notNull(),
+  sizeBytes: integer('size_bytes'),
+
+  category: assetCategoryEnum('category').default('misc').notNull(),
+  title: text('title'),
+  altText: text('alt_text'),
+  tags: jsonb('tags').$type<string[]>(),
+
+  width: integer('width'),
+  height: integer('height'),
+
+  isPublic: boolean('is_public').default(true).notNull(),
+  displayOrder: integer('display_order').default(0),
+});
+
 // ── Type exports ──────────────────────────────────────────────────────────────
 
+export type MediaAsset = typeof mediaAssets.$inferSelect;
+export type NewMediaAsset = typeof mediaAssets.$inferInsert;
 export type Lead = typeof leads.$inferSelect;
 export type NewLead = typeof leads.$inferInsert;
 export type KpiActivityLog = typeof kpiActivityLog.$inferSelect;

@@ -337,10 +337,10 @@
         aria-label="Close">✕</button>
       <svelte:boundary onerror={(e) => console.error('BookingFlow error:', e)}>
         <BookingFlow onClose={() => (showBooking = false)} />
-        {#snippet failed(error)}
+        {#snippet failed(error: unknown)}
           <div class="flex flex-col items-center justify-center gap-4 p-12 text-center">
             <p class="text-red-400 text-lg font-semibold">Something went wrong</p>
-            <p class="text-zinc-400 text-sm max-w-md">{error?.message ?? 'An unexpected error occurred.'}</p>
+            <p class="text-zinc-400 text-sm max-w-md">{error instanceof Error ? error.message : 'An unexpected error occurred.'}</p>
             <button onclick={() => (showBooking = false)}
               class="mt-2 px-6 py-2 rounded-full bg-zinc-700 text-white hover:bg-zinc-600 transition-colors text-sm font-medium">Close</button>
           </div>

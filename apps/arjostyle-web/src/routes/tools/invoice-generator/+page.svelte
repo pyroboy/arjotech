@@ -33,7 +33,7 @@
 	// Tax and discount
 	let taxPercent = $state(12);
 	let discountAmount = $state(0);
-	let discountType: 'fixed' | 'percent' = $state('fixed');
+	let discountType = $state<'fixed' | 'percent'>('fixed');
 
 	// Notes
 	let notes = $state('');

@@ -6,11 +6,11 @@
     complement?: Color;
   }
 
-  let uploadedImage: {
+  let uploadedImage = $state<{
     preview: string;
     width: number;
     height: number;
-  } | null = $state(null);
+  } | null>(null);
 
   let extractedColors = $state<Color[]>([]);
   let showComplements = $state(false);

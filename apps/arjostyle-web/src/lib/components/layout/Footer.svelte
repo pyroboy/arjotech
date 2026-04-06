@@ -51,26 +51,25 @@
       <div>
         <p class="text-xs uppercase tracking-wider text-zinc-600 mb-3 font-semibold">Navigate</p>
         <ul class="space-y-2">
-          <li>
-            <a href="/tattoo" class="text-sm text-zinc-400 hover:text-white transition-colors">
-              Tattoo Portfolio
-            </a>
-          </li>
-          <li>
-            <a href="/software" class="text-sm text-zinc-400 hover:text-white transition-colors">
-              Software Projects
-            </a>
-          </li>
-          <li>
-            <a href="/book" class="text-sm text-zinc-400 hover:text-white transition-colors">
-              Book a Session
-            </a>
-          </li>
-          <li>
-            <a href="/contact" class="text-sm text-zinc-400 hover:text-white transition-colors">
-              Contact
-            </a>
-          </li>
+          <li><a href="/tattoo" class="text-sm text-zinc-400 hover:text-white transition-colors">Tattoo Portfolio</a></li>
+          <li><a href="/paintings" class="text-sm text-zinc-400 hover:text-white transition-colors">Paintings</a></li>
+          <li><a href="/flash" class="text-sm text-zinc-400 hover:text-white transition-colors">Flash Designs</a></li>
+          <li><a href="/software" class="text-sm text-zinc-400 hover:text-white transition-colors">Software Projects</a></li>
+          <li><a href="/pricing" class="text-sm text-zinc-400 hover:text-white transition-colors">Pricing</a></li>
+          <li><a href="/book" class="text-sm text-zinc-400 hover:text-white transition-colors">Book a Session</a></li>
+          <li><a href="/contact" class="text-sm text-zinc-400 hover:text-white transition-colors">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 2b: Studio -->
+      <div>
+        <p class="text-xs uppercase tracking-wider text-zinc-600 mb-3 font-semibold">More</p>
+        <ul class="space-y-2">
+          <li><a href="/about" class="text-sm text-zinc-400 hover:text-white transition-colors">About</a></li>
+          <li><a href="/studio" class="text-sm text-zinc-400 hover:text-white transition-colors">The Studio</a></li>
+          <li><a href="/testimonials" class="text-sm text-zinc-400 hover:text-white transition-colors">Testimonials</a></li>
+          <li><a href="/faq" class="text-sm text-zinc-400 hover:text-white transition-colors">FAQ</a></li>
+          <li><a href="/aftercare" class="text-sm text-zinc-400 hover:text-white transition-colors">Aftercare</a></li>
         </ul>
       </div>
 
