@@ -19,8 +19,6 @@
   let brainLight1 = $state<THREE.PointLight | null>(null);
   let brainLight2 = $state<THREE.PointLight | null>(null);
   let brainLight3 = $state<THREE.PointLight | null>(null);
-  let brainMesh = $state<THREE.Mesh | null>(null);
-
   let brainGeometry = $state<THREE.IcosahedronGeometry | null>(null);
   let neuralLines = $state<THREE.BufferGeometry | null>(null);
 
@@ -87,29 +85,11 @@
       brainLight3.position.z = Math.sin(time * 0.6) * 0.3;
     }
 
-    // Brain emissive pulse
-    if (brainMesh) {
-      const mat = brainMesh.material as THREE.MeshStandardMaterial;
-      mat.emissiveIntensity = 0.4 + Math.sin(time * 2.0) * 0.25;
-    }
   });
 </script>
 
 <T.Group bind:ref={group} position={[0, 0.2, 0]}>
   {#if brainGeometry}
-    <!-- Brain wireframe -->
-    <T.Mesh bind:ref={brainMesh}>
-      <T is={brainGeometry} />
-      <T.MeshStandardMaterial
-        wireframe={true}
-        transparent={true}
-        opacity={0.35}
-        color={new THREE.Color('#06b6d4')}
-        emissive={new THREE.Color('#06b6d4')}
-        emissiveIntensity={0.4}
-      />
-    </T.Mesh>
-
     <!-- Orange glow core -->
     <T.Mesh scale={[0.55, 0.55, 0.55]}>
       <T.IcosahedronGeometry args={[1.4, 0]} />
