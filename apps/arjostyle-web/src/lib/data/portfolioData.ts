@@ -131,6 +131,57 @@ SvelteKit full-stack with Neon PostgreSQL and Drizzle ORM. Better Auth for multi
   }
 ];
 
+// --- Website Projects ---
+
+export interface WebProject {
+  slug: string;
+  title: string;
+  client: string;
+  location: string;
+  description: string;
+  longDescription?: string;
+  techStack: string[];
+  liveUrl?: string;
+  githubUrl?: string;
+  imageUrl?: string;
+  tags: string[];
+  status: 'production' | 'built' | 'prototype';
+  featured: boolean;
+  year: number;
+}
+
+export const websiteProjects: WebProject[] = [
+  {
+    slug: 'march-of-faith',
+    title: 'March of Faith Inc.',
+    client: 'March of Faith Incorporated',
+    location: 'Tagbilaran City, Bohol, Philippines',
+    description: 'Official website for a church established in 1974 — sermons, events, live stream, online giving, gallery, member directory, and a full admin CMS. Built with SvelteKit and Supabase.',
+    longDescription: `Church website built for March of Faith Incorporated, a faith-based organization serving Tagbilaran City, Bohol since 1974. The site covers the full congregation experience — from first-time visitors to long-time members.
+
+**Features:**
+- **Sermons library** — Browse and watch past sermon recordings by series, pastor, or topic. Supports video embeds and audio downloads.
+- **Events calendar** — Upcoming services, ministry events, and community gatherings with registration support.
+- **Live stream** — Dedicated livestream page for Sunday services and special broadcasts.
+- **Online giving** — Secure digital offering and tithe submission for members.
+- **Gallery** — Photo and video gallery of church activities, missions, and milestones.
+- **Pastors & leadership** — Staff directory with bios, roles, and contact information.
+- **Prayers** — Community prayer wall where members can submit and respond to prayer requests.
+- **News & announcements** — Church bulletin and blog for ministry updates.
+- **Multiple churches** — Directory of affiliated church branches.
+- **Admin CMS** — Full admin panel for staff to manage all content without touching code.
+- **Contact & map** — Location info, service schedules, and embedded map for the Tagbilaran City campus.
+
+**Built for real people:**
+The client is non-technical — the admin panel was designed to be usable by church staff with no developer involvement for day-to-day updates. Brand colors, typography, and tone all follow the official March of Faith brand guide.`,
+    techStack: ['SvelteKit', 'TypeScript', 'Supabase', 'Drizzle ORM', 'TailwindCSS', 'Vercel'],
+    tags: ['Church', 'CMS', 'Client Work', 'Full-stack'],
+    status: 'production',
+    featured: true,
+    year: 2025
+  }
+];
+
 // --- Tattoo Portfolio Types & Data ---
 
 export interface PortfolioImageItem {
