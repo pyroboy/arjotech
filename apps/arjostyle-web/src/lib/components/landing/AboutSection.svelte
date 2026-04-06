@@ -16,10 +16,10 @@
         <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-zinc-800 border border-zinc-700 text-zinc-400">Philippines</span>
       </div>
       <p class="text-zinc-400 leading-relaxed max-w-2xl">
-        I build full-stack web apps end-to-end — from database schema to deployed product. Specializing in <span class="text-white">Svelte 5</span>, offline-first architecture with <span class="text-white">RxDB</span>, and edge deployments on <span class="text-white">Cloudflare</span>. Currently building 5 production apps across POS, property management, workforce ops, and SaaS.
+        Full-stack developer with a designer's eye — I build complete production systems from schema to pixel, and I can draw and paint what I can't find in a library. I work on the most modern stack available: <span class="text-white">Svelte 5</span>, <span class="text-white">Neon</span>, <span class="text-white">RxDB</span>, <span class="text-white">SpacetimeDB</span>, and edge-first on <span class="text-white">Cloudflare</span>. Complex web apps, AI chatbots, booking systems, real-time dashboards, POS, SaaS — if it runs in a browser, I ship it.
       </p>
       <div class="flex flex-wrap justify-center md:justify-start gap-2 mt-4" use:scrollReveal={{ y: 15, stagger: 0.05, children: true, delay: 0.2 }}>
-        {#each ['Svelte 5', 'SvelteKit', 'TypeScript', 'RxDB', 'Neon', 'Cloudflare', 'Three.js'] as skill}
+        {#each ['Svelte 5', 'SvelteKit', 'TypeScript', 'RxDB', 'Neon', 'SpacetimeDB', 'Cloudflare', 'Three.js', 'AI/LLM'] as skill}
           <span class="text-xs px-2.5 py-1 bg-zinc-900 border border-zinc-800 text-zinc-400 rounded-lg font-mono">{skill}</span>
         {/each}
       </div>

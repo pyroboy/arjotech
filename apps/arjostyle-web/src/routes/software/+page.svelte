@@ -42,9 +42,9 @@
 
 <svelte:head>
   <title>Software — Arjo Magno, Full-Stack Developer</title>
-  <meta name="description" content="Full-stack applications shipped for real businesses — POS systems, AI studio assistants, booking platforms, workforce tools, and SaaS. Built with SvelteKit, TypeScript, and Cloudflare." />
+  <meta name="description" content="Complex web apps, AI chatbots, booking platforms, POS systems, and SaaS — built on the most modern stack: Svelte 5, Neon, RxDB, SpacetimeDB, Cloudflare." />
   <meta property="og:title" content="Software — Arjo Magno, Full-Stack Developer" />
-  <meta property="og:description" content="Full-stack applications shipped for real businesses — POS systems, AI studio assistants, booking platforms, workforce tools, and SaaS. Built with SvelteKit, TypeScript, and Cloudflare." />
+  <meta property="og:description" content="Complex web apps, AI chatbots, booking platforms, POS systems, and SaaS — built on the most modern stack: Svelte 5, Neon, RxDB, SpacetimeDB, Cloudflare." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://arjostyle-web.pages.dev/software" />
 </svelte:head>
@@ -56,8 +56,7 @@
       <p class="text-tech-500/80 font-mono text-sm tracking-widest uppercase mb-3">Full-Stack Developer</p>
       <h1 class="font-display text-5xl md:text-6xl font-bold text-white mb-6">Software I've Built</h1>
       <p class="text-zinc-400 text-lg max-w-2xl leading-relaxed">
-        Production applications shipped for real clients and real users — a restaurant POS handling live orders, an AI studio assistant answering client DMs, a multi-tenant SaaS for ID generation, and the platform powering this very site.
-        Everything is full-stack: database schema, API routes, UI, deployment.
+        Complex web apps, AI chatbots, booking platforms, POS systems, SaaS — shipped and running in production. I build on the most modern stack available: Svelte 5, SvelteKit, Neon, RxDB, SpacetimeDB, Cloudflare. Everything end-to-end: database schema, API routes, UI design, and deployment.
       </p>
     </div>
   </div>

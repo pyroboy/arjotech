@@ -23,8 +23,7 @@
             Arjo Magno
           </h1>
           <p class="text-zinc-300 text-lg leading-relaxed mb-6">
-            Full-stack developer and tattoo artist based in Tagbilaran City, Bohol.
-            I ship production software for real businesses and create permanent art rooted in Filipino culture, personal stories, and clean design.
+            Full-stack developer and visual artist based in Tagbilaran City, Bohol. I design and build complete production systems on the most modern stack — Svelte 5, Neon, RxDB, SpacetimeDB, Cloudflare — and I create permanent art rooted in Filipino culture, personal stories, and clean design. If I can't find it in a library, I draw it myself.
           </p>
           <div class="flex gap-4">
             <a href="https://instagram.com/arjostyle.ink" target="_blank" rel="noopener noreferrer"
@@ -69,7 +68,7 @@
         </RevealOnScroll>
         <RevealOnScroll delay={160}>
           <p>
-            On the software side, I build full-stack production systems — a restaurant POS running live in a BBQ chain, an AI chatbot handling client DMs for this studio, a multi-tenant SaaS for ID generation, and more. Same principles as tattooing: clean lines, nothing wasted, built to last.
+            On the software side, I build anything that runs in a browser — a restaurant POS running live in a BBQ chain, an AI chatbot handling client DMs for this studio, a multi-tenant SaaS for ID generation, real-time dashboards, booking platforms, and more. Complex full-stack apps, bots, websites — same principles as tattooing: clean lines, nothing wasted, built to last.
           </p>
         </RevealOnScroll>
       </div>
