@@ -4,7 +4,7 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
   plugins: [sveltekit()],
   ssr: {
-    noExternal: ['three', '@threlte/core', '@threlte/extras']
+    noExternal: ['three', '@threlte/core', '@threlte/extras', 'gsap']
   },
   test: {
     // Run unit tests in node environment (no browser needed for pure logic)
