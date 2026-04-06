@@ -19,10 +19,10 @@
 </script>
 
 <svelte:head>
-  <title>Arjo Magno — Tattoo Artist & Software Developer</title>
-  <meta name="description" content="Arjo Magno — tattoo artist and software developer based in the Philippines. Full-stack apps, offline-first architecture, Svelte 5." />
-  <meta property="og:title" content="Arjo Magno — Tattoo Artist & Software Developer" />
-  <meta property="og:description" content="Arjo Magno — tattoo artist and software developer based in the Philippines." />
+  <title>Arjo Magno — Full-Stack Developer, AI Engineer & Tattoo Artist</title>
+  <meta name="description" content="Arjo Magno — full-stack developer, AI engineer, and tattoo artist. Building LLM-powered agents, complex web apps, and permanent art. Svelte 5, Rust, Claude API, Neon, Cloudflare." />
+  <meta property="og:title" content="Arjo Magno — Full-Stack Developer, AI Engineer & Tattoo Artist" />
+  <meta property="og:description" content="Building LLM-powered agents, complex web apps, and permanent art. Svelte 5, Rust, Claude API, Neon, Cloudflare." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://arjostyle.com/" />
 </svelte:head>

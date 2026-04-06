@@ -5,9 +5,9 @@
 
 <svelte:head>
   <title>About — Arjo Magno</title>
-  <meta name="description" content="Arjo Magno — tattoo artist, painter, and software developer from Tagbilaran City, Bohol. The story behind ArjoStyle." />
+  <meta name="description" content="Arjo Magno — full-stack developer, AI engineer, tattoo artist, and painter from Tagbilaran City, Bohol. Building LLM-powered agents, complex web apps, and permanent art." />
   <meta property="og:title" content="About — Arjo Magno" />
-  <meta property="og:description" content="Tattoo artist, painter, and software developer from Tagbilaran City, Bohol." />
+  <meta property="og:description" content="Full-stack developer, AI engineer, tattoo artist, and painter from Tagbilaran City, Bohol." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://arjostyle.ink/about" />
 </svelte:head>
@@ -23,7 +23,7 @@
             Arjo Magno
           </h1>
           <p class="text-zinc-300 text-lg leading-relaxed mb-6">
-            Full-stack developer and visual artist based in Tagbilaran City, Bohol. I design and build complete production systems on the most modern stack — Svelte 5, Neon, RxDB, SpacetimeDB, Cloudflare — and I create permanent art rooted in Filipino culture, personal stories, and clean design. If I can't find it in a library, I draw it myself.
+            Full-stack developer, AI engineer, and visual artist based in Tagbilaran City, Bohol. I design and build complete production systems — from LLM-powered conversational agents to complex SaaS — on the most modern stack available: Svelte 5, Neon, RxDB, SpacetimeDB, Cloudflare. I also create permanent art rooted in Filipino culture, personal stories, and clean design. If I can't find it in a library, I draw it myself.
           </p>
           <div class="flex gap-4">
             <a href="https://instagram.com/arjostyle.ink" target="_blank" rel="noopener noreferrer"
@@ -68,7 +68,7 @@
         </RevealOnScroll>
         <RevealOnScroll delay={160}>
           <p>
-            On the software side, I build anything that runs in a browser — a restaurant POS running live in a BBQ chain, an AI chatbot handling client DMs for this studio, a multi-tenant SaaS for ID generation, real-time dashboards, booking platforms, and more. Complex full-stack apps, bots, websites — same principles as tattooing: clean lines, nothing wasted, built to last.
+            On the software side, I build anything that runs in a browser or talks to a model — a restaurant POS running live in a BBQ chain, an AI chatbot handling client DMs via the Groq and Claude APIs, a multi-tenant SaaS for ID generation, and <span class="text-white">claw-agent</span>: a Rust/Tauri AI orchestration harness with multi-agent teams, mission planning, session management, and health monitoring. Complex full-stack apps, LLM pipelines, conversational agents, real-time systems — same principles as tattooing: clean lines, nothing wasted, built to last.
           </p>
         </RevealOnScroll>
       </div>
@@ -85,7 +85,7 @@
         {#each [
           { title: 'Tattooing', href: '/tattoo', desc: 'Blackwork, geometric, minimalist, florals, Japanese, and custom designs. Appointment-only at ATS, Tagbilaran.' },
           { title: 'Painting', href: '/paintings', desc: 'Original acrylic and mixed media works on canvas. Available for sale and commission.' },
-          { title: 'Software', href: '/software', desc: 'Full-stack apps, business tools, and websites. Building things that actually work.' }
+          { title: 'Software & AI', href: '/software', desc: 'Full-stack apps, AI agents, LLM integrations, chatbots, and orchestration harnesses. Building things that think and work.' }
         ] as item, i}
           <RevealOnScroll delay={i * 80}>
             <a href={item.href} class="block glass-panel rounded-xl p-6 border border-zinc-800 hover:border-ink-500/40 transition-colors group">

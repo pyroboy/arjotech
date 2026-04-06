@@ -15,6 +15,28 @@ export interface SoftwareProject {
 
 export const softwareProjects: SoftwareProject[] = [
   {
+    slug: 'claw-agent',
+    title: 'Claw Agent',
+    description: 'AI agent orchestration harness — a Rust/Tauri desktop app for managing multi-agent teams, mission planning, session lifecycle, health monitoring, and Discord integration. The control plane for autonomous AI workflows.',
+    longDescription: `Desktop-native AI orchestration harness built with Rust (Tauri v2) and Svelte 5. Designed to coordinate multiple AI agents working as teams on complex, multi-step missions.
+
+**Core Systems:**
+- **Mission planner** — Define objectives, break into sub-tasks, assign to agent teams. Track progress through a Kanban-style interface.
+- **Multi-agent teams** — Spawn, monitor, and coordinate multiple AI agents with distinct capabilities. Agents communicate through structured message passing.
+- **Session management** — Full lifecycle tracking for agent sessions: creation, execution, checkpointing, and teardown. Persistent session state across restarts.
+- **Health monitoring** — Real-time CPU, memory, and process monitoring. Built-in doctor system diagnoses issues and suggests fixes.
+- **Discord integration** — Live feed of agent activity and mission updates pushed to Discord channels for remote monitoring.
+- **Face recognition** — FaceManager component for identity-aware agent interactions.
+- **DuckDB persistence** — 49-table intelligence layer storing facts, corrections, embeddings, conversation history, and semantic code indexes.
+
+**Architecture:**
+Rust backend handles agent process management, IPC, system health, and file operations. Svelte 5 frontend provides the operator interface. DuckDB for local persistence. Ollama for embeddings and semantic search. Designed for power users who need to orchestrate AI at scale.`,
+    techStack: ['Rust', 'Tauri v2', 'Svelte 5', 'DuckDB', 'Ollama', 'TypeScript', 'Discord API'],
+    tags: ['AI', 'Agent Orchestration', 'Rust', 'Desktop App'],
+    status: 'prototype',
+    featured: true
+  },
+  {
     slug: 'tattoo-tide',
     title: 'Tattoo Tide',
     description: 'Full-stack tattoo studio platform — 3D body placement selector, AI-powered admin tools, online booking flow, and a portfolio gallery. This site is built on it.',

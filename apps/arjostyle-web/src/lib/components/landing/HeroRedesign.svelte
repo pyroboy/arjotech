@@ -59,8 +59,10 @@
     <div class="mt-6 space-y-2 transition-all duration-700 {subtitleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}">
       <p class="text-xl md:text-2xl text-zinc-300 font-light">
         <span class="text-ink-400">Tattoo Artist</span>
-        <span class="text-zinc-600 mx-3">&</span>
-        <span class="text-tech-400">Software Developer</span>
+        <span class="text-zinc-600 mx-3">·</span>
+        <span class="text-tech-400">Full-Stack Developer</span>
+        <span class="text-zinc-600 mx-3">·</span>
+        <span class="text-purple-400">AI Engineer</span>
       </p>
       <p class="text-sm md:text-base text-zinc-500 font-mono tracking-wider">
         Tagbilaran City, Bohol — Philippines
@@ -101,4 +103,4 @@
 </section>
 
 <!-- Hidden accessible h1 -->
-<h1 class="sr-only">Arjo Magno — Tattoo Artist & Software Developer</h1>
+<h1 class="sr-only">Arjo Magno — Full-Stack Developer, AI Engineer & Tattoo Artist</h1>

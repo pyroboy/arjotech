@@ -6,10 +6,16 @@
 
   const techStack = [
     { name: 'SvelteKit', icon: Code2 },
-    { name: 'React', icon: Code2 },
+    { name: 'Rust / Tauri', icon: Code2 },
     { name: 'TypeScript', icon: Code2 },
+    { name: 'Claude API', icon: Code2 },
+    { name: 'Groq / LLMs', icon: Code2 },
+    { name: 'Neon', icon: Database },
+    { name: 'RxDB', icon: Database },
+    { name: 'SpacetimeDB', icon: Database },
     { name: 'Cloudflare', icon: Globe },
-    { name: 'PostgreSQL', icon: Database },
+    { name: 'DuckDB', icon: Database },
+    { name: 'Three.js', icon: Globe },
     { name: 'Tailwind', icon: Code2 }
   ];
 
@@ -53,10 +59,10 @@
 <section class="bg-surface-900 px-6 py-20">
   <div class="max-w-6xl mx-auto">
     <div class="mb-20">
-      <p class="text-tech-500/80 font-mono text-sm tracking-widest uppercase mb-3">Full-Stack Developer</p>
+      <p class="text-tech-500/80 font-mono text-sm tracking-widest uppercase mb-3">Full-Stack Developer & AI Engineer</p>
       <h1 class="font-display text-5xl md:text-6xl font-bold text-white mb-6">Software I've Built</h1>
       <p class="text-zinc-400 text-lg max-w-2xl leading-relaxed">
-        Complex web apps, AI chatbots, booking platforms, POS systems, SaaS — shipped and running in production. I build on the most modern stack available: Svelte 5, SvelteKit, Neon, RxDB, SpacetimeDB, Cloudflare. Everything end-to-end: database schema, API routes, UI design, and deployment.
+        LLM-powered conversational agents, AI orchestration harnesses, complex SaaS, POS systems, real-time dashboards — shipped and running in production. I build on the most modern stack available: Svelte 5, Rust/Tauri, Neon, RxDB, SpacetimeDB, Claude API, Groq, Cloudflare. Everything end-to-end: model integration, database schema, API routes, UI design, and deployment.
       </p>
     </div>
   </div>
@@ -138,12 +144,11 @@
     <div class="mb-16">
       <h2 class="font-display text-4xl font-bold text-white mb-4">Technologies I Work With</h2>
       <p class="text-zinc-400 text-lg max-w-2xl">
-        I specialize in modern full-stack development with a focus on performance, user experience,
-        and scalability.
+        Modern full-stack development, AI/LLM integration, and systems programming. I pick the most capable tool for each layer — from Rust for performance-critical backends to Claude and Groq for intelligent agent behavior.
       </p>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+    <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
       {#each techStack as tech}
         <div class="bg-surface-900 border border-zinc-800/50 rounded-lg p-6 flex flex-col items-center gap-3 hover:border-tech-500/30 transition-colors">
           <div class="w-10 h-10 rounded-lg bg-tech-500/10 border border-tech-500/20 flex items-center justify-center">

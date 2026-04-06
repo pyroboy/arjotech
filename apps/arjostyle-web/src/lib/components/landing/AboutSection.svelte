@@ -12,14 +12,15 @@
     <div class="flex-1 text-center md:text-left">
       <div class="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-3">
         <h2 class="text-white font-semibold text-lg">Arturo Jose Magno</h2>
-        <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-tech-500/10 border border-tech-500/20 text-tech-400">Full-stack Developer</span>
+        <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-tech-500/10 border border-tech-500/20 text-tech-400">Full-Stack Developer</span>
+        <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400">AI Engineer</span>
         <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-zinc-800 border border-zinc-700 text-zinc-400">Philippines</span>
       </div>
       <p class="text-zinc-400 leading-relaxed max-w-2xl">
-        Full-stack developer with a designer's eye — I build complete production systems from schema to pixel, and I can draw and paint what I can't find in a library. I work on the most modern stack available: <span class="text-white">Svelte 5</span>, <span class="text-white">Neon</span>, <span class="text-white">RxDB</span>, <span class="text-white">SpacetimeDB</span>, and edge-first on <span class="text-white">Cloudflare</span>. Complex web apps, AI chatbots, booking systems, real-time dashboards, POS, SaaS — if it runs in a browser, I ship it.
+        Full-stack developer and AI engineer with a designer's eye. I build production systems end-to-end — from database schema to deployed pixel — and I can draw and paint what I can't find in a library. I build on the most modern stack: <span class="text-white">Svelte 5</span>, <span class="text-white">Neon</span>, <span class="text-white">RxDB</span>, <span class="text-white">SpacetimeDB</span>, edge-first on <span class="text-white">Cloudflare</span>. From LLM-powered conversational agents and AI orchestration harnesses to complex SaaS, POS systems, and real-time dashboards — if it runs in a browser or talks to a model, I ship it.
       </p>
       <div class="flex flex-wrap justify-center md:justify-start gap-2 mt-4" use:scrollReveal={{ y: 15, stagger: 0.05, children: true, delay: 0.2 }}>
-        {#each ['Svelte 5', 'SvelteKit', 'TypeScript', 'RxDB', 'Neon', 'SpacetimeDB', 'Cloudflare', 'Three.js', 'AI/LLM'] as skill}
+        {#each ['Svelte 5', 'SvelteKit', 'TypeScript', 'Rust/Tauri', 'RxDB', 'Neon', 'SpacetimeDB', 'Cloudflare', 'Claude API', 'Groq', 'AI Agents'] as skill}
           <span class="text-xs px-2.5 py-1 bg-zinc-900 border border-zinc-800 text-zinc-400 rounded-lg font-mono">{skill}</span>
         {/each}
       </div>
