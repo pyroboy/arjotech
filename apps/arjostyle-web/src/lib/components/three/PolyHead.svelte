@@ -1,6 +1,5 @@
 <script lang="ts">
   import { T, useTask } from '@threlte/core';
-  import { useGltf } from '@threlte/extras';
   import * as THREE from 'three';
   import { onMount } from 'svelte';
 
@@ -16,43 +15,38 @@
     mouseY = 0
   }: Props = $props();
 
-  let headGroup = $state<THREE.Group | null>(null);
+  let group = $state<THREE.Group | null>(null);
   let brainLight1 = $state<THREE.PointLight | null>(null);
   let brainLight2 = $state<THREE.PointLight | null>(null);
   let brainLight3 = $state<THREE.PointLight | null>(null);
   let brainMesh = $state<THREE.Mesh | null>(null);
 
-  // Load the head model
-  const gltf = useGltf('/models/head.glb');
-
-  // Build the brain geometry once mounted
   let brainGeometry = $state<THREE.IcosahedronGeometry | null>(null);
   let neuralLines = $state<THREE.BufferGeometry | null>(null);
 
   onMount(() => {
-    // Brain inner mesh — sized to nearly fill the skull
-    const brainGeo = new THREE.IcosahedronGeometry(0.09, 2);
-    const brainPos = brainGeo.attributes.position;
-    for (let i = 0; i < brainPos.count; i++) {
-      brainPos.setXYZ(
+    // Brain mesh — organic icosahedron with displaced vertices
+    const geo = new THREE.IcosahedronGeometry(1.4, 2);
+    const pos = geo.attributes.position;
+    for (let i = 0; i < pos.count; i++) {
+      pos.setXYZ(
         i,
-        brainPos.getX(i) + (Math.random() - 0.5) * 0.006,
-        brainPos.getY(i) + (Math.random() - 0.5) * 0.006,
-        brainPos.getZ(i) + (Math.random() - 0.5) * 0.006
+        pos.getX(i) + (Math.random() - 0.5) * 0.12,
+        pos.getY(i) + (Math.random() - 0.5) * 0.12,
+        pos.getZ(i) + (Math.random() - 0.5) * 0.12
       );
     }
-    brainGeo.computeVertexNormals();
-    brainGeometry = brainGeo;
+    geo.computeVertexNormals();
+    brainGeometry = geo;
 
-    // Neural connection lines
+    // Neural connection lines — 50 random connections between brain vertices
     const linePositions: number[] = [];
-    const verts = brainGeo.attributes.position;
     for (let i = 0; i < 50; i++) {
-      const a = Math.floor(Math.random() * verts.count);
-      const b = Math.floor(Math.random() * verts.count);
+      const a = Math.floor(Math.random() * pos.count);
+      const b = Math.floor(Math.random() * pos.count);
       linePositions.push(
-        verts.getX(a), verts.getY(a), verts.getZ(a),
-        verts.getX(b), verts.getY(b), verts.getZ(b)
+        pos.getX(a), pos.getY(a), pos.getZ(a),
+        pos.getX(b), pos.getY(b), pos.getZ(b)
       );
     }
     const lineGeo = new THREE.BufferGeometry();
@@ -60,196 +54,141 @@
     neuralLines = lineGeo;
   });
 
-  // Process loaded model — convert to wireframe
-  let headMeshes = $state<THREE.Mesh[]>([]);
-
-  $effect(() => {
-    if (!$gltf) return;
-    const meshes: THREE.Mesh[] = [];
-    $gltf.scene.traverse((child: THREE.Object3D) => {
-      if ((child as THREE.Mesh).isMesh) {
-        const mesh = child as THREE.Mesh;
-        meshes.push(mesh);
-      }
-    });
-    headMeshes = meshes;
-  });
-
-  // Smooth mouse tracking
   let smoothMouseX = 0;
   let smoothMouseY = 0;
 
   useTask(() => {
-    if (!headGroup) return;
+    if (!group) return;
 
     smoothMouseX += (mouseX - smoothMouseX) * 0.03;
     smoothMouseY += (mouseY - smoothMouseY) * 0.03;
 
-    // Scroll-driven head tilt
+    // Scroll tilt — looks down as you scroll
     const scrollTilt = scrollProgress * 0.5;
-    headGroup.rotation.x = scrollTilt + smoothMouseY * 0.12;
-    headGroup.rotation.y = smoothMouseX * 0.2;
+    group.rotation.x = scrollTilt + smoothMouseY * 0.15;
+    group.rotation.y = smoothMouseX * 0.25;
 
+    // Idle breathing
     const time = performance.now() * 0.001;
-    headGroup.rotation.z = Math.sin(time * 0.3) * 0.015;
+    group.rotation.z = Math.sin(time * 0.3) * 0.02;
 
-    // Brain lights pulse
+    // Pulsing brain lights
     if (brainLight1) {
-      brainLight1.intensity = 2.0 + Math.sin(time * 2.0) * 1.2;
+      brainLight1.intensity = 2.5 + Math.sin(time * 2.0) * 1.5;
     }
     if (brainLight2) {
-      brainLight2.intensity = 1.5 + Math.sin(time * 3.0 + 1) * 0.8;
-      brainLight2.position.x = Math.sin(time * 0.8) * 0.03;
-      brainLight2.position.z = Math.cos(time * 0.8) * 0.03;
+      brainLight2.intensity = 1.8 + Math.sin(time * 3.0 + 1) * 1.0;
+      brainLight2.position.x = Math.sin(time * 0.8) * 0.4;
+      brainLight2.position.z = Math.cos(time * 0.8) * 0.4;
     }
     if (brainLight3) {
-      brainLight3.intensity = 1.0 + Math.sin(time * 1.5 + 2) * 0.6;
-      brainLight3.position.x = Math.cos(time * 0.6) * 0.04;
-      brainLight3.position.z = Math.sin(time * 0.6) * 0.02;
+      brainLight3.intensity = 1.2 + Math.sin(time * 1.5 + 2) * 0.8;
+      brainLight3.position.x = Math.cos(time * 0.6) * 0.5;
+      brainLight3.position.z = Math.sin(time * 0.6) * 0.3;
     }
 
     // Brain emissive pulse
     if (brainMesh) {
       const mat = brainMesh.material as THREE.MeshStandardMaterial;
-      mat.emissiveIntensity = 0.4 + Math.sin(time * 2.0) * 0.3;
+      mat.emissiveIntensity = 0.4 + Math.sin(time * 2.0) * 0.25;
     }
   });
 </script>
 
-<T.Group bind:ref={headGroup} position={[0, -0.1, 0]} scale={[1.8, 1.8, 1.8]}>
-  <!-- Head wireframe from GLTF model -->
-  {#each headMeshes as mesh}
-    <!-- Primary wireframe -->
-    <T.Mesh geometry={mesh.geometry}>
+<T.Group bind:ref={group} position={[0, 0.2, 0]}>
+  {#if brainGeometry}
+    <!-- Brain wireframe -->
+    <T.Mesh bind:ref={brainMesh}>
+      <T is={brainGeometry} />
       <T.MeshStandardMaterial
         wireframe={true}
         transparent={true}
-        opacity={0.2}
-        color={new THREE.Color('#94a3b8')}
-        emissive={new THREE.Color('#06b6d4')}
-        emissiveIntensity={0.08}
-      />
-    </T.Mesh>
-
-    <!-- Faint solid fill for depth -->
-    <T.Mesh geometry={mesh.geometry}>
-      <T.MeshStandardMaterial
-        transparent={true}
-        opacity={0.025}
-        color={new THREE.Color('#0c4a6e')}
-        side={THREE.BackSide}
-      />
-    </T.Mesh>
-
-    <!-- Subtle edge highlight -->
-    <T.Mesh geometry={mesh.geometry}>
-      <T.MeshStandardMaterial
-        transparent={true}
-        opacity={0.04}
+        opacity={0.35}
         color={new THREE.Color('#06b6d4')}
         emissive={new THREE.Color('#06b6d4')}
-        emissiveIntensity={0.15}
-        side={THREE.FrontSide}
+        emissiveIntensity={0.4}
       />
     </T.Mesh>
-  {/each}
 
-  <!-- Brain group — positioned inside upper skull -->
-  {#if brainGeometry}
-    <T.Group position={[0, 0.08, 0.01]}>
-      <!-- Brain wireframe mesh -->
-      <T.Mesh bind:ref={brainMesh}>
-        <T is={brainGeometry} />
-        <T.MeshStandardMaterial
-          wireframe={true}
-          transparent={true}
-          opacity={0.5}
-          color={new THREE.Color('#06b6d4')}
-          emissive={new THREE.Color('#06b6d4')}
-          emissiveIntensity={0.4}
-        />
-      </T.Mesh>
-
-      <!-- Brain glow core (orange) -->
-      <T.Mesh scale={[0.6, 0.6, 0.6]}>
-        <T.IcosahedronGeometry args={[0.09, 0]} />
-        <T.MeshStandardMaterial
-          transparent={true}
-          opacity={0.12}
-          color={new THREE.Color('#ea580c')}
-          emissive={new THREE.Color('#ea580c')}
-          emissiveIntensity={1.0}
-        />
-      </T.Mesh>
-
-      <!-- Second glow core (purple) -->
-      <T.Mesh scale={[0.4, 0.4, 0.4]} position={[0.015, 0.015, 0]}>
-        <T.IcosahedronGeometry args={[0.09, 0]} />
-        <T.MeshStandardMaterial
-          transparent={true}
-          opacity={0.08}
-          color={new THREE.Color('#8b5cf6')}
-          emissive={new THREE.Color('#8b5cf6')}
-          emissiveIntensity={0.8}
-        />
-      </T.Mesh>
-
-      <!-- Neural connection lines -->
-      {#if neuralLines}
-        <T.LineSegments>
-          <T is={neuralLines} />
-          <T.LineBasicMaterial
-            transparent={true}
-            opacity={0.2}
-            color={new THREE.Color('#22d3ee')}
-          />
-        </T.LineSegments>
-      {/if}
-
-      <!-- Brain lights — pulsing from inside -->
-      <T.PointLight
-        bind:ref={brainLight1}
-        color={new THREE.Color('#06b6d4')}
-        intensity={3.0}
-        distance={0.8}
-        decay={2}
-        position={[0, 0.03, 0]}
-      />
-      <T.PointLight
-        bind:ref={brainLight2}
+    <!-- Orange glow core -->
+    <T.Mesh scale={[0.55, 0.55, 0.55]}>
+      <T.IcosahedronGeometry args={[1.4, 0]} />
+      <T.MeshStandardMaterial
+        transparent={true}
+        opacity={0.1}
         color={new THREE.Color('#ea580c')}
-        intensity={2.0}
-        distance={0.6}
-        decay={2}
-        position={[0.04, 0, 0.03]}
+        emissive={new THREE.Color('#ea580c')}
+        emissiveIntensity={1.0}
       />
-      <T.PointLight
-        bind:ref={brainLight3}
+    </T.Mesh>
+
+    <!-- Purple glow core -->
+    <T.Mesh scale={[0.4, 0.4, 0.4]} position={[0.15, 0.15, 0]}>
+      <T.IcosahedronGeometry args={[1.4, 0]} />
+      <T.MeshStandardMaterial
+        transparent={true}
+        opacity={0.08}
         color={new THREE.Color('#8b5cf6')}
-        intensity={1.5}
-        distance={0.5}
-        decay={2}
-        position={[-0.03, 0.015, -0.03]}
+        emissive={new THREE.Color('#8b5cf6')}
+        emissiveIntensity={0.9}
       />
-    </T.Group>
+    </T.Mesh>
+
+    <!-- Neural connection lines -->
+    {#if neuralLines}
+      <T.LineSegments>
+        <T is={neuralLines} />
+        <T.LineBasicMaterial
+          transparent={true}
+          opacity={0.2}
+          color={new THREE.Color('#22d3ee')}
+        />
+      </T.LineSegments>
+    {/if}
+
+    <!-- Pulsing brain lights -->
+    <T.PointLight
+      bind:ref={brainLight1}
+      color={new THREE.Color('#06b6d4')}
+      intensity={2.5}
+      distance={5}
+      decay={2}
+      position={[0, 0.3, 0]}
+    />
+    <T.PointLight
+      bind:ref={brainLight2}
+      color={new THREE.Color('#ea580c')}
+      intensity={1.8}
+      distance={4}
+      decay={2}
+      position={[0.4, 0, 0.3]}
+    />
+    <T.PointLight
+      bind:ref={brainLight3}
+      color={new THREE.Color('#8b5cf6')}
+      intensity={1.2}
+      distance={3.5}
+      decay={2}
+      position={[-0.3, 0.15, -0.3]}
+    />
   {/if}
 
-  <!-- Orbiting ring around head -->
-  <T.Mesh rotation.x={Math.PI / 2} position={[0, 0.04, 0]}>
-    <T.TorusGeometry args={[0.18, 0.0008, 8, 64]} />
+  <!-- Orbiting ring -->
+  <T.Mesh rotation.x={Math.PI / 2} position={[0, 0, 0]}>
+    <T.TorusGeometry args={[2.0, 0.008, 8, 64]} />
     <T.MeshBasicMaterial
       transparent={true}
-      opacity={0.15}
+      opacity={0.12}
       color={new THREE.Color('#06b6d4')}
     />
   </T.Mesh>
 
   <!-- Second ring tilted -->
-  <T.Mesh rotation.x={1.2} rotation.z={0.4} position={[0, 0.05, 0]}>
-    <T.TorusGeometry args={[0.16, 0.0006, 8, 64]} />
+  <T.Mesh rotation.x={1.2} rotation.z={0.4} position={[0, 0.1, 0]}>
+    <T.TorusGeometry args={[1.8, 0.006, 8, 64]} />
     <T.MeshBasicMaterial
       transparent={true}
-      opacity={0.1}
+      opacity={0.08}
       color={new THREE.Color('#ea580c')}
     />
   </T.Mesh>
