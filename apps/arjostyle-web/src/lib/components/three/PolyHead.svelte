@@ -30,8 +30,8 @@
   let neuralLines = $state<THREE.BufferGeometry | null>(null);
 
   onMount(() => {
-    // Brain inner mesh
-    const brainGeo = new THREE.IcosahedronGeometry(0.065, 1);
+    // Brain inner mesh — sized to nearly fill the skull
+    const brainGeo = new THREE.IcosahedronGeometry(0.09, 2);
     const brainPos = brainGeo.attributes.position;
     for (let i = 0; i < brainPos.count; i++) {
       brainPos.setXYZ(
@@ -116,7 +116,7 @@
   });
 </script>
 
-<T.Group bind:ref={headGroup} position={[0, -0.3, 0]} scale={[4, 4, 4]}>
+<T.Group bind:ref={headGroup} position={[0, -0.1, 0]} scale={[1.8, 1.8, 1.8]}>
   <!-- Head wireframe from GLTF model -->
   {#each headMeshes as mesh}
     <!-- Primary wireframe -->
@@ -171,8 +171,8 @@
       </T.Mesh>
 
       <!-- Brain glow core (orange) -->
-      <T.Mesh scale={[0.5, 0.5, 0.5]}>
-        <T.IcosahedronGeometry args={[0.065, 0]} />
+      <T.Mesh scale={[0.6, 0.6, 0.6]}>
+        <T.IcosahedronGeometry args={[0.09, 0]} />
         <T.MeshStandardMaterial
           transparent={true}
           opacity={0.12}
@@ -183,8 +183,8 @@
       </T.Mesh>
 
       <!-- Second glow core (purple) -->
-      <T.Mesh scale={[0.35, 0.35, 0.35]} position={[0.01, 0.01, 0]}>
-        <T.IcosahedronGeometry args={[0.065, 0]} />
+      <T.Mesh scale={[0.4, 0.4, 0.4]} position={[0.015, 0.015, 0]}>
+        <T.IcosahedronGeometry args={[0.09, 0]} />
         <T.MeshStandardMaterial
           transparent={true}
           opacity={0.08}
@@ -210,26 +210,26 @@
       <T.PointLight
         bind:ref={brainLight1}
         color={new THREE.Color('#06b6d4')}
-        intensity={2.0}
-        distance={0.5}
+        intensity={3.0}
+        distance={0.8}
         decay={2}
-        position={[0, 0.02, 0]}
+        position={[0, 0.03, 0]}
       />
       <T.PointLight
         bind:ref={brainLight2}
         color={new THREE.Color('#ea580c')}
-        intensity={1.5}
-        distance={0.4}
+        intensity={2.0}
+        distance={0.6}
         decay={2}
-        position={[0.03, 0, 0.02]}
+        position={[0.04, 0, 0.03]}
       />
       <T.PointLight
         bind:ref={brainLight3}
         color={new THREE.Color('#8b5cf6')}
-        intensity={1.0}
-        distance={0.35}
+        intensity={1.5}
+        distance={0.5}
         decay={2}
-        position={[-0.02, 0.01, -0.02]}
+        position={[-0.03, 0.015, -0.03]}
       />
     </T.Group>
   {/if}
