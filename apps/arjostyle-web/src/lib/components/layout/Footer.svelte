@@ -70,6 +70,7 @@
           <li><a href="/testimonials" class="text-sm text-zinc-400 hover:text-white transition-colors">Testimonials</a></li>
           <li><a href="/faq" class="text-sm text-zinc-400 hover:text-white transition-colors">FAQ</a></li>
           <li><a href="/aftercare" class="text-sm text-zinc-400 hover:text-white transition-colors">Aftercare</a></li>
+          <li><a href="/socials" class="text-sm text-zinc-400 hover:text-white transition-colors">Socials</a></li>
         </ul>
       </div>
 
