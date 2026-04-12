@@ -35,8 +35,8 @@
 
 <section class="relative h-[100dvh] flex items-center justify-center overflow-hidden bg-surface-900">
   <!-- Background gradient blobs -->
-  <GradientBlob color="bg-ink-500/15" size="w-[800px] h-[800px]" position="-top-40 -left-40" delay={0} />
-  <GradientBlob color="bg-tech-500/10" size="w-[700px] h-[700px]" position="-bottom-40 -right-40" delay={5} />
+  <GradientBlob color="bg-ink-500/15" size="w-[400px] h-[400px] md:w-[800px] md:h-[800px]" position="-top-40 -left-40" delay={0} />
+  <GradientBlob color="bg-tech-500/10" size="w-[350px] h-[350px] md:w-[700px] md:h-[700px]" position="-bottom-40 -right-40" delay={5} />
   <GradientBlob color="bg-ink-500/5" size="w-[400px] h-[400px]" position="top-1/3 right-1/4" delay={10} />
 
   <!-- 3D Scene (lazy-loaded, browser-only) -->
@@ -50,14 +50,14 @@
     <TextReveal
       text="ARJO MAGNO"
       tag="h2"
-      class="font-display text-6xl md:text-8xl lg:text-9xl font-bold text-white tracking-tight leading-none"
+      class="font-display text-4xl sm:text-5xl md:text-8xl lg:text-9xl font-bold text-white tracking-tight leading-none"
       delay={0.3}
       stagger={0.04}
     />
 
     <!-- Subtitles -->
     <div class="mt-6 space-y-2 transition-all duration-700 {subtitleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}">
-      <p class="text-xl md:text-2xl text-zinc-300 font-light">
+      <p class="text-sm md:text-xl text-zinc-300 font-light leading-relaxed">
         <span class="text-ink-400">Tattoo Artist</span>
         <span class="text-zinc-600 mx-3">·</span>
         <span class="text-tech-400">Full-Stack Developer</span>

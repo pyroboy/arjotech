@@ -29,7 +29,7 @@
     <div class="grid grid-cols-3 md:grid-cols-6 gap-1.5 md:gap-2" use:scrollReveal={{ y: 30, scale: 0.95, stagger: 0.06, children: true }}>
       {#each images.slice(0, 6) as src, i}
         <a href="/tattoo"
-          class="relative aspect-square overflow-hidden rounded-lg bg-zinc-900 group {i === 0 ? 'col-span-2 row-span-2' : ''}">
+          class="relative aspect-square overflow-hidden rounded-lg bg-zinc-900 group {i === 0 ? 'md:col-span-2 md:row-span-2' : ''}">
           {#if !imageLoaded[i]}
             <div class="absolute inset-0 bg-zinc-800 animate-pulse rounded-lg z-10">
               <div class="absolute inset-0 bg-gradient-to-br from-zinc-700/30 to-transparent"></div>

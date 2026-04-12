@@ -12,7 +12,7 @@
 
 <section class="bg-surface-800 border-b border-zinc-800/50 px-6 py-10">
   <div class="max-w-5xl mx-auto">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-zinc-800/60 rounded-xl overflow-hidden" use:scrollReveal={{ y: 30, stagger: 0.12, children: true }}>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-0 md:gap-px bg-zinc-800/60 rounded-xl overflow-hidden" use:scrollReveal={{ y: 30, stagger: 0.12, children: true }}>
       {#each metrics as metric}
         <div class="flex flex-col items-center gap-2 px-6 py-8 bg-surface-800">
           <span class="text-xs font-mono tracking-[0.4em] {metric.color} uppercase mb-1">{metric.label}</span>

@@ -19,7 +19,7 @@
     <button
       use:magnetic
       onclick={onBook}
-      class="inline-flex items-center gap-2 bg-ink-500 text-white px-10 py-4 rounded-full font-semibold hover:bg-ink-400 transition-colors text-lg active:scale-95 shadow-lg shadow-ink-500/20 hover:shadow-ink-500/40"
+      class="inline-flex items-center gap-2 bg-ink-500 text-white px-6 sm:px-10 py-3 sm:py-4 rounded-full font-semibold hover:bg-ink-400 transition-colors text-base sm:text-lg active:scale-95 shadow-lg shadow-ink-500/20 hover:shadow-ink-500/40"
     >
       Book a Session →
     </button>
