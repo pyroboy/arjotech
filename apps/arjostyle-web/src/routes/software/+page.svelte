@@ -41,7 +41,7 @@
       case 'prototype':
         return 'WIP';
       default:
-        return status.toUpperCase();
+        ((_: never) => 'WIP')(status);
     }
   }
 </script>

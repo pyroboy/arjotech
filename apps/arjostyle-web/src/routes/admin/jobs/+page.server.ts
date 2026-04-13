@@ -29,11 +29,14 @@ export const load: PageServerLoad = async () => {
 		.from(jobOpportunities)
 		.orderBy(desc(jobOpportunities.createdAt));
 
-	// Normalize remote: true → 'Remote', false → 'On-site', null/undefined → 'Unknown'
-	const normalized = jobs.map(j => ({
-		...j,
-		remote: j.remote === true ? 'Remote' : j.remote === false ? 'On-site' : 'Unknown',
-	}));
+	// Normalize remote: 'true'/'Remote' → 'Remote', 'false'/'On-site' → 'On-site', null/other → 'Unknown'
+	const normalized = jobs.map(j => {
+		const r = (j.remote ?? '').toLowerCase();
+		return {
+			...j,
+			remote: r === 'true' || r === 'remote' ? 'Remote' : r === 'false' || r === 'on-site' ? 'On-site' : 'Unknown',
+		};
+	});
 
 	return { jobs: normalized };
 };
