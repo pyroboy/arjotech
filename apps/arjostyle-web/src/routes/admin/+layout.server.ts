@@ -2,7 +2,8 @@ import type { LayoutServerLoad } from './$types';
 import { redirect } from '@sveltejs/kit';
 
 export const load: LayoutServerLoad = async ({ locals, cookies, url }) => {
-  if (url.pathname === '/admin/login') {
+  // Allow login page without auth
+  if (url.pathname === '/admin/login' || url.pathname === '/admin/logout') {
     return {};
   }
 

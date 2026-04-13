@@ -7,7 +7,7 @@ pages_build_output_dir = ".svelte-kit/cloudflare"
 NODE_ENV = "production"
 R2_PUBLIC_URL = "https://pub-96532b44a4674c75b7eca3f5ff1cc082.r2.dev"
 TURNSTILE_SITE_KEY = "0x4AAAAAAA_your_site_key"
-TURNSTILE_SECRET_KEY = "your_secret_key"
+BETTER_AUTH_URL = "https://arjostyle.com"
 
 [[r2_buckets]]
 binding = "ARJOSTYLE_BUCKET"
@@ -19,3 +19,7 @@ id = "0240826786b5457b86501077cab20526"
 
 [observability]
 enabled = true
+
+# Secrets (set via: wrangler secret put DATABASE_URL)
+# Run: wrangler secret put DATABASE_URL
+# And: wrangler secret put TURNSTISTLE_SECRET_KEY
