@@ -10,16 +10,8 @@
       <span class="font-display text-3xl text-tech font-bold">A</span>
     </div>
     <div class="flex-1 text-center md:text-left">
-<<<<<<< Updated upstream
-      <div class="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-3">
-        <h2 class="text-white font-semibold text-lg">Arturo Jose Magno</h2>
-        <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-tech-500/10 border border-tech-500/20 text-tech-400">Full-Stack Developer</span>
-        <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400">AI Engineer</span>
-        <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-zinc-800 border border-zinc-700 text-zinc-400">Bohol, Philippines</span>
-=======
       <div class="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-4">
         <h2 class="text-white font-display text-2xl tracking-wide">ARTURO JOSE MAGNO</h2>
->>>>>>> Stashed changes
       </div>
       <div class="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-4">
         <span class="text-[10px] font-mono px-2 py-1 border border-tech text-tech tracking-widest uppercase">Full-Stack Developer</span>

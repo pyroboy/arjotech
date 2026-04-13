@@ -18,11 +18,7 @@
     <p class="text-zinc-500 mb-10 max-w-lg mx-auto text-sm leading-relaxed">Use the interactive 3D body placement tool to explore options, get an instant price estimate, and book your session online.</p>
     <button
       onclick={onBook}
-<<<<<<< Updated upstream
-      class="inline-flex items-center gap-2 bg-ink-500 text-white px-6 sm:px-10 py-3 sm:py-4 rounded-full font-semibold hover:bg-ink-400 transition-colors text-base sm:text-lg active:scale-95 shadow-lg shadow-ink-500/20 hover:shadow-ink-500/40"
-=======
       class="inline-flex items-center gap-3 bg-red-500 text-white px-10 py-4 font-bold text-base hover:bg-red-600 transition-all duration-150 translate-y-0 hover:-translate-y-0.5"
->>>>>>> Stashed changes
     >
       BOOK A SESSION →
     </button>

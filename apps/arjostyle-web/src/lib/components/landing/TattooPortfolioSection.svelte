@@ -29,11 +29,7 @@
     <div class="grid grid-cols-3 md:grid-cols-6 gap-1" use:scrollReveal={{ y: 30, scale: 0.95, stagger: 0.06, children: true }}>
       {#each images.slice(0, 6) as src, i}
         <a href="/tattoo"
-<<<<<<< Updated upstream
-          class="relative aspect-square overflow-hidden rounded-lg bg-zinc-900 group {i === 0 ? 'md:col-span-2 md:row-span-2' : ''}">
-=======
           class="relative aspect-square overflow-hidden bg-elevated group {i === 0 ? 'col-span-2 row-span-2' : ''}">
->>>>>>> Stashed changes
           {#if !imageLoaded[i]}
             <div class="absolute inset-0 bg-dark z-10">
               <div class="absolute inset-0 bg-elevated animate-pulse"></div>
