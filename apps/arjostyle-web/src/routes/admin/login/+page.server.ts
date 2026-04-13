@@ -1,5 +1,6 @@
 import type { PageServerLoad, Actions } from './$types';
 import { redirect } from '@sveltejs/kit';
+import { verifyCredentials, createSession, SESSION_COOKIE_NAME } from '$lib/server/kv-session';
 
 const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY;
 
@@ -20,16 +21,16 @@ async function verifyTurnstile(token: string): Promise<boolean> {
   }
 }
 
-export const load: PageServerLoad = async ({ cookies }) => {
-  const sessionCookie = cookies.get('better-auth.session_token');
-  if (sessionCookie) {
+export const load: PageServerLoad = async ({ cookies, locals }) => {
+  const sessionToken = cookies.get(SESSION_COOKIE_NAME);
+  if (sessionToken && locals.session) {
     throw redirect(302, '/admin');
   }
   return {};
 };
 
 export const actions: Actions = {
-  default: async ({ request, locals, cookies }) => {
+  default: async ({ request, cookies, platform }) => {
     const formData = await request.formData();
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
@@ -39,7 +40,6 @@ export const actions: Actions = {
       return { error: 'Email and password are required' };
     }
 
-    // Skip Turnstile check if no token (allows local dev without Turnstile)
     if (turnstileToken) {
       const isValid = await verifyTurnstile(turnstileToken);
       if (!isValid) {
@@ -47,27 +47,26 @@ export const actions: Actions = {
       }
     }
 
-    try {
-      const auth = locals.auth;
-      if (!auth?.api?.signInEmail) {
-        return { error: 'Authentication not configured' };
-      }
+    const env = platform?.env ?? {};
+    const credentials = await verifyCredentials(env, email, password);
 
-      const result = await auth.api.signInEmail({
-        body: { email, password },
-        headers: { cookie: cookies.toString() }
-      });
-
-      if (result?.user) {
-        throw redirect(302, '/admin');
-      }
-
-      return { error: 'Invalid credentials' };
-    } catch (err: any) {
-      if (err.status === 302 || err?.redirect) {
-        throw redirect(302, '/admin');
-      }
-      return { error: err.message || 'Invalid email or password' };
+    if (!credentials) {
+      return { error: 'Invalid email or password' };
     }
+
+    const token = await createSession(env, credentials.userId);
+    if (!token) {
+      return { error: 'Session creation failed' };
+    }
+
+    cookies.set(SESSION_COOKIE_NAME, token, {
+      path: '/',
+      httpOnly: true,
+      secure: true,
+      sameSite: 'lax',
+      maxAge: 60 * 60 * 24 * 7,
+    });
+
+    throw redirect(302, '/admin');
   }
 };

@@ -18,7 +18,7 @@ declare global {
       caches: CacheStorage & { default: Cache };
     }
     interface Locals {
-      auth: ReturnType<typeof import('$lib/server/auth').createAuth>;
+      session: import('$lib/server/kv-session').SessionData | null;
     }
   }
 }

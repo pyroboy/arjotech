@@ -1,21 +1,15 @@
 import type { Actions } from './$types';
 import { redirect } from '@sveltejs/kit';
+import { deleteSession, SESSION_COOKIE_NAME } from '$lib/server/kv-session';
 
 export const actions: Actions = {
-  default: async ({ locals, cookies }) => {
-    const auth = locals.auth;
-    if (auth?.api?.signOut) {
-      try {
-        await auth.api.signOut({
-          headers: { cookie: cookies.toString() }
-        });
-      } catch (e) {
-        console.error('Sign out error:', e);
-      }
+  default: async ({ cookies, platform }) => {
+    const token = cookies.get(SESSION_COOKIE_NAME);
+    if (token) {
+      const env = platform?.env ?? {};
+      await deleteSession(env, token);
     }
-    // Clear the session cookie explicitly since better-auth's signOut
-    // response Set-Cookie header isn't automatically forwarded in form actions
-    cookies.delete('better-auth.session_token', { path: '/' });
+    cookies.delete(SESSION_COOKIE_NAME, { path: '/' });
     throw redirect(302, '/admin/login');
   }
 };
