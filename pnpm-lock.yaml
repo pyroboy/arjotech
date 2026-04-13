@@ -86,6 +86,9 @@ importers:
       three:
         specifier: ^0.174.0
         version: 0.174.0
+      vite:
+        specifier: ^5.4.0
+        version: 5.4.21(@types/node@22.19.17)
       zod:
         specifier: ^4.3.6
         version: 4.3.6
@@ -135,9 +138,6 @@ importers:
       typescript:
         specifier: ^5.5.3
         version: 5.9.3
-      vite:
-        specifier: ^5.4.0
-        version: 5.4.21(@types/node@22.19.17)
       vitest:
         specifier: ^2.0.0
         version: 2.1.9(@types/node@22.19.17)
