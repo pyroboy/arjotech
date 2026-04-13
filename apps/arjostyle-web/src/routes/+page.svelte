@@ -25,6 +25,9 @@
   <meta property="og:description" content="Building LLM-powered agents, complex web apps, and permanent art. Svelte 5, Rust, Claude API, Neon, Cloudflare." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://arjostyle.com/" />
+  <meta property="og:image" content="https://res.cloudinary.com/dexcw6vg0/image/upload/v1744505507/usvdknljttntfwcjzujg.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://res.cloudinary.com/dexcw6vg0/image/upload/v1744505507/usvdknljttntfwcjzujg.webp" />
 </svelte:head>
 
 <HeroRedesign />
