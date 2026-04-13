@@ -40,12 +40,13 @@ export const actions: Actions = {
       return { error: 'Email and password are required' };
     }
 
-    if (turnstileToken) {
-      const isValid = await verifyTurnstile(turnstileToken);
-      if (!isValid) {
-        return { error: 'Security check failed. Please try again.' };
-      }
-    }
+    // TODO: Re-enable Turnstile verification once TURNSTILE_SECRET_KEY is configured in Cloudflare Pages
+    // if (turnstileToken) {
+    //   const isValid = await verifyTurnstile(turnstileToken);
+    //   if (!isValid) {
+    //     return { error: 'Security check failed. Please try again.' };
+    //   }
+    // }
 
     const env = platform?.env ?? {};
     const credentials = await verifyCredentials(env, email, password);
