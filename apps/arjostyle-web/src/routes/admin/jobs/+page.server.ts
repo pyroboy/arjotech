@@ -4,7 +4,12 @@ import { jobOpportunities } from '$lib/db/schema';
 import { desc, eq } from 'drizzle-orm';
 
 export const load: PageServerLoad = async () => {
-	const db = createDb(process.env.DATABASE_URL!);
+	const DATABASE_URL = process.env.DATABASE_URL;
+	if (!DATABASE_URL) {
+		return { jobs: [], error: 'DATABASE_URL not configured' };
+	}
+
+	const db = createDb(DATABASE_URL);
 
 	const jobs = await db
 		.select({
@@ -43,7 +48,11 @@ export const load: PageServerLoad = async () => {
 
 export const actions: Actions = {
 	updateStatus: async ({ request }) => {
-		const db = createDb(process.env.DATABASE_URL!);
+		const DATABASE_URL = process.env.DATABASE_URL;
+		if (!DATABASE_URL) {
+			return { success: false, error: 'DATABASE_URL not configured' };
+		}
+		const db = createDb(DATABASE_URL);
 		const data = await request.formData();
 		const id = data.get('id') as string;
 		const status = data.get('status') as string;
