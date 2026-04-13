@@ -41,7 +41,7 @@
       case 'prototype':
         return 'WIP';
       default:
-        ((_: never) => 'WIP')(status);
+        return ((_: never) => 'WIP')(status);
     }
   }
 </script>
