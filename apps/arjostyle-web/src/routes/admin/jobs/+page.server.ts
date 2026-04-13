@@ -31,10 +31,25 @@ export const load: PageServerLoad = async ({ platform }) => {
 			.orderBy(desc(jobOpportunities.createdAt));
 
 		const normalized = jobs.map(j => {
-			const r = (j.remote ?? '').toLowerCase();
+			let remoteDisplay = 'Unknown';
+			if (typeof j.remote === 'boolean') {
+				remoteDisplay = j.remote ? 'Remote' : 'On-site';
+			} else if (typeof j.remote === 'string') {
+				const r = j.remote.toLowerCase();
+				remoteDisplay = r === 'true' || r === 'remote' ? 'Remote' : r === 'false' || r === 'on-site' ? 'On-site' : 'Unknown';
+			}
+
+			let tagsDisplay = '';
+			if (Array.isArray(j.yourTags)) {
+				tagsDisplay = (j.yourTags as string[]).join(', ');
+			} else if (typeof j.yourTags === 'string') {
+				tagsDisplay = j.yourTags;
+			}
+
 			return {
 				...j,
-				remote: r === 'true' || r === 'remote' ? 'Remote' : r === 'false' || r === 'on-site' ? 'On-site' : 'Unknown',
+				remote: remoteDisplay,
+				yourTags: tagsDisplay,
 			};
 		});
 
