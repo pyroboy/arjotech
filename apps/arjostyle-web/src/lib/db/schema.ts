@@ -463,6 +463,49 @@ export const jobOpportunities = pgTable('job_opportunities', {
 export type JobOpportunity = typeof jobOpportunities.$inferSelect;
 export type NewJobOpportunity = typeof jobOpportunities.$inferInsert;
 
+// ── Job Sources ────────────────────────────────────────────────────────────────
+
+export const jobSources = pgTable('job_sources', {
+	id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
+	createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+	updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+
+	name: text('name').notNull(),
+	baseUrl: text('base_url').notNull(),
+	searchPath: text('search_path'),
+	isActive: boolean('is_active').default(true).notNull(),
+	displayOrder: integer('display_order').default(0),
+});
+
+export type JobSource = typeof jobSources.$inferSelect;
+
+// ── Job Keywords ──────────────────────────────────────────────────────────────
+
+export const jobKeywords = pgTable('job_keywords', {
+	id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
+	createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+	updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+
+	keyword: text('keyword').notNull().unique(),
+	sourceId: uuid('source_id').references(() => jobSources.id, { onDelete: 'cascade' }),
+	isActive: boolean('is_active').default(true).notNull(),
+});
+
+export type JobKeyword = typeof jobKeywords.$inferSelect;
+
+// ── Job Tags ─────────────────────────────────────────────────────────────────
+
+export const jobTags = pgTable('job_tags', {
+	id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
+	createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+
+	name: text('name').notNull().unique(),
+	color: text('color').default('#fbbf24'),
+	category: text('category'),
+});
+
+export type JobTag = typeof jobTags.$inferSelect;
+
 // ── Type exports ──────────────────────────────────────────────────────────────
 
 export type MediaAsset = typeof mediaAssets.$inferSelect;
