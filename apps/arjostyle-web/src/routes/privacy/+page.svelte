@@ -2,7 +2,10 @@
   <title>Privacy Policy — Arjo Magno</title>
 </svelte:head>
 
-<div class="min-h-screen bg-surface-900 px-6 py-20 max-w-2xl mx-auto prose prose-invert">
-  <h1 class="font-display text-4xl text-white not-prose mb-8">Privacy Policy</h1>
-  <p>Privacy policy content coming soon.</p>
+<div class="min-h-screen bg-dark px-6 py-20">
+  <div class="max-w-2xl mx-auto">
+    <p class="text-ink text-[10px] font-mono uppercase tracking-[0.3em] mb-4">Legal</p>
+    <h1 class="font-display text-5xl text-white mb-8 tracking-wide">PRIVACY POLICY</h1>
+    <p class="text-zinc-500 font-mono text-sm leading-relaxed">Privacy policy content coming soon.</p>
+  </div>
 </div>

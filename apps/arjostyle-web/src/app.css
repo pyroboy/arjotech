@@ -1,4 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+/* ==========================================================================
+   ARJOSTYLE — BOLD BRUTALIST DESIGN SYSTEM
+   Deep dark, sharp corners, oversized typography, editorial feel
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,172 +11,438 @@
 
 @layer base {
   :root {
-    --background: 240 10% 4%;
-    --foreground: 0 0% 98%;
-    --surface: 240 5% 10%;
-    --border: 240 4% 16%;
-    --ink-accent: 25 95% 53%;
-    --tech-accent: 189 94% 43%;
+    /* Core palette — deep dark, no warmth */
+    --bg-dark: #0A0A0F;
+    --bg-surface: #111116;
+    --bg-elevated: #18181D;
+    
+    /* Accent colors */
+    --ink: #f97316;
+    --ink-dim: #ea580c;
+    --tech: #06b6d4;
+    --tech-dim: #0891b2;
+    --red: #FF4D4D;
+    --red-dim: #dc2626;
+    
+    /* Borders & lines */
+    --border: #27272A;
+    --border-light: #3f3f46;
+    
+    /* Text */
+    --text-primary: #fafafa;
+    --text-secondary: #a1a1aa;
+    --text-muted: #71717a;
+    
+    /* Typography */
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    
+    /* Animation */
+    --ease-brutal: cubic-bezier(0.25, 0, 0, 1);
+    --duration-fast: 150ms;
+    --duration-normal: 250ms;
   }
 
+  /* Reset & base */
   * {
-    @apply border-zinc-800;
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-light) var(--bg-dark);
   }
 
   body {
-    @apply bg-surface-900 text-zinc-100;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Noise texture background */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    background-attachment: fixed;
   }
 
+  /* Selection */
   ::selection {
-    @apply bg-ink-500/30 text-white;
+    background-color: var(--ink);
+    color: white;
   }
-}
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-light);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+  }
+
+  /* Focus states */
+  :focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+  }
+
+  /* Typography defaults */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: 0.02em;
+    line-height: 1;
   }
 }
 
 /* ==========================================================================
-   Utility Classes — Dark-theme design tokens for arjostyle booking flow
+   Utility Classes — Brutalist Design Tokens
    ========================================================================== */
 
-/* --- Glassmorphism panels for overlays on dark backgrounds --- */
-.glass-panel {
-  background: rgba(24, 24, 27, 0.80);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+@layer utilities {
+  /* Text balance */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Brutalist card — sharp, no radius, hard border */
+  .brutal-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    transition: border-color var(--duration-normal) var(--ease-brutal),
+                background-color var(--duration-normal) var(--ease-brutal);
+  }
+  .brutal-card:hover {
+    border-color: var(--border-light);
+    background: var(--bg-elevated);
+  }
+
+  /* Brutalist button */
+  .brutal-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.02em;
+    border: none;
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-brutal);
+  }
+  .brutal-btn-primary {
+    background: var(--red);
+    color: white;
+  }
+  .brutal-btn-primary:hover {
+    background: var(--red-dim);
+    transform: translateY(-2px);
+  }
+  .brutal-btn-primary:active {
+    transform: translateY(0);
+  }
+  .brutal-btn-secondary {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border-light);
+  }
+  .brutal-btn-secondary:hover {
+    border-color: var(--text-primary);
+    background: var(--bg-elevated);
+  }
+  .brutal-btn-ink {
+    background: var(--ink);
+    color: white;
+  }
+  .brutal-btn-ink:hover {
+    background: var(--ink-dim);
+    transform: translateY(-2px);
+  }
+  .brutal-btn-tech {
+    background: var(--tech);
+    color: var(--bg-dark);
+  }
+  .brutal-btn-tech:hover {
+    background: var(--tech-dim);
+    transform: translateY(-2px);
+  }
+
+  /* Input fields */
+  .brutal-input {
+    background: var(--bg-dark);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    padding: 0.75rem 1rem;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    transition: border-color var(--duration-fast) var(--ease-brutal);
+  }
+  .brutal-input:focus {
+    border-color: var(--ink);
+    outline: none;
+  }
+  .brutal-input::placeholder {
+    color: var(--text-muted);
+  }
+
+  /* Tag/Badge */
+  .brutal-tag {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    color: var(--text-secondary);
+  }
+  .brutal-tag-ink {
+    border-color: var(--ink);
+    color: var(--ink);
+    background: rgba(249, 115, 22, 0.1);
+  }
+  .brutal-tag-tech {
+    border-color: var(--tech);
+    color: var(--tech);
+    background: rgba(6, 182, 212, 0.1);
+  }
+  .brutal-tag-red {
+    border-color: var(--red);
+    color: var(--red);
+    background: rgba(255, 77, 77, 0.1);
+  }
 }
 
-.glass-panel-light {
-  background: rgba(24, 24, 27, 0.60);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+/* ==========================================================================
+   Animation Keyframes — Snappy, Brutalist
+   ========================================================================== */
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* --- Ink accent glow for buttons and active elements --- */
-.glow-ink {
-  box-shadow: 0 0 12px rgba(234, 88, 12, 0.25), 0 0 4px rgba(234, 88, 12, 0.1);
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.glow-ink-lg {
-  box-shadow: 0 0 20px rgba(234, 88, 12, 0.3), 0 0 8px rgba(234, 88, 12, 0.15);
-}
-
-.glow-ink-hover:hover {
-  box-shadow: 0 0 24px rgba(234, 88, 12, 0.35), 0 0 8px rgba(234, 88, 12, 0.2);
-}
-
-/* --- Enhanced input focus state with subtle glow --- */
-.input-focus-glow:focus {
-  border-color: rgb(234, 88, 12);
-  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15);
-  outline: none;
-}
-
-.input-focus-glow:focus-within {
-  border-color: rgb(234, 88, 12);
-  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15);
-}
-
-/* --- Subtle depth gradient for 3D model backgrounds --- */
-.bg-depth-gradient {
-  background: radial-gradient(ellipse at 50% 40%, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
-}
-
-/* --- Animation keyframes --- */
-
-/* Scale-in animation for checkmarks and badges */
 @keyframes scaleIn {
-  0% { transform: scale(0); opacity: 0; }
-  60% { transform: scale(1.15); }
-  100% { transform: scale(1); opacity: 1; }
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-/* Subtle pulse for active/pending elements */
-@keyframes subtlePulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+@keyframes borderPulse {
+  0%, 100% { border-color: var(--border); }
+  50% { border-color: var(--border-light); }
 }
 
-/* Count-up fade for price changes */
-@keyframes fadeInUp {
-  0% { opacity: 0; transform: translateY(4px); }
-  100% { opacity: 1; transform: translateY(0); }
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Animation utilities */
+.animate-slide-up {
+  animation: slideUp var(--duration-normal) var(--ease-brutal) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn var(--duration-normal) var(--ease-brutal) forwards;
 }
 
 .animate-scale-in {
-  animation: scaleIn 0.3s ease-out forwards;
+  animation: scaleIn var(--duration-normal) var(--ease-brutal) forwards;
 }
 
-.animate-subtle-pulse {
-  animation: subtlePulse 2s ease-in-out infinite;
+.animate-border-pulse {
+  animation: borderPulse 2s ease-in-out infinite;
 }
 
-.animate-fade-in-up {
-  animation: fadeInUp 0.3s ease-out forwards;
+.animate-slide-in-left {
+  animation: slideInLeft var(--duration-normal) var(--ease-brutal) forwards;
 }
 
-/* --- Booking flow typography hierarchy --- */
+.animate-slide-in-right {
+  animation: slideInRight var(--duration-normal) var(--ease-brutal) forwards;
+}
+
+/* Stagger children */
+.stagger-children > * {
+  opacity: 0;
+  animation: slideUp var(--duration-normal) var(--ease-brutal) forwards;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 50ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 100ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 150ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 200ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 250ms; }
+.stagger-children > *:nth-child(7) { animation-delay: 300ms; }
+.stagger-children > *:nth-child(8) { animation-delay: 350ms; }
+.stagger-children > *:nth-child(9) { animation-delay: 400ms; }
+.stagger-children > *:nth-child(10) { animation-delay: 450ms; }
+.stagger-children > *:nth-child(11) { animation-delay: 500ms; }
+.stagger-children > *:nth-child(12) { animation-delay: 550ms; }
+
+/* ==========================================================================
+   Typography Utilities
+   ========================================================================== */
+
+/* Display headings — oversized, tight */
+.text-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+  line-height: 0.95;
+}
+
+.text-display-sm {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+.text-display-md {
+  font-size: clamp(3rem, 8vw, 6rem);
+}
+
+.text-display-lg {
+  font-size: clamp(4rem, 10vw, 9rem);
+}
+
+.text-display-xl {
+  font-size: clamp(5rem, 12vw, 12rem);
+}
+
+/* Mono labels */
+.text-mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Layout Utilities
+   ========================================================================== */
+
+.section-border {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.section-pad {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+  .section-pad {
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+/* Grid lines background */
+.bg-grid {
+  background-image: 
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ==========================================================================
+   Booking Flow Overrides
+   ========================================================================== */
+
+.booking-scrollbar::-webkit-scrollbar {
+  width: 3px;
+}
+.booking-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.booking-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+}
+
 .booking-title {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  font-size: 1.5rem;
-  line-height: 1.2;
-  color: #f4f4f5;
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+  line-height: 1;
 }
 
 .booking-section-title {
-  font-size: 0.8125rem;
-  font-weight: 600;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #a1a1aa;
+  color: var(--text-muted);
 }
 
 .booking-label {
   font-size: 0.875rem;
-  color: #a1a1aa;
+  color: var(--text-secondary);
 }
 
 .booking-value {
   font-size: 0.875rem;
   font-weight: 500;
-  color: #f4f4f5;
+  color: var(--text-primary);
 }
 
-/* --- Interactive card hover with subtle lift --- */
+/* Card interactive */
 .card-interactive {
-  transition: all 0.2s ease-out;
+  transition: all var(--duration-fast) var(--ease-brutal);
 }
-
 .card-interactive:hover {
-  border-color: rgba(234, 88, 12, 0.3);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
-  transform: translateY(-1px);
+  border-color: var(--ink);
+  background: var(--bg-elevated);
 }
-
 .card-interactive:active {
-  transform: translateY(0);
-}
-
-/* --- Refined scrollbar for booking flow content area --- */
-.booking-scrollbar::-webkit-scrollbar {
-  width: 4px;
-}
-
-.booking-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.booking-scrollbar::-webkit-scrollbar-thumb {
-  background-color: rgba(161, 161, 170, 0.2);
-  border-radius: 2px;
-}
-
-.booking-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(161, 161, 170, 0.4);
+  transform: scale(0.99);
 }

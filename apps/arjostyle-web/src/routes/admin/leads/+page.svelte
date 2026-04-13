@@ -63,15 +63,15 @@
   ];
 
   const statusColors: Record<string, string> = {
-    new: 'bg-blue-500/10 text-blue-400 border-blue-500/30',
-    contacted: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/30',
-    responded: 'bg-purple-500/10 text-purple-400 border-purple-500/30',
-    qualified: 'bg-orange-500/10 text-orange-400 border-orange-500/30',
-    proposal_sent: 'bg-amber-500/10 text-amber-400 border-amber-500/30',
-    negotiating: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/30',
-    won: 'bg-green-500/10 text-green-400 border-green-500/30',
-    lost: 'bg-red-500/10 text-red-400 border-red-500/30',
-    dormant: 'bg-zinc-500/10 text-zinc-400 border-zinc-500/30',
+    new: 'background: rgba(59,130,246,0.1); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3);',
+    contacted: 'background: rgba(6,182,212,0.1); color: #22d3ee; border: 1px solid rgba(6,182,212,0.3);',
+    responded: 'background: rgba(168,85,247,0.1); color: #c084fc; border: 1px solid rgba(168,85,247,0.3);',
+    qualified: 'background: rgba(249,115,22,0.1); color: #fb923c; border: 1px solid rgba(249,115,22,0.3);',
+    proposal_sent: 'background: rgba(245,158,11,0.1); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3);',
+    negotiating: 'background: rgba(234,179,8,0.1); color: #facc15; border: 1px solid rgba(234,179,8,0.3);',
+    won: 'background: rgba(34,197,94,0.1); color: #4ade80; border: 1px solid rgba(34,197,94,0.3);',
+    lost: 'background: rgba(239,68,68,0.1); color: #f87171; border: 1px solid rgba(239,68,68,0.3);',
+    dormant: 'background: rgba(113,113,122,0.1); color: #a1a1aa; border: 1px solid rgba(113,113,122,0.3);',
   };
 
   const statusLabels: Record<string, string> = {
@@ -290,17 +290,17 @@
   }
 </script>
 
-<div class="min-h-screen bg-gradient-to-br from-surface-900 to-surface-800 p-4 sm:p-8">
+<div class="min-h-screen bg-[var(--bg-dark)] p-4 sm:p-8">
   <!-- Header -->
   <div class="mb-6 sm:mb-8">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
       <div>
-        <h1 class="text-2xl sm:text-4xl font-bold text-white mb-1 sm:mb-2">Leads</h1>
-        <p class="text-sm sm:text-base text-zinc-400">Manage sales pipeline across all businesses</p>
+        <h1 class="text-2xl sm:text-4xl font-bold text-[var(--text-primary)] mb-1 sm:mb-2">Leads</h1>
+        <p class="text-sm sm:text-base text-[var(--text-secondary)]">Manage sales pipeline across all businesses</p>
       </div>
       <button
         onclick={() => (showAddForm = !showAddForm)}
-        class="flex items-center gap-2 bg-orange-500/20 border border-orange-500/30 rounded-lg px-4 py-3 text-orange-400 font-semibold hover:bg-orange-500/30 transition-colors self-start sm:self-auto"
+        class="flex items-center gap-2 bg-[var(--ink)]/20 border border-[var(--ink)]/30 rounded px-4 py-3 text-[var(--ink)] font-semibold hover:bg-[var(--ink)]/30 transition-colors self-start sm:self-auto"
       >
         <Plus class="w-5 h-5" />
         Add Lead
@@ -309,23 +309,23 @@
 
     <!-- Stats Bar -->
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 mb-6">
-      <div class="bg-surface-800 border border-zinc-700 rounded-lg p-3 sm:p-4">
+      <div class="bg-[var(--bg-surface)] border border-[var(--border)] rounded p-3 sm:p-4">
         <p class="text-zinc-400 text-xs sm:text-sm font-medium mb-1">Total Leads</p>
         <p class="text-2xl sm:text-3xl font-bold text-white">{stats.total}</p>
       </div>
-      <div class="bg-surface-800 border border-zinc-700 rounded-lg p-3 sm:p-4">
+      <div class="bg-[var(--bg-surface)] border border-[var(--border)] rounded p-3 sm:p-4">
         <p class="text-zinc-400 text-xs sm:text-sm font-medium mb-1">New This Week</p>
         <p class="text-2xl sm:text-3xl font-bold text-blue-400">{stats.newThisWeek}</p>
       </div>
-      <div class="bg-surface-800 border border-zinc-700 rounded-lg p-3 sm:p-4">
+      <div class="bg-[var(--bg-surface)] border border-[var(--border)] rounded p-3 sm:p-4">
         <p class="text-zinc-400 text-xs sm:text-sm font-medium mb-1">Contacted</p>
         <p class="text-2xl sm:text-3xl font-bold text-cyan-400">{stats.contacted}</p>
       </div>
-      <div class="bg-surface-800 border border-zinc-700 rounded-lg p-3 sm:p-4">
+      <div class="bg-[var(--bg-surface)] border border-[var(--border)] rounded p-3 sm:p-4">
         <p class="text-zinc-400 text-xs sm:text-sm font-medium mb-1">Won</p>
         <p class="text-2xl sm:text-3xl font-bold text-green-400">{stats.won}</p>
       </div>
-      <div class="bg-surface-800 border border-zinc-700 rounded-lg p-3 sm:p-4">
+      <div class="bg-[var(--bg-surface)] border border-[var(--border)] rounded p-3 sm:p-4">
         <p class="text-zinc-400 text-xs sm:text-sm font-medium mb-1">Pipeline Value</p>
         <p class="text-xl sm:text-2xl font-bold text-orange-400">{formatCurrency(stats.totalValue)}</p>
       </div>
@@ -343,24 +343,24 @@
 
     <!-- Add Lead Form -->
     {#if showAddForm}
-      <div class="bg-surface-800 border border-zinc-700 rounded-lg p-6 mb-6">
-        <h2 class="text-xl font-bold text-white mb-4">New Lead</h2>
+      <div class="bg-[var(--bg-surface)] border border-[var(--border)] rounded p-6 mb-6">
+        <h2 class="text-xl font-bold text-[var(--text-primary)] mb-4">New Lead</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
           <div>
-            <label class="block text-zinc-400 text-sm font-medium mb-2">Name *
+            <label class="block text-[var(--text-secondary)] text-sm font-medium mb-2">Name *
             <input
               type="text"
               placeholder="Lead name"
               bind:value={formData.name}
-              class="w-full bg-surface-900 border border-zinc-700 rounded-lg px-4 py-2 text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500/50 transition-colors"
+              class="w-full bg-[var(--bg-dark)] border border-[var(--border)] rounded px-4 py-2 text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--ink)]/50 transition-colors"
             />
 </label>
           </div>
           <div>
-            <label class="block text-zinc-400 text-sm font-medium mb-2">Business *
+            <label class="block text-[var(--text-secondary)] text-sm font-medium mb-2">Business *
             <select
               bind:value={formData.business}
-              class="w-full bg-surface-900 border border-zinc-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-orange-500/50 transition-colors cursor-pointer"
+              class="w-full bg-[var(--bg-dark)] border border-[var(--border)] rounded px-4 py-2 text-[var(--text-primary)] focus:outline-none focus:border-[var(--ink)]/50 transition-colors cursor-pointer"
             >
               {#each businesses as b}
                 <option value={b.id}>{b.label}</option>
@@ -369,10 +369,10 @@
 </label>
           </div>
           <div>
-            <label class="block text-zinc-400 text-sm font-medium mb-2">Source
+            <label class="block text-[var(--text-secondary)] text-sm font-medium mb-2">Source
             <select
               bind:value={formData.source}
-              class="w-full bg-surface-900 border border-zinc-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-orange-500/50 transition-colors cursor-pointer"
+              class="w-full bg-[var(--bg-dark)] border border-[var(--border)] rounded px-4 py-2 text-[var(--text-primary)] focus:outline-none focus:border-[var(--ink)]/50 transition-colors cursor-pointer"
             >
               {#each sources as s}
                 <option value={s.id}>{s.label}</option>
@@ -381,72 +381,72 @@
 </label>
           </div>
           <div>
-            <label class="block text-zinc-400 text-sm font-medium mb-2">Estimated Value (₱)
+            <label class="block text-[var(--text-secondary)] text-sm font-medium mb-2">Estimated Value (₱)
             <input
               type="number"
               placeholder="5000"
               bind:value={formData.estimatedValue}
-              class="w-full bg-surface-900 border border-zinc-700 rounded-lg px-4 py-2 text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500/50 transition-colors"
+              class="w-full bg-[var(--bg-dark)] border border-[var(--border)] rounded px-4 py-2 text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--ink)]/50 transition-colors"
             />
 </label>
           </div>
           <div>
-            <label class="block text-zinc-400 text-sm font-medium mb-2">Phone
+            <label class="block text-[var(--text-secondary)] text-sm font-medium mb-2">Phone
             <input
               type="tel"
               placeholder="+63 9XX XXX XXXX"
               bind:value={formData.phone}
-              class="w-full bg-surface-900 border border-zinc-700 rounded-lg px-4 py-2 text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500/50 transition-colors"
+              class="w-full bg-[var(--bg-dark)] border border-[var(--border)] rounded px-4 py-2 text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--ink)]/50 transition-colors"
             />
 </label>
           </div>
           <div>
-            <label class="block text-zinc-400 text-sm font-medium mb-2">Email
+            <label class="block text-[var(--text-secondary)] text-sm font-medium mb-2">Email
             <input
               type="email"
               placeholder="email@example.com"
               bind:value={formData.email}
-              class="w-full bg-surface-900 border border-zinc-700 rounded-lg px-4 py-2 text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500/50 transition-colors"
+              class="w-full bg-[var(--bg-dark)] border border-[var(--border)] rounded px-4 py-2 text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--ink)]/50 transition-colors"
             />
 </label>
           </div>
           <div>
-            <label class="block text-zinc-400 text-sm font-medium mb-2">Facebook
+            <label class="block text-[var(--text-secondary)] text-sm font-medium mb-2">Facebook
             <input
               type="text"
               placeholder="facebook.com/username"
               bind:value={formData.facebook}
-              class="w-full bg-surface-900 border border-zinc-700 rounded-lg px-4 py-2 text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500/50 transition-colors"
+              class="w-full bg-[var(--bg-dark)] border border-[var(--border)] rounded px-4 py-2 text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--ink)]/50 transition-colors"
             />
 </label>
           </div>
           <div>
-            <label class="block text-zinc-400 text-sm font-medium mb-2">Instagram
+            <label class="block text-[var(--text-secondary)] text-sm font-medium mb-2">Instagram
             <input
               type="text"
               placeholder="@username"
               bind:value={formData.instagram}
-              class="w-full bg-surface-900 border border-zinc-700 rounded-lg px-4 py-2 text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500/50 transition-colors"
+              class="w-full bg-[var(--bg-dark)] border border-[var(--border)] rounded px-4 py-2 text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--ink)]/50 transition-colors"
             />
 </label>
           </div>
           <div class="sm:col-span-2">
-            <label class="block text-zinc-400 text-sm font-medium mb-2">Interest / What they want
+            <label class="block text-[var(--text-secondary)] text-sm font-medium mb-2">Interest / What they want
             <textarea
               placeholder="e.g., 'Tapsilog catering for 50 people', 'Tattoo sleeve design', etc."
               bind:value={formData.interest}
               rows="2"
-              class="w-full bg-surface-900 border border-zinc-700 rounded-lg px-4 py-2 text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500/50 transition-colors resize-none"
+              class="w-full bg-[var(--bg-dark)] border border-[var(--border)] rounded px-4 py-2 text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--ink)]/50 transition-colors resize-none"
             ></textarea>
 </label>
           </div>
           <div class="sm:col-span-2">
-            <label class="block text-zinc-400 text-sm font-medium mb-2">Notes
+            <label class="block text-[var(--text-secondary)] text-sm font-medium mb-2">Notes
             <textarea
               placeholder="Additional notes..."
               bind:value={formData.notes}
               rows="2"
-              class="w-full bg-surface-900 border border-zinc-700 rounded-lg px-4 py-2 text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500/50 transition-colors resize-none"
+              class="w-full bg-[var(--bg-dark)] border border-[var(--border)] rounded px-4 py-2 text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--ink)]/50 transition-colors resize-none"
             ></textarea>
 </label>
           </div>
@@ -455,13 +455,13 @@
           <button
             onclick={addLead}
             disabled={loading}
-            class="flex-1 bg-orange-500 hover:bg-orange-600 disabled:bg-orange-500/50 text-white font-semibold py-2 rounded-lg transition-colors"
+            class="flex-1 bg-[var(--ink)] hover:bg-[var(--ink-dim)] disabled:opacity-50 text-white font-semibold py-2 rounded transition-colors"
           >
             {loading ? 'Creating...' : 'Create Lead'}
           </button>
           <button
             onclick={() => (showAddForm = false)}
-            class="flex-1 bg-surface-700 hover:bg-surface-600 text-white font-semibold py-2 rounded-lg transition-colors"
+            class="flex-1 bg-[var(--bg-elevated)] hover:bg-[var(--border)] text-[var(--text-primary)] font-semibold py-2 rounded transition-colors"
           >
             Cancel
           </button>
@@ -470,14 +470,14 @@
     {/if}
 
     <!-- Search and Filters -->
-    <div class="flex gap-3 sm:gap-4 mb-6">
+      <div class="flex gap-3 sm:gap-4 mb-6">
       <div class="flex-1 relative">
-        <Search class="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 w-5 h-5" />
+        <Search class="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)] w-5 h-5" />
         <input
           type="text"
           placeholder="Search leads by name, email, phone, or interest..."
           bind:value={searchQuery}
-          class="w-full bg-surface-800 border border-zinc-700 rounded-lg pl-12 pr-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500/50 transition-colors"
+          class="w-full bg-[var(--bg-surface)] border border-[var(--border)] rounded pl-12 pr-4 py-3 text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--ink)]/50 transition-colors"
         />
       </div>
     </div>
@@ -486,18 +486,18 @@
     <div class="flex gap-2 mb-6 overflow-x-auto pb-2">
       <button
         onclick={() => (selectedBusiness = null)}
-        class="px-4 py-2 rounded-lg font-semibold transition-all whitespace-nowrap {selectedBusiness === null
-          ? 'bg-orange-500/20 border border-orange-500/30 text-orange-400'
-          : 'bg-surface-800 border border-zinc-700 text-zinc-400 hover:border-zinc-600'}"
+        class="px-4 py-2 rounded font-semibold transition-all whitespace-nowrap {selectedBusiness === null
+          ? 'bg-[var(--ink)]/20 border border-[var(--ink)]/30 text-[var(--ink)]'
+          : 'bg-[var(--bg-surface)] border border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--border-light)]'}"
       >
         All Businesses
       </button>
       {#each businesses as business}
         <button
           onclick={() => (selectedBusiness = selectedBusiness === business.id ? null : business.id)}
-          class="px-4 py-2 rounded-lg font-semibold transition-all whitespace-nowrap flex items-center gap-2 {selectedBusiness === business.id
-            ? 'bg-orange-500/20 border border-orange-500/30 text-orange-400'
-            : 'bg-surface-800 border border-zinc-700 text-zinc-400 hover:border-zinc-600'}"
+          class="px-4 py-2 rounded font-semibold transition-all whitespace-nowrap flex items-center gap-2 {selectedBusiness === business.id
+            ? 'bg-[var(--ink)]/20 border border-[var(--ink)]/30 text-[var(--ink)]'
+            : 'bg-[var(--bg-surface)] border border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--border-light)]'}"
         >
           <span>{business.emoji}</span>
           {business.label}
@@ -509,18 +509,18 @@
     <div class="flex gap-2 mb-6 overflow-x-auto pb-2">
       <button
         onclick={() => (selectedStatus = null)}
-        class="px-3 py-1 rounded-full text-sm font-semibold transition-all whitespace-nowrap {selectedStatus === null
-          ? 'bg-orange-500/20 border border-orange-500/30 text-orange-400'
-          : 'bg-surface-800 border border-zinc-700 text-zinc-400 hover:border-zinc-600'}"
+        class="px-3 py-1 rounded text-sm font-semibold transition-all whitespace-nowrap {selectedStatus === null
+          ? 'bg-[var(--ink)]/20 border border-[var(--ink)]/30 text-[var(--ink)]'
+          : 'bg-[var(--bg-surface)] border border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--border-light)]'}"
       >
         All Status
       </button>
       {#each statuses as status}
         <button
           onclick={() => (selectedStatus = selectedStatus === status ? null : status)}
-          class="px-3 py-1 rounded-full text-sm font-semibold transition-all whitespace-nowrap {selectedStatus === status
-            ? 'bg-orange-500/20 border border-orange-500/30 text-orange-400'
-            : 'bg-surface-800 border border-zinc-700 text-zinc-400 hover:border-zinc-600'}"
+          class="px-3 py-1 rounded text-sm font-semibold transition-all whitespace-nowrap {selectedStatus === status
+            ? 'bg-[var(--ink)]/20 border border-[var(--ink)]/30 text-[var(--ink)]'
+            : 'bg-[var(--bg-surface)] border border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--border-light)]'}"
         >
           {statusLabels[status]}
         </button>
@@ -531,8 +531,8 @@
   <!-- Kanban Board -->
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 pb-8">
     {#each statuses.slice(0, 3) as status}
-      <div class="flex flex-col bg-surface-800/30 border border-zinc-700 rounded-lg p-4">
-        <h2 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+      <div class="flex flex-col bg-[var(--bg-surface)]/30 border border-[var(--border)] rounded p-4">
+        <h2 class="text-lg font-bold text-[var(--text-primary)] mb-4 flex items-center gap-2">
           <span class={`inline-block w-2 h-2 rounded-full`}
             style={`background: ${
               status === 'new'
@@ -544,35 +544,35 @@
                     : '#8b5cf6'
             }`}></span>
           {statusLabels[status]}
-          <span class="text-xs font-normal text-zinc-500">({groupedByStatus[status].length})</span>
+          <span class="text-xs font-normal text-[var(--text-muted)]">({groupedByStatus[status].length})</span>
         </h2>
         <div class="flex-1 space-y-3 overflow-y-auto max-h-96">
           {#each groupedByStatus[status] as lead (lead.id)}
-            <div class="bg-surface-900 border border-zinc-700 rounded-lg p-4 hover:border-zinc-600 transition-all group">
+            <div class="bg-[var(--bg-dark)] border border-[var(--border)] rounded p-4 hover:border-[var(--border-light)] transition-all group">
               <!-- Header: Name and emoji -->
               <div class="flex items-start justify-between mb-3">
                 <div class="flex-1">
-                  <p class="font-semibold text-white">{lead.name}</p>
-                  <p class="text-xs text-zinc-500">{getBusinessEmoji(lead.business)} {lead.business}</p>
+                  <p class="font-semibold text-[var(--text-primary)]">{lead.name}</p>
+                  <p class="text-xs text-[var(--text-muted)]">{getBusinessEmoji(lead.business)} {lead.business}</p>
                 </div>
-                <span class="text-sm font-semibold text-orange-400">{formatCurrency(lead.estimatedValue)}</span>
+                <span class="text-sm font-semibold text-[var(--ink)]">{formatCurrency(lead.estimatedValue)}</span>
               </div>
 
               <!-- Source badge -->
               <div class="mb-3">
-                <span class="inline-block bg-surface-800 text-zinc-300 text-xs px-2 py-1 rounded">
+                <span class="inline-block bg-[var(--bg-surface)] text-[var(--text-secondary)] text-xs px-2 py-1 rounded">
                   {getSourceLabel(lead.source)}
                 </span>
               </div>
 
               <!-- Interest snippet -->
               {#if lead.interest}
-                <p class="text-sm text-zinc-400 mb-3 line-clamp-2">{lead.interest}</p>
+                <p class="text-sm text-[var(--text-secondary)] mb-3 line-clamp-2">{lead.interest}</p>
               {/if}
 
               <!-- Days since contact -->
               {#if lead.lastContactedAt}
-                <p class="text-xs text-zinc-500 mb-3">Last contacted: {daysSinceContact(lead.lastContactedAt)}</p>
+                <p class="text-xs text-[var(--text-muted)] mb-3">Last contacted: {daysSinceContact(lead.lastContactedAt)}</p>
               {/if}
 
               <!-- Actions -->
@@ -580,7 +580,7 @@
                 <button
                   onclick={() => markAsContacted(lead.id)}
                   title="Mark as contacted"
-                  class="flex-1 flex items-center justify-center gap-1 bg-surface-800 hover:bg-surface-700 text-zinc-300 hover:text-white py-1 px-2 rounded text-xs font-semibold transition-colors"
+                  class="flex-1 flex items-center justify-center gap-1 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] py-1 px-2 rounded text-xs font-semibold transition-colors"
                 >
                   <MessageCircle class="w-3 h-3" />
                   DM
@@ -588,7 +588,7 @@
                 <button
                   onclick={() => logCall(lead.id)}
                   title="Log a call"
-                  class="flex-1 flex items-center justify-center gap-1 bg-surface-800 hover:bg-surface-700 text-zinc-300 hover:text-white py-1 px-2 rounded text-xs font-semibold transition-colors"
+                  class="flex-1 flex items-center justify-center gap-1 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] py-1 px-2 rounded text-xs font-semibold transition-colors"
                 >
                   <Phone class="w-3 h-3" />
                   Call
@@ -601,7 +601,7 @@
                   {#each statuses.slice(statuses.indexOf(status) + 1, statuses.indexOf(status) + 2) as nextStatus}
                     <button
                       onclick={() => updateLeadStatus(lead.id, nextStatus)}
-                      class="flex-1 flex items-center justify-center gap-1 bg-orange-500/10 hover:bg-orange-500/20 text-orange-400 border border-orange-500/30 hover:border-orange-500/50 py-1 px-2 rounded text-xs font-semibold transition-colors"
+                      class="flex-1 flex items-center justify-center gap-1 bg-[var(--ink)]/10 hover:bg-[var(--ink)]/20 text-[var(--ink)] border border-[var(--ink)]/30 hover:border-[var(--ink)]/50 py-1 px-2 rounded text-xs font-semibold transition-colors"
                     >
                       <ChevronRight class="w-3 h-3" />
                       Move
@@ -618,27 +618,27 @@
     {/each}
 
     <!-- Final stages column -->
-    <div class="flex flex-col bg-surface-800/30 border border-zinc-700 rounded-lg p-4">
-      <h2 class="text-lg font-bold text-white mb-4">Won / Lost / Dormant</h2>
+    <div class="flex flex-col bg-[var(--bg-surface)]/30 border border-[var(--border)] rounded p-4">
+      <h2 class="text-lg font-bold text-[var(--text-primary)] mb-4">Won / Lost / Dormant</h2>
       <div class="flex-1 space-y-3 overflow-y-auto max-h-96">
         {#each statuses.slice(6) as status}
           {#each groupedByStatus[status] as lead (lead.id)}
-            <div class="bg-surface-900 border {statusColors[status]} rounded-lg p-3">
+            <div class="bg-[var(--bg-dark)] border border-[var(--border)] rounded p-3">
               <div class="flex items-start justify-between mb-2">
                 <div>
-                  <p class="font-semibold text-white text-sm">{lead.name}</p>
-                  <p class="text-xs text-zinc-500">{getBusinessEmoji(lead.business)} {lead.business}</p>
+                  <p class="font-semibold text-[var(--text-primary)] text-sm">{lead.name}</p>
+                  <p class="text-xs text-[var(--text-muted)]">{getBusinessEmoji(lead.business)} {lead.business}</p>
                 </div>
                 <span class="text-xs font-semibold">{formatCurrency(lead.estimatedValue)}</span>
               </div>
-              <span class="inline-block {statusColors[status]} text-xs px-2 py-1 rounded border">
+              <span class="inline-block text-xs px-2 py-1 rounded border" style={statusColors[status]}>
                 {statusLabels[status]}
               </span>
             </div>
           {/each}
         {/each}
         {#if statuses.slice(6).every((s) => groupedByStatus[s].length === 0)}
-          <p class="text-zinc-600 text-center py-8 text-sm">No closed leads</p>
+          <p class="text-[var(--text-muted)] text-center py-8 text-sm">No closed leads</p>
         {/if}
       </div>
     </div>
@@ -647,6 +647,6 @@
 
 <style>
   :global(body) {
-    @apply bg-surface-900;
+    background-color: var(--bg-dark);
   }
 </style>

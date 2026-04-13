@@ -49,13 +49,13 @@
   }
 </script>
 
-<section id="faq" class="py-20 md:py-24 bg-surface-900 transition-colors duration-300">
+<section id="faq" class="py-20 md:py-24 bg-dark transition-colors duration-300 border-b border-border">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <RevealOnScroll>
-      <h2 class="text-3xl md:text-4xl font-semibold text-center mb-4 text-white">Frequently Asked Questions</h2>
+      <h2 class="text-3xl md:text-4xl font-display font-semibold text-center mb-4 text-white tracking-wide">FREQUENTLY ASKED QUESTIONS</h2>
     </RevealOnScroll>
     <RevealOnScroll delay={100}>
-      <p class="text-zinc-400 text-lg text-center max-w-3xl mx-auto mb-10">
+      <p class="text-zinc-500 text-lg text-center max-w-3xl mx-auto mb-10 font-mono text-sm">
         Have questions about getting inked? Find answers below or search for keywords.
       </p>
     </RevealOnScroll>
@@ -64,9 +64,9 @@
       <div bind:this={scrollRef} class="max-w-3xl mx-auto mb-8">
         <input
           type="text"
-          placeholder="Search for a question or answer..."
+          placeholder="Search questions..."
           bind:value={searchTerm}
-          class="w-full px-4 py-2 border border-zinc-700 rounded-md bg-surface-800 text-white focus:ring-ink-500 focus:border-ink-500"
+          class="w-full px-4 py-3 border border-border bg-elevated text-white font-mono text-sm focus:border-ink focus:outline-none"
         />
       </div>
     </RevealOnScroll>
@@ -75,19 +75,19 @@
       {#each filteredFaqs as faq, index}
         {@const itemId = `item-${index}`}
         <RevealOnScroll delay={100}>
-          <div class="border-b border-zinc-700">
+          <div class="border-b border-border">
             <button
-              class="w-full text-left py-4 text-base md:text-lg font-medium text-zinc-100 hover:text-white flex justify-between items-center"
+              class="w-full text-left py-4 text-base md:text-lg font-display text-zinc-200 hover:text-white flex justify-between items-center transition-colors duration-150"
               onclick={() => toggleItem(itemId)}
               aria-expanded={openItem === itemId}
             >
-              <span>{faq.question}</span>
+              <span>{faq.question.toUpperCase()}</span>
               <span class="ml-4 flex-shrink-0 transition-transform duration-200 {openItem === itemId ? 'rotate-180' : ''}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
               </span>
             </button>
             {#if openItem === itemId}
-              <div class="text-zinc-400 text-sm md:text-base leading-relaxed pt-1 pb-4">
+              <div class="text-zinc-500 text-sm md:text-base leading-relaxed pt-1 pb-4 font-mono">
                 {faq.answer}
               </div>
             {/if}
@@ -96,19 +96,19 @@
       {/each}
 
       {#if filteredFaqs.length === 0 && searchTerm.trim()}
-        <p class="text-center text-zinc-500 mt-6">No questions found matching "{searchTerm}".</p>
+        <p class="text-center text-zinc-600 mt-6 font-mono text-sm">No questions found matching "{searchTerm}".</p>
       {/if}
     </div>
 
     <div class="text-center mt-10">
       {#if !showAll && faqData.length > INITIAL_FAQ_COUNT}
-        <button onclick={() => (showAll = true)} class="px-6 py-2 border border-zinc-700 text-zinc-300 rounded-lg hover:bg-zinc-800 transition-colors">
-          See All FAQs ({faqData.length})
+        <button onclick={() => (showAll = true)} class="px-6 py-3 border border-border text-zinc-400 text-sm font-mono hover:bg-elevated hover:border-border-light hover:text-white transition-colors">
+          SEE ALL FAQS ({faqData.length})
         </button>
       {/if}
       {#if showAll && faqData.length > INITIAL_FAQ_COUNT}
-        <button onclick={handleShowLess} class="px-6 py-2 border border-zinc-700 text-zinc-300 rounded-lg hover:bg-zinc-800 transition-colors">
-          Show Less FAQs
+        <button onclick={handleShowLess} class="px-6 py-3 border border-border text-zinc-400 text-sm font-mono hover:bg-elevated hover:border-border-light hover:text-white transition-colors">
+          SHOW LESS
         </button>
       {/if}
     </div>

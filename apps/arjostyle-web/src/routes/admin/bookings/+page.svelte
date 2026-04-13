@@ -12,13 +12,13 @@
   let sortOrder = $state<'asc' | 'desc'>('desc');
 
   const statusColors: Record<string, string> = {
-    Available: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
-    Pending: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/30',
-    Confirmed: 'bg-green-500/10 text-green-400 border-green-500/30',
-    Completed: 'bg-blue-500/10 text-blue-400 border-blue-500/30',
-    Rejected: 'bg-red-500/10 text-red-400 border-red-500/30',
-    'Needs Info': 'bg-orange-500/10 text-orange-400 border-orange-500/30',
-    Conflict: 'bg-zinc-500/10 text-zinc-400 border-zinc-500/30',
+    Available: 'background: rgba(16,185,129,0.1); color: #34d399; border: 1px solid rgba(16,185,129,0.3);',
+    Pending: 'background: rgba(234,179,8,0.1); color: #facc15; border: 1px solid rgba(234,179,8,0.3);',
+    Confirmed: 'background: rgba(34,197,94,0.1); color: #4ade80; border: 1px solid rgba(34,197,94,0.3);',
+    Completed: 'background: rgba(59,130,246,0.1); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3);',
+    Rejected: 'background: rgba(239,68,68,0.1); color: #f87171; border: 1px solid rgba(239,68,68,0.3);',
+    'Needs Info': 'background: rgba(249,115,22,0.1); color: #fb923c; border: 1px solid rgba(249,115,22,0.3);',
+    Conflict: 'background: rgba(113,113,122,0.1); color: #a1a1aa; border: 1px solid rgba(113,113,122,0.3);',
   };
 
   let filteredBookings = $derived.by(() => {
@@ -114,16 +114,16 @@
   }
 </script>
 
-<div class="min-h-screen bg-gradient-to-br from-surface-900 to-surface-800 p-4 sm:p-8">
+<div class="min-h-screen bg-[var(--bg-dark)] p-4 sm:p-8">
   <!-- Header -->
   <div class="mb-6 sm:mb-8">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
       <div>
-        <h1 class="text-2xl sm:text-4xl font-bold text-white mb-1 sm:mb-2">Bookings</h1>
-        <p class="text-sm sm:text-base text-zinc-400">Manage tattoo booking requests</p>
+        <h1 class="text-2xl sm:text-4xl font-bold text-[var(--text-primary)] mb-1 sm:mb-2">Bookings</h1>
+        <p class="text-sm sm:text-base text-[var(--text-secondary)]">Manage tattoo booking requests</p>
       </div>
-      <div class="bg-ink-500/20 border border-ink-500/30 rounded-lg px-4 py-2 self-start sm:self-auto">
-        <span class="text-ink-500 font-semibold text-base sm:text-lg">{filteredBookings.length} bookings</span>
+      <div class="bg-[var(--ink)]/20 border border-[var(--ink)]/30 rounded px-4 py-2 self-start sm:self-auto">
+        <span class="text-[var(--ink)] font-semibold text-base sm:text-lg">{filteredBookings.length} bookings</span>
       </div>
     </div>
 
@@ -131,12 +131,12 @@
     <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
       <!-- Search -->
       <div class="flex-1 relative">
-        <Search class="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 w-5 h-5" />
+        <Search class="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)] w-5 h-5" />
         <input
           type="text"
           placeholder="Search by name, email, or placement..."
           bind:value={searchQuery}
-          class="w-full bg-surface-800 border border-zinc-700 rounded-lg pl-12 pr-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-tech-500 transition-colors"
+          class="w-full bg-[var(--bg-surface)] border border-[var(--border)] rounded pl-12 pr-4 py-3 text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--tech)] transition-colors"
         />
       </div>
 
@@ -144,7 +144,7 @@
       <div class="flex gap-2">
         <select
           bind:value={statusFilter}
-          class="bg-surface-800 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-tech-500 transition-colors cursor-pointer"
+          class="bg-[var(--bg-surface)] border border-[var(--border)] rounded px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--tech)] transition-colors cursor-pointer"
         >
           <option value="all">All Status</option>
           <option value="Pending">Pending</option>
@@ -159,85 +159,85 @@
   </div>
 
   <!-- Table -->
-  <div class="bg-surface-800 border border-zinc-800 rounded-lg overflow-hidden">
+  <div class="bg-[var(--bg-surface)] border border-[var(--border)] rounded overflow-hidden">
     <div class="overflow-x-auto">
       <table class="w-full">
         <thead>
-          <tr class="border-b border-zinc-700 bg-surface-900/50">
+          <tr class="border-b border-[var(--border)] bg-[var(--bg-dark)]/50">
             <th class="px-6 py-4 text-left">
               <button
                 onclick={() => toggleSort('status')}
-                class="flex items-center gap-2 text-zinc-300 hover:text-white transition-colors font-semibold"
+                class="flex items-center gap-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors font-semibold"
               >
                 Status
                 {#if sortBy === 'status'}
-                  <span class="text-tech-500">{sortOrder === 'asc' ? '↑' : '↓'}</span>
+                  <span class="text-[var(--tech)]">{sortOrder === 'asc' ? '↑' : '↓'}</span>
                 {/if}
               </button>
             </th>
             <th class="px-6 py-4 text-left">
               <button
                 onclick={() => toggleSort('name')}
-                class="flex items-center gap-2 text-zinc-300 hover:text-white transition-colors font-semibold"
+                class="flex items-center gap-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors font-semibold"
               >
                 Client
                 {#if sortBy === 'name'}
-                  <span class="text-tech-500">{sortOrder === 'asc' ? '↑' : '↓'}</span>
+                  <span class="text-[var(--tech)]">{sortOrder === 'asc' ? '↑' : '↓'}</span>
                 {/if}
               </button>
             </th>
-            <th class="px-6 py-4 text-left font-semibold text-zinc-300">Tattoo Details</th>
-            <th class="px-6 py-4 text-left font-semibold text-zinc-300">Price</th>
+            <th class="px-6 py-4 text-left font-semibold text-[var(--text-secondary)]">Tattoo Details</th>
+            <th class="px-6 py-4 text-left font-semibold text-[var(--text-secondary)]">Price</th>
             <th class="px-6 py-4 text-left">
               <button
                 onclick={() => toggleSort('createdAt')}
-                class="flex items-center gap-2 text-zinc-300 hover:text-white transition-colors font-semibold"
+                class="flex items-center gap-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors font-semibold"
               >
                 Date Requested
                 {#if sortBy === 'createdAt'}
-                  <span class="text-tech-500">{sortOrder === 'asc' ? '↑' : '↓'}</span>
+                  <span class="text-[var(--tech)]">{sortOrder === 'asc' ? '↑' : '↓'}</span>
                 {/if}
               </button>
             </th>
-            <th class="px-6 py-4 text-left font-semibold text-zinc-300">Actions</th>
+            <th class="px-6 py-4 text-left font-semibold text-[var(--text-secondary)]">Actions</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-zinc-700">
+        <tbody class="divide-y divide-[var(--border)]">
           {#each filteredBookings as booking (booking.id)}
-            <tr class="hover:bg-surface-900/50 transition-colors">
+            <tr class="hover:bg-[var(--bg-dark)]/50 transition-colors">
               <td class="px-6 py-4">
                 <span
-                  class="inline-block px-3 py-1 rounded-full border text-xs font-medium {statusColors[booking.status] || statusColors.Pending}"
+                  class="inline-block px-3 py-1 rounded border text-xs font-medium" style={statusColors[booking.status] || statusColors['Pending']}
                 >
                   {booking.status}
                 </span>
               </td>
               <td class="px-6 py-4">
                 <div>
-                  <p class="text-white font-medium">{booking.name || '—'}</p>
-                  <p class="text-sm text-zinc-400">{truncateEmail(booking.email)}</p>
+                  <p class="text-[var(--text-primary)] font-medium">{booking.name || '—'}</p>
+                  <p class="text-sm text-[var(--text-secondary)]">{truncateEmail(booking.email)}</p>
                 </div>
               </td>
               <td class="px-6 py-4">
                 <div class="text-sm">
-                  <p class="text-white">
+                  <p class="text-[var(--text-primary)]">
                     {booking.placement || '—'} ({booking.tattooSize || '?'} cm²)
                   </p>
-                  <p class="text-zinc-400">{booking.primaryTattooStyle || 'Style TBD'}</p>
+                  <p class="text-[var(--text-secondary)]">{booking.primaryTattooStyle || 'Style TBD'}</p>
                 </div>
               </td>
               <td class="px-6 py-4">
-                <p class="text-white font-semibold">
+                <p class="text-[var(--text-primary)] font-semibold">
                   {formatCurrency(booking.pricingDetails?.total ?? 0)}
                 </p>
               </td>
               <td class="px-6 py-4">
-                <p class="text-white text-sm">{formatDate(booking.createdAt)}</p>
+                <p class="text-[var(--text-primary)] text-sm">{formatDate(booking.createdAt)}</p>
               </td>
               <td class="px-6 py-4">
                 <button
                   onclick={() => openDetail(booking)}
-                  class="inline-flex items-center gap-2 px-3 py-2 bg-tech-500/10 hover:bg-tech-500/20 border border-tech-500/30 hover:border-tech-500/50 text-tech-500 rounded-lg transition-all text-sm font-medium"
+                  class="inline-flex items-center gap-2 px-3 py-2 bg-[var(--tech)]/10 hover:bg-[var(--tech)]/20 border border-[var(--tech)]/30 hover:border-[var(--tech)]/50 text-[var(--tech)] rounded transition-all text-sm font-medium"
                 >
                   <Eye class="w-4 h-4" />
                   View
@@ -251,8 +251,8 @@
 
     {#if filteredBookings.length === 0}
       <div class="px-6 py-12 text-center">
-        <AlertCircle class="w-12 h-12 text-zinc-600 mx-auto mb-4" />
-        <p class="text-zinc-400">No bookings found</p>
+        <AlertCircle class="w-12 h-12 text-[var(--text-muted)] mx-auto mb-4" />
+        <p class="text-[var(--text-secondary)]">No bookings found</p>
       </div>
     {/if}
   </div>
@@ -261,13 +261,13 @@
   {#if showDetail && selectedBooking}
     <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
     <div class="fixed inset-0 bg-black/40 z-40" onclick={() => (showDetail = false)} role="presentation"></div>
-    <div class="fixed inset-y-0 right-0 w-full sm:w-[500px] bg-surface-800 border-l border-zinc-800 shadow-2xl z-50 flex flex-col">
+    <div class="fixed inset-y-0 right-0 w-full sm:w-[500px] bg-[var(--bg-surface)] border-l border-[var(--border)] shadow-2xl z-50 flex flex-col">
       <!-- Header -->
-      <div class="flex items-center justify-between p-6 border-b border-zinc-700 bg-surface-900/50">
-        <h2 class="text-xl font-bold text-white">Booking Details</h2>
+      <div class="flex items-center justify-between p-6 border-b border-[var(--border)] bg-[var(--bg-dark)]/50">
+        <h2 class="text-xl font-bold text-[var(--text-primary)]">Booking Details</h2>
         <button
           onclick={() => (showDetail = false)}
-          class="p-2 hover:bg-surface-800 rounded-lg transition-colors text-zinc-400 hover:text-white"
+          class="p-2 hover:bg-[var(--bg-elevated)] rounded transition-colors text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
         >
           <X class="w-5 h-5" />
         </button>

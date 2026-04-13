@@ -127,31 +127,34 @@
 	<meta name="description" content="Generate QR codes for text, URLs, WiFi, contacts, and emails. Customize colors and size. Download as PNG or SVG." />
 </svelte:head>
 
-<div class="min-h-screen bg-surface-900 px-4 py-8 sm:px-6 lg:px-8">
+<div class="min-h-screen px-4 py-8 sm:px-6 lg:px-8" style="background-color: var(--bg-dark);">
 	<div class="mx-auto max-w-6xl">
 		<!-- Header -->
 		<div class="mb-8">
-			<h1 class="text-3xl font-bold text-white sm:text-4xl">QR Code Generator</h1>
-			<p class="mt-2 text-zinc-400">Create QR codes for text, URLs, WiFi, contacts, and emails.</p>
+			<div class="mb-3">
+				<a href="/tools" class="text-mono-label hover:text-ink transition-colors">← ALL TOOLS</a>
+			</div>
+			<p class="text-mono-label mb-2">UTILITY TOOL</p>
+			<h1 class="font-display text-display-sm text-white tracking-wide">QR CODE GENERATOR</h1>
+			<p class="mt-2 font-mono text-sm" style="color: var(--text-secondary);">Create QR codes for text, URLs, WiFi, contacts, and emails.</p>
 		</div>
 
 		<div class="grid gap-6 lg:grid-cols-2">
 			<!-- Input Panel -->
 			<div class="space-y-6">
 				<!-- Tabs -->
-				<div class="flex gap-2 border-b border-zinc-700/50">
+				<div class="flex gap-0 border-b" style="border-color: var(--border);">
 					{#each ['text', 'wifi', 'vcard', 'email'] as tab}
 						<button
 							onclick={() => {
 								activeTab = tab as TabType;
 							}}
-							class={`px-4 py-2 text-sm font-medium transition-colors border-b-2 -mb-[2px] ${
-								activeTab === tab
-									? 'border-orange-500 text-orange-500'
-									: 'border-transparent text-zinc-400 hover:text-zinc-300'
-							}`}
+							class="px-4 py-3 text-sm font-mono font-medium transition-all duration-150 border-b-2 -mb-[2px] {activeTab === tab
+								? 'border-ink text-white'
+								: 'border-transparent hover:text-white'}"
+							style={activeTab !== tab ? `color: var(--text-secondary);` : ''}
 						>
-							{tab.charAt(0).toUpperCase() + tab.slice(1)}
+							{tab.toUpperCase()}
 						</button>
 					{/each}
 				</div>
@@ -160,215 +163,216 @@
 				<div class="space-y-4">
 					{#if activeTab === 'text'}
 						<div>
-							<label class="block text-sm font-medium text-white mb-2">Text or URL
-							<textarea
-								bind:value={textInput}
-								placeholder="Enter text or URL..."
-								rows="4"
-								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
-							></textarea>
-</label>
+							<label class="block text-sm font-mono font-medium text-white mb-2">TEXT OR URL
+								<textarea
+									bind:value={textInput}
+									placeholder="Enter text or URL..."
+									rows="4"
+									class="brutal-input w-full mt-2"
+								></textarea>
+							</label>
 						</div>
 					{:else if activeTab === 'wifi'}
 						<div>
-							<label class="block text-sm font-medium text-white mb-2">Network Name (SSID)
-							<input
-								type="text"
-								bind:value={wifiSSID}
-								placeholder="WiFi network name..."
-								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
-							/>
-</label>
+							<label class="block text-sm font-mono font-medium text-white mb-2">NETWORK NAME (SSID)
+								<input
+									type="text"
+									bind:value={wifiSSID}
+									placeholder="WiFi network name..."
+									class="brutal-input w-full mt-2"
+								/>
+							</label>
 						</div>
 						<div>
-							<label class="block text-sm font-medium text-white mb-2">Password
-							<input
-								type="password"
-								bind:value={wifiPassword}
-								placeholder="WiFi password..."
-								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
-							/>
-</label>
+							<label class="block text-sm font-mono font-medium text-white mb-2">PASSWORD
+								<input
+									type="password"
+									bind:value={wifiPassword}
+									placeholder="WiFi password..."
+									class="brutal-input w-full mt-2"
+								/>
+							</label>
 						</div>
 						<div>
-							<label class="block text-sm font-medium text-white mb-2">Encryption
-							<select
-								bind:value={wifiEncryption}
-								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white focus:border-orange-500 focus:outline-none"
-							>
-								<option value="WPA">WPA</option>
-								<option value="WEP">WEP</option>
-								<option value="None">None</option>
-							</select>
-</label>
+							<label class="block text-sm font-mono font-medium text-white mb-2">ENCRYPTION
+								<select
+									bind:value={wifiEncryption}
+									class="brutal-input w-full mt-2"
+								>
+									<option value="WPA">WPA</option>
+									<option value="WEP">WEP</option>
+									<option value="None">NONE</option>
+								</select>
+							</label>
 						</div>
 					{:else if activeTab === 'vcard'}
 						<div>
-							<label class="block text-sm font-medium text-white mb-2">Full Name
-							<input
-								type="text"
-								bind:value={vcardName}
-								placeholder="John Doe..."
-								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
-							/>
-</label>
+							<label class="block text-sm font-mono font-medium text-white mb-2">FULL NAME
+								<input
+									type="text"
+									bind:value={vcardName}
+									placeholder="John Doe..."
+									class="brutal-input w-full mt-2"
+								/>
+							</label>
 						</div>
 						<div>
-							<label class="block text-sm font-medium text-white mb-2">Phone
-							<input
-								type="tel"
-								bind:value={vcardPhone}
-								placeholder="+63 123 4567..."
-								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
-							/>
-</label>
+							<label class="block text-sm font-mono font-medium text-white mb-2">PHONE
+								<input
+									type="tel"
+									bind:value={vcardPhone}
+									placeholder="+63 123 4567..."
+									class="brutal-input w-full mt-2"
+								/>
+							</label>
 						</div>
 						<div>
-							<label class="block text-sm font-medium text-white mb-2">Email
-							<input
-								type="email"
-								bind:value={vcardEmail}
-								placeholder="john@example.com..."
-								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
-							/>
-</label>
+							<label class="block text-sm font-mono font-medium text-white mb-2">EMAIL
+								<input
+									type="email"
+									bind:value={vcardEmail}
+									placeholder="john@example.com..."
+									class="brutal-input w-full mt-2"
+								/>
+							</label>
 						</div>
 						<div>
-							<label class="block text-sm font-medium text-white mb-2">Company
-							<input
-								type="text"
-								bind:value={vcardCompany}
-								placeholder="Company name..."
-								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
-							/>
-</label>
+							<label class="block text-sm font-mono font-medium text-white mb-2">COMPANY
+								<input
+									type="text"
+									bind:value={vcardCompany}
+									placeholder="Company name..."
+									class="brutal-input w-full mt-2"
+								/>
+							</label>
 						</div>
 						<div>
-							<label class="block text-sm font-medium text-white mb-2">Title
-							<input
-								type="text"
-								bind:value={vcardTitle}
-								placeholder="Job title..."
-								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
-							/>
-</label>
+							<label class="block text-sm font-mono font-medium text-white mb-2">TITLE
+								<input
+									type="text"
+									bind:value={vcardTitle}
+									placeholder="Job title..."
+									class="brutal-input w-full mt-2"
+								/>
+							</label>
 						</div>
 					{:else if activeTab === 'email'}
 						<div>
-							<label class="block text-sm font-medium text-white mb-2">To
-							<input
-								type="email"
-								bind:value={emailTo}
-								placeholder="recipient@example.com..."
-								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
-							/>
-</label>
+							<label class="block text-sm font-mono font-medium text-white mb-2">TO
+								<input
+									type="email"
+									bind:value={emailTo}
+									placeholder="recipient@example.com..."
+									class="brutal-input w-full mt-2"
+								/>
+							</label>
 						</div>
 						<div>
-							<label class="block text-sm font-medium text-white mb-2">Subject
-							<input
-								type="text"
-								bind:value={emailSubject}
-								placeholder="Email subject..."
-								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
-							/>
-</label>
+							<label class="block text-sm font-mono font-medium text-white mb-2">SUBJECT
+								<input
+									type="text"
+									bind:value={emailSubject}
+									placeholder="Email subject..."
+									class="brutal-input w-full mt-2"
+								/>
+							</label>
 						</div>
 						<div>
-							<label class="block text-sm font-medium text-white mb-2">Message
-							<textarea
-								bind:value={emailBody}
-								placeholder="Email body..."
-								rows="3"
-								class="w-full rounded-lg bg-zinc-800/50 border border-zinc-700/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
-							></textarea>
-</label>
+							<label class="block text-sm font-mono font-medium text-white mb-2">MESSAGE
+								<textarea
+									bind:value={emailBody}
+									placeholder="Email body..."
+									rows="3"
+									class="brutal-input w-full mt-2"
+								></textarea>
+							</label>
 						</div>
 					{/if}
 				</div>
 
 				<!-- Customization -->
-				<div class="space-y-4 border-t border-zinc-700/50 pt-6">
-					<h2 class="text-sm font-semibold text-white">Customization</h2>
+				<div class="space-y-4 pt-6" style="border-top: 1px solid var(--border);">
+					<h2 class="text-sm font-mono font-semibold text-white uppercase tracking-widest">CUSTOMIZATION</h2>
 
 					<div class="grid grid-cols-2 gap-4">
 						<div>
-							<label for="qr-fg-color" class="block text-sm font-medium text-zinc-400 mb-2">Foreground Color</label>
+							<label for="qr-fg-color" class="block text-sm font-mono font-medium mb-2" style="color: var(--text-secondary);">FOREGROUND COLOR</label>
 							<div class="flex items-center gap-2">
 								<input
 									type="color"
 									bind:value={qrForeground}
-									class="h-10 w-10 rounded cursor-pointer border border-zinc-700/50"
+									class="h-10 w-10 cursor-pointer border"
+									style="background-color: var(--bg-dark); border-color: var(--border);"
 								/>
-								<span class="text-sm text-zinc-400">{qrForeground}</span>
+								<span class="text-sm font-mono" style="color: var(--text-secondary);">{qrForeground}</span>
 							</div>
 						</div>
 
 						<div>
-							<label for="qr-bg-color" class="block text-sm font-medium text-zinc-400 mb-2">Background Color</label>
+							<label for="qr-bg-color" class="block text-sm font-mono font-medium mb-2" style="color: var(--text-secondary);">BACKGROUND COLOR</label>
 							<div class="flex items-center gap-2">
 								<input
 									type="color"
 									bind:value={qrBackground}
-									class="h-10 w-10 rounded cursor-pointer border border-zinc-700/50"
+									class="h-10 w-10 cursor-pointer border"
+									style="background-color: var(--bg-dark); border-color: var(--border);"
 								/>
-								<span class="text-sm text-zinc-400">{qrBackground}</span>
+								<span class="text-sm font-mono" style="color: var(--text-secondary);">{qrBackground}</span>
 							</div>
 						</div>
 					</div>
 
 					<div>
-						<label class="block text-sm font-medium text-zinc-400 mb-2">Size: {qrSize}px
-						<input
-							type="range"
-							min="200"
-							max="600"
-							step="50"
-							bind:value={qrSize}
-							class="w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-orange-500"
-						/>
-</label>
+						<label class="block text-sm font-mono font-medium mb-2" style="color: var(--text-secondary);">SIZE: {qrSize}px
+							<input
+								type="range"
+								min="200"
+								max="600"
+								step="50"
+								bind:value={qrSize}
+								class="w-full h-2 mt-2 appearance-none cursor-pointer"
+								style="background-color: var(--bg-dark); accent-color: var(--ink);"
+							/>
+						</label>
 					</div>
 				</div>
 			</div>
 
 			<!-- Preview Panel -->
 			<div class="space-y-6">
-				<div class="rounded-lg bg-zinc-800/50 border border-zinc-700/50 p-6 flex flex-col items-center justify-center min-h-[400px]">
+				<div class="brutal-card p-6 flex flex-col items-center justify-center min-h-[400px]">
 					{#if qrDataUrl}
 						<img src={qrDataUrl} alt="QR Code" class="max-w-full" />
 					{:else}
-						<div class="text-center text-zinc-500">
-							<p class="text-sm">QR code preview</p>
+						<div class="text-center" style="color: var(--text-muted);">
+							<p class="text-sm font-mono">QR CODE PREVIEW</p>
 						</div>
 					{/if}
 				</div>
 
 				<!-- Download Buttons -->
-				<div class="grid grid-cols-2 gap-3">
+				<div class="grid grid-cols-2 gap-2">
 					<button
 						onclick={downloadPNG}
 						disabled={!qrDataUrl}
-						class="flex items-center justify-center gap-2 rounded-lg bg-orange-500 px-4 py-2 font-medium text-white hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+						class="brutal-btn brutal-btn-ink disabled:opacity-50 disabled:cursor-not-allowed"
 					>
-						Download PNG
+						DOWNLOAD PNG
 					</button>
 					<button
 						onclick={downloadSVG}
 						disabled={!qrSvgUrl}
-						class="flex items-center justify-center gap-2 rounded-lg bg-orange-500 px-4 py-2 font-medium text-white hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+						class="brutal-btn brutal-btn-ink disabled:opacity-50 disabled:cursor-not-allowed"
 					>
-						Download SVG
+						DOWNLOAD SVG
 					</button>
 				</div>
 			</div>
 		</div>
 
 		<!-- Footer -->
-		<div class="mt-12 text-center text-zinc-500 text-sm border-t border-zinc-700/50 pt-6">
-			<p>
-				Part of <a href="/tools" class="text-orange-500 hover:text-orange-400 transition-colors">ArjoStyle Free Tools</a>
-			</p>
+		<div class="mt-12 text-center pt-6" style="border-top: 1px solid var(--border);">
+			<a href="/tools" class="text-mono-label hover:text-ink transition-colors">← BACK TO FREE TOOLS</a>
 		</div>
 	</div>
 </div>

@@ -1,10 +1,13 @@
 import { Pool } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-serverless';
 import * as schema from './schema';
+import * as authSchema from './auth-schema-generated';
+
+export { schema, authSchema };
 
 export function createDb(databaseUrl: string) {
   const pool = new Pool({ connectionString: databaseUrl });
-  return drizzle(pool, { schema });
+  return drizzle(pool, { schema: { ...schema, ...authSchema } });
 }
 
 // For use in server-side SvelteKit load functions / API routes

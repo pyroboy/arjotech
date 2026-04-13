@@ -195,62 +195,66 @@
 	<meta name="description" content="Generate secure random passwords. Customize length, character types, and check strength. Free online password generator." />
 </svelte:head>
 
-<div class="min-h-screen bg-surface-900 px-4 py-8 sm:px-6 lg:px-8">
+<div class="min-h-screen px-4 py-8 sm:px-6 lg:px-8" style="background-color: var(--bg-dark);">
 	<div class="mx-auto max-w-4xl">
 		<!-- Header -->
 		<div class="mb-8">
-			<h1 class="text-3xl font-bold text-white sm:text-4xl">Password Generator</h1>
-			<p class="mt-2 text-zinc-400">Create secure, random passwords instantly.</p>
+			<div class="mb-3">
+				<a href="/tools" class="text-mono-label hover:text-ink transition-colors">← ALL TOOLS</a>
+			</div>
+			<p class="text-mono-label mb-2">DEVELOPER TOOL</p>
+			<h1 class="font-display text-display-sm text-white tracking-wide">PASSWORD GENERATOR</h1>
+			<p class="mt-2 text-sm" style="color: var(--text-secondary);">Create secure, random passwords instantly.</p>
 		</div>
 
 		<div class="space-y-6">
 			<!-- Password Display -->
-			<div class="rounded-lg bg-zinc-800/50 border border-zinc-700/50 p-8">
+			<div class="brutal-card p-8">
 				<div class="mb-4 text-center">
-					<p class="text-zinc-400 text-sm mb-2">Your Password</p>
+					<p class="text-sm mb-2 font-mono" style="color: var(--text-secondary);">Your Password</p>
 					<p class="font-mono text-3xl font-bold text-white break-all">{password || '---'}</p>
 				</div>
 
 				<div class="flex gap-2 justify-center">
 					<button
 						onclick={generateNew}
-						class="flex-1 rounded-lg bg-orange-500 px-6 py-2 font-medium text-white hover:bg-orange-600 transition-colors"
+						class="brutal-btn brutal-btn-ink flex-1"
 					>
-						Generate
+						GENERATE
 					</button>
 					<button
 						onclick={copyPassword}
 						disabled={!password}
-						class="flex-1 rounded-lg bg-orange-500 px-6 py-2 font-medium text-white hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+						class="brutal-btn brutal-btn-ink flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
 					>
-						{copied ? 'Copied!' : 'Copy'}
+						{copied ? 'COPIED!' : 'COPY'}
 					</button>
 				</div>
 			</div>
 
 			<!-- Strength Meter -->
 			{#if stats}
-				<div class="rounded-lg bg-zinc-800/50 border border-zinc-700/50 p-6">
+				<div class="brutal-card p-6">
 					<div class="mb-4">
 						<div class="flex items-center justify-between mb-2">
-							<span class="text-sm font-medium text-zinc-400">Strength</span>
-							<span class={`text-sm font-semibold ${getStrengthTextColor(stats.strength)}`}>{stats.strength}</span>
+							<span class="text-sm font-medium" style="color: var(--text-secondary);">Strength</span>
+							<span class={`text-sm font-semibold`} style={stats.strength === 'Weak' ? 'color: var(--red);' : stats.strength === 'Fair' ? 'color: #f97316;' : stats.strength === 'Good' ? 'color: #eab308;' : 'color: #22c55e;'}>{stats.strength}</span>
 						</div>
-						<div class="h-2 bg-zinc-700 rounded-full overflow-hidden">
+						<div class="h-2 w-full" style="background-color: var(--bg-dark);">
 							<div
-								class={`h-full ${getStrengthColor(stats.strength)} transition-all`}
-								style={`width: ${Math.min(100, (stats.entropy / 100) * 100)}%`}
+								class="h-full transition-all"
+								style={`width: ${Math.min(100, (stats.entropy / 100) * 100)}%; ${stats.strength === 'Weak' ? 'background-color: var(--red);' : stats.strength === 'Fair' ? 'background-color: #f97316;' : stats.strength === 'Good' ? 'background-color: #eab308;' : stats.strength === 'Strong' ? 'background-color: #84cc16;' : 'background-color: #22c55e;'}`}
 							></div>
 						</div>
 					</div>
 
 					<div class="grid grid-cols-2 gap-4 text-sm">
 						<div>
-							<p class="text-zinc-400 mb-1">Entropy</p>
+							<p class="mb-1 font-mono" style="color: var(--text-secondary);">Entropy</p>
 							<p class="text-white font-semibold">{stats.entropy} bits</p>
 						</div>
 						<div>
-							<p class="text-zinc-400 mb-1">Crack Time (1T guesses/sec)</p>
+							<p class="mb-1 font-mono" style="color: var(--text-secondary);">Crack Time (1T/sec)</p>
 							<p class="text-white font-semibold">{stats.crackTime}</p>
 						</div>
 					</div>
@@ -258,9 +262,9 @@
 			{/if}
 
 			<!-- Length Slider -->
-			<div class="rounded-lg bg-zinc-800/50 border border-zinc-700/50 p-6">
+			<div class="brutal-card p-6">
 				<div class="flex items-center justify-between mb-4">
-					<label for="length" class="text-sm font-medium text-zinc-400">Length: <span class="text-white text-lg">{length}</span></label>
+					<label for="length" class="text-sm font-medium" style="color: var(--text-secondary);">Length: <span class="text-white text-lg">{length}</span></label>
 				</div>
 				<input
 					id="length"
@@ -268,73 +272,79 @@
 					min="8"
 					max="128"
 					bind:value={length}
-					class="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-orange-500"
+					class="w-full h-2 appearance-none cursor-pointer"
+					style="background-color: var(--bg-dark); accent-color: var(--ink);"
 				/>
-				<div class="flex justify-between text-xs text-zinc-500 mt-2">
+				<div class="flex justify-between text-xs mt-2 font-mono" style="color: var(--text-muted);">
 					<span>8</span>
 					<span>128</span>
 				</div>
 			</div>
 
 			<!-- Character Options -->
-			<div class="rounded-lg bg-zinc-800/50 border border-zinc-700/50 p-6">
-				<h2 class="text-sm font-semibold text-white mb-4">Character Types</h2>
+			<div class="brutal-card p-6">
+				<h2 class="text-sm font-semibold text-white mb-4">CHARACTER TYPES</h2>
 				<div class="space-y-3">
 					<label class="flex items-center gap-3 cursor-pointer">
 						<input
 							type="checkbox"
 							bind:checked={useUppercase}
 							onchange={() => generateNew()}
-							class="w-4 h-4 rounded accent-orange-500 cursor-pointer"
+							class="w-4 h-4 cursor-pointer"
+							style="accent-color: var(--ink);"
 						/>
-						<span class="text-sm text-zinc-400">Uppercase (A-Z)</span>
+						<span class="text-sm" style="color: var(--text-secondary);">Uppercase (A-Z)</span>
 					</label>
 					<label class="flex items-center gap-3 cursor-pointer">
 						<input
 							type="checkbox"
 							bind:checked={useLowercase}
 							onchange={() => generateNew()}
-							class="w-4 h-4 rounded accent-orange-500 cursor-pointer"
+							class="w-4 h-4 cursor-pointer"
+							style="accent-color: var(--ink);"
 						/>
-						<span class="text-sm text-zinc-400">Lowercase (a-z)</span>
+						<span class="text-sm" style="color: var(--text-secondary);">Lowercase (a-z)</span>
 					</label>
 					<label class="flex items-center gap-3 cursor-pointer">
 						<input
 							type="checkbox"
 							bind:checked={useNumbers}
 							onchange={() => generateNew()}
-							class="w-4 h-4 rounded accent-orange-500 cursor-pointer"
+							class="w-4 h-4 cursor-pointer"
+							style="accent-color: var(--ink);"
 						/>
-						<span class="text-sm text-zinc-400">Numbers (0-9)</span>
+						<span class="text-sm" style="color: var(--text-secondary);">Numbers (0-9)</span>
 					</label>
 					<label class="flex items-center gap-3 cursor-pointer">
 						<input
 							type="checkbox"
 							bind:checked={useSymbols}
 							onchange={() => generateNew()}
-							class="w-4 h-4 rounded accent-orange-500 cursor-pointer"
+							class="w-4 h-4 cursor-pointer"
+							style="accent-color: var(--ink);"
 						/>
-						<span class="text-sm text-zinc-400">Symbols (!@#$%^&*)</span>
+						<span class="text-sm" style="color: var(--text-secondary);">Symbols (!@#$%^&*)</span>
 					</label>
 					<label class="flex items-center gap-3 cursor-pointer">
 						<input
 							type="checkbox"
 							bind:checked={excludeAmbiguous}
 							onchange={() => generateNew()}
-							class="w-4 h-4 rounded accent-orange-500 cursor-pointer"
+							class="w-4 h-4 cursor-pointer"
+							style="accent-color: var(--ink);"
 						/>
-						<span class="text-sm text-zinc-400">Exclude Ambiguous (i, l, 1, L, o, 0, O)</span>
+						<span class="text-sm" style="color: var(--text-secondary);">Exclude Ambiguous (i, l, 1, L, o, 0, O)</span>
 					</label>
 				</div>
 			</div>
 
 			<!-- Bulk Generation -->
-			<div class="rounded-lg bg-zinc-800/50 border border-zinc-700/50 p-6">
-				<h2 class="text-sm font-semibold text-white mb-4">Bulk Generate</h2>
+			<div class="brutal-card p-6">
+				<h2 class="text-sm font-semibold text-white mb-4">BULK GENERATE</h2>
 				<div class="flex gap-2 mb-4">
 					<select
 						bind:value={bulkCount}
-						class="rounded-lg bg-zinc-700 border border-zinc-600 px-3 py-2 text-white focus:outline-none focus:border-orange-500"
+						class="brutal-input flex-1"
 					>
 						<option value={5}>5 passwords</option>
 						<option value={10}>10 passwords</option>
@@ -342,40 +352,40 @@
 					</select>
 					<button
 						onclick={generateBulk}
-						class="flex-1 rounded-lg bg-orange-500 px-4 py-2 font-medium text-white hover:bg-orange-600 transition-colors"
+						class="brutal-btn brutal-btn-ink flex-1"
 					>
-						Generate Bulk
+						GENERATE BULK
 					</button>
 				</div>
 
 				{#if bulkPasswords.length > 0}
-					<div class="bg-zinc-900 border border-zinc-700/50 rounded-lg p-3 font-mono text-sm text-green-400 max-h-48 overflow-auto mb-3">
+					<div class="p-3 font-mono text-sm max-h-48 overflow-auto mb-3" style="background-color: var(--bg-dark); border: 1px solid var(--border); color: #22c55e;">
 						{#each bulkPasswords as pwd}
 							<div>{pwd}</div>
 						{/each}
 					</div>
 					<button
 						onclick={copyBulk}
-						class="w-full rounded-lg bg-green-600 px-4 py-2 font-medium text-white hover:bg-green-700 transition-colors"
+						class="brutal-btn brutal-btn-primary w-full"
 					>
-						Copy All
+						COPY ALL
 					</button>
 				{/if}
 			</div>
 
 			<!-- Password History -->
 			{#if passwordHistory.length > 0}
-				<div class="rounded-lg bg-zinc-800/50 border border-zinc-700/50 p-6">
-					<h2 class="text-sm font-semibold text-white mb-4">Recent Passwords</h2>
+				<div class="brutal-card p-6">
+					<h2 class="text-sm font-semibold text-white mb-4">RECENT PASSWORDS</h2>
 					<div class="space-y-2">
 						{#each passwordHistory as entry}
-							<div class="flex items-center justify-between bg-zinc-900 rounded-lg p-3">
-								<span class="font-mono text-sm text-green-400 break-all">{entry.password}</span>
+							<div class="flex items-center justify-between p-3" style="background-color: var(--bg-dark); border: 1px solid var(--border);">
+								<span class="font-mono text-sm break-all" style="color: #22c55e;">{entry.password}</span>
 								<button
 									onclick={() => navigator.clipboard.writeText(entry.password)}
-									class="ml-2 px-2 py-1 text-xs bg-zinc-700 hover:bg-zinc-600 text-zinc-300 rounded transition-colors flex-shrink-0"
+									class="brutal-btn brutal-btn-secondary text-xs flex-shrink-0 ml-2"
 								>
-									Copy
+									COPY
 								</button>
 							</div>
 						{/each}
@@ -385,9 +395,9 @@
 		</div>
 
 		<!-- Footer -->
-		<div class="mt-12 text-center text-zinc-500 text-sm border-t border-zinc-700/50 pt-6">
-			<p>
-				Part of <a href="/tools" class="text-orange-500 hover:text-orange-400 transition-colors">ArjoStyle Free Tools</a>
+		<div class="mt-12 text-center text-sm pt-6" style="border-top: 1px solid var(--border);">
+			<p style="color: var(--text-muted);">
+				Part of <a href="/tools" style="color: var(--ink);" class="hover:opacity-80 transition-colors">ArjoStyle Free Tools</a>
 			</p>
 		</div>
 	</div>

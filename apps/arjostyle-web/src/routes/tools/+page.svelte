@@ -144,33 +144,32 @@
   />
 </svelte:head>
 
-<div class="min-h-screen bg-surface-900 pt-20 pb-16 px-4 md:px-8">
+<div class="min-h-screen pt-20 pb-16 px-4 md:px-8" style="background-color: var(--bg-dark);">
   <div class="max-w-6xl mx-auto">
     <!-- Header -->
     <div class="mb-12 text-center">
-      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Free Online Tools</h1>
-      <p class="text-zinc-400 text-lg max-w-2xl mx-auto">
-        {tools.length} free tools — calculators, image editors, generators, and more. No signup, no ads, runs in your browser.
+      <p class="text-mono-label mb-4">FREE ONLINE TOOLS</p>
+      <h1 class="font-display text-display-md text-white mb-6 tracking-wide">
+        {tools.length} FREE TOOLS
+      </h1>
+      <p class="text-sm max-w-2xl mx-auto" style="color: var(--text-secondary); font-family: var(--font-mono);">
+        Calculators, image editors, generators, and more. No signup, no ads, runs in your browser.
       </p>
     </div>
 
     <!-- Category Filter -->
-    <div class="flex flex-wrap justify-center gap-3 mb-12">
+    <div class="flex flex-wrap justify-center gap-1 mb-12">
       <button
         onclick={() => activeCategory = null}
-        class="px-4 py-2 rounded-full text-sm font-medium transition-all {activeCategory === null
-          ? 'bg-orange-500 text-white'
-          : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-white'}"
+        class="brutal-btn {activeCategory === null ? 'brutal-btn-primary' : 'brutal-btn-secondary'}"
       >
-        All ({tools.length})
+        ALL ({tools.length})
       </button>
       {#each categories as cat}
         {@const count = tools.filter(t => t.category === cat.key).length}
         <button
           onclick={() => activeCategory = activeCategory === cat.key ? null : cat.key}
-          class="px-4 py-2 rounded-full text-sm font-medium transition-all {activeCategory === cat.key
-            ? 'bg-orange-500 text-white'
-            : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-white'}"
+          class="brutal-btn {activeCategory === cat.key ? 'brutal-btn-primary' : 'brutal-btn-secondary'}"
         >
           {cat.icon} {cat.label} ({count})
         </button>
@@ -178,68 +177,65 @@
     </div>
 
     <!-- Tools Grid -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-2 mb-16 stagger-children">
       {#each filteredTools as tool}
         <a
           href={tool.path}
-          class="group relative bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 border border-zinc-700/50 rounded-lg p-6 hover:border-orange-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/10"
+          class="group brutal-card p-6"
         >
-          <div class="absolute inset-0 bg-gradient-to-br from-orange-500/0 to-orange-600/0 group-hover:from-orange-500/5 group-hover:to-orange-600/5 rounded-lg transition-all duration-300 pointer-events-none"></div>
+          <div class="text-3xl mb-3">{tool.icon}</div>
 
-          <div class="relative z-10">
-            <div class="text-3xl mb-3 inline-block">{tool.icon}</div>
+          <h2 class="text-white font-display text-lg mb-2 group-hover:text-ink transition-colors tracking-wide">
+            {tool.title.toUpperCase()}
+          </h2>
 
-            <h2 class="text-white font-semibold text-lg mb-2 group-hover:text-orange-400 transition-colors">
-              {tool.title}
-            </h2>
+          <p class="text-sm leading-relaxed mb-4" style="color: var(--text-secondary);">{tool.description}</p>
 
-            <p class="text-zinc-400 text-sm leading-relaxed mb-4">{tool.description}</p>
-
-            <div class="flex items-center gap-2 text-orange-400 group-hover:gap-3 transition-all">
-              <span class="text-sm font-medium">Open Tool</span>
-              <span class="text-lg">→</span>
-            </div>
+          <div class="flex items-center gap-2 font-mono text-sm group-hover:gap-3 transition-all" style="color: var(--ink);">
+            <span>OPEN TOOL</span>
+            <span>→</span>
           </div>
         </a>
       {/each}
     </div>
 
     <!-- Features Section -->
-    <div class="bg-zinc-800/30 border border-zinc-700/50 rounded-lg p-8 mb-16">
-      <h2 class="text-white font-semibold text-2xl mb-8 text-center">Why Use These Tools?</h2>
+    <div class="brutal-card p-8 mb-16">
+      <h2 class="text-white font-display text-2xl mb-8 text-center tracking-wide">WHY USE THESE TOOLS?</h2>
 
       <div class="grid md:grid-cols-4 gap-8">
         <div class="text-center">
           <div class="text-2xl mb-3">🆓</div>
-          <h3 class="text-white font-semibold mb-2">100% Free</h3>
-          <p class="text-zinc-400 text-sm">No signup, no ads, no hidden fees.</p>
+          <h3 class="text-white font-semibold mb-2 font-display tracking-wide">100% FREE</h3>
+          <p class="text-sm" style="color: var(--text-secondary);">No signup, no ads, no hidden fees.</p>
         </div>
         <div class="text-center">
           <div class="text-2xl mb-3">🔒</div>
-          <h3 class="text-white font-semibold mb-2">Private</h3>
-          <p class="text-zinc-400 text-sm">Everything runs in your browser. Data never leaves your device.</p>
+          <h3 class="text-white font-semibold mb-2 font-display tracking-wide">PRIVATE</h3>
+          <p class="text-sm" style="color: var(--text-secondary);">Everything runs in your browser. Data never leaves your device.</p>
         </div>
         <div class="text-center">
           <div class="text-2xl mb-3">⚡</div>
-          <h3 class="text-white font-semibold mb-2">Instant</h3>
-          <p class="text-zinc-400 text-sm">No loading screens. Results calculated in real-time.</p>
+          <h3 class="text-white font-semibold mb-2 font-display tracking-wide">INSTANT</h3>
+          <p class="text-sm" style="color: var(--text-secondary);">No loading screens. Results calculated in real-time.</p>
         </div>
         <div class="text-center">
           <div class="text-2xl mb-3">📱</div>
-          <h3 class="text-white font-semibold mb-2">Mobile-Friendly</h3>
-          <p class="text-zinc-400 text-sm">Works on any device — phone, tablet, or desktop.</p>
+          <h3 class="text-white font-semibold mb-2 font-display tracking-wide">MOBILE-FRIENDLY</h3>
+          <p class="text-sm" style="color: var(--text-secondary);">Works on any device — phone, tablet, or desktop.</p>
         </div>
       </div>
     </div>
 
     <!-- CTA -->
     <div class="text-center">
-      <p class="text-zinc-500 text-sm mb-4">Built by <a href="/" class="text-orange-400 hover:text-orange-300">ArjoStyle</a></p>
+      <p class="text-sm font-mono mb-4" style="color: var(--text-muted);">Built by <a href="/" style="color: var(--ink);" class="hover:opacity-80">ArjoStyle</a></p>
       <a
         href="/"
-        class="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors text-sm"
+        class="inline-flex items-center gap-2 font-mono text-sm transition-colors hover:text-white"
+        style="color: var(--text-secondary);"
       >
-        ← Back to ArjoStyle
+        ← BACK TO ARJOSTYLE
       </a>
     </div>
   </div>

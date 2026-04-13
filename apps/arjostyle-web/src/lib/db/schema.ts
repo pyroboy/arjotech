@@ -398,6 +398,71 @@ export const mediaAssets = pgTable('media_assets', {
   displayOrder: integer('display_order').default(0),
 });
 
+// ── Job Opportunities ─────────────────────────────────────────────────────────
+
+export const jobSourceEnum = pgEnum('job_source', [
+	'hackernews',
+	'weworkremotely',
+	'remoteok',
+	'remotive',
+	'arcdev',
+	'linkedin',
+	'other'
+]);
+
+export const jobStatusEnum = pgEnum('job_status', [
+	'new',
+	'viewed',
+	'applied',
+	'screening',
+	'interview',
+	'offer',
+	'rejected',
+	'ghosted'
+]);
+
+export const jobFitEnum = pgEnum('job_fit', [
+	'strong',
+	'good',
+	'stretch',
+	'weak'
+]);
+
+export const jobOpportunities = pgTable('job_opportunities', {
+	id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
+	createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+	updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+
+	// Core
+	title: text('title').notNull(),
+	company: text('company').notNull(),
+	url: text('url').notNull(),
+	source: jobSourceEnum('source').default('other').notNull(),
+	fit: jobFitEnum('fit').default('good'),
+
+	// Details
+	payRange: text('pay_range'),
+	location: text('location'),
+	remote: text('remote'),
+	jobType: text('job_type'),
+
+	// Tracking
+	status: jobStatusEnum('status').default('new').notNull(),
+	notes: text('notes'),
+
+	// Fit analysis
+	fitSummary: text('fit_summary'),
+	yourTags: text('your_tags'),
+	jdSnippet: text('jd_snippet'),
+
+	// Timestamps
+	foundAt: timestamp('found_at', { withTimezone: true }).defaultNow().notNull(),
+	appliedAt: timestamp('applied_at', { withTimezone: true }),
+});
+
+export type JobOpportunity = typeof jobOpportunities.$inferSelect;
+export type NewJobOpportunity = typeof jobOpportunities.$inferInsert;
+
 // ── Type exports ──────────────────────────────────────────────────────────────
 
 export type MediaAsset = typeof mediaAssets.$inferSelect;

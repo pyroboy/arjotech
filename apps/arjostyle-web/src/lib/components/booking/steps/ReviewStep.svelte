@@ -143,49 +143,49 @@
 <div class="py-12 max-w-lg mx-auto px-4 text-center space-y-8">
   <!-- Green checkmark -->
   <div class="flex justify-center">
-    <div class="w-20 h-20 rounded-full bg-emerald-500/20 border-2 border-emerald-500 flex items-center justify-center">
-      <CheckCircle size={40} class="text-emerald-400" />
+    <div class="w-20 h-20 border-2 border-tech flex items-center justify-center">
+      <CheckCircle size={40} class="text-tech" />
     </div>
   </div>
 
   <div>
-    <h2 class="text-3xl font-bold text-white mb-2">Booking Request Sent!</h2>
-    <p class="text-zinc-400">I'll contact you within 24 hours to confirm your appointment.</p>
+    <h2 class="text-3xl font-mono font-bold text-white mb-2 uppercase tracking-wide">Booking Request Sent!</h2>
+    <p class="text-zinc-500 font-mono text-sm">I'LL CONTACT YOU WITHIN 24 HOURS TO CONFIRM YOUR APPOINTMENT.</p>
   </div>
 
   <!-- Booking summary -->
-  <div class="bg-surface-800 border border-zinc-800 rounded-xl p-5 text-left space-y-3 text-sm">
-    <h3 class="text-lg font-semibold text-white mb-3">Booking Summary</h3>
+  <div class="bg-elevated border border-border p-5 text-left space-y-3 text-sm">
+    <h3 class="text-lg font-mono font-semibold text-white mb-3 uppercase tracking-wide">Booking Summary</h3>
     <div class="flex justify-between">
-      <span class="text-zinc-500">Name:</span>
-      <span class="text-white font-medium">{confirmedName}</span>
+      <span class="text-zinc-600 font-mono uppercase text-xs">Name:</span>
+      <span class="text-white font-mono font-medium">{confirmedName}</span>
     </div>
     <div class="flex justify-between">
-      <span class="text-zinc-500">Email:</span>
-      <span class="text-white font-medium">{confirmedEmail}</span>
+      <span class="text-zinc-600 font-mono uppercase text-xs">Email:</span>
+      <span class="text-white font-mono font-medium">{confirmedEmail}</span>
     </div>
     <div class="flex justify-between">
-      <span class="text-zinc-500">Style:</span>
-      <span class="text-white font-medium capitalize">{confirmedStyle}</span>
+      <span class="text-zinc-600 font-mono uppercase text-xs">Style:</span>
+      <span class="text-white font-mono font-medium capitalize">{confirmedStyle}</span>
     </div>
     <div class="flex justify-between">
-      <span class="text-zinc-500">Placement:</span>
-      <span class="text-white font-medium capitalize">{confirmedPlacement}</span>
+      <span class="text-zinc-600 font-mono uppercase text-xs">Placement:</span>
+      <span class="text-white font-mono font-medium capitalize">{confirmedPlacement}</span>
     </div>
     <div class="flex justify-between">
-      <span class="text-zinc-500">Size:</span>
-      <span class="text-white font-medium">{confirmedSize}</span>
+      <span class="text-zinc-600 font-mono uppercase text-xs">Size:</span>
+      <span class="text-white font-mono font-medium">{confirmedSize}</span>
     </div>
   </div>
 
   <!-- What happens next -->
-  <div class="bg-ink-500/5 border border-ink-500/30 rounded-xl p-5 text-left">
-    <h3 class="font-semibold text-white mb-3">What happens next</h3>
-    <ol class="text-sm text-zinc-400 space-y-2 list-decimal list-inside">
-      <li>I'll review your request and reach out within 24 hours</li>
-      <li>We'll finalize the design details and confirm pricing</li>
-      <li>A 50% deposit secures your appointment slot</li>
-      <li>You'll receive a confirmation with your appointment date</li>
+  <div class="bg-ink/5 border border-ink p-5 text-left">
+    <h3 class="font-mono font-semibold text-white mb-3 uppercase tracking-wide">What happens next</h3>
+    <ol class="text-sm font-mono text-zinc-400 space-y-2 list-decimal list-inside">
+      <li>I'LL REVIEW YOUR REQUEST AND REACH OUT WITHIN 24 HOURS</li>
+      <li>WE'LL FINALIZE THE DESIGN DETAILS AND CONFIRM PRICING</li>
+      <li>A 50% DEPOSIT SECURES YOUR APPOINTMENT SLOT</li>
+      <li>YOU'LL RECEIVE A CONFIRMATION WITH YOUR APPOINTMENT DATE</li>
     </ol>
   </div>
 
@@ -194,16 +194,16 @@
     <button
       type="button"
       onclick={() => { showConfirmation = false; onBookAnother(); }}
-      class="flex-1 py-3 border border-zinc-700 text-zinc-300 rounded-xl font-medium hover:bg-zinc-800 transition-colors"
+      class="flex-1 py-3 border border-border text-zinc-400 font-mono font-medium hover:bg-elevated hover:text-white transition-colors"
     >
-      Book Another
+      BOOK ANOTHER
     </button>
     <button
       type="button"
       onclick={() => { onSubmitSuccess(); }}
-      class="flex-1 py-3 bg-ink-500 text-white rounded-xl font-semibold hover:bg-ink-400 transition-colors"
+      class="flex-1 py-3 bg-ink text-dark font-mono font-bold hover:bg-ink/80 transition-colors"
     >
-      Done
+      DONE
     </button>
   </div>
 </div>

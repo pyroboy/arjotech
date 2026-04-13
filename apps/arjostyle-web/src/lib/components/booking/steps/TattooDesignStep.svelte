@@ -304,18 +304,18 @@
 </script>
 
 <!-- Section dot indicators -->
-<div class="sticky top-0 z-30 bg-surface-900/90 backdrop-blur-sm pb-2 pt-1 px-2 -mx-4 sm:-mx-6">
+<div class="sticky top-0 z-30 bg-dark/90 pb-2 pt-1 px-2 -mx-4 sm:-mx-6 border-b border-border">
 	<div class="flex items-center justify-center gap-1">
 		{#each sections as sec, i}
 			<button
 				type="button"
-				class="flex items-center gap-1 px-2 py-1 rounded-full text-[9px] font-medium transition-all
-					{activeSection === i ? 'bg-ink-500/20 text-ink-400' : 'text-zinc-600 hover:text-zinc-400'}"
+				class="flex items-center gap-1 px-2 py-1 text-[9px] font-mono font-medium transition-all
+					{activeSection === i ? 'text-ink' : 'text-zinc-600 hover:text-zinc-400'}"
 				onclick={() => scrollToSection(i)}
 			>
-				<span class="w-1.5 h-1.5 rounded-full transition-colors {activeSection === i ? 'bg-ink-500' : 'bg-zinc-700'}"></span>
+				<span class="w-1.5 h-1.5 transition-colors {activeSection === i ? 'bg-ink' : 'bg-border'}"></span>
 				{#if activeSection === i}
-					<span>{sec.label}</span>
+					<span>{sec.label.toUpperCase()}</span>
 				{/if}
 			</button>
 		{/each}
@@ -324,35 +324,35 @@
 
 <div bind:this={scrollContainerEl} class="py-4 space-y-8 max-w-2xl mx-auto">
 	<!-- Section 0: First Tattoo? -->
-	<div id="section-start" class="border-b border-zinc-800 pb-6 scroll-mt-12" style="scroll-snap-align: start;">
-		<h3 class="booking-section-title mb-4">Is this your first tattoo?</h3>
-		<div class="flex gap-3">
+<div id="section-start" class="border-b border-border pb-6 scroll-mt-12" style="scroll-snap-align: start;">
+		<h3 class="booking-section-title mb-4 uppercase tracking-wide">Is this your first tattoo?</h3>
+		<div class="flex gap-2">
 			<button
 				type="button"
-				class="flex-1 py-3 rounded-xl text-sm font-medium transition-all
+				class="flex-1 py-3 text-sm font-mono font-medium transition-all border
 					{formData.firstTattoo === true
-						? 'bg-ink-500 text-white shadow-lg shadow-ink-500/25 ring-2 ring-ink-500/50'
-						: 'bg-surface-900 text-slate-300 border border-zinc-700 hover:border-zinc-500'}"
+						? 'bg-white border-white text-dark font-bold'
+						: 'bg-elevated border-border text-zinc-400 hover:border-border-light hover:text-white'}"
 				onclick={() => updateFormData({ firstTattoo: true })}
 			>
-				Yes, first time!
+				YES, FIRST TIME!
 			</button>
 			<button
 				type="button"
-				class="flex-1 py-3 rounded-xl text-sm font-medium transition-all
+				class="flex-1 py-3 text-sm font-mono font-medium transition-all border
 					{formData.firstTattoo === false
-						? 'bg-ink-500 text-white shadow-lg shadow-ink-500/25 ring-2 ring-ink-500/50'
-						: 'bg-surface-900 text-slate-300 border border-zinc-700 hover:border-zinc-500'}"
+						? 'bg-white border-white text-dark font-bold'
+						: 'bg-elevated border-border text-zinc-400 hover:border-border-light hover:text-white'}"
 				onclick={() => updateFormData({ firstTattoo: false })}
 			>
-				I've been inked before
+				I'VE BEEN INKED BEFORE
 			</button>
 		</div>
 	</div>
 
 	<!-- Section 1: Style Selection -->
-	<div id="section-style" class="border-b border-zinc-800 pb-6 scroll-mt-12" style="scroll-snap-align: start;">
-		<h3 class="booking-section-title mb-4">What style?</h3>
+	<div id="section-style" class="border-b border-border pb-6 scroll-mt-12" style="scroll-snap-align: start;">
+		<h3 class="booking-section-title mb-4 uppercase tracking-wide">What style?</h3>
 		<ExampleStylesCarousel
 			selectedStyle={formData.primaryTattooStyle ?? ''}
 			onStyleSelect={(styleId) => updateFormData({ primaryTattooStyle: styleId })}
@@ -360,21 +360,21 @@
 	</div>
 
 	<!-- Section 2: Body Placement (2-level) -->
-	<div id="section-placement" class="border-b border-zinc-800 pb-6 scroll-mt-12" style="scroll-snap-align: start;">
-		<h3 class="booking-section-title mb-4">Where on your body?</h3>
+	<div id="section-placement" class="border-b border-border pb-6 scroll-mt-12" style="scroll-snap-align: start;">
+		<h3 class="booking-section-title mb-4 uppercase tracking-wide">Where on your body?</h3>
 
 		<!-- Region pills -->
 		<div class="flex flex-wrap gap-2 mb-4">
 			{#each regions as region}
 				<button
 					type="button"
-					class="px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 border hover:scale-[1.02]
+					class="px-3 py-1.5 text-sm font-mono font-medium transition-all duration-150 border hover:scale-[1.02]
 						{selectedRegion === region
-							? 'bg-ink-500 border-ink-500 text-white'
-							: 'bg-surface-900 border-zinc-700 text-slate-300 hover:border-ink-500/50'}"
+							? 'bg-ink border-ink text-dark font-bold'
+							: 'bg-elevated border-border text-zinc-500 hover:border-ink hover:text-white'}"
 					onclick={() => selectRegion(region)}
 				>
-					{region}
+					{region.toUpperCase()}
 				</button>
 			{/each}
 		</div>
@@ -385,10 +385,10 @@
 				{#each placements as area}
 					<button
 						type="button"
-						class="px-3 py-1.5 rounded-lg text-sm transition-all duration-200 border hover:scale-[1.02]
+						class="px-3 py-1.5 text-sm font-mono transition-all duration-150 border
 							{formData.bodyArea === area && formData.bodyRegion === selectedRegion
-								? 'bg-ink-500/20 border-ink-500 text-ink-400'
-								: 'bg-surface-900 border-zinc-700 text-slate-400 hover:border-zinc-500'}"
+								? 'bg-ink/20 border-ink text-ink'
+								: 'bg-elevated border-border text-zinc-500 hover:border-border-light'}"
 						onclick={() => selectPlacement(area)}
 					>
 						{area}
@@ -398,12 +398,12 @@
 		{/if}
 
 		{#if formData.bodyArea && formData.painLevel}
-			<div class="mt-3 bg-zinc-800/50 rounded-lg p-3 border border-zinc-800 space-y-1">
-				<p class="text-xs text-slate-500">
-					Pain level: {formData.painLevel}/10 — {formData.painReason}
+			<div class="mt-3 bg-elevated p-3 border border-border space-y-1">
+				<p class="text-xs font-mono text-zinc-500"> 
+					PAIN LEVEL: {formData.painLevel}/10 — {formData.painReason}
 				</p>
 				{#if formData.firstTattoo}
-					<p class="text-xs text-emerald-400/80">
+					<p class="text-xs font-mono text-tech">
 						Most people say the pain is less than expected. We also offer numbing cream for extra comfort.
 					</p>
 				{/if}
@@ -414,22 +414,22 @@
 		<div class="mt-3">
 			<button
 				type="button"
-				class="text-xs text-ink-400 hover:text-ink-300 transition-colors"
+				class="text-xs font-mono text-ink hover:text-ink-400 transition-colors"
 				onclick={() => showAdditionalAreas = !showAdditionalAreas}
 			>
-				{showAdditionalAreas ? '− Hide' : '+ Planning multiple tattoos or a large piece?'}
+				{showAdditionalAreas ? '− HIDE' : '+ PLANNING MULTIPLE TATTOOS OR A LARGE PIECE?'}
 			</button>
 			{#if showAdditionalAreas}
 				<div class="mt-2">
 					<textarea
-						class="w-full bg-surface-800 border border-zinc-700 text-zinc-100 rounded-lg p-3 text-sm resize-none input-focus-glow"
+						class="w-full bg-dark border border-border text-zinc-100 p-3 text-sm font-mono resize-none"
 						placeholder="Describe additional tattoo ideas or areas you'd like covered (e.g., 'also want a small rose on my ankle' or 'full sleeve from shoulder to wrist')"
 						rows={3}
 						maxlength={500}
 						value={formData.additionalAreas ?? ''}
 						oninput={(e) => updateFormData({ additionalAreas: (e.target as HTMLTextAreaElement).value })}
 					></textarea>
-					<p class="text-[10px] text-zinc-500 mt-1">The artist will discuss all placements at consultation</p>
+					<p class="text-[10px] font-mono text-zinc-600 mt-1">THE ARTIST WILL DISCUSS ALL PLACEMENTS AT CONSULTATION</p>
 				</div>
 			{/if}
 		</div>
@@ -437,24 +437,24 @@
 
 	<!-- Inspiration Search (optional, only shows after placement selected) -->
 	{#if formData.bodyArea}
-		<div class="border-b border-zinc-800 pb-6">
+		<div class="border-b border-border pb-6">
 			<button
 				type="button"
-				class="flex items-center gap-2 text-xs text-zinc-500 hover:text-ink-400 transition-colors"
+				class="flex items-center gap-2 text-xs font-mono text-zinc-500 hover:text-ink transition-colors"
 				onclick={() => { showInspiration = !showInspiration; }}
 			>
 				<Search class="w-3.5 h-3.5" />
-				{showInspiration ? '− Hide inspiration search' : '+ Need inspiration? Search for ideas'}
+				{showInspiration ? '− HIDE INSPIRATION SEARCH' : '+ NEED INSPIRATION? SEARCH FOR IDEAS'}
 			</button>
 
 			{#if showInspiration}
 				<div class="mt-3 space-y-3">
-					<p class="text-[10px] text-zinc-500">Search for tattoo ideas, save images you like, then upload them as references below</p>
+					<p class="text-[10px] font-mono text-zinc-600">SEARCH FOR TATTOO IDEAS, SAVE IMAGES YOU LIKE, THEN UPLOAD THEM AS REFERENCES BELOW</p>
 
 					<!-- Auto-generated search query (editable) -->
 					<input
 						type="text"
-						class="w-full bg-surface-800 border border-zinc-700 text-zinc-100 rounded-lg px-3 py-2 text-sm input-focus-glow"
+						class="w-full bg-dark border border-border text-zinc-100 px-3 py-2 text-sm font-mono"
 						placeholder="e.g., inner forearm fineline tattoo"
 						bind:value={customQuery}
 					/>
@@ -464,25 +464,25 @@
 						<button
 							type="button"
 							onclick={() => openSearch('google')}
-							class="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg bg-zinc-800 border border-zinc-700 hover:border-zinc-500 text-zinc-300 text-xs font-medium transition-colors"
+							class="flex-1 flex items-center justify-center gap-1.5 py-2 bg-elevated border border-border hover:border-border-light text-zinc-300 text-xs font-mono font-medium transition-colors"
 						>
-							<span class="text-sm">G</span> Google
+							<span class="text-sm">G</span> GOOGLE
 							<ExternalLink class="w-3 h-3 text-zinc-500" />
 						</button>
 						<button
 							type="button"
 							onclick={() => openSearch('pinterest')}
-							class="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg bg-zinc-800 border border-zinc-700 hover:border-red-500/50 text-zinc-300 text-xs font-medium transition-colors"
+							class="flex-1 flex items-center justify-center gap-1.5 py-2 bg-elevated border border-border hover:border-red-500/50 text-zinc-300 text-xs font-mono font-medium transition-colors"
 						>
-							<span class="text-red-500 text-sm font-bold">P</span> Pinterest
+							<span class="text-red-500 text-sm font-bold">P</span> PINTEREST
 							<ExternalLink class="w-3 h-3 text-zinc-500" />
 						</button>
 						<button
 							type="button"
 							onclick={() => openSearch('instagram')}
-							class="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg bg-zinc-800 border border-zinc-700 hover:border-purple-500/50 text-zinc-300 text-xs font-medium transition-colors"
+							class="flex-1 flex items-center justify-center gap-1.5 py-2 bg-elevated border border-border hover:border-pink-500/50 text-zinc-300 text-xs font-mono font-medium transition-colors"
 						>
-							<span class="text-pink-500 text-sm font-bold">I</span> Instagram
+							<span class="text-pink-500 text-sm font-bold">I</span> INSTAGRAM
 							<ExternalLink class="w-3 h-3 text-zinc-500" />
 						</button>
 					</div>
@@ -493,21 +493,20 @@
 	{/if}
 
 	<!-- Section 3: Size Categories -->
-	<div id="section-size" class="border-b border-zinc-800 pb-6 scroll-mt-12" style="scroll-snap-align: start;">
-		<h3 class="booking-section-title mb-4">How big?</h3>
-		<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+	<div id="section-size" class="border-b border-border pb-6 scroll-mt-12" style="scroll-snap-align: start;">
+		<h3 class="booking-section-title mb-4 uppercase tracking-wide">How big?</h3>
+		<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
 			{#each SIZE_CATEGORIES as cat}
 				<button
 					type="button"
-					class="card-interactive p-3 rounded-lg border text-left transition-all
+					class="p-3 border text-left transition-all
 						{formData.sizeCategory === cat.id
-							? 'bg-ink-500/15 border-ink-500 ring-1 ring-ink-500/30'
-							: 'bg-surface-900 border-zinc-700'}"
+							? 'bg-white border-white text-dark'
+							: 'bg-elevated border-border hover:border-border-light'}"
 					onclick={() => selectSize(cat.id)}
 				>
-					<p class="text-sm font-semibold text-slate-200">{cat.label}</p>
-					<p class="text-xs text-slate-400 mt-1">{cat.description}</p>
-					<p class="text-xs text-slate-500 mt-0.5">{cat.example}</p>
+					<p class="text-sm font-mono font-semibold text-slate-200">{cat.label.toUpperCase()}</p>
+					<p class="text-[10px] font-mono text-zinc-500 mt-1">{cat.description}</p>
 				</button>
 			{/each}
 		</div>
@@ -517,49 +516,49 @@
 	<div id="section-price" class="scroll-mt-12" style="scroll-snap-align: start;">
 	{#if priceRange.min > 0}
 		{#key priceRange.min}
-			<div class="animate-fade-in-up bg-ink-500/5 border border-ink-500/20 rounded-xl p-4 flex items-center justify-between">
+			<div class="animate-slide-up bg-ink/10 border border-ink p-4 flex items-center justify-between">
 				<div>
-					<p class="text-xs text-zinc-400 uppercase tracking-wide">Estimated Price Range</p>
-					<p class="text-ink-400 text-xl font-bold mt-1">
+					<p class="text-[10px] font-mono text-zinc-500 uppercase tracking-wide">ESTIMATED PRICE RANGE</p>
+					<p class="text-ink text-xl font-mono font-bold mt-1">
 						₱{priceRange.min.toLocaleString()} — ₱{priceRange.max.toLocaleString()}
 					</p>
 				</div>
-				<p class="text-xs text-zinc-500 max-w-[140px] text-right">Final price confirmed at consultation</p>
+				<p class="text-[10px] font-mono text-zinc-600 max-w-[140px] text-right">FINAL PRICE CONFIRMED AT CONSULTATION</p>
 			</div>
 		{/key}
 	{:else}
-		<div class="bg-zinc-800/30 border border-zinc-800 rounded-xl p-4 text-center">
-			<p class="text-xs text-zinc-500">Select a size to see your price estimate</p>
+		<div class="bg-elevated border border-border p-4 text-center">
+			<p class="text-xs font-mono text-zinc-600">SELECT A SIZE TO SEE YOUR PRICE ESTIMATE</p>
 		</div>
 	{/if}
 	</div>
 
 	<!-- Section 4: Color & Options -->
-	<div id="section-color" class="border-b border-zinc-800 pb-6 scroll-mt-12" style="scroll-snap-align: start;">
+	<div id="section-color" class="border-b border-border pb-6 scroll-mt-12" style="scroll-snap-align: start;">
 		<div class="flex flex-col sm:flex-row gap-6">
 			<!-- Color toggle -->
 			<div>
-				<h3 class="booking-section-title mb-3">Color</h3>
+				<h3 class="booking-section-title mb-3 uppercase tracking-wide">Color</h3>
 				<div class="flex gap-2">
 					<button
 						type="button"
-						class="px-4 py-2 rounded-full text-sm font-medium border transition-all
+						class="px-4 py-2 text-sm font-mono font-medium border transition-all
 							{!formData.isColor
-								? 'bg-ink-500 border-ink-500 text-white'
-								: 'bg-surface-900 border-zinc-700 text-slate-300 hover:border-zinc-500'}"
+								? 'bg-white border-white text-dark font-bold'
+								: 'bg-elevated border-border text-zinc-400 hover:border-border-light hover:text-white'}"
 						onclick={() => updateFormData({ isColor: false })}
 					>
-						Black & Grey
+						BLACK & GREY
 					</button>
 					<button
 						type="button"
-						class="px-4 py-2 rounded-full text-sm font-medium border transition-all
+						class="px-4 py-2 text-sm font-mono font-medium border transition-all
 							{formData.isColor
-								? 'bg-ink-500 border-ink-500 text-white'
-								: 'bg-surface-900 border-zinc-700 text-slate-300 hover:border-zinc-500'}"
+								? 'bg-white border-white text-dark font-bold'
+								: 'bg-elevated border-border text-zinc-400 hover:border-border-light hover:text-white'}"
 						onclick={() => updateFormData({ isColor: true })}
 					>
-						Color
+						COLOR
 					</button>
 				</div>
 			</div>
@@ -567,27 +566,27 @@
 			<!-- Cover-up toggle (only for returning clients — first-timers can't have a tattoo to cover) -->
 			{#if formData.firstTattoo === false}
 				<div>
-					<h3 class="booking-section-title mb-3">Cover-up?</h3>
+					<h3 class="booking-section-title mb-3 uppercase tracking-wide">Cover-up?</h3>
 					<div class="flex gap-2">
 						<button
 							type="button"
-							class="px-4 py-2 rounded-full text-sm font-medium border transition-all
+							class="px-4 py-2 text-sm font-mono font-medium border transition-all
 								{!formData.isCoverUp
-									? 'bg-ink-500 border-ink-500 text-white'
-									: 'bg-surface-900 border-zinc-700 text-slate-300 hover:border-zinc-500'}"
+									? 'bg-white border-white text-dark font-bold'
+									: 'bg-elevated border-border text-zinc-400 hover:border-border-light hover:text-white'}"
 							onclick={() => updateFormData({ isCoverUp: false })}
 						>
-							No
+							NO
 						</button>
 						<button
 							type="button"
-							class="px-4 py-2 rounded-full text-sm font-medium border transition-all
+							class="px-4 py-2 text-sm font-mono font-medium border transition-all
 								{formData.isCoverUp
-									? 'bg-ink-500 border-ink-500 text-white'
-									: 'bg-surface-900 border-zinc-700 text-slate-300 hover:border-zinc-500'}"
+									? 'bg-white border-white text-dark font-bold'
+									: 'bg-elevated border-border text-zinc-400 hover:border-border-light hover:text-white'}"
 							onclick={() => updateFormData({ isCoverUp: true })}
 						>
-							Yes
+							YES
 						</button>
 					</div>
 				</div>
@@ -596,13 +595,13 @@
 	</div>
 
 	<!-- Section 5: Describe Your Vision (optional) -->
-	<div id="section-details" class="border-b border-zinc-800 pb-6 scroll-mt-12" style="scroll-snap-align: start;">
-		<label class="booking-section-title mb-3 block" for="tattooDescription">
-			Describe Your Vision <span class="text-zinc-500 normal-case font-normal">(optional)</span>
+	<div id="section-details" class="border-b border-border pb-6 scroll-mt-12" style="scroll-snap-align: start;">
+		<label class="booking-section-title mb-3 block uppercase tracking-wide" for="tattooDescription">
+			Describe Your Vision <span class="text-zinc-600 normal-case font-normal font-mono text-xs">(OPTIONAL)</span>
 		</label>
 		<textarea
 			id="tattooDescription"
-			class="w-full bg-surface-800 border border-zinc-700 text-zinc-100 rounded-lg p-3 focus:border-ink-500 focus:outline-none resize-none input-focus-glow"
+			class="w-full bg-dark border border-border text-zinc-100 p-3 font-mono text-sm focus:border-ink focus:outline-none resize-none"
 			placeholder="Describe your vision — style details, specific elements, color preferences, anything the artist should know..."
 			rows={4}
 			maxlength={1000}
@@ -612,29 +611,29 @@
 				updateFormData({ tattooDescription: val });
 			}}
 		></textarea>
-		<p class="text-xs text-zinc-500 mt-2">
-			{(formData.tattooDescription ?? '').length} / 1000 characters
+		<p class="text-[10px] font-mono text-zinc-600 mt-2">
+			{(formData.tattooDescription ?? '').length} / 1000 CHARACTERS
 		</p>
 	</div>
 
 	<!-- Section 6: Creative Freedom -->
-	<div id="section-freedom" class="border-b border-zinc-800 pb-6 scroll-mt-12" style="scroll-snap-align: start;">
-		<h3 class="booking-section-title mb-4">How closely should the artist follow your idea?</h3>
+	<div id="section-freedom" class="border-b border-border pb-6 scroll-mt-12" style="scroll-snap-align: start;">
+		<h3 class="booking-section-title mb-4 uppercase tracking-wide">How closely should the artist follow your idea?</h3>
 		<div class="flex flex-col gap-2">
 			{#each creativeFreedomOptions as option}
 				<button
 					type="button"
 					class="w-full {formData.creativeFreedom === option.value
-						? 'bg-ink-500/15 border-ink-500 ring-1 ring-ink-500/30 rounded-xl px-4 py-3 flex items-center gap-3'
-						: 'bg-surface-800 border border-zinc-700 rounded-xl px-4 py-3 flex items-center gap-3 transition-all hover:border-zinc-500'}"
+						? 'bg-ink/10 border-ink px-4 py-3 flex items-center gap-3'
+						: 'bg-elevated border border-border px-4 py-3 flex items-center gap-3 transition-all hover:border-border-light'}"
 					onclick={() => updateFormData({ creativeFreedom: option.value })}
 				>
 					<option.icon
 						size={18}
-						class={formData.creativeFreedom === option.value ? 'text-ink-500' : 'text-zinc-400'}
+						class={formData.creativeFreedom === option.value ? 'text-ink' : 'text-zinc-500'}
 					/>
-					<span class="text-sm font-medium {formData.creativeFreedom === option.value ? 'text-ink-400' : 'text-zinc-300'}">
-						{option.label}
+					<span class="text-sm font-mono font-medium {formData.creativeFreedom === option.value ? 'text-ink' : 'text-zinc-400'}">
+						{option.label.toUpperCase()}
 					</span>
 				</button>
 			{/each}
@@ -643,12 +642,12 @@
 
 	<!-- Section 7: Cover-up Photo (conditional) -->
 	{#if formData.isCoverUp}
-		<div class="border-b border-zinc-800 pb-6">
-			<h3 class="booking-section-title mb-2">Upload a photo of your existing tattoo</h3>
-			<p class="text-xs text-zinc-400 mb-4">Up to 2 images, 5MB each</p>
+		<div class="border-b border-border pb-6">
+			<h3 class="booking-section-title mb-2 uppercase tracking-wide">Upload a photo of your existing tattoo</h3>
+			<p class="text-xs font-mono text-zinc-600 mb-4">UP TO 2 IMAGES, 5MB EACH</p>
 
 			<label
-				class="group block border-2 border-dashed border-zinc-700 hover:border-ink-500/50 hover:bg-ink-500/5 rounded-xl p-6 text-center transition-colors cursor-pointer"
+				class="group block border-2 border-dashed border-border hover:border-ink p-6 text-center transition-colors cursor-pointer"
 			>
 				<input
 					type="file"
@@ -658,22 +657,22 @@
 					onchange={(e) => handleCoverUpUpload((e.target as HTMLInputElement).files)}
 					disabled={coverUpUploading || (formData.coverUpPhoto ?? []).length >= 2}
 				/>
-				<p class="text-slate-300 font-medium text-sm">
-					{coverUpUploading ? 'Uploading...' : 'Click to upload'}
+				<p class="text-zinc-300 font-mono font-medium text-sm">
+					{coverUpUploading ? 'UPLOADING...' : 'CLICK TO UPLOAD'}
 				</p>
-				<p class="text-xs text-slate-500 mt-1">PNG, JPG, GIF up to 5MB</p>
+				<p class="text-[10px] font-mono text-zinc-600 mt-1">PNG, JPG, GIF UP TO 5MB</p>
 			</label>
 
 			{#if coverUpUploadError}
-				<div class="mt-3 p-3 bg-red-500/10 border border-red-500/30 rounded-lg">
-					<p class="text-xs text-red-400">{coverUpUploadError}</p>
+				<div class="mt-3 p-3 bg-red-500/10 border border-red-500">
+					<p class="text-xs font-mono text-red-500">{coverUpUploadError}</p>
 				</div>
 			{/if}
 
 			{#if (formData.coverUpPhoto ?? []).length > 0}
 				<div class="mt-4 flex flex-wrap gap-3">
 					{#each formData.coverUpPhoto ?? [] as image, index (index)}
-						<div class="relative w-16 h-16 rounded-lg overflow-hidden border border-zinc-700">
+						<div class="relative w-16 h-16 overflow-hidden border border-border">
 							<img src={image} alt="Cover-up {index + 1}" class="w-full h-full object-cover" />
 							<button
 								type="button"
@@ -692,12 +691,12 @@
 
 	<!-- Section 8: Reference Images (optional) -->
 	<div id="section-refs" class="scroll-mt-12" style="scroll-snap-align: start;">
-		<h3 class="booking-section-title mb-2">
-			Add reference images <span class="text-zinc-500 normal-case font-normal">(optional, max 3)</span>
+		<h3 class="booking-section-title mb-2 uppercase tracking-wide">
+			Add reference images <span class="text-zinc-600 normal-case font-normal font-mono text-xs">(OPTIONAL, MAX 3)</span>
 		</h3>
 
 		<label
-			class="group block border-2 border-dashed border-zinc-700 group-hover:border-ink-500/50 group-hover:bg-ink-500/5 rounded-xl p-6 text-center transition-colors cursor-pointer hover:border-ink-500/50 hover:bg-ink-500/5"
+			class="group block border-2 border-dashed border-border group-hover:border-ink p-6 text-center transition-colors cursor-pointer hover:border-ink"
 		>
 			<input
 				type="file"
@@ -707,22 +706,22 @@
 				onchange={(e) => handleFileUpload((e.target as HTMLInputElement).files)}
 				disabled={uploading || formData.referenceImages.length >= 3}
 			/>
-			<p class="text-slate-300 font-medium text-sm">
-				{uploading ? 'Uploading...' : 'Click to upload'}
+			<p class="text-zinc-300 font-mono font-medium text-sm">
+				{uploading ? 'UPLOADING...' : 'CLICK TO UPLOAD'}
 			</p>
-			<p class="text-xs text-slate-500 mt-1">PNG, JPG, GIF up to 5MB</p>
+			<p class="text-[10px] font-mono text-zinc-600 mt-1">PNG, JPG, GIF UP TO 5MB</p>
 		</label>
 
 		{#if uploadError}
-			<div class="mt-3 p-3 bg-red-500/10 border border-red-500/30 rounded-lg">
-				<p class="text-xs text-red-400">{uploadError}</p>
+			<div class="mt-3 p-3 bg-red-500/10 border border-red-500">
+				<p class="text-xs font-mono text-red-500">{uploadError}</p>
 			</div>
 		{/if}
 
 		{#if formData.referenceImages.length > 0}
 			<div class="mt-4 flex flex-wrap gap-3">
 				{#each formData.referenceImages as image, index (index)}
-					<div class="relative w-16 h-16 rounded-lg overflow-hidden border border-zinc-700">
+					<div class="relative w-16 h-16 overflow-hidden border border-border">
 						{#if typeof image === 'string'}
 							<img src={image} alt="Reference {index + 1}" class="w-full h-full object-cover" />
 						{:else}

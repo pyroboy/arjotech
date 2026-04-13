@@ -24,27 +24,27 @@
   <meta property="og:url" content="https://arjostyle.ink/flash" />
 </svelte:head>
 
-<div class="min-h-screen bg-surface-900 text-zinc-100">
-  <section class="pt-20 pb-12 px-6 text-center">
+<div class="min-h-screen bg-dark text-zinc-100">
+  <section class="pt-20 pb-12 px-6 text-center border-b border-border">
     <RevealOnScroll>
-      <p class="text-ink-500 text-sm font-medium uppercase tracking-widest mb-3">Ready to Book</p>
-      <h1 class="text-4xl md:text-5xl font-display font-bold text-white mb-4">Flash Designs</h1>
-      <p class="text-zinc-400 text-lg max-w-xl mx-auto">
+      <p class="text-ink text-[10px] font-mono uppercase tracking-[0.3em] mb-3">Ready to Book</p>
+      <h1 class="text-4xl md:text-5xl font-display font-bold text-white mb-4 tracking-wide">FLASH DESIGNS</h1>
+      <p class="text-zinc-500 text-lg max-w-xl mx-auto font-mono text-sm">
         Pre-drawn designs at a fixed price. No lengthy consultation — pick what you love and book it.
       </p>
     </RevealOnScroll>
   </section>
 
   {#if data.flashDesigns.length > 0}
-    <div class="px-6 pb-8 flex gap-2 justify-center">
+    <div class="px-6 pb-8 pt-8 flex gap-1 justify-center border-b border-border">
       {#each (['all', 'available', 'claimed'] as const) as f}
         <button
           onclick={() => (filter = f)}
-          class="px-4 py-1.5 rounded-full text-sm border transition-colors {filter === f
-            ? 'bg-ink-500/20 border-ink-500/50 text-ink-400'
-            : 'border-zinc-700 text-zinc-400 hover:border-zinc-500'}"
+          class="px-4 py-2 text-sm font-mono transition-all duration-150 {filter === f
+            ? 'bg-white text-dark font-bold'
+            : 'bg-elevated text-zinc-500 border border-border hover:border-border-light hover:text-white'}"
         >
-          {f === 'all' ? 'All' : f === 'available' ? 'Available' : 'Claimed'}
+          {f === 'all' ? 'ALL' : f === 'available' ? 'AVAILABLE' : 'CLAIMED'}
         </button>
       {/each}
     </div>
@@ -54,35 +54,35 @@
     <div class="max-w-6xl mx-auto">
       {#if data.flashDesigns.length === 0}
         <RevealOnScroll>
-          <div class="text-center py-24 text-zinc-500">
+          <div class="text-center py-24 text-zinc-600">
             <p class="text-5xl mb-4">⚡</p>
-            <p class="text-lg font-medium text-zinc-400 mb-2">Flash drops coming soon</p>
-            <p class="text-sm max-w-sm mx-auto">Designing the first collection. Follow on Instagram to be notified when flash drops go live.</p>
+            <p class="text-lg font-display text-zinc-400 mb-2 tracking-wide">FLASH DROPS COMING SOON</p>
+            <p class="text-sm max-w-sm mx-auto text-zinc-600">Designing the first collection. Follow on Instagram to be notified when flash drops go live.</p>
             <a href="https://instagram.com/arjostyle.ink" target="_blank" rel="noopener noreferrer"
-               class="mt-6 inline-block px-6 py-2.5 border border-zinc-700 text-zinc-300 rounded-full text-sm hover:bg-zinc-800 transition-colors">
+               class="mt-6 inline-block px-6 py-3 border border-border text-zinc-400 text-sm font-mono hover:bg-elevated hover:border-border-light transition-colors">
               @arjostyle.ink
             </a>
           </div>
         </RevealOnScroll>
       {:else}
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 mt-8">
           {#each filtered as design, i}
             <RevealOnScroll delay={i * 50}>
               <a href="/flash/{design.slug}"
-                 class="group block rounded-xl overflow-hidden border transition-colors {design.available ? 'border-zinc-800 hover:border-ink-500/40' : 'border-zinc-800/50 opacity-60'} bg-zinc-900">
-                <div class="aspect-square overflow-hidden bg-zinc-800 relative">
+                 class="group block border transition-all duration-150 {design.available ? 'bg-elevated border-border hover:border-ink/30' : 'bg-dark border-border/50 opacity-60'}">
+                <div class="aspect-square overflow-hidden bg-dark relative">
                   <img src={design.imageUrl} alt={design.title} loading="lazy"
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                   {#if !design.available}
-                    <div class="absolute inset-0 bg-black/50 flex items-center justify-center">
-                      <span class="text-white text-sm font-medium px-3 py-1 rounded-full bg-zinc-900/80">Claimed</span>
+                    <div class="absolute inset-0 bg-dark/60 flex items-center justify-center">
+                      <span class="text-white text-sm font-mono px-3 py-1 border border-white/20">CLAIMED</span>
                     </div>
                   {/if}
                 </div>
                 <div class="p-4">
-                  <h2 class="font-semibold text-white text-sm mb-1 group-hover:text-ink-400 transition-colors">{design.title}</h2>
-                  <p class="text-xs text-zinc-500 mb-2">{design.style} · {design.size}</p>
-                  <p class="text-ink-400 font-bold">{formatCurrency(design.price)}</p>
+                  <h2 class="font-display text-white text-sm mb-1 group-hover:text-ink transition-colors tracking-wide">{design.title.toUpperCase()}</h2>
+                  <p class="text-[10px] font-mono text-zinc-600 mb-2 uppercase tracking-widest">{design.style} — {design.size}</p>
+                  <p class="text-ink font-display text-lg">{formatCurrency(design.price)}</p>
                 </div>
               </a>
             </RevealOnScroll>

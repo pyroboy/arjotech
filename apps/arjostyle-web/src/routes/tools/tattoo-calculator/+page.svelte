@@ -66,18 +66,19 @@
   />
 </svelte:head>
 
-<div class="min-h-screen bg-surface-900 pt-20 pb-16 px-4 md:px-8">
+<div class="min-h-screen pt-20 pb-16 px-4 md:px-8" style="background-color: var(--bg-dark);">
   <div class="max-w-6xl mx-auto">
     <!-- Header -->
     <div class="mb-10 text-center">
-      <div class="inline-block mb-4">
-        <span class="px-3 py-1 text-xs font-medium rounded-full bg-zinc-800 text-zinc-400 border border-zinc-700/50">
-          Legacy Tool — Now part of the streamlined booking flow
-        </span>
+      <div class="mb-4">
+        <a href="/tools" class="text-mono-label hover:text-ink transition-colors">← ALL TOOLS</a>
       </div>
-      <h1 class="text-4xl md:text-5xl font-bold text-white mb-3">Tattoo Calculator</h1>
-      <p class="text-zinc-400 text-lg max-w-2xl mx-auto">
-        Interactive 3D body placement with real-time pricing
+      <p class="text-mono-label mb-3">BUSINESS CALCULATOR</p>
+      <h1 class="font-display text-display-sm md:text-display-md text-white mb-3 tracking-wide">
+        TATTOO CALCULATOR
+      </h1>
+      <p class="text-sm max-w-2xl mx-auto" style="color: var(--text-secondary);">
+        Interactive 3D body placement with real-time pricing. Plan your tattoo before booking.
       </p>
     </div>
 
@@ -85,34 +86,32 @@
     <div class="grid lg:grid-cols-5 gap-8 mb-16">
       <!-- Preview Panel -->
       <div class="lg:col-span-2">
-        <div class="sticky top-24">
-          <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg overflow-hidden">
-            <TattooPreviewInfo
-              modelId="default"
-              {selectedCategory}
-              {currentPlacement}
-              {isColor}
-              {painLevel}
-              {painReason}
-              {size}
-              {priceTierLevel}
-              {estimatedPrice}
-              {estimatedDuration}
-              selectedStyle={null}
-              previewHeight={PREVIEW_HEIGHT}
-              isMiniMode={false}
-              onToggleExpand={() => { previewExpanded = !previewExpanded; }}
-              editMode={false}
-              liveMappings={defaultBodyPartMappings}
-              onMappingUpdate={handleMappingUpdate}
-            />
-          </div>
+        <div class="sticky top-24 brutal-card overflow-hidden">
+          <TattooPreviewInfo
+            modelId="default"
+            {selectedCategory}
+            {currentPlacement}
+            {isColor}
+            {painLevel}
+            {painReason}
+            {size}
+            {priceTierLevel}
+            {estimatedPrice}
+            {estimatedDuration}
+            selectedStyle={null}
+            previewHeight={PREVIEW_HEIGHT}
+            isMiniMode={false}
+            onToggleExpand={() => { previewExpanded = !previewExpanded; }}
+            editMode={false}
+            liveMappings={defaultBodyPartMappings}
+            onMappingUpdate={handleMappingUpdate}
+          />
         </div>
       </div>
 
       <!-- Calculator Panel -->
       <div class="lg:col-span-3">
-        <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg p-6">
+        <div class="brutal-card p-6">
           <TattooCalculator
             bodyPartMappings={defaultBodyPartMappings}
             onchange={handleCalculatorChange}
@@ -122,22 +121,22 @@
     </div>
 
     <!-- CTA Section -->
-    <div class="text-center pt-8 border-t border-zinc-700/50">
-      <h2 class="text-2xl font-bold text-white mb-3">Ready to book?</h2>
-      <p class="text-zinc-400 mb-6 max-w-lg mx-auto">
+    <div class="text-center pt-8" style="border-top: 1px solid var(--border);">
+      <h2 class="font-display text-2xl text-white mb-3">READY TO BOOK?</h2>
+      <p class="mb-6 max-w-lg mx-auto text-sm" style="color: var(--text-secondary);">
         Use the streamlined booking flow to submit your tattoo inquiry. I'll review and confirm pricing during consultation.
       </p>
       <a
         href="/book"
-        class="inline-flex items-center gap-2 px-8 py-3 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 transition-all duration-200 transform hover:scale-105"
+        class="brutal-btn brutal-btn-primary"
       >
-        Book a Session →
+        BOOK A SESSION →
       </a>
     </div>
 
     <!-- Footer -->
-    <div class="mt-12 pt-8 border-t border-zinc-700/50 text-center text-xs text-zinc-500">
-      <a href="/tools" class="hover:text-zinc-400 transition-colors">
+    <div class="mt-12 pt-8 text-center" style="border-top: 1px solid var(--border);">
+      <a href="/tools" class="text-mono-label hover:text-ink transition-colors">
         Part of ArjoStyle Free Tools →
       </a>
     </div>

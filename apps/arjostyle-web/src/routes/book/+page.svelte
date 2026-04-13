@@ -16,7 +16,7 @@
   <meta property="og:url" content="https://arjostyle-web.pages.dev/book" />
 </svelte:head>
 
-<div class="min-h-screen bg-surface-900">
+<div class="min-h-screen bg-dark">
   <div class="sm:max-w-4xl sm:mx-auto min-h-screen flex flex-col">
     <BookingFlow onClose={() => goto('/tattoo')} />
   </div>

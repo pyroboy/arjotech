@@ -10,6 +10,7 @@
       label: 'Core',
       items: [
         { href: '/admin/reports', label: 'KPI Dashboard', icon: '📊' },
+        { href: '/admin/jobs', label: 'Jobs', icon: '💼' },
         { href: '/admin/bookings', label: 'Bookings', icon: '📋' },
         { href: '/admin/leads', label: 'Leads', icon: '🎯' },
       ]
@@ -44,11 +45,11 @@
   });
 </script>
 
-<div class="min-h-screen bg-surface-900 flex">
+<div class="min-h-screen bg-[var(--bg-dark)] flex">
   <!-- Mobile hamburger button -->
   <button
     onclick={() => { mobileNavOpen = !mobileNavOpen; }}
-    class="sm:hidden fixed top-3 left-3 z-[60] w-9 h-9 flex items-center justify-center rounded-lg bg-zinc-800/90 backdrop-blur-sm border border-zinc-700 text-zinc-300"
+    class="sm:hidden fixed top-3 left-3 z-[60] w-10 h-10 flex items-center justify-center bg-[var(--bg-elevated)] border border-[var(--border)] text-[var(--text-secondary)]"
     aria-label="Toggle navigation"
   >
     {#if mobileNavOpen}
@@ -62,7 +63,7 @@
   {#if mobileNavOpen}
     <!-- svelte-ignore a11y_no_static_element_interactions -->
     <div
-      class="sm:hidden fixed inset-0 bg-black/60 z-[55] backdrop-blur-sm"
+      class="sm:hidden fixed inset-0 bg-[var(--bg-dark)]/80 z-[55]"
       onclick={() => { mobileNavOpen = false; }}
       onkeydown={(e) => { if (e.key === 'Escape') mobileNavOpen = false; }}
     ></div>
@@ -73,20 +74,20 @@
     {mobileNavOpen ? 'translate-x-0' : '-translate-x-full'}
     sm:translate-x-0
     fixed sm:relative z-[56] sm:z-auto
-    w-64 h-full bg-surface-800 border-r border-zinc-800 flex flex-col p-6 shrink-0
-    transition-transform duration-200 ease-out
+    w-64 h-full bg-[var(--bg-elevated)] border-r border-[var(--border)] flex flex-col p-6 shrink-0
+    transition-transform duration-150
   ">
     <div class="mb-8">
-      <a href="/" class="text-zinc-500 text-xs font-mono hover:text-zinc-300">← arjostyle.com</a>
-      <h2 class="text-white font-semibold mt-2">Admin Panel</h2>
+      <a href="/" class="text-[var(--text-muted)] text-xs font-mono hover:text-[var(--text-primary)]">← arjostyle.com</a>
+      <h2 class="text-[var(--text-primary)] font-display mt-2 tracking-wide">ADMIN PANEL</h2>
     </div>
     <nav class="flex-1 space-y-6">
       {#each navSections as section}
         <div>
-          <p class="text-zinc-600 text-[10px] uppercase tracking-widest font-semibold mb-2 px-3">{section.label}</p>
+          <p class="text-[10px] uppercase tracking-widest font-mono text-[var(--text-muted)] mb-2 px-3">{section.label}</p>
           <div class="space-y-0.5">
             {#each section.items as item}
-              <a href={item.href} class="flex items-center gap-3 px-3 py-2 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors text-sm">
+              <a href={item.href} class="flex items-center gap-3 px-3 py-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-dark)] border border-transparent hover:border-[var(--border)] transition-all duration-150 text-sm font-mono">
                 <span>{item.icon}</span>
                 <span>{item.label}</span>
               </a>
@@ -95,8 +96,17 @@
         </div>
       {/each}
     </nav>
-    <div class="pt-4 border-t border-zinc-800">
-      <p class="text-zinc-600 text-xs font-mono">arjostyle admin v2</p>
+    <div class="pt-4 border-t border-[var(--border)]">
+      <form method="POST" action="/admin/logout">
+        <button 
+          type="submit" 
+          class="w-full text-left px-3 py-2 text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-dark)] border border-transparent hover:border-[var(--border)] transition-all duration-150 text-sm font-mono flex items-center gap-2"
+        >
+          <span>🚪</span>
+          <span>LOGOUT</span>
+        </button>
+      </form>
+      <p class="text-zinc-800 text-[10px] font-mono mt-2 uppercase tracking-widest">arjostyle admin v2</p>
     </div>
   </aside>
 

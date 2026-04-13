@@ -173,6 +173,49 @@ SvelteKit full-stack with Neon PostgreSQL and Drizzle ORM. Better Auth for multi
     tags: ['SaaS', 'AI', 'Multi-tenant', '3D'],
     status: 'production',
     featured: true
+  },
+  {
+    slug: 'career-ops',
+    title: 'Career-Ops',
+    description: 'AI-powered job search pipeline — evaluates 99+ offers automatically, generates ATS-optimized PDFs, scans 45+ portals, and tracks everything in a personal command center. Built with Claude Code + Node.js.',
+    longDescription: `End-to-end AI job search automation system. The same system running to find this job opportunity.
+
+**Features:**
+- **Auto-pipeline** — Paste a job URL, get full evaluation + PDF + tracker entry
+- **6-block evaluation** — Role summary, CV match, level strategy, comp research, personalization, interview prep
+- **Portal scanner** — Scans 45+ companies (Ashby, Greenhouse, Lever) + freelance platforms (Upwork, Gun.io, RemoteOK)
+- **Batch processing** — Evaluate 10+ offers in parallel with Claude Code sub-agents
+- **ATS PDF generation** — Keyword-injected CVs, Space Grotesk + DM Sans design
+- **Offer ranking** — 10-dimension scoring system across 5 tiers (A+ to D)
+- **Pipeline tracker** — Single source of truth with integrity checks
+
+**The system evaluated 99+ AI company offers** across Anthropic, PolyAI, Parloa, Intercom, and more. The resulting ranked pipeline is the source of truth for this job search.`,
+    techStack: ['Claude Code', 'Node.js', 'YAML', 'Markdown', 'SQLite', 'Playwright', 'Puppeteer'],
+    tags: ['AI', 'Automation', 'Job Search', 'LLM'],
+    status: 'production',
+    featured: true
+  },
+  {
+    slug: 'secondbrain',
+    title: 'SecondBrain',
+    description: 'Personal knowledge management system — Obsidian vault synced to SQLite with FTS5 full-text search, BM25 ranking, and BM25-style relevance scoring. 1,877 notes searchable in milliseconds.',
+    longDescription: `Dual-system personal knowledge base combining Obsidian's markdown-first editing with SQLite's search speed.
+
+**Features:**
+- **Incremental sync** — SHA256-based change detection, only processes modified files
+- **Full-text search** — FTS5 with BM25 ranking across all 1,877 notes
+- **Frontmatter parsing** — Extracts tags, dates, aliases, and custom fields
+- **Wiki-link graph** — Tracks [[links]] and #tags across the vault
+- **Context tree** — Structured knowledge tree for AI context injection
+- **Domain folders** — 5 pillars: AI & Tools, Personal & Goals, Technology, Art & Creative, Operations
+
+**Tech stack:** Node.js scripts (sync.mjs, query.mjs), SQLite FTS5, Obsidian vault. No Electron, no DuckDB — lightweight and fast.
+
+This is the memory system behind this conversation — all knowledge is instantly queryable.`,
+    techStack: ['Node.js', 'SQLite', 'FTS5', 'BM25', 'Obsidian', 'Bash'],
+    tags: ['KM', 'Search', 'SQLite', 'Obsidian', 'FTS'],
+    status: 'production',
+    featured: true
   }
 ];
 

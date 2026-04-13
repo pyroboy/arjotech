@@ -30,7 +30,7 @@
 {#if isAdminPage}
   {@render children()}
 {:else}
-  <div class="min-h-screen flex flex-col bg-surface-900 text-zinc-100">
+  <div class="min-h-screen flex flex-col bg-dark text-zinc-100">
     {#if !isBookingPage}
       <Header />
     {/if}

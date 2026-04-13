@@ -13,10 +13,10 @@
   }
 
   const sizePresets: SizePreset[] = [
-    { label: 'Tiny', min: 1, max: 4 },
-    { label: 'Small', min: 4, max: 16 },
-    { label: 'Medium', min: 16, max: 36 },
-    { label: 'Large', min: 36, max: 64 },
+    { label: 'TINY', min: 1, max: 4 },
+    { label: 'SMALL', min: 4, max: 16 },
+    { label: 'MED', min: 16, max: 36 },
+    { label: 'LARGE', min: 36, max: 64 },
     { label: 'XL', min: 64, max: 100 }
   ];
 
@@ -101,12 +101,12 @@
   />
 </svelte:head>
 
-<div class="min-h-screen bg-surface-900 pt-20 pb-16 px-4 md:px-8">
+<div class="min-h-screen bg-dark pt-20 pb-16 px-4 md:px-8 border-b border-border">
   <div class="max-w-4xl mx-auto">
     <!-- Header -->
     <div class="mb-12 text-center">
-      <h1 class="text-4xl md:text-5xl font-bold text-white mb-2">Tattoo Price Estimator</h1>
-      <p class="text-zinc-400 text-lg">
+      <h1 class="text-4xl md:text-5xl font-display font-bold text-white mb-2 tracking-wide">TATTOO PRICE ESTIMATOR</h1>
+      <p class="text-zinc-500 font-mono text-sm">
         Get a realistic price estimate for your custom tattoo design
       </p>
     </div>
@@ -114,21 +114,21 @@
     <!-- Main Content -->
     <div class="grid md:grid-cols-3 gap-8 mb-12">
       <!-- Input Panel -->
-      <div class="md:col-span-2 space-y-8">
+      <div class="md:col-span-2 space-y-2">
         <!-- Size Section -->
-        <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg p-6">
-          <h2 class="text-white font-semibold text-lg mb-4">Size</h2>
-          <p class="text-zinc-400 text-sm mb-4">{size} sq inches</p>
+        <div class="bg-elevated border border-border p-6">
+          <h2 class="text-white font-display text-lg mb-4 tracking-wide">SIZE</h2>
+          <p class="text-zinc-500 font-mono text-sm mb-4">{size} sq inches</p>
 
           <!-- Presets -->
-          <div class="grid grid-cols-5 gap-2 mb-6">
+          <div class="grid grid-cols-5 gap-1 mb-6">
             {#each sizePresets as preset (preset.label)}
               <button
                 onclick={() => setSize(preset)}
-                class="py-2 px-3 rounded-lg text-sm font-medium transition-all duration-200 {size >=
+                class="py-2 px-3 text-sm font-mono font-medium transition-all duration-150 {size >=
                 preset.min && size <= preset.max
-                  ? 'bg-orange-500 text-white'
-                  : 'bg-zinc-700/50 text-zinc-300 hover:bg-zinc-700'}"
+                  ? 'bg-white text-dark font-bold'
+                  : 'bg-dark text-zinc-500 border border-border hover:border-border-light hover:text-white'}"
               >
                 {preset.label}
               </button>
@@ -141,38 +141,38 @@
             min="1"
             max="100"
             bind:value={size}
-            class="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-orange-500"
+            class="w-full h-2 bg-dark appearance-none cursor-pointer accent-ink"
           />
-          <div class="flex justify-between text-xs text-zinc-500 mt-2">
+          <div class="flex justify-between text-[10px] font-mono text-zinc-600 mt-2">
             <span>1</span>
             <span>100</span>
           </div>
         </div>
 
         <!-- Placement Section -->
-        <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg p-6">
-          <h2 class="text-white font-semibold text-lg mb-4">Body Placement</h2>
+        <div class="bg-elevated border border-border p-6">
+          <h2 class="text-white font-display text-lg mb-4 tracking-wide">BODY PLACEMENT</h2>
           <select
             bind:value={selectedPlacement}
-            class="w-full px-4 py-2 bg-zinc-700/50 border border-zinc-600 rounded-lg text-white text-sm mb-4 focus:outline-none focus:border-orange-500"
+            class="w-full px-4 py-3 bg-dark border border-border text-white text-sm font-mono mb-4 focus:outline-none focus:border-ink"
           >
             {#each bodyPlacements as placement (placement.name)}
               <option value={placement.name}>{placement.name}</option>
             {/each}
           </select>
-          <div class="flex items-center gap-2 text-zinc-400 text-sm">
-            <span>Pain Level:</span>
+          <div class="flex items-center gap-2 text-zinc-500 text-sm font-mono">
+            <span>PAIN LEVEL:</span>
             <div class="flex gap-1">
               {#each Array(5) as _, i}
-                <span class={i < painDots ? 'text-orange-500' : 'text-zinc-600'}>●</span>
+                <span class={i < painDots ? 'text-ink' : 'text-border'}>●</span>
               {/each}
             </div>
           </div>
         </div>
 
         <!-- Complexity Section -->
-        <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg p-6">
-          <h2 class="text-white font-semibold text-lg mb-4">Complexity</h2>
+        <div class="bg-elevated border border-border p-6">
+          <h2 class="text-white font-display text-lg mb-4 tracking-wide">COMPLEXITY</h2>
           <div class="space-y-3">
             {#each Object.keys(complexityMultipliers) as option}
               <label class="flex items-center gap-3 cursor-pointer group">
@@ -181,27 +181,27 @@
                   name="complexity"
                   value={option}
                   bind:group={complexity}
-                  class="w-4 h-4 accent-orange-500 cursor-pointer"
+                  class="w-4 h-4 accent-ink cursor-pointer"
                 />
-                <span class="text-white group-hover:text-orange-400 transition-colors">{option}</span>
+                <span class="text-zinc-300 group-hover:text-white transition-colors font-mono text-sm">{option.toUpperCase()}</span>
               </label>
             {/each}
           </div>
         </div>
 
         <!-- Color & Coverup Section -->
-        <div class="grid md:grid-cols-2 gap-4">
-          <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg p-6">
-            <h2 class="text-white font-semibold text-lg mb-4">Color</h2>
+        <div class="grid md:grid-cols-2 gap-2">
+          <div class="bg-elevated border border-border p-6">
+            <h2 class="text-white font-display text-lg mb-4 tracking-wide">COLOR</h2>
             <label class="flex items-center gap-3 cursor-pointer mb-3">
               <input
                 type="radio"
                 name="color"
                 value={false}
                 bind:group={isFullColor}
-                class="w-4 h-4 accent-orange-500 cursor-pointer"
+                class="w-4 h-4 accent-ink cursor-pointer"
               />
-              <span class="text-white">Black & Grey</span>
+              <span class="text-zinc-300 font-mono text-sm">BLACK & GREY</span>
             </label>
             <label class="flex items-center gap-3 cursor-pointer">
               <input
@@ -209,76 +209,76 @@
                 name="color"
                 value={true}
                 bind:group={isFullColor}
-                class="w-4 h-4 accent-orange-500 cursor-pointer"
+                class="w-4 h-4 accent-ink cursor-pointer"
               />
-              <span class="text-white">Full Color (1.5x)</span>
+              <span class="text-zinc-300 font-mono text-sm">FULL COLOR (1.5x)</span>
             </label>
           </div>
 
-          <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg p-6">
-            <h2 class="text-white font-semibold text-lg mb-4">Cover-up</h2>
+          <div class="bg-elevated border border-border p-6">
+            <h2 class="text-white font-display text-lg mb-4 tracking-wide">COVER-UP</h2>
             <label class="flex items-center gap-3 cursor-pointer">
               <input
                 type="checkbox"
                 bind:checked={isCoverup}
-                class="w-4 h-4 accent-orange-500 cursor-pointer"
+                class="w-4 h-4 accent-ink cursor-pointer"
               />
-              <span class="text-white">{isCoverup ? 'Yes' : 'No'} {isCoverup ? '(2x)' : ''}</span>
+              <span class="text-zinc-300 font-mono text-sm">{isCoverup ? 'YES (2x)' : 'NO'}</span>
             </label>
           </div>
         </div>
       </div>
 
       <!-- Results Panel -->
-      <div class="space-y-6">
+      <div class="space-y-2">
         <!-- Price Card -->
-        <div class="bg-gradient-to-br from-orange-500/20 to-orange-600/10 border border-orange-500/30 rounded-lg p-6">
-          <p class="text-zinc-400 text-sm uppercase font-semibold tracking-wider mb-2">
-            Estimated Price Range
+        <div class="bg-elevated border border-ink/30 p-6">
+          <p class="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mb-2">
+            ESTIMATED PRICE RANGE
           </p>
-          <div class="text-3xl font-bold text-white mb-1">
+          <div class="text-3xl font-display text-white mb-1">
             {formatPrice(priceRange.low)} — {formatPrice(priceRange.high)}
           </div>
-          <p class="text-zinc-400 text-sm">±20% depending on details</p>
+          <p class="text-zinc-600 font-mono text-sm">±20% depending on details</p>
         </div>
 
         <!-- Sessions Card -->
-        <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg p-6">
+        <div class="bg-elevated border border-border p-6">
           <div class="mb-4">
-            <p class="text-zinc-400 text-sm uppercase font-semibold tracking-wider mb-1">Sessions</p>
-            <p class="text-2xl font-bold text-white">{sessionEstimate.sessions}</p>
+            <p class="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mb-1">SESSIONS</p>
+            <p class="text-2xl font-display text-white">{sessionEstimate.sessions}</p>
           </div>
-          <div class="pt-4 border-t border-zinc-700/50">
-            <p class="text-zinc-400 text-sm uppercase font-semibold tracking-wider mb-1">Total Hours</p>
-            <p class="text-xl font-bold text-white">{sessionEstimate.totalHours}</p>
+          <div class="pt-4 border-t border-border">
+            <p class="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mb-1">TOTAL HOURS</p>
+            <p class="text-xl font-display text-white">{sessionEstimate.totalHours}</p>
           </div>
         </div>
 
         <!-- Deposit Card -->
-        <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg p-6">
-          <p class="text-zinc-400 text-sm uppercase font-semibold tracking-wider mb-2">50% Deposit</p>
-          <p class="text-2xl font-bold text-orange-400">{formatPrice(depositAmount)}</p>
+        <div class="bg-elevated border border-border p-6">
+          <p class="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mb-2">50% DEPOSIT</p>
+          <p class="text-2xl font-display text-ink">{formatPrice(depositAmount)}</p>
         </div>
 
         <!-- Specs Summary -->
-        <div class="bg-zinc-800/30 border border-zinc-700/50 rounded-lg p-4 text-sm space-y-2">
-          <div class="flex justify-between text-zinc-300">
+        <div class="bg-dark border border-border p-4 text-sm space-y-2">
+          <div class="flex justify-between text-zinc-400 font-mono text-sm">
             <span>Size:</span>
             <span class="text-white font-medium">{size} sq in</span>
           </div>
-          <div class="flex justify-between text-zinc-300">
+          <div class="flex justify-between text-zinc-400 font-mono text-sm">
             <span>Placement:</span>
             <span class="text-white font-medium">{selectedPlacement}</span>
           </div>
-          <div class="flex justify-between text-zinc-300">
+          <div class="flex justify-between text-zinc-400 font-mono text-sm">
             <span>Complexity:</span>
             <span class="text-white font-medium">{complexity}</span>
           </div>
-          <div class="flex justify-between text-zinc-300">
+          <div class="flex justify-between text-zinc-400 font-mono text-sm">
             <span>Color:</span>
             <span class="text-white font-medium">{isFullColor ? 'Full Color' : 'B&W'}</span>
           </div>
-          <div class="flex justify-between text-zinc-300">
+          <div class="flex justify-between text-zinc-400 font-mono text-sm">
             <span>Cover-up:</span>
             <span class="text-white font-medium">{isCoverup ? 'Yes' : 'No'}</span>
           </div>
@@ -287,21 +287,20 @@
     </div>
 
     <!-- CTA Section -->
-    <div class="text-center pt-8 border-t border-zinc-700/50">
-      <p class="text-zinc-400 mb-4">Ready to book? Book your tattoo session now.</p>
+    <div class="text-center pt-8 border-t border-border">
+      <p class="text-zinc-500 font-mono text-sm mb-4">Ready to book? Book your tattoo session now.</p>
       <a
         href="/book"
-        class="inline-flex items-center gap-2 px-8 py-3 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 transition-all duration-200 transform hover:scale-105"
+        class="inline-flex items-center gap-2 px-8 py-3 bg-red-500 text-white font-bold text-sm hover:bg-red-600 transition-all duration-150"
       >
-        Ready to book? →
-        <span>arjostyle.com/book</span>
+        BOOK NOW →
       </a>
     </div>
 
     <!-- Footer -->
-    <div class="mt-12 pt-8 border-t border-zinc-700/50 text-center text-xs text-zinc-500">
-      <a href="/tools" class="hover:text-zinc-400 transition-colors"
-        >Part of ArjoStyle Free Tools →</a
+    <div class="mt-12 pt-8 border-t border-border text-center">
+      <a href="/tools" class="text-zinc-600 font-mono text-sm hover:text-white transition-colors"
+        >← BACK TO FREE TOOLS</a
       >
     </div>
   </div>

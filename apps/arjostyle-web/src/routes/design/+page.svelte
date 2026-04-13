@@ -27,28 +27,28 @@
   <meta property="og:url" content="https://arjostyle.ink/design" />
 </svelte:head>
 
-<div class="min-h-screen bg-surface-900 text-zinc-100">
-  <section class="pt-20 pb-12 px-6 text-center">
+<div class="min-h-screen bg-dark text-zinc-100">
+  <section class="pt-20 pb-12 px-6 text-center border-b border-border">
     <RevealOnScroll>
-      <p class="text-ink-500 text-sm font-medium uppercase tracking-widest mb-3">Visual Communication</p>
-      <h1 class="text-4xl md:text-5xl font-display font-bold text-white mb-4">Design Work</h1>
-      <p class="text-zinc-400 text-lg max-w-xl mx-auto">
+      <p class="text-ink text-[10px] font-mono uppercase tracking-[0.3em] mb-3">Visual Communication</p>
+      <h1 class="text-4xl md:text-5xl font-display font-bold text-white mb-4 tracking-wide">DESIGN WORK</h1>
+      <p class="text-zinc-500 text-lg max-w-xl mx-auto font-mono text-sm">
         Logos, menus, brand identities, and signage. Clean, purposeful design that works.
-        <a href="/pricing#design" class="text-ink-400 hover:underline ml-1">View pricing →</a>
+        <a href="/pricing#design" class="text-ink hover:underline ml-1">View pricing →</a>
       </p>
     </RevealOnScroll>
   </section>
 
   {#if data.designProjects.length > 0}
-    <div class="px-6 pb-8 flex flex-wrap gap-2 justify-center">
+    <div class="px-6 pb-8 pt-8 flex flex-wrap gap-1 justify-center border-b border-border">
       {#each (['all', 'logo', 'menu', 'brand', 'signage'] as const) as f}
         <button
           onclick={() => (filter = f)}
-          class="px-4 py-1.5 rounded-full text-sm border transition-colors {filter === f
-            ? 'bg-ink-500/20 border-ink-500/50 text-ink-400'
-            : 'border-zinc-700 text-zinc-400 hover:border-zinc-500'}"
+          class="px-4 py-2 text-sm font-mono transition-all duration-150 {filter === f
+            ? 'bg-white text-dark font-bold'
+            : 'bg-elevated text-zinc-500 border border-border hover:border-border-light hover:text-white'}"
         >
-          {f === 'all' ? 'All' : CATEGORY_LABELS[f]}
+          {f === 'all' ? 'ALL' : CATEGORY_LABELS[f].toUpperCase()}
         </button>
       {/each}
     </div>
@@ -58,28 +58,28 @@
     <div class="max-w-6xl mx-auto">
       {#if data.designProjects.length === 0}
         <RevealOnScroll>
-          <div class="text-center py-24 text-zinc-500">
+          <div class="text-center py-24 text-zinc-600">
             <p class="text-5xl mb-4">🎨</p>
-            <p class="text-lg font-medium text-zinc-400 mb-2">Portfolio coming soon</p>
-            <p class="text-sm">Compiling past projects. Check back soon or <a href="/contact" class="text-ink-400 hover:underline">reach out</a> for a quote.</p>
+            <p class="text-lg font-display text-zinc-400 mb-2 tracking-wide">PORTFOLIO COMING SOON</p>
+            <p class="text-sm font-mono">Compiling past projects. Check back soon or <a href="/contact" class="text-ink hover:underline">reach out</a> for a quote.</p>
           </div>
         </RevealOnScroll>
       {:else}
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-2 mt-8">
           {#each filtered as project, i}
             <RevealOnScroll delay={i * 60}>
-              <div class="group rounded-xl overflow-hidden border border-zinc-800 bg-zinc-900">
-                <div class="aspect-video overflow-hidden bg-zinc-800">
+              <div class="group bg-elevated border border-border overflow-hidden hover:border-ink/30 transition-all duration-150">
+                <div class="aspect-video overflow-hidden bg-dark">
                   <img src={project.imageUrl} alt={project.title} loading="lazy"
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                 </div>
                 <div class="p-4">
                   <div class="flex items-start justify-between gap-2 mb-1">
-                    <h2 class="font-semibold text-white text-base">{project.title}</h2>
-                    <span class="text-xs px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-500 shrink-0">{CATEGORY_LABELS[project.category]}</span>
+                    <h2 class="font-display text-white text-base group-hover:text-ink transition-colors tracking-wide">{project.title.toUpperCase()}</h2>
+                    <span class="text-[10px] font-mono px-2 py-0.5 border border-border text-zinc-600 shrink-0 uppercase tracking-widest">{CATEGORY_LABELS[project.category]}</span>
                   </div>
-                  <p class="text-xs text-zinc-500">{project.client} · {project.year}</p>
-                  <p class="text-sm text-zinc-400 mt-2 line-clamp-2">{project.description}</p>
+                  <p class="text-[10px] font-mono text-zinc-600 uppercase tracking-widest">{project.client} — {project.year}</p>
+                  <p class="text-sm text-zinc-500 mt-2 line-clamp-2 font-mono">{project.description}</p>
                 </div>
               </div>
             </RevealOnScroll>
@@ -89,12 +89,12 @@
     </div>
   </section>
 
-  <section class="py-20 px-6 text-center border-t border-zinc-800/50">
+  <section class="py-20 px-6 text-center border-t border-border">
     <RevealOnScroll>
-      <h2 class="text-2xl font-display font-semibold text-white mb-3">Need Design Work?</h2>
-      <p class="text-zinc-400 mb-8 max-w-md mx-auto">Logo, menu, brand identity — let's talk scope and pricing.</p>
-      <a href="/contact" class="px-8 py-3 bg-ink-500 text-white rounded-full font-semibold hover:bg-ink-400 transition-colors">
-        Get a Quote
+      <h2 class="text-3xl font-display font-semibold text-white mb-3 tracking-wide">NEED DESIGN WORK?</h2>
+      <p class="text-zinc-500 mb-8 max-w-md mx-auto font-mono text-sm">Logo, menu, brand identity — let's talk scope and pricing.</p>
+      <a href="/contact" class="px-8 py-3 bg-red-500 text-white font-bold text-sm hover:bg-red-600 transition-all duration-150">
+        GET A QUOTE
       </a>
     </RevealOnScroll>
   </section>
