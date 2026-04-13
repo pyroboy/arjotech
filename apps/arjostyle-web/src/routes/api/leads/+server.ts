@@ -7,7 +7,7 @@ import { z } from 'zod';
 
 const createLeadSchema = z.object({
   business: z.enum(['silog', 'sweetytreats', 'foodhub', 'dorm', 'arjostyle'], {
-    required_error: 'Business is required',
+    message: 'Business is required',
   }),
   status: z.enum(['new', 'contacted', 'responded', 'qualified', 'proposal_sent', 'negotiating', 'won', 'lost', 'dormant']).optional().default('new'),
   source: z.enum(['facebook', 'instagram', 'tiktok', 'google', 'walk_in', 'referral', 'dm', 'email', 'phone', 'website', 'other']).optional().default('other'),

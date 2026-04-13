@@ -5,9 +5,9 @@ import { marketingContent } from '$lib/db/schema';
 import { z } from 'zod';
 
 const generateSchema = z.object({
-  business: z.enum(['silog', 'sweetytreats', 'foodhub', 'dorm', 'arjostyle'], { required_error: 'Business is required' }),
-  contentType: z.enum(['menu_image', 'promo_graphic', 'social_caption', 'story_post', 'reel_script', 'review_reply'], { required_error: 'Content type is required' }),
-  platform: z.enum(['facebook', 'tiktok', 'instagram', 'google_business'], { required_error: 'Platform is required' }),
+  business: z.enum(['silog', 'sweetytreats', 'foodhub', 'dorm', 'arjostyle'], { message: 'Business is required' }),
+  contentType: z.enum(['menu_image', 'promo_graphic', 'social_caption', 'story_post', 'reel_script', 'review_reply'], { message: 'Content type is required' }),
+  platform: z.enum(['facebook', 'tiktok', 'instagram', 'google_business'], { message: 'Platform is required' }),
   pipelineStage: z.enum(['awareness', 'interest', 'conversion', 'retention', 'advocacy']).optional(),
   menuItem: z.object({ name: z.string().optional(), price: z.number().optional(), style: z.string().optional() }).optional(),
   promoDetails: z.object({ title: z.string().optional(), discount: z.string().optional(), validUntil: z.string().optional() }).optional(),

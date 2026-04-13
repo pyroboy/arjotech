@@ -6,10 +6,10 @@ import { desc, eq } from 'drizzle-orm';
 import { z } from 'zod';
 
 const createContentSchema = z.object({
-  business: z.enum(['silog', 'sweetytreats', 'foodhub', 'dorm', 'arjostyle'], { required_error: 'Business is required' }),
-  contentType: z.enum(['menu_image', 'promo_graphic', 'social_caption', 'story_post', 'reel_script', 'review_reply'], { required_error: 'Content type is required' }),
-  platform: z.enum(['facebook', 'tiktok', 'instagram', 'google_business'], { required_error: 'Platform is required' }),
-  pipelineStage: z.enum(['awareness', 'interest', 'conversion', 'retention', 'advocacy'], { required_error: 'Pipeline stage is required' }),
+  business: z.enum(['silog', 'sweetytreats', 'foodhub', 'dorm', 'arjostyle'], { message: 'Business is required' }),
+  contentType: z.enum(['menu_image', 'promo_graphic', 'social_caption', 'story_post', 'reel_script', 'review_reply'], { message: 'Content type is required' }),
+  platform: z.enum(['facebook', 'tiktok', 'instagram', 'google_business'], { message: 'Platform is required' }),
+  pipelineStage: z.enum(['awareness', 'interest', 'conversion', 'retention', 'advocacy'], { message: 'Pipeline stage is required' }),
   status: z.enum(['draft', 'generated', 'approved', 'scheduled', 'published', 'failed']).optional().default('draft'),
   title: z.string().min(1, 'Title is required'),
   caption: z.string().optional(),

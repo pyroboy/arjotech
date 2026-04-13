@@ -5,11 +5,11 @@ import { kpiActivityLog } from '$lib/db/schema';
 import { z } from 'zod';
 
 const logSchema = z.object({
-  business: z.enum(['silog', 'sweetytreats', 'foodhub', 'dorm', 'arjostyle'], { required_error: 'Business is required' }),
+  business: z.enum(['silog', 'sweetytreats', 'foodhub', 'dorm', 'arjostyle'], { message: 'Business is required' }),
   category: z.string().min(1, 'Category is required'),
   action: z.string().min(1, 'Action is required'),
   value: z.number().optional().default(1),
-  metadata: z.record(z.any()).optional(),
+  metadata: z.record(z.string(), z.any()).optional(),
   notes: z.string().optional(),
 });
 

@@ -11,7 +11,7 @@ const bookingSchema = z.object({
   email: z.string().email('Valid email is required'),
   phone: z.string().min(1, 'Phone is required'),
   dob: z.string().optional(),
-  size: z.number({ required_error: 'Tattoo size is required' }),
+  size: z.number({ message: 'Tattoo size is required' }),
   isColor: z.boolean().optional().default(false),
   complexity: z.number().optional(),
   selectedCategory: z.string().optional(),

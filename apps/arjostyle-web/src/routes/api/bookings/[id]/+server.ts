@@ -9,8 +9,7 @@ const uuidSchema = z.string().uuid('Invalid booking ID format');
 
 const patchSchema = z.object({
   status: z.enum(['Available', 'Pending', 'Confirmed', 'Rejected', 'Completed', 'Needs Info', 'Conflict'], {
-    required_error: 'Status is required',
-    invalid_type_error: 'Invalid status value',
+    message: 'Status is required',
   }),
 });
 

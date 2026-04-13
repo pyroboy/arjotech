@@ -29,10 +29,10 @@ export const load: PageServerLoad = async () => {
 		.from(jobOpportunities)
 		.orderBy(desc(jobOpportunities.createdAt));
 
-	// Normalize remote: true → 'Remote', false → 'On-site'
+	// Normalize remote: true → 'Remote', false → 'On-site', null/undefined → 'Unknown'
 	const normalized = jobs.map(j => ({
 		...j,
-		remote: j.remote === true ? 'Remote' : j.remote === false ? 'On-site' : j.remote,
+		remote: j.remote === true ? 'Remote' : j.remote === false ? 'On-site' : 'Unknown',
 	}));
 
 	return { jobs: normalized };

@@ -6,13 +6,13 @@ import { desc, eq } from 'drizzle-orm';
 import { z } from 'zod';
 
 const createTemplateSchema = z.object({
-  business: z.enum(['silog', 'sweetytreats', 'foodhub', 'dorm', 'arjostyle'], { required_error: 'Business is required' }),
-  contentType: z.enum(['menu_image', 'promo_graphic', 'social_caption', 'story_post', 'reel_script', 'review_reply'], { required_error: 'Content type is required' }),
+  business: z.enum(['silog', 'sweetytreats', 'foodhub', 'dorm', 'arjostyle'], { message: 'Business is required' }),
+  contentType: z.enum(['menu_image', 'promo_graphic', 'social_caption', 'story_post', 'reel_script', 'review_reply'], { message: 'Content type is required' }),
   name: z.string().min(1, 'Name is required'),
   promptTemplate: z.string().min(1, 'Prompt template is required'),
   captionTemplate: z.string().optional(),
-  platform: z.enum(['facebook', 'tiktok', 'instagram', 'google_business'], { required_error: 'Platform is required' }),
-  pipelineStage: z.enum(['awareness', 'interest', 'conversion', 'retention', 'advocacy'], { required_error: 'Pipeline stage is required' }),
+  platform: z.enum(['facebook', 'tiktok', 'instagram', 'google_business'], { message: 'Platform is required' }),
+  pipelineStage: z.enum(['awareness', 'interest', 'conversion', 'retention', 'advocacy'], { message: 'Pipeline stage is required' }),
   isActive: z.boolean().optional().default(true),
   variables: z.array(z.object({ key: z.string(), label: z.string(), defaultValue: z.string() })).optional(),
 });
