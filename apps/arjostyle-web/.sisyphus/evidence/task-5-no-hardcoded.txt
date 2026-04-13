@@ -1,0 +1,17 @@
+# Task 5 Evidence: No Hardcoded Secrets
+
+## Hardcoded secret search (should be empty)
+Pattern: 0x4AAAAAAC1Ui3Ml0sQEOt0fEg6BzisIYzA
+Result: No matches found
+
+## TURNSTILE_SECRET_KEY usage (env var pattern)
+Pattern: TURNSTILE_SECRET_KEY
+Result:
+src/routes/admin/login/+page.server.ts
+  4: const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY;
+  12: secret: TURNSTILE_SECRET_KEY,
+
+## Verification
+- Hardcoded secret removed
+- Now using process.env.TURNSTILE_SECRET_KEY
+- Secret not exposed in error messages

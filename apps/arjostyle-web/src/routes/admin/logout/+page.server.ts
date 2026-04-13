@@ -13,6 +13,9 @@ export const actions: Actions = {
         console.error('Sign out error:', e);
       }
     }
+    // Clear the session cookie explicitly since better-auth's signOut
+    // response Set-Cookie header isn't automatically forwarded in form actions
+    cookies.delete('better-auth.session_token', { path: '/' });
     throw redirect(302, '/admin/login');
   }
 };

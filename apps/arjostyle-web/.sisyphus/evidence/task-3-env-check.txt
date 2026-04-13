@@ -1,0 +1,30 @@
+# Evidence: Task 3 - Environment Variables Fix
+# Generated: 2026-04-13
+
+## Grep Results for BETTER_AUTH and TURNSTILE env vars
+
+./.env:BETTER_AUTH_URL=https://arjostyle.com
+./.env:BETTER_AUTH_SECRET=RNWwLc707ug2xakxECWRM45n6o2qn3h+mKB06VRXqTI=
+./.env:TURNSTILE_SECRET_KEY=
+./.env.example:BETTER_AUTH_URL=https://arjostyle.com
+./.env.example:BETTER_AUTH_SECRET=your-secret-key-here
+./.env.example:TURNSTILE_SECRET_KEY=
+./src/app.d.ts:        BETTER_AUTH_URL?: string;
+./src/app.d.ts:        TURNSTILE_SITE_KEY?: string;
+./src/app.d.ts:        TURNSTILE_SECRET_KEY?: string;
+./src/lib/server/auth.ts:  const baseUrl = (env as { BASE_URL?: string }).BASE_URL ?? process.env.BETTER_AUTH_URL ?? 'https://arjostyle.com';
+./src/routes/admin/login/+page.server.ts:const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY;
+./src/routes/admin/login/+page.server.ts:        secret: TURNSTILE_SECRET_KEY,
+
+## Changes Made
+
+1. Added to .env:
+   - BETTER_AUTH_URL=https://arjostyle.com
+   - BETTER_AUTH_SECRET=<generated>
+   - TURNSTILE_SECRET_KEY=<empty placeholder>
+
+2. Created .env.example with documented template values
+
+## Files Changed
+- .env (added 3 lines)
+- .env.example (created with documentation)

@@ -17,7 +17,7 @@ export function createAuth(env: { DATABASE_URL?: string; BASE_URL?: string } | {
       enabled: true,
       requireEmailVerification: false,
     },
-    trustedOrigins: ["https://arjostyle.com", "http://localhost:5173"],
+    trustedOrigins: ["https://arjostyle.com", "https://www.arjostyle.com", "http://localhost:5173"],
     session: {
       expiresIn: 60 * 60 * 24 * 7,
       updateAge: 60 * 60 * 24,

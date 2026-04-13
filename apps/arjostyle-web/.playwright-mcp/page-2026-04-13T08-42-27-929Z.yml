@@ -1,0 +1,82 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - link "← arjostyle.com" [ref=e6] [cursor=pointer]:
+        - /url: /
+      - heading "ADMIN PANEL" [level=2] [ref=e7]
+    - navigation [ref=e8]:
+      - generic [ref=e9]:
+        - paragraph [ref=e10]: Core
+        - generic [ref=e11]:
+          - link "📊 KPI Dashboard" [ref=e12] [cursor=pointer]:
+            - /url: /admin/reports
+            - generic [ref=e13]: 📊
+            - generic [ref=e14]: KPI Dashboard
+          - link "💼 Jobs" [ref=e15] [cursor=pointer]:
+            - /url: /admin/jobs
+            - generic [ref=e16]: 💼
+            - generic [ref=e17]: Jobs
+          - link "📋 Bookings" [ref=e18] [cursor=pointer]:
+            - /url: /admin/bookings
+            - generic [ref=e19]: 📋
+            - generic [ref=e20]: Bookings
+          - link "🎯 Leads" [ref=e21] [cursor=pointer]:
+            - /url: /admin/leads
+            - generic [ref=e22]: 🎯
+            - generic [ref=e23]: Leads
+      - generic [ref=e24]:
+        - paragraph [ref=e25]: Marketing
+        - generic [ref=e26]:
+          - link "📣 Pipeline" [ref=e27] [cursor=pointer]:
+            - /url: /admin/marketing
+            - generic [ref=e28]: 📣
+            - generic [ref=e29]: Pipeline
+          - link "✨ Content Generator" [ref=e30] [cursor=pointer]:
+            - /url: /admin/marketing/generate
+            - generic [ref=e31]: ✨
+            - generic [ref=e32]: Content Generator
+          - link "📅 Calendar" [ref=e33] [cursor=pointer]:
+            - /url: /admin/marketing/calendar
+            - generic [ref=e34]: 📅
+            - generic [ref=e35]: Calendar
+      - generic [ref=e36]:
+        - paragraph [ref=e37]: Content
+        - link "🖼 Media Assets" [ref=e39] [cursor=pointer]:
+          - /url: /admin/assets
+          - generic [ref=e40]: 🖼
+          - generic [ref=e41]: Media Assets
+      - generic [ref=e42]:
+        - paragraph [ref=e43]: Tools
+        - generic [ref=e44]:
+          - link "🫀 3D Mapping" [ref=e45] [cursor=pointer]:
+            - /url: /admin/model
+            - generic [ref=e46]: 🫀
+            - generic [ref=e47]: 3D Mapping
+          - link "🤖 AI Prompts" [ref=e48] [cursor=pointer]:
+            - /url: /admin/ai
+            - generic [ref=e49]: 🤖
+            - generic [ref=e50]: AI Prompts
+    - generic [ref=e51]:
+      - button "🚪 LOGOUT" [ref=e53] [cursor=pointer]:
+        - generic [ref=e54]: 🚪
+        - generic [ref=e55]: LOGOUT
+      - paragraph [ref=e56]: arjostyle admin v2
+  - main [ref=e57]:
+    - generic [ref=e59]:
+      - generic [ref=e60]:
+        - img [ref=e62]
+        - heading "Admin Login" [level=1] [ref=e63]
+        - paragraph [ref=e64]: Sign in to access the admin panel
+      - generic [ref=e66]:
+        - generic [ref=e67]:
+          - generic [ref=e68]:
+            - generic [ref=e69]: Email
+            - textbox "Email" [ref=e70]:
+              - /placeholder: you@example.com
+          - generic [ref=e71]:
+            - generic [ref=e72]: Password
+            - textbox "Password" [ref=e73]:
+              - /placeholder: ••••••••
+        - button "Sign In" [disabled] [ref=e74]
+      - link "← Back to website" [ref=e76] [cursor=pointer]:
+        - /url: /

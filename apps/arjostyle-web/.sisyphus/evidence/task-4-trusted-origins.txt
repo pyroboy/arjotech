@@ -1,0 +1,15 @@
+# Task 4: Trusted Origins Fix - Evidence
+
+## File: src/lib/server/auth.ts
+
+## Grep Result:
+Found 1 match(es) in 1 file(s)
+
+/Users/arjomagno/Documents/github-repos/arjotech/apps/arjostyle-web/src/lib/server/auth.ts
+  20: trustedOrigins: ["https://arjostyle.com", "https://www.arjostyle.com", "http://localhost:5173"],
+
+## Verification:
+- trustedOrigins array now contains:
+  1. "https://arjostyle.com" (kept)
+  2. "https://www.arjostyle.com" (added)
+  3. "http://localhost:5173" (kept - development origin)

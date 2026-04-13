@@ -1,0 +1,73 @@
+TypeScript: 66 errors in 1 files
+═══════════════════════════════════════
+Top codes: TS7006 (29x), TS7005 (21x), TS7034 (8x), TS7053 (5x), TS2339 (2x)
+
+../../node_modules/.pnpm/gsap@3.14.2/node_modules/gsap/utils/VelocityTracker.js (66 errors)
+  L11: TS7034 Variable 'gsap' implicitly has type 'any' in some locations where its type cannot be determined.
+  L12: TS7034 Variable '_coreInitted' implicitly has type 'any' in some locations where its type cannot be determined.
+  L13: TS7034 Variable '_toArray' implicitly has type 'any' in some locations where its type cannot be determined.
+  L14: TS7034 Variable '_getUnit' implicitly has type 'any' in some locations where its type cannot be determined.
+  L15: TS7034 Variable '_first' implicitly has type 'any' in some locations where its type cannot be determined.
+  L16: TS7034 Variable '_ticker' implicitly has type 'any' in some locations where its type cannot be determined.
+  L17: TS7034 Variable '_time1' implicitly has type 'any' in some locations where its type cannot be determined.
+  L19: TS7034 Variable '_getCache' implicitly has type 'any' in some locations where its type cannot be determined.
+  L21: TS7005 Variable 'gsap' implicitly has an 'any' type.
+  L24: TS7006 Parameter 'value' implicitly has an 'any' type.
+  L27: TS7006 Parameter 'target' implicitly has an 'any' type.
+  L28: TS7005 Variable '_getCache' implicitly has an 'any' type.
+  L30: TS7006 Parameter 'target' implicitly has an 'any' type.
+  L31: TS7053 Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'.
+  L31: TS7005 Variable '_toArray' implicitly has an 'any' type.
+  L33: TS7006 Parameter 'time' implicitly has an 'any' type.
+  L34: TS7005 Variable '_first' implicitly has an 'any' type.
+  L37: TS7005 Variable '_time1' implicitly has an 'any' type.
+  L38: TS7005 Variable '_time1' implicitly has an 'any' type.
+  L72: TS7006 Parameter 'target' implicitly has an 'any' type.
+  L72: TS7006 Parameter 'property' implicitly has an 'any' type.
+  L72: TS7006 Parameter 'type' implicitly has an 'any' type.
+  L72: TS7006 Parameter 'next' implicitly has an 'any' type.
+  L76: TS7053 Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ deg: number; rad...
+  L76: TS7005 Variable '_getUnit' implicitly has an 'any' type.
+  L79: TS7005 Variable '_ticker' implicitly has an 'any' type.
+  L88: TS7006 Parameter 'target' implicitly has an 'any' type.
+  L88: TS7006 Parameter 'property' implicitly has an 'any' type.
+  L89: TS7005 Variable '_coreInitted' implicitly has an 'any' type.
+  L90: TS7005 Variable '_toArray' implicitly has an 'any' type.
+  L91: TS7053 Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'.
+  L93: TS2339 Property 'add' does not exist on type 'VelocityTracker'.
+  L96: TS7006 Parameter 'core' implicitly has an 'any' type.
+  L104: TS7006 Parameter 'property' implicitly has an 'any' type.
+  L104: TS7006 Parameter 'skipRecentTick' implicitly has an 'any' type.
+  L122: TS7005 Variable '_ticker' implicitly has an 'any' type.
+  L131: TS7053 Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'.
+    No index signature with a parameter of type 'string' was found on type '{}'.
+  L137: TS7006 Parameter 'property' implicitly has an 'any' type.
+  L141: TS7006 Parameter 'property' implicitly has an 'any' type.
+  L141: TS7006 Parameter 'type' implicitly has an 'any' type.
+  L147: TS7005 Variable '_ticker' implicitly has an 'any' type.
+  L149: TS7005 Variable '_first' implicitly has an 'any' type.
+  L150: TS7005 Variable '_ticker' implicitly has an 'any' type.
+  L152: TS7005 Variable '_ticker' implicitly has an 'any' type.
+  L155: TS7005 Variable '_first' implicitly has an 'any' type.
+  L159: TS7006 Parameter 'property' implicitly has an 'any' type.
+  L174: TS7005 Variable '_first' implicitly has an 'any' type.
+  L175: TS7005 Variable '_ticker' implicitly has an 'any' type.
+  L184: TS7006 Parameter 'shallow' implicitly has an 'any' type.
+  L190: TS7053 Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'.
+  L194: TS7006 Parameter 'targets' implicitly has an 'any' type.
+  L194: TS7006 Parameter 'properties' implicitly has an 'any' type.
+  L194: TS7006 Parameter 'types' implicitly has an 'any' type.
+  L195: TS7005 Variable '_coreInitted' implicitly has an 'any' type.
+  L198: TS7005 Variable '_toArray' implicitly has an 'any' type.
+  L219: TS7006 Parameter 'targets' implicitly has an 'any' type.
+  L219: TS7006 Parameter 'properties' implicitly has an 'any' type.
+  L222: TS7005 Variable '_toArray' implicitly has an 'any' type.
+  L222: TS7006 Parameter 'target' implicitly has an 'any' type.
+  L226: TS7006 Parameter 'p' implicitly has an 'any' type.
+  L233: TS7006 Parameter 'target' implicitly has an 'any' type.
+  L233: TS7006 Parameter 'property' implicitly has an 'any' type.
+  L239: TS7006 Parameter 'target' implicitly has an 'any' type.
+  L239: TS7006 Parameter 'property' implicitly has an 'any' type.
+  L247: TS2339 Property 'getByTarget' does not exist on type 'typeof VelocityTracker'.
+  L248: TS18048 'gsap' is possibly 'undefined'.
+[full output: ~/Library/Application Support/rtk/tee/1776069091_tsc.log]

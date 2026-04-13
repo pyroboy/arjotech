@@ -1,7 +1,7 @@
 import type { PageServerLoad, Actions } from './$types';
 import { redirect } from '@sveltejs/kit';
 
-const TURNSTILE_SECRET_KEY = '0x4AAAAAAC1Ui3Ml0sQEOt0fEg6BzisIYzA';
+const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY;
 
 async function verifyTurnstile(token: string): Promise<boolean> {
   try {

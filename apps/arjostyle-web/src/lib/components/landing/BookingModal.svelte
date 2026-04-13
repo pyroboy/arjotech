@@ -1,11 +1,21 @@
 <script lang="ts">
   import BookingFlow from '$lib/components/booking/BookingFlow.svelte';
+  import { browser } from '$app/environment';
 
   interface Props {
     show: boolean;
   }
 
   let { show = $bindable(false) }: Props = $props();
+
+  $effect(() => {
+    if (!browser) return;
+    if (show) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  });
 </script>
 
 {#if show}
