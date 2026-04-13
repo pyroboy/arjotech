@@ -2,7 +2,12 @@ import type { PageServerLoad, Actions } from './$types';
 import { redirect } from '@sveltejs/kit';
 import { verifyCredentials, createSession, SESSION_COOKIE_NAME } from '$lib/server/kv-session';
 
-const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY;
+interface Env {
+  DATABASE_URL: string;
+  ARJOSTYLE_KV: KVNamespace;
+}
+
+const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY ?? '';
 
 async function verifyTurnstile(token: string): Promise<boolean> {
   try {
@@ -49,7 +54,7 @@ export const actions: Actions = {
       //   }
       // }
 
-      const env = platform?.env ?? {};
+      const env = (platform?.env ?? {}) as Env;
       
       // Debug: check if env is properly passed
       console.error('[DEBUG] env keys:', Object.keys(env));
@@ -79,8 +84,8 @@ export const actions: Actions = {
       });
 
       throw redirect(302, '/admin');
-    } catch (err) {
-      if (err instanceof Response || (typeof err === 'object' && err?.status === 302)) {
+    } catch (err: unknown) {
+      if (err instanceof Response || (typeof err === 'object' && err !== null && (err as { status?: number }).status === 302)) {
         throw err;
       }
       console.error('[LOGIN ERROR]', err);
