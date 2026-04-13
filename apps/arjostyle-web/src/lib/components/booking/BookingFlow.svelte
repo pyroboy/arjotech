@@ -233,7 +233,7 @@
 
     <div
       bind:this={contentEl}
-      style="scroll-snap-type: y proximity;"
+      style="scroll-snap-type: y proximity; overscroll-behavior: contain;"
       class="relative z-10 flex-1 overflow-y-auto px-4 sm:px-6 pb-6 transition-all duration-300 ease-out sm:order-2 sm:w-1/2
         {store.isTransitioning
           ? transitionDirection === 'left'

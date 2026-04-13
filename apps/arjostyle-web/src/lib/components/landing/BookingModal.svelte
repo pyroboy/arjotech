@@ -14,7 +14,7 @@
     <div class="absolute inset-0 bg-dark/95"
       onclick={() => (show = false)}
       onkeydown={(e) => { if (e.key === 'Escape') show = false; }}></div>
-    <div class="relative z-10 w-full h-full sm:h-auto sm:max-w-4xl sm:max-h-[90dvh] overflow-hidden sm:border sm:border-border bg-dark shadow-[8px_8px_0_var(--border)] sm:mx-4">
+    <div class="relative z-10 w-full h-full sm:h-auto sm:max-w-4xl sm:max-h-[90dvh] overflow-y-auto overscroll-behavior-contain sm:overflow-hidden sm:border sm:border-border bg-dark shadow-[8px_8px_0_var(--border)] sm:mx-4">
       <button onclick={() => (show = false)}
         class="absolute right-4 top-4 z-[110] flex h-10 w-10 items-center justify-center bg-elevated border border-border text-zinc-400 hover:bg-dark hover:text-white transition-colors"
         aria-label="Close">✕</button>
