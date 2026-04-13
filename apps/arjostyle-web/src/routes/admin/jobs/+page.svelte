@@ -132,9 +132,9 @@
 
 					<div style="flex: 1; overflow-y: auto; padding: 0.75rem; display: flex; flex-direction: column; gap: 0.625rem;">
 						{#each jobs as job (job.id)}
-							<div style="background: rgba(24,24,27,0.8); border: 1px solid rgba(255,255,255,0.06); border-radius: 0.625rem; padding: 0.875rem; transition: all 150ms;"
-							onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(245,158,11,0.3)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 12px rgba(0,0,0,0.3)'; }}
-							onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.06)'; (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}>
+							<div role="listitem" style="background: rgba(24,24,27,0.8); border: 1px solid rgba(255,255,255,0.06); border-radius: 0.625rem; padding: 0.875rem; transition: all 150ms;"
+								onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(245,158,11,0.3)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 12px rgba(0,0,0,0.3)'; }}
+								onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.06)'; (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}>
 								<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
 									<span style="font-size: 11px; font-family: monospace; font-weight: 700; color: #e4e4e7; letter-spacing: 0.05em;">{job.company}</span>
 									<span style="font-size: 9px; font-family: monospace; font-weight: 600; padding: 2px 6px; border-radius: 4px; background: {(sourceColors[job.source] || '#6b7280')}22; color: {sourceColors[job.source] || '#6b7280'}; border: 1px solid {(sourceColors[job.source] || '#6b7280')}44; letter-spacing: 0.05em;">{job.source}</span>
@@ -176,16 +176,16 @@
 			<h3 style="font-size: 14px; font-weight: 600; color: #fafafa; margin: 0 0 1rem 0; font-family: monospace;">Add Job Source</h3>
 			<form method="POST" action="?/addSource" use:enhance style="display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: flex-end; margin-bottom: 1.5rem;">
 				<div>
-					<label style="font-size: 10px; font-family: monospace; color: #71717a; text-transform: uppercase; display: block; margin-bottom: 4px;">Name</label>
-					<input type="text" name="name" placeholder="HackerNews" required style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; padding: 0.5rem 0.75rem; color: #fafafa; font-size: 13px; font-family: monospace; width: 140px;" />
+					<label for="source-name" style="font-size: 10px; font-family: monospace; color: #71717a; text-transform: uppercase; display: block; margin-bottom: 4px;">Name</label>
+					<input id="source-name" type="text" name="name" placeholder="HackerNews" required style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; padding: 0.5rem 0.75rem; color: #fafafa; font-size: 13px; font-family: monospace; width: 140px;" />
 				</div>
 				<div>
-					<label style="font-size: 10px; font-family: monospace; color: #71717a; text-transform: uppercase; display: block; margin-bottom: 4px;">Base URL</label>
-					<input type="url" name="baseUrl" placeholder="https://news.ycombinator.com" required style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; padding: 0.5rem 0.75rem; color: #fafafa; font-size: 13px; font-family: monospace; width: 260px;" />
+					<label for="source-base-url" style="font-size: 10px; font-family: monospace; color: #71717a; text-transform: uppercase; display: block; margin-bottom: 4px;">Base URL</label>
+					<input id="source-base-url" type="url" name="baseUrl" placeholder="https://news.ycombinator.com" required style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; padding: 0.5rem 0.75rem; color: #fafafa; font-size: 13px; font-family: monospace; width: 260px;" />
 				</div>
 				<div>
-					<label style="font-size: 10px; font-family: monospace; color: #71717a; text-transform: uppercase; display: block; margin-bottom: 4px;">Search Path</label>
-					<input type="text" name="searchPath" placeholder="/jobs?search=" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; padding: 0.5rem 0.75rem; color: #fafafa; font-size: 13px; font-family: monospace; width: 160px;" />
+					<label for="source-search-path" style="font-size: 10px; font-family: monospace; color: #71717a; text-transform: uppercase; display: block; margin-bottom: 4px;">Search Path</label>
+					<input id="source-search-path" type="text" name="searchPath" placeholder="/jobs?search=" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; padding: 0.5rem 0.75rem; color: #fafafa; font-size: 13px; font-family: monospace; width: 160px;" />
 				</div>
 				<button type="submit" style="background: #fbbf24; color: #000; border: none; border-radius: 0.5rem; padding: 0.5rem 1rem; font-size: 12px; font-weight: 600; font-family: monospace; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
 					<Plus size={14} /> Add
@@ -231,12 +231,12 @@
 			<h3 style="font-size: 14px; font-weight: 600; color: #fafafa; margin: 0 0 1rem 0; font-family: monospace;">Add Search Keyword</h3>
 			<form method="POST" action="?/addKeyword" use:enhance style="display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: flex-end; margin-bottom: 1.5rem;">
 				<div>
-					<label style="font-size: 10px; font-family: monospace; color: #71717a; text-transform: uppercase; display: block; margin-bottom: 4px;">Keyword</label>
-					<input type="text" name="keyword" placeholder="full-stack engineer" required style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; padding: 0.5rem 0.75rem; color: #fafafa; font-size: 13px; font-family: monospace; width: 200px;" />
+					<label for="keyword-input" style="font-size: 10px; font-family: monospace; color: #71717a; text-transform: uppercase; display: block; margin-bottom: 4px;">Keyword</label>
+					<input id="keyword-input" type="text" name="keyword" placeholder="full-stack engineer" required style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; padding: 0.5rem 0.75rem; color: #fafafa; font-size: 13px; font-family: monospace; width: 200px;" />
 				</div>
 				<div>
-					<label style="font-size: 10px; font-family: monospace; color: #71717a; text-transform: uppercase; display: block; margin-bottom: 4px;">Source (optional)</label>
-					<select name="sourceId" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; padding: 0.5rem 0.75rem; color: #fafafa; font-size: 13px; font-family: monospace; min-width: 160px;">
+					<label for="keyword-source" style="font-size: 10px; font-family: monospace; color: #71717a; text-transform: uppercase; display: block; margin-bottom: 4px;">Source (optional)</label>
+					<select id="keyword-source" name="sourceId" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; padding: 0.5rem 0.75rem; color: #fafafa; font-size: 13px; font-family: monospace; min-width: 160px;">
 						<option value="">Any source</option>
 						{#each (data.sources || []) as source}
 							<option value={source.id}>{source.name}</option>
@@ -279,16 +279,16 @@
 			<h3 style="font-size: 14px; font-weight: 600; color: #fafafa; margin: 0 0 1rem 0; font-family: monospace;">Add Job Tag</h3>
 			<form method="POST" action="?/addTag" use:enhance style="display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: flex-end; margin-bottom: 1.5rem;">
 				<div>
-					<label style="font-size: 10px; font-family: monospace; color: #71717a; text-transform: uppercase; display: block; margin-bottom: 4px;">Tag Name</label>
-					<input type="text" name="name" placeholder="SvelteKit" required style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; padding: 0.5rem 0.75rem; color: #fafafa; font-size: 13px; font-family: monospace; width: 140px;" />
+					<label for="tag-name" style="font-size: 10px; font-family: monospace; color: #71717a; text-transform: uppercase; display: block; margin-bottom: 4px;">Tag Name</label>
+					<input id="tag-name" type="text" name="name" placeholder="SvelteKit" required style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; padding: 0.5rem 0.75rem; color: #fafafa; font-size: 13px; font-family: monospace; width: 140px;" />
 				</div>
 				<div>
-					<label style="font-size: 10px; font-family: monospace; color: #71717a; text-transform: uppercase; display: block; margin-bottom: 4px;">Color</label>
-					<input type="color" name="color" value="#fbbf24" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; padding: 0.25rem; width: 60px; height: 38px; cursor: pointer;" />
+					<label for="tag-color" style="font-size: 10px; font-family: monospace; color: #71717a; text-transform: uppercase; display: block; margin-bottom: 4px;">Color</label>
+					<input id="tag-color" type="color" name="color" value="#fbbf24" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; padding: 0.25rem; width: 60px; height: 38px; cursor: pointer;" />
 				</div>
 				<div>
-					<label style="font-size: 10px; font-family: monospace; color: #71717a; text-transform: uppercase; display: block; margin-bottom: 4px;">Category</label>
-					<input type="text" name="category" placeholder="tech, role, domain" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; padding: 0.5rem 0.75rem; color: #fafafa; font-size: 13px; font-family: monospace; width: 140px;" />
+					<label for="tag-category" style="font-size: 10px; font-family: monospace; color: #71717a; text-transform: uppercase; display: block; margin-bottom: 4px;">Category</label>
+					<input id="tag-category" type="text" name="category" placeholder="tech, role, domain" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; padding: 0.5rem 0.75rem; color: #fafafa; font-size: 13px; font-family: monospace; width: 140px;" />
 				</div>
 				<button type="submit" style="background: #fbbf24; color: #000; border: none; border-radius: 0.5rem; padding: 0.5rem 1rem; font-size: 12px; font-weight: 600; font-family: monospace; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
 					<Tag size={14} /> Add
