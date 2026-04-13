@@ -2,11 +2,6 @@ import type { PageServerLoad, Actions } from './$types';
 import { redirect } from '@sveltejs/kit';
 import { verifyCredentials, createSession, SESSION_COOKIE_NAME } from '$lib/server/kv-session';
 
-interface Env {
-  DATABASE_URL: string;
-  ARJOSTYLE_KV: KVNamespace;
-}
-
 const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY ?? '';
 
 async function verifyTurnstile(token: string): Promise<boolean> {
@@ -54,7 +49,7 @@ export const actions: Actions = {
       //   }
       // }
 
-      const env = (platform?.env ?? {}) as Env;
+      const env = (platform?.env ?? {}) as Record<string, unknown>;
       
       // Debug: check if env is properly passed
       console.error('[DEBUG] env keys:', Object.keys(env));
