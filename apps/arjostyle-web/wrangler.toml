@@ -4,7 +4,6 @@ compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".svelte-kit/cloudflare"
 
 [vars]
-# NODE_ENV removed — was causing pnpm to skip devDependencies during build (vite not found)
 R2_PUBLIC_URL = "https://pub-96532b44a4674c75b7eca3f5ff1cc082.r2.dev"
 TURNSTILE_SITE_KEY = "0x4AAAAAAA_your_site_key"
 BETTER_AUTH_URL = "https://arjostyle.com"
