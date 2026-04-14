@@ -8,19 +8,27 @@
     },
     {
       question: 'How much will my tattoo cost?',
-      answer: 'Philippine market rates start at ₱1,500 for small fine-line pieces and go up based on size, detail complexity, and whether color is involved. The booking form has a Tattoo Calculator that gives you an initial estimate — final price is confirmed at consultation. No surprises.'
+      answer: 'Philippine market rates start at ₱1,500 for small fine-line pieces and go up based on size, detail complexity, and whether color is involved. The booking form has a Tattoo Calculator that gives you an initial estimate — final price is confirmed at consultation. No surprises, no hidden fees.'
     },
     {
       question: 'What if I don\'t have a design idea yet?',
-      answer: 'Many clients come with just a feeling or a reference photo. That\'s enough. During consultation, we build the design together — you approve every detail before any ink touches skin.'
+      answer: 'Many clients come with just a feeling or a reference photo. That\'s enough. During consultation, we build the design together — you approve every detail before any ink touches skin. Custom work is what I do, not flash-pile copy-paste.'
     },
     {
-      question: 'What if I change my mind?',
-      answer: 'You review and approve the design mockup before I start. If something doesn\'t feel right, we fix it then. I don\'t put needle to skin until you\'re 100% satisfied with the design and placement.'
+      question: 'What if I change my mind about the design?',
+      answer: 'You review and approve the design mockup before I start. If something doesn\'t feel right, we fix it then. I don\'t put needle to skin until you\'re 100% satisfied with the design and placement. Revisions are part of the process.'
+    },
+    {
+      question: 'What makes ArjoStyle different from a tattoo shop?',
+      answer: 'This is a one-person private studio — not a shop floor. You get dedicated, uninterrupted time with me, no rushing between clients. I specialize in fine-line Japanese work, custom Filipino-themed pieces (including Baybayin), and clean bold traditional work. Every design is built for you specifically.'
+    },
+    {
+      question: 'Do you do Baybayin or Filipino-themed tattoos?',
+      answer: 'Yes — custom Baybayin scripts, Philippine-inspired designs, and Filipino cultural motifs are some of my favorite work. Upload what you have in mind (names, words, concepts) and we\'ll build something that connects to your heritage.'
     },
     {
       question: 'Is it safe and hygienic?',
-      answer: 'Non-negotiable. I use 100% single-use disposable needles and ink caps. All reusable equipment is autoclave-sterilized. Premium vegan-friendly inks. The studio follows strict cross-contamination protocols. Your safety comes before anything else.'
+      answer: 'Non-negotiable. I use 100% single-use disposable needles and ink caps. All reusable equipment is autoclave-sterilized. Premium vegan-friendly inks. The studio follows strict cross-contamination protocols. Your safety comes before anything else — no exceptions.'
     },
     {
       question: 'Do you accept walk-ins?',
@@ -28,7 +36,7 @@
     },
     {
       question: 'How do I book an appointment?',
-      answer: 'Fill out the online booking form — be as detailed as you can about your idea, placement, and size. I\'ll review it and contact you to discuss the design, confirm pricing, and arrange the 50% deposit to secure your slot.'
+      answer: 'Fill out the online booking form — be as detailed as you can about your idea, placement, and size. I\'ll review it personally and contact you to discuss the design, confirm pricing, and arrange the 50% deposit to secure your slot.'
     },
     {
       question: 'Is the consultation separate from the tattoo session?',
@@ -44,7 +52,7 @@
     },
     {
       question: 'What happens after I submit the booking form?',
-      answer: 'I review every submission personally. Within 24–48 hours, I\'ll reach out via your preferred contact method to discuss the design, answer questions, and send a invoice for the 50% deposit. Your slot is only confirmed once the deposit clears.'
+      answer: 'I review every submission personally. Within 24–48 hours, I\'ll reach out via your preferred contact method to discuss the design, answer questions, and send an invoice for the 50% deposit. Your slot is only confirmed once the deposit clears.'
     },
     {
       question: 'What is the minimum age to get tattooed?',
@@ -56,15 +64,15 @@
     },
     {
       question: 'What payment methods do you accept?',
-      answer: 'Deposit: GCash or bank transfer (BPI/UnionBank). Balance on session day: Cash preferred. GCash also accepted. No card payments, no Venmo — just the methods listed here.'
+      answer: 'Deposit: GCash or bank transfer (BPI/UnionBank). Balance on session day: Cash preferred. GCash also accepted. No card payments — just the methods listed here.'
     },
     {
       question: 'Can I bring my own design or reference images?',
-      answer: 'Absolutely. Upload them in the booking form along with any written notes. Reference images help me understand your taste and aesthetic direction — even vague references are useful.'
+      answer: 'Absolutely. Upload them in the booking form along with any written notes. Reference images help me understand your taste and aesthetic direction — even vague references are useful. Original concepts welcome.'
     },
     {
       question: 'Do you do cover-up tattoos?',
-      answer: 'Yes. Cover-ups require an in-person assessment to evaluate the existing tattoo\'s age, ink depth, and scarring. Please upload clear photos of the area you want to cover in the booking form.'
+      answer: 'Yes. Cover-ups require an in-person assessment to evaluate the existing tattoo\'s age, ink depth, and scarring. Please upload clear photos of the area you want to cover in the booking form and I\'ll give you honest feedback on what\'s possible.'
     },
     {
       question: 'How long will my tattoo appointment take?',
@@ -102,6 +110,14 @@
       question: 'What if I have a medical condition or skin condition?',
       answer: 'Disclose all medical conditions in the booking form. Conditions like keloid scarring, hemophilia, diabetes, active eczema or psoriasis in the placement area, and immunodeficiency conditions may affect whether I can work on you. I reserve the right to decline service if I assess the risk as too high.'
     },
+    {
+      question: 'Can I see your studio before booking?',
+      answer: 'Absolutely. The Studio page has photos of the workspace. Tagbilaran City, Bohol-based — mention your location in the booking form and we can discuss whether an in-person visit before the session makes sense for your situation.'
+    },
+    {
+      question: 'How do I know ArjoStyle is the right artist for me?',
+      answer: 'Browse the Tattoo and Flash galleries. Read the testimonials from real clients. If my work resonates with you — especially the fine-line and Japanese work — there\'s a good fit. The booking form is the first step: describe what you want, and I\'ll tell you honestly if I\'m the right person for it.'
+    }
   ];
 
   const INITIAL_FAQ_COUNT = 6;
@@ -134,7 +150,7 @@
     </RevealOnScroll>
     <RevealOnScroll delay={100}>
       <p class="text-zinc-500 text-lg text-center max-w-3xl mx-auto mb-10 font-mono text-sm">
-        Have questions about getting inked? Find answers below — or use the search to filter by keyword.
+        Have questions about getting inked? Find answers below — or search by keyword.
       </p>
     </RevealOnScroll>
 
