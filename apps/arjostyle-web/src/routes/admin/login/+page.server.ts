@@ -1,36 +1,14 @@
 import type { PageServerLoad, Actions } from './$types';
 import { redirect } from '@sveltejs/kit';
 import { verifyCredentials, createSession, SESSION_COOKIE_NAME } from '$lib/server/kv-session';
-import { env as dynamicEnv } from '$env/dynamic/private';
-import { env as publicEnv } from '$env/dynamic/public';
-
-const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY ?? '';
-
-async function verifyTurnstile(token: string): Promise<boolean> {
-  try {
-    const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        secret: TURNSTILE_SECRET_KEY,
-        response: token,
-      }),
-    });
-    const data = await response.json();
-    return data.success === true;
-  } catch {
-    return false;
-  }
-}
+import { APP_VERSION, COMMIT_SHA } from '$lib/version';
 
 export const load: PageServerLoad = async ({ cookies, locals }) => {
   const sessionToken = cookies.get(SESSION_COOKIE_NAME);
   if (sessionToken && locals.session) {
     throw redirect(302, '/admin');
   }
-  const version = dynamicEnv.APP_VERSION ?? 'v0.1.0';
-  const commitSha = (publicEnv.CF_PAGES_COMMIT_SHA ?? 'dev').slice(0, 7);
-  return { version, commitSha };
+  return { version: APP_VERSION, commitSha: COMMIT_SHA };
 };
 
 export const actions: Actions = {
@@ -45,17 +23,7 @@ export const actions: Actions = {
         return { error: 'Email and password are required' };
       }
 
-      // TODO: Re-enable Turnstile verification once TURNSTILE_SECRET_KEY is configured in Cloudflare Pages
-      // if (turnstileToken) {
-      //   const isValid = await verifyTurnstile(turnstileToken);
-      //   if (!isValid) {
-      //     return { error: 'Security check failed. Please try again.' };
-      //   }
-      // }
-
       const env = (platform?.env ?? {}) as Record<string, unknown>;
-      
-      // Debug: check if env is properly passed
       console.error('[DEBUG] env keys:', Object.keys(env));
       console.error('[DEBUG] DATABASE_URL present:', !!env.DATABASE_URL);
       console.error('[DEBUG] ARJOSTYLE_KV present:', !!env.ARJOSTYLE_KV);
