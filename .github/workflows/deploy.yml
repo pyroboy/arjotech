@@ -38,10 +38,11 @@ jobs:
           echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
           echo "version=${VERSION}" >> $GITHUB_ENV
 
+      - name: Inject version into wrangler.toml
+        run: |
+          sed -i "s/^APP_VERSION = \".*\"/APP_VERSION = \"${{ env.VERSION }}\"/" apps/arjostyle-web/wrangler.toml
+
       - name: Build arjostyle-web
-        env:
-          APP_VERSION: ${{ env.VERSION }}
-          PUBLIC_APP_VERSION: ${{ env.VERSION }}
         run: |
           cd apps/arjostyle-web
           pnpm build
@@ -49,12 +50,9 @@ jobs:
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
-          api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          account-id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          project-name: arjostyle-web
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: arjostyle-web
           directory: apps/arjostyle-web/.svelte-kit/cloudflare
-          git-source-directory: apps/arjostyle-web
-          wrangler-config: apps/arjostyle-web/wrangler.toml
-          environment-variables: |
-            APP_VERSION=${{ env.VERSION }}
-            PUBLIC_APP_VERSION=${{ env.VERSION }}
+          gitSourceDirectory: apps/arjostyle-web
+          wranglerConfig: apps/arjostyle-web/wrangler.toml
