@@ -13,6 +13,10 @@ export function createDb(databaseUrl: string) {
 // For use in server-side SvelteKit load functions / API routes
 export function getDb(env: { DATABASE_URL?: string } | { [key: string]: string }) {
   const url = (env as { DATABASE_URL?: string }).DATABASE_URL ?? process.env.DATABASE_URL;
-  if (!url) throw new Error('DATABASE_URL is not set');
+  if (!url) {
+    throw new Error(
+      'DATABASE_URL is not set — set it in Cloudflare Pages vars (production) or .env (local)'
+    );
+  }
   return createDb(url);
 }

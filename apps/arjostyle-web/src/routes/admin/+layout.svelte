@@ -6,11 +6,12 @@
   let mobileNavOpen = $state(false);
 
   const navSections = [
-    {
+      {
       label: 'Core',
       items: [
         { href: '/admin/reports', label: 'KPI Dashboard', icon: '📊' },
         { href: '/admin/jobs', label: 'Jobs', icon: '💼' },
+        { href: '/admin/opportunities', label: 'Opportunities', icon: '🚀' },
         { href: '/admin/bookings', label: 'Bookings', icon: '📋' },
         { href: '/admin/leads', label: 'Leads', icon: '🎯' },
       ]
