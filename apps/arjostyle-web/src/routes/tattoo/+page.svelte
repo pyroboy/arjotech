@@ -2,6 +2,7 @@
   import { PenLine, Palette, Sparkles } from 'lucide-svelte';
   import BookingFlow from '$lib/components/booking/BookingFlow.svelte';
   import Portfolio from '$lib/components/landing/Portfolio.svelte';
+  import CampaignIntro from '$lib/components/campaign/CampaignIntro.svelte';
   import { bookingStore } from '$lib/stores/booking.svelte';
   import { imageUrls } from '$data/portfolioData';
   import { onMount } from 'svelte';
@@ -81,6 +82,9 @@
     </div>
   </div>
 </section>
+
+<!-- Campaign Intro Carousel — 3-slide intro before portfolio -->
+<CampaignIntro />
 
 <!-- Portfolio Gallery -->
 <Portfolio onOpenBookingModal={() => (showBooking = true)} />
