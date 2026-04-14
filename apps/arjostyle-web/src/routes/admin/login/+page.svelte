@@ -3,7 +3,7 @@
   import { Shield } from 'lucide-svelte';
   import { onMount } from 'svelte';
 
-  let { form } = $props();
+  let { form, data } = $props();
   let loading = $state(false);
   let turnstileToken = $state('');
 
@@ -34,6 +34,9 @@
 
 <div class="min-h-screen bg-surface-900 flex items-center justify-center p-4">
   <div class="w-full max-w-md">
+    <div class="text-center mb-6">
+      <span class="text-xs text-zinc-600 font-mono">arjostyle admin {data.version} · {data.commitSha}</span>
+    </div>
     <div class="text-center mb-8">
       <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-zinc-800/50 border border-zinc-700 mb-4">
         <Shield class="w-8 h-8 text-ink-500" />

@@ -21,12 +21,15 @@ async function verifyTurnstile(token: string): Promise<boolean> {
   }
 }
 
-export const load: PageServerLoad = async ({ cookies, locals }) => {
+export const load: PageServerLoad = async ({ cookies, locals, platform }) => {
   const sessionToken = cookies.get(SESSION_COOKIE_NAME);
   if (sessionToken && locals.session) {
     throw redirect(302, '/admin');
   }
-  return {};
+  const env = platform?.env ?? {};
+  const version = (env as Record<string, string>).APP_VERSION ?? '0.1.0';
+  const commitSha = ((env as Record<string, string>).CF_PAGES_COMMIT_SHA ?? 'dev').slice(0, 7);
+  return { version, commitSha };
 };
 
 export const actions: Actions = {
