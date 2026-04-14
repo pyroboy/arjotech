@@ -41,7 +41,7 @@ jobs:
 
       - name: Inject version into wrangler.toml
         run: |
-          sed -i "s/^APP_VERSION = \".*\"/APP_VERSION = \"${{ env.VERSION }}\"/" apps/arjostyle-web/wrangler.toml
+          sed -i "s/^APP_VERSION = \".*\"/APP_VERSION = \"$VERSION\"/" apps/arjostyle-web/wrangler.toml
 
       - name: Build arjostyle-web
         run: |
@@ -55,5 +55,3 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: arjostyle-web
           directory: apps/arjostyle-web/.svelte-kit/cloudflare
-          gitSourceDirectory: apps/arjostyle-web
-          wranglerConfig: apps/arjostyle-web/wrangler.toml
