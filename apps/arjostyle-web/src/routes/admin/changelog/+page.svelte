@@ -3,11 +3,15 @@
 
   let { data }: { data: PageData } = $props();
 
+  const currentVersion = $derived(data.version);
+  const currentCommit = $derived(data.commitSha);
+  const today = new Date().toISOString().split('T')[0];
+
   const changelog = [
     {
-      version: data.version,
-      date: new Date().toISOString().split('T')[0],
-      commit: data.commitSha,
+      version: currentVersion,
+      date: today,
+      commit: currentCommit,
       changes: [
         { type: 'feat', label: 'Feature', color: '#4ade80', text: 'Added changelog page to admin panel' },
         { type: 'feat', label: 'Feature', color: '#4ade80', text: 'Added version + commit SHA display to admin layout footer' },
