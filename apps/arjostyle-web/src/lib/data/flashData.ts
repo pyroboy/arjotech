@@ -12,39 +12,69 @@ export interface FlashDesign {
 
 export const flashDesigns: FlashDesign[] = [
 	{
-		slug: 'sakura-branch-fine-line',
+		slug: 'sakura-branch',
 		title: 'Sakura Branch',
 		style: 'Fine Line / Japanese',
 		size: 'small',
-		price: 180,
+		price: 1500,
 		available: true,
-		imageUrl:
-			'http://hailuo-image-algeng-data-us.oss-us-east-1.aliyuncs.com/image_inference_output%2Ftalkie%2Fprod%2Fimg%2F2026-04-14%2Fe862ebc2-e966-4d4e-9cc2-fd81668786aa_aigc.jpeg',
+		imageUrl: '/flash/flash-sakura-1.jpg',
 		description: 'Delicate sakura branch with three blossoms. Single-needle fine line work.',
 		tags: ['japanese', 'floral', 'fine-line', 'sakura']
 	},
 	{
-		slug: 'wave-koi-rib',
+		slug: 'wave-koi-dynamics',
 		title: 'Koi & Wave',
 		style: 'Traditional / Japanese',
 		size: 'medium',
-		price: 320,
+		price: 3500,
 		available: true,
-		imageUrl:
-			'http://hailuo-image-algeng-data-us.oss-us-east-1.aliyuncs.com/image_inference_output%2Ftalkie%2Fprod%2Fimg%2F2026-04-14%2F260be4fe-4e07-421d-9320-dbce5d7c0f71_aigc.jpeg',
+		imageUrl: '/flash/flash-wave-1.jpg',
 		description: 'Bold wave with koi motif. Classic tebori-inspired linework.',
 		tags: ['japanese', 'wave', 'koi', 'traditional']
 	},
 	{
-		slug: 'wave-hanko-seal',
+		slug: 'hanko-seal-wave',
 		title: 'Hanko Seal Wave',
 		style: 'Traditional / Bold Line',
 		size: 'small',
-		price: 150,
+		price: 1800,
 		available: true,
-		imageUrl:
-			'http://hailuo-image-algeng-data-us.oss-us-east-1.aliyuncs.com/image_inference_output%2Ftalkie%2Fprod%2Fimg%2F2026-04-14%2Fb20a309a-7016-4985-8b4d-eb0266b1b49b_aigc.jpeg',
+		imageUrl: '/flash/flash-hanko-1.jpg',
 		description: 'Hanko seal style bold wave with cherry blossom. Red and black ink.',
 		tags: ['japanese', 'hanko', 'bold', 'wave', 'traditional']
+	},
+	{
+		slug: 'sakura-fine-pair',
+		title: 'Sakura Pair',
+		style: 'Fine Line / Japanese',
+		size: 'small',
+		price: 1500,
+		available: true,
+		imageUrl: '/flash/flash-sakura-2.jpg',
+		description: 'Matched sakura blossoms on branch. Perfect as a pair placement.',
+		tags: ['japanese', 'floral', 'fine-line', 'sakura', 'pair']
+	},
+	{
+		slug: 'wave-spiral-1',
+		title: 'Wave Spiral',
+		style: 'Traditional / Japanese',
+		size: 'small',
+		price: 2000,
+		available: true,
+		imageUrl: '/flash/flash-wave-2.jpg',
+		description: 'Dynamic spiral wave with bold outlines. High contrast traditional style.',
+		tags: ['japanese', 'wave', 'bold', 'traditional']
+	},
+	{
+		slug: 'wave-classic-3',
+		title: 'Classic Wave',
+		style: 'Traditional / Japanese',
+		size: 'medium',
+		price: 3500,
+		available: true,
+		imageUrl: '/flash/flash-wave-3.jpg',
+		description: 'Classic ukiyo-e inspired wave. Timeless bold graphic composition.',
+		tags: ['japanese', 'wave', 'ukiyo-e', 'traditional']
 	}
 ];
