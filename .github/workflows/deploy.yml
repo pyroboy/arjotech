@@ -47,9 +47,14 @@ jobs:
           pnpm build
 
       - name: Deploy to Cloudflare Pages
-        run: pnpm exec wrangler pages deploy .svelte-kit/cloudflare --project-name=arjostyle-web
-        env:
-          APP_VERSION: ${{ env.VERSION }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-        working-directory: apps/arjostyle-web
+        uses: cloudflare/pages-action@v1
+        with:
+          api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          account-id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          project-name: arjostyle-web
+          directory: apps/arjostyle-web/.svelte-kit/cloudflare
+          git-source-directory: apps/arjostyle-web
+          wrangler-config: apps/arjostyle-web/wrangler.toml
+          environment-variables: |
+            APP_VERSION=${{ env.VERSION }}
+            PUBLIC_APP_VERSION=${{ env.VERSION }}
