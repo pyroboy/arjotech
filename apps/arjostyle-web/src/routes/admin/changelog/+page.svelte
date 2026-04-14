@@ -7,7 +7,7 @@
   const currentCommit = $derived(data.commitSha);
   const today = new Date().toISOString().split('T')[0];
 
-  const changelog = [
+  const changelog = $derived([
     {
       version: currentVersion,
       date: today,
@@ -31,7 +31,7 @@
         { type: 'feat', label: 'Feature', color: '#4ade80', text: '3D model viewer with Three.js integration' },
       ]
     }
-  ];
+  ]);
 </script>
 
 <svelte:head>

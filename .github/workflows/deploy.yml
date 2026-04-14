@@ -52,5 +52,3 @@ jobs:
           projectName: arjostyle-web
           directory: apps/arjostyle-web/.svelte-kit/cloudflare
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-          environmentVariables: |
-            {"APP_VERSION": "${{ env.VERSION }}"}

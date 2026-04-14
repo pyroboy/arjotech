@@ -1,6 +1,8 @@
 import type { PageServerLoad, Actions } from './$types';
 import { redirect } from '@sveltejs/kit';
 import { verifyCredentials, createSession, SESSION_COOKIE_NAME } from '$lib/server/kv-session';
+import { APP_VERSION } from '$env/static/private';
+import { env as dynamicEnv } from '$env/dynamic/public';
 
 const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY ?? '';
 
@@ -21,15 +23,13 @@ async function verifyTurnstile(token: string): Promise<boolean> {
   }
 }
 
-export const load: PageServerLoad = async ({ cookies, locals, platform }) => {
+export const load: PageServerLoad = async ({ cookies, locals }) => {
   const sessionToken = cookies.get(SESSION_COOKIE_NAME);
   if (sessionToken && locals.session) {
     throw redirect(302, '/admin');
   }
-  const env = platform?.env ?? {};
-  const version = (env as Record<string, string>).APP_VERSION ?? '0.1.0';
-  const commitSha = ((env as Record<string, string>).CF_PAGES_COMMIT_SHA ?? 'dev').slice(0, 7);
-  return { version, commitSha };
+  const commitSha = (dynamicEnv.CF_PAGES_COMMIT_SHA ?? 'dev').slice(0, 7);
+  return { version: APP_VERSION, commitSha };
 };
 
 export const actions: Actions = {
