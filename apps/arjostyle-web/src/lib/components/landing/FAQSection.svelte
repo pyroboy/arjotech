@@ -127,10 +127,14 @@
   let openItem = $state<string | null>(null);
 
   const filteredFaqs = $derived.by(() => {
-    const base = showAll ? faqData : faqData.slice(0, INITIAL_FAQ_COUNT);
-    if (!searchTerm.trim()) return base;
-    const lower = searchTerm.toLowerCase();
-    return base.filter((faq) => faq.question.toLowerCase().includes(lower) || faq.answer.toLowerCase().includes(lower));
+    // Always search the full dataset, then slice for display
+    const matched = !searchTerm.trim()
+      ? faqData
+      : faqData.filter((faq) => {
+          const lower = searchTerm.toLowerCase();
+          return faq.question.toLowerCase().includes(lower) || faq.answer.toLowerCase().includes(lower);
+        });
+    return showAll ? matched : matched.slice(0, INITIAL_FAQ_COUNT);
   });
 
   function handleShowLess() {

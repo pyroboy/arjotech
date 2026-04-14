@@ -20,6 +20,13 @@ apps/*/dist
 .DS_Store
 Thumbs.db
 
+# Cloudflare Wrangler (local state, secrets)
+.wrangler/
+apps/*/.wrangler/
+
+# Campaign assets (generated locally, served from /static/campaign/)
+apps/*/static/campaign/
+
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
