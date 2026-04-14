@@ -2,31 +2,109 @@
   import RevealOnScroll from '$components/ui/RevealOnScroll.svelte';
 
   const faqData = [
-    { question: 'Do tattoos hurt?', answer: 'Yes, there is some level of discomfort involved. Pain levels vary depending on individual tolerance, tattoo placement, and duration.' },
-    { question: 'How much will my tattoo cost?', answer: 'Pricing depends on size, complexity, placement, and whether it\'s color or black & grey. The booking form includes a Tattoo Calculator for an initial estimate.' },
-    { question: 'What if I don\'t have a design idea yet?', answer: 'No problem! Many clients come with just a concept. During consultation, I\'ll help shape your idea into a design you\'ll love.' },
-    { question: 'What if I change my mind?', answer: 'You\'ll approve every detail before any ink touches skin. We review the design, placement, and size together — I don\'t start until you\'re 100% happy.' },
-    { question: 'Is it safe and hygienic?', answer: 'Absolutely. I use single-use needles, hospital-grade sterilization, and premium inks. Your safety is non-negotiable.' },
-    { question: 'Do you accept walk-ins?', answer: 'I operate strictly by appointment only to ensure each client receives dedicated time and attention. Please use the online booking form to schedule your consultation and tattoo session.' },
-    { question: 'How do I book an appointment?', answer: "You can start the process by filling out the online Booking Form. Provide your details, design ideas, placement, and references. I'll contact you to discuss everything and arrange the deposit." },
-    { question: 'Is the consultation separate from the tattoo appointment?', answer: "Often, yes. After you submit your booking request, I'll contact you for an initial consultation to finalize the design, price, and duration. The actual tattoo session is scheduled separately once the deposit is paid." },
-    { question: 'How do I book multiple tattoos or placements?', answer: "The online booking form currently provides an estimate for one tattoo placement at a time. If you're interested in multiple tattoos in one session, please mention this clearly in the 'Specific Requirements' section of the form." },
-    { question: "Is the price from the 'Tattoo Estimate' step final?", answer: "No, the price shown in the 'Tattoo Estimate' step is an initial estimate based on the information you provide. The final price will be confirmed during the consultation." },
-    { question: 'What happens after I submit the booking request?', answer: "I'll review all the details and contact you via your preferred method to discuss the design, confirm the final details, and arrange the 50% deposit payment to secure your booking." },
-    { question: 'What is the minimum age to get tattooed?', answer: 'You must be 18 years of age or older to get tattooed at my studio, in accordance with Philippine law. Valid photo ID is required at your appointment.' },
-    { question: 'Is a deposit required?', answer: "Yes, a 50% non-refundable deposit is required to secure your appointment slot. This confirms your booking and goes towards the final cost of your tattoo." },
-    { question: 'What payment methods do you accept?', answer: 'I typically accept GCash or bank transfer for the deposit. The remaining balance is usually due in cash on the day of your appointment.' },
-    { question: 'Can I bring my own design?', answer: 'Yes, you can absolutely bring your own design or reference images! Please upload them using the booking form.' },
-    { question: 'Do you do cover-up tattoos?', answer: 'Yes, I do offer cover-up tattoos. Please indicate this on the booking form and provide clear photos of the existing tattoo you wish to cover.' },
-    { question: 'How long will my tattoo appointment take?', answer: "The duration depends on the tattoo's size, detail, and placement. The Tattoo Calculator provides an estimate." },
-    { question: 'What should I do to prepare for my appointment?', answer: 'Get a good night\'s sleep, eat a proper meal beforehand, and stay hydrated. Avoid alcohol or blood-thinning medication 24 hours prior.' },
-    { question: 'What is your rescheduling/cancellation policy?', answer: 'I require at least 48-72 hours notice for rescheduling. Deposits are non-refundable.' },
-    { question: 'Do you offer touch-ups?', answer: 'Yes, I typically offer one free touch-up within 2-3 months after the tattoo has fully healed, provided that aftercare instructions were followed correctly.' },
-    { question: 'What safety and hygiene measures do you follow?', answer: 'I use single-use needles, hospital-grade sterilization for all reusable equipment, and maintain a clean and sanitized environment.' },
-    { question: 'What do I need to do for tattoo aftercare?', answer: 'After your session, I\'ll clean and bandage the tattoo and provide you with detailed instructions on how to clean, moisturize, and protect it during the healing process.' },
+    {
+      question: 'Do tattoos hurt?',
+      answer: 'Discomfort is part of the process — pain tolerance varies by placement. Ribs, spine, and feet rank high on the sensitivity scale. Hands and forearms are more manageable. I talk clients through every session and take breaks as needed. Most clients describe it as "uncomfortable but bearable."'
+    },
+    {
+      question: 'How much will my tattoo cost?',
+      answer: 'Philippine market rates start at ₱1,500 for small fine-line pieces and go up based on size, detail complexity, and whether color is involved. The booking form has a Tattoo Calculator that gives you an initial estimate — final price is confirmed at consultation. No surprises.'
+    },
+    {
+      question: 'What if I don\'t have a design idea yet?',
+      answer: 'Many clients come with just a feeling or a reference photo. That\'s enough. During consultation, we build the design together — you approve every detail before any ink touches skin.'
+    },
+    {
+      question: 'What if I change my mind?',
+      answer: 'You review and approve the design mockup before I start. If something doesn\'t feel right, we fix it then. I don\'t put needle to skin until you\'re 100% satisfied with the design and placement.'
+    },
+    {
+      question: 'Is it safe and hygienic?',
+      answer: 'Non-negotiable. I use 100% single-use disposable needles and ink caps. All reusable equipment is autoclave-sterilized. Premium vegan-friendly inks. The studio follows strict cross-contamination protocols. Your safety comes before anything else.'
+    },
+    {
+      question: 'Do you accept walk-ins?',
+      answer: 'No — I work strictly by appointment so every client gets dedicated, uninterrupted time. This means no rushed sessions and no competing with a full shop. Fill out the booking form and I\'ll get back to you within 24–48 hours.'
+    },
+    {
+      question: 'How do I book an appointment?',
+      answer: 'Fill out the online booking form — be as detailed as you can about your idea, placement, and size. I\'ll review it and contact you to discuss the design, confirm pricing, and arrange the 50% deposit to secure your slot.'
+    },
+    {
+      question: 'Is the consultation separate from the tattoo session?',
+      answer: 'Yes. After you submit your booking request, I\'ll reach out for an initial chat to finalize the design direction. The actual tattoo session is booked separately once the 50% deposit is paid.'
+    },
+    {
+      question: 'Can I book multiple tattoos in one session?',
+      answer: 'Yes — if the designs are small to medium and related, we can combine them. Mention this in the Specific Requirements field of the booking form and I\'ll give you a combined quote.'
+    },
+    {
+      question: 'Is the price from the Tattoo Calculator final?',
+      answer: 'The calculator gives an initial estimate based on the info you provide. Final pricing is confirmed during consultation — it can go up or down slightly depending on final design complexity and placement.'
+    },
+    {
+      question: 'What happens after I submit the booking form?',
+      answer: 'I review every submission personally. Within 24–48 hours, I\'ll reach out via your preferred contact method to discuss the design, answer questions, and send a invoice for the 50% deposit. Your slot is only confirmed once the deposit clears.'
+    },
+    {
+      question: 'What is the minimum age to get tattooed?',
+      answer: '18+, no exceptions. Philippine law requires valid government-issued photo ID at the appointment — Passport, Driver\'s License, or National ID accepted.'
+    },
+    {
+      question: 'Is a deposit required?',
+      answer: 'Yes — 50% of the estimated total, non-refundable. This secures your appointment slot and covers design time. The remaining 50% is paid in cash on the day of your session.'
+    },
+    {
+      question: 'What payment methods do you accept?',
+      answer: 'Deposit: GCash or bank transfer (BPI/UnionBank). Balance on session day: Cash preferred. GCash also accepted. No card payments, no Venmo — just the methods listed here.'
+    },
+    {
+      question: 'Can I bring my own design or reference images?',
+      answer: 'Absolutely. Upload them in the booking form along with any written notes. Reference images help me understand your taste and aesthetic direction — even vague references are useful.'
+    },
+    {
+      question: 'Do you do cover-up tattoos?',
+      answer: 'Yes. Cover-ups require an in-person assessment to evaluate the existing tattoo\'s age, ink depth, and scarring. Please upload clear photos of the area you want to cover in the booking form.'
+    },
+    {
+      question: 'How long will my tattoo appointment take?',
+      answer: 'Small pieces (1–2 hrs), medium pieces (2–4 hrs), large pieces (4–8 hrs). The Tattoo Calculator estimates duration based on size and complexity. Multi-session work is always an option for larger pieces.'
+    },
+    {
+      question: 'How should I prepare for my appointment?',
+      answer: 'Get a full night\'s sleep and eat a proper meal beforehand — low blood sugar makes the experience harder. Stay hydrated. Avoid alcohol for 24 hours before and any blood-thinning medication (ibuprofen, aspirin) for at least 48 hours. Wear comfortable clothing that gives access to the placement area.'
+    },
+    {
+      question: 'What is your rescheduling and cancellation policy?',
+      answer: 'Rescheduling requires at least 48 hours notice — contact me as soon as you know. Deposits are non-refundable and non-transferable. If you cancel without proper notice, the deposit is forfeited and a new booking is required.'
+    },
+    {
+      question: 'Do you offer touch-ups?',
+      answer: 'Yes — one complimentary touch-up within 3 months of the tattoo date, provided healing was normal and aftercare instructions were followed correctly. Touch-ups after 3 months or for aftercare-related issues may incur a small fee.'
+    },
+    {
+      question: 'What hygiene and safety measures do you follow?',
+      answer: '100% single-use disposable needles and ink cups. Autoclave sterilization for all non-disposable tools. Hospital-grade disinfectants used between every client. I follow FDA-equivalent standards for ink and supply sourcing. The studio is a clean, private one-person setup — no shared equipment ever.'
+    },
+    {
+      question: 'What aftercare products do you recommend?',
+      answer: 'For the first 2 weeks: unscented, dye-free lotion (CetrIM, Lubriderm, or similar) applied thin 2–3x daily. Avoid petroleum-based products like Vaseline. Use fragrance-free antibacterial soap for the first wash only. After 2 weeks: any quality moisturizer. For long-term color preservation: SPF 30+ sunscreen over the area when exposed.'
+    },
+    {
+      question: 'How long does a tattoo take to fully heal?',
+      answer: 'Surface healing takes 2–3 weeks. Full internal healing — where the deeper layers of skin have fully regenerated — takes 3–6 months. The tattoo will look its best at the 1-month mark after the surface skin has finished peeling and settling.'
+    },
+    {
+      question: 'Can I get tattooed if I\'m pregnant or breastfeeding?',
+      answer: 'No. I do not tattoo clients who are pregnant or breastfeeding. This is standard practice industry-wide due to the risk of infection and the unknown effects of ink substances on developing bodies.'
+    },
+    {
+      question: 'What if I have a medical condition or skin condition?',
+      answer: 'Disclose all medical conditions in the booking form. Conditions like keloid scarring, hemophilia, diabetes, active eczema or psoriasis in the placement area, and immunodeficiency conditions may affect whether I can work on you. I reserve the right to decline service if I assess the risk as too high.'
+    },
   ];
 
-  const INITIAL_FAQ_COUNT = 5;
+  const INITIAL_FAQ_COUNT = 6;
   let searchTerm = $state('');
   let showAll = $state(false);
   let scrollRef: HTMLDivElement;
@@ -56,7 +134,7 @@
     </RevealOnScroll>
     <RevealOnScroll delay={100}>
       <p class="text-zinc-500 text-lg text-center max-w-3xl mx-auto mb-10 font-mono text-sm">
-        Have questions about getting inked? Find answers below or search for keywords.
+        Have questions about getting inked? Find answers below — or use the search to filter by keyword.
       </p>
     </RevealOnScroll>
 
