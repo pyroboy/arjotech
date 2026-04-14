@@ -39,12 +39,17 @@ jobs:
           COMMIT=$(git rev-parse --short HEAD)
           echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
           echo "COMMIT=${COMMIT}" >> $GITHUB_OUTPUT
-          echo "version=${VERSION}" >> $GITHUB_ENV
-          echo "commit=${COMMIT}" >> $GITHUB_ENV
-          cat > apps/arjostyle-web/src/lib/version.ts << EOF
-export const APP_VERSION = "\${VERSION}";
-export const COMMIT_SHA = "\${COMMIT}";
-EOF
+          printf 'export const APP_VERSION = "%s";\nexport const COMMIT_SHA = "%s";\n' "$VERSION" "$COMMIT" > apps/arjostyle-web/src/lib/version.ts
+
+      - name: Generate changelog
+        run: node scripts/generate-changelog.js
+
+      - name: Commit updated changelog
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add CHANGELOG.md apps/arjostyle-web/src/lib/changelog-data.ts
+          git diff --cached --quiet || git commit -m "chore: update CHANGELOG.md [skip ci]"
 
       - name: Build arjostyle-web
         run: |
