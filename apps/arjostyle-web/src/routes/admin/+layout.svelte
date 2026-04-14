@@ -44,8 +44,10 @@
     $page.url.pathname;
     mobileNavOpen = false;
   });
+  const showSidebar = $derived(!!data.user);
 </script>
 
+{#if showSidebar}
 <div class="min-h-screen bg-[var(--bg-dark)] flex">
   <!-- Mobile hamburger button -->
   <button
@@ -116,3 +118,9 @@
     {@render children()}
   </main>
 </div>
+{:else}
+<!-- Public page layout (no sidebar) -->
+<main class="min-h-screen bg-[var(--bg-dark)]">
+  {@render children()}
+</main>
+{/if}
