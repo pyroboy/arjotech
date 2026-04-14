@@ -34,6 +34,7 @@
       items: [
         { href: '/admin/model', label: '3D Mapping', icon: '🫀' },
         { href: '/admin/ai', label: 'AI Prompts', icon: '🤖' },
+        { href: '/admin/changelog', label: 'Changelog', icon: '📝' },
       ]
     },
   ];
