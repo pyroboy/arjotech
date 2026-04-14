@@ -2,7 +2,7 @@
   import { Menu, X } from 'lucide-svelte';
   import { page } from '$app/stores';
 
-  let { children } = $props();
+  let { children, data }: { children: any; data: { user: { email: string; name: string }; version: string; commitSha: string } } = $props();
   let mobileNavOpen = $state(false);
 
   const navSections = [
@@ -106,7 +106,7 @@
           <span>LOGOUT</span>
         </button>
       </form>
-      <p class="text-zinc-800 text-[10px] font-mono mt-2 uppercase tracking-widest">arjostyle admin v2</p>
+      <p class="text-zinc-800 text-[10px] font-mono mt-2 uppercase tracking-widest">arjostyle admin {data.version} · {data.commitSha}</p>
     </div>
   </aside>
 
