@@ -197,23 +197,39 @@ SvelteKit full-stack with Neon PostgreSQL and Drizzle ORM. Better Auth for multi
   },
   {
     slug: 'secondbrain',
-    title: 'SecondBrain',
-    description: 'Personal knowledge management system — Obsidian vault synced to SQLite with FTS5 full-text search, BM25 ranking, and BM25-style relevance scoring. 1,877 notes searchable in milliseconds.',
-    longDescription: `Dual-system personal knowledge base combining Obsidian's markdown-first editing with SQLite's search speed.
+    title: 'SecondBrain v2: MemForge',
+    description: 'Self-organizing knowledge graph — a hybrid engine that blends deterministic SQL scoring with probabilistic LLM sleep cycles to build a self-pruning, self-revising 2,000+ note memory that runs entirely on autopilot.',
+    longDescription: `MemForge is a production-grade personal knowledge graph that runs 10 automated phases every night — blending the precision of SQL scoring with the semantic power of LLM-driven sleep cycles. It self-organizes, self-prunes, and self-revises without manual curation. The system behind over 2,000 notes that just work.
 
-**Features:**
-- **Incremental sync** — SHA256-based change detection, only processes modified files
-- **Full-text search** — FTS5 with BM25 ranking across all 1,877 notes
-- **Frontmatter parsing** — Extracts tags, dates, aliases, and custom fields
-- **Wiki-link graph** — Tracks [[links]] and #tags across the vault
-- **Context tree** — Structured knowledge tree for AI context injection
-- **Domain folders** — 5 pillars: AI & Tools, Personal & Goals, Technology, Art & Creative, Operations
+**The core architecture:**
+A dual-tier system: Obsidian markdown files as the cold, durable storage layer, and a 60-table SQLite database as the hot scoring/query layer. The two stay in sync through SHA256-based change detection — only modified files get reprocessed.
 
-**Tech stack:** Node.js scripts (sync.mjs, query.mjs), SQLite FTS5, Obsidian vault. No Electron, no DuckDB — lightweight and fast.
+**The scoring engine (6 phases):**
+- **Phase 0 — Weight adaptation** — Learns from retrieval outcomes, adjusts scoring weights based on what actually gets used
+- **Phase 1 — Scoring** — Importance, confidence, graduation, surprise, staleness, and retrieval success tracked per note
+- **Phase 2 — Triage** — Graduate promising notes, archive cold ones, detect staleness
+- **Phase 2.5 — Conflict resolution** — Detects contradictory note pairs and resolves them via LLM
+- **Phase 3 — Revision** — LLM-driven content revision of high-priority notes
+- **Phase 4 — Graph extraction** — Entity extraction, relationship mapping, wikilink graph maintenance
 
-This is the memory system behind this conversation — all knowledge is instantly queryable.`,
-    techStack: ['Node.js', 'SQLite', 'FTS5', 'BM25', 'Obsidian', 'Bash'],
-    tags: ['KM', 'Search', 'SQLite', 'Obsidian', 'FTS'],
+**The sleep cycle (4 phases):**
+- **Phase 5 — Reflection** — High-level insight generation, contradiction analysis
+- **Phase 5.5 — Schema detection** — Identifies repeated entity pattern schemas across notes
+- **Phase 6 — Cold purge** — Hard-deletes archived entries past retention threshold
+- **Audit chain** — SHA-256 hash chain for every mutation, fully auditable
+
+**Pillar classification:**
+4-pillar system (Magno/tech/style/tirol) with keyword matching as primary and Ollama semantic embeddings as fallback — notes auto-classify into domain buckets with confidence scoring.
+
+**Operational stats:**
+- 2,034 notes in the vault, 60+ scoring tables, 129/130 test suite passing
+- Runs nightly via LaunchAgent at 3 AM — fully automated, zero manual curation
+- Ollama nomic-embed-text (768d) for semantic search, FTS5 BM25 for keyword search
+-Retrieval latency: milliseconds across 2,000+ notes
+
+This is the memory engine powering every conversation — notes are instantly queryable, automatically maintained, and semantically coherent.`,
+    techStack: ['Node.js', 'SQLite', 'FTS5', 'BM25', 'Ollama', 'Obsidian', 'LaunchAgents', 'SHA-256'],
+    tags: ['KM', 'AI', 'Knowledge Graph', 'LLM', 'Self-Organizing', 'SQLite'],
     status: 'production',
     featured: true
   }
