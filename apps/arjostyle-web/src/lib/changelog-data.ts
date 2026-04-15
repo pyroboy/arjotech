@@ -3,9 +3,22 @@ import type { Release } from './changelog-types';
 
 export const changelogData: Release[] = [
   {
+    "version": "v0.1.7",
+    "date": "2026-04-15",
+    "commit": "408c17c",
+    "changes": [
+      {
+        "type": "fix",
+        "label": "Fix",
+        "color": "#f87171",
+        "text": "fix(arjostyle-web): resolve type check errors"
+      }
+    ]
+  },
+  {
     "version": "v0.1.6",
     "date": "2026-04-14",
-    "commit": "a4b697c",
+    "commit": "408c17c",
     "changes": [
       {
         "type": "fix",
