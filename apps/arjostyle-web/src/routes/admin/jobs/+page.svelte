@@ -173,7 +173,7 @@
 
 	{#if activeTab === 'sources'}
 		<div style="background: rgba(24,24,27,0.8); border: 1px solid rgba(255,255,255,0.06); border-radius: 0.75rem; padding: 1.5rem;">
-			<h3 style="font-size: 14px; font-weight: 600; color: #fafafa; margin: 0 0 1rem 0; font-family: monospace;">Add Job Source</h3>
+			<h2 style="font-size: 14px; font-weight: 600; color: #fafafa; margin: 0 0 1rem 0; font-family: monospace;">Add Job Source</h2>
 			<form method="POST" action="?/addSource" use:enhance style="display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: flex-end; margin-bottom: 1.5rem;">
 				<div>
 					<label for="source-name" style="font-size: 10px; font-family: monospace; color: #71717a; text-transform: uppercase; display: block; margin-bottom: 4px;">Name</label>

@@ -66,7 +66,7 @@
 		return { strong, applied, newCount, total };
 	});
 
-	function getFitConfig(fit: string) {
+	function getFitConfig(fit: string | null) {
 		return fitConfig.find((f) => f.key === fit) || fitConfig[3];
 	}
 
