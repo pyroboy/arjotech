@@ -6,6 +6,7 @@
     Package, MapPin, Smartphone, BarChart3, Shield, WifiOff, RefreshCw,
     CheckCircle2, Users
   } from 'lucide-svelte';
+  import type { Component } from 'svelte';
 
   const project = softwareProjects.find(p => p.slug === $page.params.slug);
   const otherProjects = softwareProjects.filter(p => p.slug !== $page.params.slug).slice(0, 2);
@@ -204,12 +205,14 @@
         <div class="bg-elevated border border-border p-6">
           <h3 class="text-zinc-600 text-[10px] font-mono uppercase tracking-widest mb-5">BY THE NUMBERS</h3>
           <ul class="space-y-3">
-            {#each [
-              [CheckCircle2, '117 Svelte components'],
-              [Users, '5 role-based dashboards'],
-              [MapPin, 'Multi-location support'],
-              [Smartphone, 'PWA — iOS & Android']
-            ] as [Icon, label]}
+            {#each (
+              [
+                [CheckCircle2, '117 Svelte components'],
+                [Users, '5 role-based dashboards'],
+                [MapPin, 'Multi-location support'],
+                [Smartphone, 'PWA — iOS & Android']
+              ] as const
+            ) as [Icon, label] (Icon)}
               <li class="flex items-center gap-3">
                 <svelte:component this={Icon} class="w-4 h-4 text-tech shrink-0" />
                 <span class="text-zinc-300 text-sm">{label}</span>

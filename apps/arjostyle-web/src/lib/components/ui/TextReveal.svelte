@@ -44,7 +44,7 @@
     animated = true;
   });
 
-  const chars = text.split('');
+  const chars = $derived(text.split(''));
 </script>
 
 <!-- svelte-ignore a11y_consider_explicit_label -->

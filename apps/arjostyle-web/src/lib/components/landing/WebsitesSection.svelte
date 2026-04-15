@@ -10,7 +10,7 @@
 
   let { projects }: Props = $props();
 
-  const featured = projects.filter(p => p.featured);
+  const featured = $derived(projects.filter(p => p.featured));
 </script>
 
 {#if featured.length > 0}

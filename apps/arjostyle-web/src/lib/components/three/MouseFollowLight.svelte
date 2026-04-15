@@ -18,7 +18,7 @@
     invert = false
   }: Props = $props();
 
-  let lightRef = $state<THREE.PointLight | null>(null);
+  let lightRef = $state<THREE.PointLight | undefined>(undefined);
   let currentX = 0;
   let currentY = 0;
 

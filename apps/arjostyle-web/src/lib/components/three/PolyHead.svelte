@@ -15,10 +15,10 @@
     mouseY = 0
   }: Props = $props();
 
-  let group = $state<THREE.Group | null>(null);
-  let brainLight1 = $state<THREE.PointLight | null>(null);
-  let brainLight2 = $state<THREE.PointLight | null>(null);
-  let brainLight3 = $state<THREE.PointLight | null>(null);
+  let group = $state<THREE.Group | undefined>(undefined);
+  let brainLight1 = $state<THREE.PointLight | undefined>(undefined);
+  let brainLight2 = $state<THREE.PointLight | undefined>(undefined);
+  let brainLight3 = $state<THREE.PointLight | undefined>(undefined);
   let brainGeometry = $state<THREE.IcosahedronGeometry | null>(null);
   let neuralLines = $state<THREE.BufferGeometry | null>(null);
 

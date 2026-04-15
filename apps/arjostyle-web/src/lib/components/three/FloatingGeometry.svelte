@@ -28,8 +28,8 @@
     mouseY = 0
   }: Props = $props();
 
-  let meshRef = $state<THREE.Mesh | null>(null);
-  const baseY = position[1];
+  let meshRef = $state<THREE.Mesh | undefined>(undefined);
+  const baseY = $derived(position[1]);
 
   useTask((delta) => {
     if (!meshRef) return;

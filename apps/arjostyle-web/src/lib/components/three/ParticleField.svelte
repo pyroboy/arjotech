@@ -9,7 +9,7 @@
 
   let { count = 300 }: Props = $props();
 
-  let pointsRef = $state<THREE.Points | null>(null);
+  let pointsRef = $state<THREE.Points | undefined>(undefined);
   let geometry = $state<THREE.BufferGeometry | null>(null);
 
   onMount(() => {
