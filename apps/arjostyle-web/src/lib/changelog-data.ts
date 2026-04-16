@@ -3,9 +3,22 @@ import type { Release } from './changelog-types';
 
 export const changelogData: Release[] = [
   {
+    "version": "v0.1.9",
+    "date": "2026-04-16",
+    "commit": "6036641",
+    "changes": [
+      {
+        "type": "misc",
+        "label": "Misc",
+        "color": "#a78bfa",
+        "text": "chore(release): bump to v0.1.8"
+      }
+    ]
+  },
+  {
     "version": "v0.1.8",
     "date": "2026-04-16",
-    "commit": "caae7bd",
+    "commit": "6036641",
     "changes": [
       {
         "type": "fix",
@@ -30,7 +43,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.7",
     "date": "2026-04-15",
-    "commit": "caae7bd",
+    "commit": "6036641",
     "changes": [
       {
         "type": "fix",
@@ -43,7 +56,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.6",
     "date": "2026-04-14",
-    "commit": "caae7bd",
+    "commit": "6036641",
     "changes": [
       {
         "type": "fix",
