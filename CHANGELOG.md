@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [v0.1.8] - 2026-04-16
+
+### Fixes
+- fix(arjostyle-web): resolve type check errors
+
+### Chores
+- bump to v0.1.7 + regenerate changelog
+
+### Other
+- chore(deps): add semver for version bump skill
+
 ## [v0.1.7] - 2026-04-15
 
 ### Fixes

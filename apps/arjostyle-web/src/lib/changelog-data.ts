@@ -3,9 +3,34 @@ import type { Release } from './changelog-types';
 
 export const changelogData: Release[] = [
   {
+    "version": "v0.1.8",
+    "date": "2026-04-16",
+    "commit": "caae7bd",
+    "changes": [
+      {
+        "type": "fix",
+        "label": "Fix",
+        "color": "#f87171",
+        "text": "fix(arjostyle-web): resolve type check errors"
+      },
+      {
+        "type": "chore",
+        "label": "Chore",
+        "color": "#60a5fa",
+        "text": "bump to v0.1.7 + regenerate changelog"
+      },
+      {
+        "type": "misc",
+        "label": "Misc",
+        "color": "#a78bfa",
+        "text": "chore(deps): add semver for version bump skill"
+      }
+    ]
+  },
+  {
     "version": "v0.1.7",
     "date": "2026-04-15",
-    "commit": "408c17c",
+    "commit": "caae7bd",
     "changes": [
       {
         "type": "fix",
@@ -18,7 +43,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.6",
     "date": "2026-04-14",
-    "commit": "408c17c",
+    "commit": "caae7bd",
     "changes": [
       {
         "type": "fix",
