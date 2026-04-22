@@ -3,9 +3,22 @@ import type { Release } from './changelog-types';
 
 export const changelogData: Release[] = [
   {
+    "version": "v0.1.14",
+    "date": "2026-04-22",
+    "commit": "b02377e",
+    "changes": [
+      {
+        "type": "misc",
+        "label": "Misc",
+        "color": "#a78bfa",
+        "text": "chore(release): bump to v0.1.13"
+      }
+    ]
+  },
+  {
     "version": "v0.1.13",
     "date": "2026-04-21",
-    "commit": "1be9736",
+    "commit": "b02377e",
     "changes": [
       {
         "type": "misc",
@@ -18,7 +31,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.12",
     "date": "2026-04-20",
-    "commit": "1be9736",
+    "commit": "b02377e",
     "changes": [
       {
         "type": "misc",
@@ -31,7 +44,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.11",
     "date": "2026-04-18",
-    "commit": "1be9736",
+    "commit": "b02377e",
     "changes": [
       {
         "type": "misc",
@@ -44,7 +57,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.10",
     "date": "2026-04-17",
-    "commit": "1be9736",
+    "commit": "b02377e",
     "changes": [
       {
         "type": "misc",
@@ -57,7 +70,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.9",
     "date": "2026-04-16",
-    "commit": "1be9736",
+    "commit": "b02377e",
     "changes": [
       {
         "type": "misc",
@@ -70,7 +83,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.8",
     "date": "2026-04-16",
-    "commit": "1be9736",
+    "commit": "b02377e",
     "changes": [
       {
         "type": "fix",
@@ -95,7 +108,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.7",
     "date": "2026-04-15",
-    "commit": "1be9736",
+    "commit": "b02377e",
     "changes": [
       {
         "type": "fix",
@@ -108,7 +121,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.6",
     "date": "2026-04-14",
-    "commit": "1be9736",
+    "commit": "b02377e",
     "changes": [
       {
         "type": "fix",
