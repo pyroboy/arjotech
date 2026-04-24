@@ -3,6 +3,7 @@
    Deep dark, sharp corners, oversized typography, editorial feel
    ========================================================================== */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
@@ -444,4 +445,42 @@
 }
 .card-interactive:active {
   transform: scale(0.99);
+}
+
+/* ==========================================================================
+   ADMIN — LINEAR-INSPIRED DESIGN TOKENS
+   ========================================================================== */
+:root {
+  /* Surface stack */
+  --admin-root: #010102;
+  --admin-panel: #0f1011;
+  --admin-surface: #191a1b;
+  --admin-raised: #28282c;
+  --admin-card-bg: rgba(255,255,255,0.03);
+  --admin-card-border: rgba(255,255,255,0.08);
+  --admin-card-bg-hover: rgba(255,255,255,0.05);
+  --admin-card-radius: 10px;
+
+  /* Typography */
+  --admin-font: 'Inter', sans-serif;
+  --admin-text-primary: #ffffff;
+  --admin-text-secondary: #8b8c8f;
+  --admin-text-muted: #525254;
+
+  /* Border system */
+  --admin-border-subtle: rgba(255,255,255,0.06);
+  --admin-border-standard: rgba(255,255,255,0.10);
+  --admin-border-strong: rgba(255,255,255,0.16);
+
+  /* Accent — indigo */
+  --admin-accent: #5e6ad2;
+  --admin-accent-hover: #4f5ad2;
+  --admin-accent-subtle: rgba(94,106,210,0.15);
+  --admin-accent-alt: #818cf8;
+
+  /* Semantic colors */
+  --admin-green: #10b981;
+  --admin-blue: #3b82f6;
+  --admin-amber: #f59e0b;
+  --admin-red: #ef4444;
 }

@@ -398,6 +398,44 @@ export const mediaAssets = pgTable('media_assets', {
   displayOrder: integer('display_order').default(0),
 });
 
+// ── Testimonials ─────────────────────────────────────────────────────────────
+
+export const testimonialSourceEnum = pgEnum('testimonial_source', [
+  'google',
+  'instagram',
+  'facebook',
+  'direct'
+]);
+
+export const testimonials = pgTable('testimonials', {
+  id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+
+  // Client info
+  clientName: text('client_name').notNull(),
+  clientHandle: text('client_handle'), // @instagram handle (optional)
+
+  // Rating & quote
+  rating: integer('rating').notNull(), // 1-5
+  quote: text('quote').notNull(),
+
+  // Tattoo details
+  tattooStyle: text('tattoo_style'), // e.g. 'neo-traditional', 'realism'
+  tattooImageUrl: text('tattoo_image_url'), // R2 URL (before/after, optional)
+
+  // Meta
+  date: text('date').notNull(), // ISO date string (YYYY-MM-DD)
+  source: testimonialSourceEnum('source').default('direct').notNull(),
+
+  // Admin
+  isFeatured: boolean('is_featured').default(false).notNull(),
+  displayOrder: integer('display_order').default(0),
+});
+
+export type Testimonial = typeof testimonials.$inferSelect;
+export type NewTestimonial = typeof testimonials.$inferInsert;
+
 // ── Job Opportunities ─────────────────────────────────────────────────────────
 
 export const jobSourceEnum = pgEnum('job_source', [

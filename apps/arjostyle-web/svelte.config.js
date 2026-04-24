@@ -13,7 +13,6 @@ const config = {
     }),
     alias: {
       $components: 'src/lib/components',
-      $types: 'src/lib/types',
       $db: 'src/lib/db',
       $utils: 'src/lib/utils',
       $data: 'src/lib/data'

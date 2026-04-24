@@ -1,41 +1,58 @@
 <script lang="ts">
-  import { Menu, X } from 'lucide-svelte';
+  import { Menu, X, LayoutDashboard, Users, Calendar, BarChart3, Settings, LogOut, Megaphone, Image, BrainCircuit, Map, FileText, Rocket, MessageSquare } from 'lucide-svelte';
   import { page } from '$app/stores';
 
   let { children, data }: { children: any; data: { user: { email: string; name: string }; version: string; commitSha: string } } = $props();
   let mobileNavOpen = $state(false);
 
+  const iconMap: Record<string, any> = {
+    '/admin/reports': LayoutDashboard,
+    '/admin/jobs': Users,
+    '/admin/opportunities': Rocket,
+    '/admin/bookings': Calendar,
+    '/admin/leads': Users,
+    '/admin/marketing': Megaphone,
+    '/admin/marketing/generate': BrainCircuit,
+    '/admin/marketing/calendar': Calendar,
+    '/admin/assets': Image,
+    '/admin/testimonials': MessageSquare,
+    '/admin/model': Map,
+    '/admin/ai': BrainCircuit,
+    '/admin/changelog': FileText,
+  };
+
   const navSections = [
-      {
+    {
       label: 'Core',
       items: [
-        { href: '/admin/reports', label: 'KPI Dashboard', icon: '📊' },
-        { href: '/admin/jobs', label: 'Jobs', icon: '💼' },
-        { href: '/admin/opportunities', label: 'Opportunities', icon: '🚀' },
-        { href: '/admin/bookings', label: 'Bookings', icon: '📋' },
-        { href: '/admin/leads', label: 'Leads', icon: '🎯' },
+        { href: '/admin/reports', label: 'KPI Dashboard' },
+        { href: '/admin/jobs', label: 'Jobs' },
+        { href: '/admin/opportunities', label: 'Opportunities' },
+        { href: '/admin/bookings', label: 'Bookings' },
+        { href: '/admin/leads', label: 'Leads' },
       ]
     },
     {
       label: 'Marketing',
       items: [
-        { href: '/admin/marketing', label: 'Pipeline', icon: '📣' },
-        { href: '/admin/marketing/generate', label: 'Content Generator', icon: '✨' },
-        { href: '/admin/marketing/calendar', label: 'Calendar', icon: '📅' },
+        { href: '/admin/marketing', label: 'Pipeline' },
+        { href: '/admin/marketing/generate', label: 'Content Generator' },
+        { href: '/admin/marketing/calendar', label: 'Calendar' },
       ]
     },
     {
       label: 'Content',
       items: [
-        { href: '/admin/assets', label: 'Media Assets', icon: '🖼' },
+        { href: '/admin/assets', label: 'Media Assets' },
+        { href: '/admin/testimonials', label: 'Testimonials' },
       ]
     },
     {
       label: 'Tools',
       items: [
-        { href: '/admin/model', label: '3D Mapping', icon: '🫀' },
-        { href: '/admin/ai', label: 'AI Prompts', icon: '🤖' },
-        { href: '/admin/changelog', label: 'Changelog', icon: '📝' },
+        { href: '/admin/model', label: '3D Mapping' },
+        { href: '/admin/ai', label: 'AI Prompts' },
+        { href: '/admin/changelog', label: 'Changelog' },
       ]
     },
   ];
@@ -45,15 +62,16 @@
     $page.url.pathname;
     mobileNavOpen = false;
   });
+
   const showSidebar = $derived(!!data.user);
 </script>
 
 {#if showSidebar}
-<div class="min-h-screen bg-[var(--bg-dark)] flex">
-  <!-- Mobile hamburger button -->
+<div class="admin-shell">
+  <!-- Mobile hamburger -->
   <button
     onclick={() => { mobileNavOpen = !mobileNavOpen; }}
-    class="sm:hidden fixed top-3 left-3 z-[60] w-10 h-10 flex items-center justify-center bg-[var(--bg-elevated)] border border-[var(--border)] text-[var(--text-secondary)]"
+    class="admin-hamburger"
     aria-label="Toggle navigation"
   >
     {#if mobileNavOpen}
@@ -67,61 +85,269 @@
   {#if mobileNavOpen}
     <!-- svelte-ignore a11y_no_static_element_interactions -->
     <div
-      class="sm:hidden fixed inset-0 bg-[var(--bg-dark)]/80 z-[55]"
+      class="admin-mobile-overlay"
       onclick={() => { mobileNavOpen = false; }}
       onkeydown={(e) => { if (e.key === 'Escape') mobileNavOpen = false; }}
     ></div>
   {/if}
 
-  <!-- Sidebar: hidden on mobile, slides in as overlay when hamburger is tapped -->
-  <aside class="
-    {mobileNavOpen ? 'translate-x-0' : '-translate-x-full'}
-    sm:translate-x-0
-    fixed sm:relative z-[56] sm:z-auto
-    w-64 h-full bg-[var(--bg-elevated)] border-r border-[var(--border)] flex flex-col p-6 shrink-0
-    transition-transform duration-150
-  ">
-    <div class="mb-8">
-      <a href="/" class="text-[var(--text-muted)] text-xs font-mono hover:text-[var(--text-primary)]">← arjostyle.com</a>
-      <h2 class="text-[var(--text-primary)] font-display mt-2 tracking-wide">ADMIN PANEL</h2>
+  <!-- Sidebar -->
+  <aside class="admin-sidebar" class:admin-sidebar--open={mobileNavOpen}>
+    <!-- Brand -->
+    <div class="admin-brand">
+      <a href="/" class="admin-brand-link">← arjostyle.com</a>
+      <h2 class="admin-brand-title">ADMIN</h2>
     </div>
-    <nav class="flex-1 space-y-6">
+
+    <!-- Nav -->
+    <nav class="admin-nav">
       {#each navSections as section}
-        <div>
-          <p class="text-[10px] uppercase tracking-widest font-mono text-[var(--text-muted)] mb-2 px-3">{section.label}</p>
-          <div class="space-y-0.5">
-            {#each section.items as item}
-              <a href={item.href} class="flex items-center gap-3 px-3 py-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-dark)] border border-transparent hover:border-[var(--border)] transition-all duration-150 text-sm font-mono">
-                <span>{item.icon}</span>
-                <span>{item.label}</span>
-              </a>
-            {/each}
-          </div>
+        <div class="admin-nav-section">
+          <p class="admin-nav-section-label">{section.label}</p>
+          {#each section.items as item}
+            {@const Icon = iconMap[item.href] || BarChart3}
+            {@const isActive = $page.url.pathname === item.href || ($page.url.pathname.startsWith(item.href) && item.href !== '/admin')}
+            <a href={item.href} class="admin-nav-item" class:admin-nav-item--active={isActive}>
+              <Icon size={15} />
+              <span>{item.label}</span>
+            </a>
+          {/each}
         </div>
       {/each}
     </nav>
-    <div class="pt-4 border-t border-[var(--border)]">
+
+    <!-- Footer -->
+    <div class="admin-sidebar-footer">
       <form method="POST" action="/admin/logout">
-        <button 
-          type="submit" 
-          class="w-full text-left px-3 py-2 text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-dark)] border border-transparent hover:border-[var(--border)] transition-all duration-150 text-sm font-mono flex items-center gap-2"
-        >
-          <span>🚪</span>
-          <span>LOGOUT</span>
+        <button type="submit" class="admin-logout-btn">
+          <LogOut size={14} />
+          <span>Logout</span>
         </button>
       </form>
-      <p class="text-zinc-800 text-[10px] font-mono mt-2 uppercase tracking-widest">arjostyle admin {data.version} · {data.commitSha}</p>
+      <p class="admin-version">arjostyle admin {data.version} · {data.commitSha}</p>
     </div>
   </aside>
 
   <!-- Main content -->
-  <main class="flex-1 overflow-auto w-full">
+  <main class="admin-main">
     {@render children()}
   </main>
 </div>
 {:else}
-<!-- Public page layout (no sidebar) -->
-<main class="min-h-screen bg-[var(--bg-dark)]">
+<main class="admin-shell admin-shell--public">
   {@render children()}
 </main>
 {/if}
+
+<style>
+  /* ── Shell ─────────────────────────────────── */
+  .admin-shell {
+    display: flex;
+    min-height: 100vh;
+    background: var(--admin-root);
+    font-family: var(--admin-font);
+  }
+
+  .admin-shell--public {
+    display: block;
+  }
+
+  /* ── Hamburger ─────────────────────────────── */
+  .admin-hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 70;
+    width: 38px;
+    height: 38px;
+    align-items: center;
+    justify-content: center;
+    background: var(--admin-panel);
+    border: 1px solid var(--admin-border-standard);
+    border-radius: 8px;
+    color: var(--admin-text-secondary);
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    .admin-hamburger { display: flex; }
+  }
+
+  /* ── Mobile overlay ────────────────────────── */
+  .admin-mobile-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 60;
+  }
+
+  @media (max-width: 768px) {
+    .admin-mobile-overlay { display: block; }
+  }
+
+  /* ── Sidebar ──────────────────────────────── */
+  .admin-sidebar {
+    width: 220px;
+    min-width: 220px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    background: var(--admin-panel);
+    border-right: 1px solid var(--admin-border-subtle);
+    display: flex;
+    flex-direction: column;
+    padding: 24px 12px;
+    overflow-y: auto;
+    z-index: 65;
+    transition: transform 150ms ease;
+  }
+
+  @media (max-width: 768px) {
+    .admin-sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      transform: translateX(-100%);
+      z-index: 65;
+    }
+    .admin-sidebar--open {
+      transform: translateX(0);
+    }
+  }
+
+  /* ── Brand ────────────────────────────────── */
+  .admin-brand {
+    padding: 0 8px 20px;
+  }
+
+  .admin-brand-link {
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--admin-text-muted);
+    text-decoration: none;
+    font-family: var(--font-mono, monospace);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .admin-brand-link:hover {
+    color: var(--admin-text-secondary);
+  }
+
+  .admin-brand-title {
+    font-size: 11px;
+    font-weight: 590;
+    color: var(--admin-text-primary);
+    letter-spacing: 0.1em;
+    font-family: var(--font-display, sans-serif);
+  }
+
+  /* ── Nav ──────────────────────────────────── */
+  .admin-nav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .admin-nav-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .admin-nav-section-label {
+    font-size: 10px;
+    font-weight: 590;
+    color: var(--admin-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0 8px;
+    margin-bottom: 4px;
+  }
+
+  .admin-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 7px 8px;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 510;
+    color: var(--admin-text-secondary);
+    text-decoration: none;
+    transition: background 100ms ease, color 100ms ease;
+    position: relative;
+  }
+
+  .admin-nav-item:hover {
+    background: var(--admin-surface);
+    color: var(--admin-text-primary);
+  }
+
+  .admin-nav-item--active {
+    background: var(--admin-accent-subtle);
+    color: var(--admin-accent-alt);
+  }
+
+  .admin-nav-item--active::before {
+    content: '';
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 18px;
+    background: var(--admin-accent);
+    border-radius: 0 2px 2px 0;
+  }
+
+  /* ── Sidebar footer ───────────────────────── */
+  .admin-sidebar-footer {
+    border-top: 1px solid var(--admin-border-subtle);
+    padding-top: 12px;
+    margin-top: 4px;
+  }
+
+  .admin-logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 7px 8px;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 510;
+    color: var(--admin-text-muted);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background 100ms ease, color 100ms ease;
+    font-family: var(--admin-font);
+  }
+
+  .admin-logout-btn:hover {
+    background: var(--admin-surface);
+    color: var(--admin-text-secondary);
+  }
+
+  .admin-version {
+    font-size: 9px;
+    color: #2a2a2e;
+    font-family: var(--font-mono, monospace);
+    padding: 0 8px;
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── Main ─────────────────────────────────── */
+  .admin-main {
+    flex: 1;
+    min-width: 0;
+    overflow: auto;
+  }
+</style>
