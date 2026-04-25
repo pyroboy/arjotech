@@ -15,7 +15,8 @@ const config = {
       $components: 'src/lib/components',
       $db: 'src/lib/db',
       $utils: 'src/lib/utils',
-      $data: 'src/lib/data'
+      $data: 'src/lib/data',
+      $types: 'src/lib/types'
     }
   }
 };

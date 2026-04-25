@@ -431,10 +431,11 @@
 
 				<!-- Client Handle -->
 				<div>
-					<label class="block text-sm font-medium text-zinc-300 mb-1.5">
+					<label for="formClientHandle" class="block text-sm font-medium text-zinc-300 mb-1.5">
 						Instagram Handle <span class="text-zinc-500">(optional)</span>
 					</label>
 					<input
+						id="formClientHandle"
 						type="text"
 						bind:value={formClientHandle}
 						placeholder="@maria_santos"
@@ -578,13 +579,15 @@
 					</label>
 
 					<div class="flex items-center gap-2">
-						<label class="text-sm text-zinc-300">Order:</label>
-						<input
-							type="number"
-							bind:value={formDisplayOrder}
-							min="0"
-							class="w-20 bg-zinc-800 border border-zinc-600 rounded-lg px-2 py-1 text-zinc-100 focus:outline-none focus:border-ink-500"
-						/>
+						<label class="flex items-center gap-2 text-sm text-zinc-300 cursor-pointer">
+							<span>Order:</span>
+							<input
+								type="number"
+								bind:value={formDisplayOrder}
+								min="0"
+								class="w-20 bg-zinc-800 border border-zinc-600 rounded-lg px-2 py-1 text-zinc-100 focus:outline-none focus:border-ink-500"
+							/>
+						</label>
 					</div>
 				</div>
 
