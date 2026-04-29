@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [v0.1.20] - 2026-04-29
+
+### Other
+- chore(release): bump to v0.1.19
+
 ## [v0.1.19] - 2026-04-28
 
 ### Other
