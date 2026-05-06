@@ -3,9 +3,22 @@ import type { Release } from './changelog-types';
 
 export const changelogData: Release[] = [
   {
+    "version": "v0.1.27",
+    "date": "2026-05-06",
+    "commit": "000540b",
+    "changes": [
+      {
+        "type": "misc",
+        "label": "Misc",
+        "color": "#a78bfa",
+        "text": "chore(release): bump to v0.1.26"
+      }
+    ]
+  },
+  {
     "version": "v0.1.26",
     "date": "2026-05-05",
-    "commit": "f5ac784",
+    "commit": "000540b",
     "changes": [
       {
         "type": "misc",
@@ -18,7 +31,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.25",
     "date": "2026-05-04",
-    "commit": "f5ac784",
+    "commit": "000540b",
     "changes": [
       {
         "type": "misc",
@@ -31,7 +44,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.24",
     "date": "2026-05-03",
-    "commit": "f5ac784",
+    "commit": "000540b",
     "changes": [
       {
         "type": "misc",
@@ -44,7 +57,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.23",
     "date": "2026-05-02",
-    "commit": "f5ac784",
+    "commit": "000540b",
     "changes": [
       {
         "type": "misc",
@@ -57,7 +70,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.22",
     "date": "2026-05-01",
-    "commit": "f5ac784",
+    "commit": "000540b",
     "changes": [
       {
         "type": "misc",
@@ -70,7 +83,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.21",
     "date": "2026-04-30",
-    "commit": "f5ac784",
+    "commit": "000540b",
     "changes": [
       {
         "type": "misc",
@@ -83,7 +96,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.20",
     "date": "2026-04-29",
-    "commit": "f5ac784",
+    "commit": "000540b",
     "changes": [
       {
         "type": "misc",
@@ -96,7 +109,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.19",
     "date": "2026-04-28",
-    "commit": "f5ac784",
+    "commit": "000540b",
     "changes": [
       {
         "type": "misc",
@@ -109,7 +122,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.18",
     "date": "2026-04-26",
-    "commit": "f5ac784",
+    "commit": "000540b",
     "changes": [
       {
         "type": "misc",
@@ -122,7 +135,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.17",
     "date": "2026-04-25",
-    "commit": "f5ac784",
+    "commit": "000540b",
     "changes": [
       {
         "type": "feat",
@@ -147,7 +160,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.16",
     "date": "2026-04-24",
-    "commit": "f5ac784",
+    "commit": "000540b",
     "changes": [
       {
         "type": "misc",
@@ -160,7 +173,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.15",
     "date": "2026-04-23",
-    "commit": "f5ac784",
+    "commit": "000540b",
     "changes": [
       {
         "type": "misc",
@@ -173,7 +186,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.14",
     "date": "2026-04-22",
-    "commit": "f5ac784",
+    "commit": "000540b",
     "changes": [
       {
         "type": "misc",
@@ -186,7 +199,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.13",
     "date": "2026-04-21",
-    "commit": "f5ac784",
+    "commit": "000540b",
     "changes": [
       {
         "type": "misc",
@@ -199,7 +212,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.12",
     "date": "2026-04-20",
-    "commit": "f5ac784",
+    "commit": "000540b",
     "changes": [
       {
         "type": "misc",
@@ -212,7 +225,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.11",
     "date": "2026-04-18",
-    "commit": "f5ac784",
+    "commit": "000540b",
     "changes": [
       {
         "type": "misc",
@@ -225,7 +238,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.10",
     "date": "2026-04-17",
-    "commit": "f5ac784",
+    "commit": "000540b",
     "changes": [
       {
         "type": "misc",
@@ -238,7 +251,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.9",
     "date": "2026-04-16",
-    "commit": "f5ac784",
+    "commit": "000540b",
     "changes": [
       {
         "type": "misc",
@@ -251,7 +264,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.8",
     "date": "2026-04-16",
-    "commit": "f5ac784",
+    "commit": "000540b",
     "changes": [
       {
         "type": "fix",
@@ -276,7 +289,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.7",
     "date": "2026-04-15",
-    "commit": "f5ac784",
+    "commit": "000540b",
     "changes": [
       {
         "type": "fix",
@@ -289,7 +302,7 @@ export const changelogData: Release[] = [
   {
     "version": "v0.1.6",
     "date": "2026-04-14",
-    "commit": "f5ac784",
+    "commit": "000540b",
     "changes": [
       {
         "type": "fix",
